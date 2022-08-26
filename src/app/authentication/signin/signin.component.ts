@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "src/app/core/service/auth.service";
 import { Role } from "src/app/core/models/role";
 import { UnsubscribeOnDestroyAdapter } from "src/app/shared/UnsubscribeOnDestroyAdapter";
+//import { ToastrService } from "ngx-toastr";
 @Component({
   selector: "app-signin",
   templateUrl: "./signin.component.html",
@@ -21,7 +22,8 @@ export class SigninComponent
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    //private Msg:ToastrService
   ) {
     super();
   }
@@ -78,7 +80,40 @@ export class SigninComponent
       this.error = "Username and Password not valid !";
       return;
     } else {
-      this.subs.sink = this.authService
+      /*
+      this.authService.getAdmin().subscribe({
+        next:(e)=>{
+          console.log(e)
+        }
+        
+      })
+      */
+      /*
+     this.subs.sink=this.authService.authUser(this.f['username'].value,this.f['password'].value)
+     .subscribe({
+      next:(e)=>{
+        console.log('token',e)
+
+          this.Msg.success("Medecin enregistrer","",{
+          closeButton:true,
+          progressAnimation:'increasing',
+          progressBar:true,
+          positionClass:'toast-top-right'
+          
+        })
+
+      },
+      error:(e)=>{
+        console.log('C est l erreur',e)
+
+        this.Msg.error("erreur lors de l'enregistrement","échec",{
+          closeButton:true
+        })
+
+      }
+     })*/
+      
+      this.subs.sink=this.authService
         .login(this.f['username'].value, this.f['password'].value)
         .subscribe({
           next: (res) => {
@@ -116,7 +151,9 @@ export class SigninComponent
             this.submitted = false;
             this.loading = false;
           }
+          
         });
+        
     }
   }
 }

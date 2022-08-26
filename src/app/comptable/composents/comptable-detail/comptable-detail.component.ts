@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ComptableService } from '../../service/comptable.service';
 
 @Component({
   selector: 'app-comptable-detail',
@@ -7,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ComptableDetailComponent implements OnInit {
 
-  constructor() { }
+  constructor(private cptService:ComptableService,
+    private routeParams:ActivatedRoute) { }
 
   ngOnInit(): void {
   }

@@ -1,23 +1,106 @@
 <section class="content">
-    <div class="content-block">
-      <div class="block-header">
-        <!-- breadcrumb -->
-        <app-breadcrumb [title]="'First 1'" [items]="[]" [active_item]="'First 1'"></app-breadcrumb>
-      </div>
-      <div class="row clearfix">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          <div class="card">
-            <div class="header">
-              <h2>First Level</h2>
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="'Medecins'" [items]="[]" [active_item]="'medecin'"></app-breadcrumb>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="header">
+            <div class="col-md-3 col-lg-3">
+              <button mat-raised-button color="primary" (click)="openDialog()">Ajouter</button>
             </div>
-            <div class="body">
-  
-              <!-- Add content here -->
-  
-            </div>
+          </div>
+          <div class="body">
+
+            <!-- Add content here -->
+            <mat-tab-group dynamicHeight>
+              <mat-tab label="Liste des medecins">
+                <div class="mat-elevation-z8">
+                  <input class="form-control" (keyup)="applyFilter($event)" placeholder="nom du medecin"
+                  #input>
+                  <table mat-table [dataSource]="medecin">
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="nom">
+                      <th mat-header-cell *matHeaderCellDef> Nom </th>
+                      <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
+                    </ng-container>
+
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="prenom">
+                      <th mat-header-cell *matHeaderCellDef> prenom </th>
+                      <td mat-cell *matCellDef="let element"> {{element.prenom}} </td>
+                    </ng-container>
+
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="genre">
+                      <th mat-header-cell *matHeaderCellDef> genre </th>
+                      <td mat-cell *matCellDef="let element"> {{element.genre}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="residence">
+                      <th mat-header-cell *matHeaderCellDef> residence </th>
+                      <td mat-cell *matCellDef="let element"> {{element.residence}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="specialite">
+                      <th mat-header-cell *matHeaderCellDef>specialite</th>
+                      <td mat-cell *matCellDef="let element"> {{element.specialite}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="type">
+                      <th mat-header-cell *matHeaderCellDef> Type de medecin</th>
+                      <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="tel">
+                      <th mat-header-cell *matHeaderCellDef> Téléphone</th>
+                      <td mat-cell *matCellDef="let element"> {{element.tel}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="edit">
+                      <th mat-header-cell *matHeaderCellDef> Detail </th>
+                      <td mat-cell *matCellDef="let element">
+                        <button mat-button>
+                          <mat-icon color="primary">
+                            login
+                          </mat-icon>
+                        </button>
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="retirer">
+                      <th mat-header-cell *matHeaderCellDef>Supprimer </th>
+                      <td mat-cell *matCellDef="let element">
+                        <button mat-button>
+                          <mat-icon color="warn">
+                            delete
+                          </mat-icon>
+                        </button>
+                      </td>
+                    </ng-container>
+
+
+                    <!-- Row shown when there is no matching data. -->
+                    <tr class="mat-row" *matNoDataRow>
+                      <td class="mat-cell" colspan="4">Aucun medecin ne correspond au filtre :"{{input.value}}"</td>
+                    </tr>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+                  <mat-paginator [pageSizeOptions]="[10,15,20]" showFirstLastButtons
+                    aria-label="Select page of periodic elements">
+                  </mat-paginator>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+            <!---->
           </div>
         </div>
       </div>
     </div>
-  </section>
-  
+  </div>
+</section>

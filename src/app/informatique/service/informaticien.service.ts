@@ -5,6 +5,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class InformaticienService {
-
+  private config:string="http://cemedo.openslearning.com/"
   constructor(private httpInfor:HttpClient) { }
 }

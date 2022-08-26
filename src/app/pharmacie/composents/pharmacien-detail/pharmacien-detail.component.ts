@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { PharmacienService } from '../../service/pharmacien.service';
 
 @Component({
   selector: 'app-pharmacien-detail',
@@ -7,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PharmacienDetailComponent implements OnInit {
 
-  constructor() { }
+  constructor(private pharService:PharmacienService,
+    private routeParams:ActivatedRoute) { }
 
   ngOnInit(): void {
   }

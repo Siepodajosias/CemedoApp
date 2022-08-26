@@ -1,2 +1,19 @@
 export class Medecin {
+    id:number=1
+    nom:string
+    prenom:string
+    genre:string
+    //dateN:string
+    residence:string
+    specialite:string
+    type:string
+    email:string
+    tel:string
+    password:string
+    numeroCNI:string
+    heureDebut:string
+    heureFin:string
+    photo:string
+    salaire:string
+    prime:string
 }

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ComptableDetailComponent } from './composents/comptable-detail/comptable-detail.component';
-import { ComptableFormsComponent } from './composents/comptable-forms/comptable-forms.component';
+import { ComptableFormsComponent } from './composents/comptable-view/comptable-forms.component';
 import { ComptableViewComponent } from './composents/comptable-view/comptable-view.component';
 
 const routes: Routes = [
@@ -23,6 +23,10 @@ const routes: Routes = [
   {
     path: 'assurance',
     loadChildren: () => import('../assurance/assurance.module').then((r) => r.AssuranceModule)
+  },
+  {
+    path:'pharmacie',
+    loadChildren:()=> import('../pharmacie/pharmacie.module').then((e)=> e.PharmacieModule)
   },
   {path:'liste',component:ComptableViewComponent},
   {path:'detail',component:ComptableDetailComponent},

@@ -10,6 +10,7 @@ import { NgApexchartsModule } from "ng-apexcharts";
 import { InformatiqueRoutingModule } from './informatique-routing.module';
 import { DashboardInformatiqueComponent } from './dashboard-informatique/dashboard-informatique.component';
 import { InformaticienService } from './service/informaticien.service';
+import { ToastrService,ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,9 @@ import { InformaticienService } from './service/informaticien.service';
     MatIconModule,
     NgApexchartsModule,
     MatTabsModule,
+    ToastrModule.forRoot({})
+
   ],
-  providers:[InformaticienService]
+  providers:[InformaticienService,ToastrService]
 })
 export class InformatiqueModule { }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders} from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user';
@@ -11,7 +11,8 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
-
+  public config:string="http://cemedo.openslearning.com/cemedo/login_check"
+  private userAuth:User=new User()
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser'))
@@ -46,4 +47,19 @@ export class AuthService {
     this.currentUserSubject.next(null);
     return of({ success: false });
   }
+  
+ // headers =new HttpHeaders.set('Content-Type','application/json');
+
+ // const headers = new HttpHeaders({'Content-Type':'application/json; charset=utf-8'});
+
+
+  authUser(username: string, password: string):Observable<any>{
+
+   this.userAuth.username=username
+   this.userAuth.password=password
+   return this.http.post<any>("http://cemedo.openslearning.com/cemedo/login_check",this.authUser,
+   {headers:new HttpHeaders({'Content-Type':'application/json'})} 
+   )
+  }
+
 }

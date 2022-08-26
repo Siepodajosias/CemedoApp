@@ -1,0 +1,168 @@
+<h2 mat-dialog-title>nouveau medecin</h2>
+<mat-dialog-content class="mat-typography e">
+    <div class="container">
+
+        <form [formGroup]="MedecinForms" (ngSubmit)="SeveData()">
+            <!--Ligne 1 nom et prenom-->
+            <div class="row mt-5">
+                <div class="col-md-6 col-lg-6 col-sm-12">
+                    <div class="mb-3">
+                        <label>Nom</label>
+                        <input type="text" class="" placeholder="Nom"
+                        class="form-control"
+                            formControlName="nom">
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-sm-12">
+                    <div class="mb-3">
+                        <label>Prenom</label>
+                        <input type="text" class="form-control" placeholder="Prénom"
+                            formControlName="prenoms">
+                    </div>
+                </div>
+            </div>
+             <!--Ligne 2 gnere,date naissance et residence-->
+            <div class="row">
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="mb-3">
+                        <label>Genre</label>
+                        <input type="text" class="form-control" placeholder="Genre"
+                            formControlName="genre">
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="mb-3">
+                        <label>Date de naissance</label>
+                        <input type="datetime" class="form-control"
+                            placeholder="date de naissance" formControlName="dateNaissance"
+                            [matDatepicker]="datepicker1">
+                        <mat-datepicker-toggle matSuffix [for]="datepicker1"></mat-datepicker-toggle>
+                        <mat-datepicker #datepicker1>
+                            <mat-datepicker-actions>
+                                <button mat-button matDatepickerCancel>Cancel</button>
+                                <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                            </mat-datepicker-actions>
+                        </mat-datepicker>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="mb-3">
+                        <label>Residence</label>
+                        <input type="text" class="form-control" placeholder="Résidence"
+                            formControlName="residence">
+                    </div>
+                </div>
+            </div>
+                <!--Ligne 3 spécialité et heure debut et fin-->
+            <div class="row">
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="mb-3">
+                        <label>Spécialité</label>
+                        <input type="text" class="form-control"
+                            formControlName="sepecialiteMedecin" placeholder="specialite">
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="mb-3">
+                        <label>Heure de service</label>
+                        <input type="datetime" class="form-control"
+                            formControlName="heureDebut" placeholder="heure debut de service"
+                            [matDatepicker]="datepicker2">
+                        <mat-datepicker-toggle matSuffix [for]="datepicker2"></mat-datepicker-toggle>
+                        <mat-datepicker #datepicker2>
+                            <mat-datepicker-actions>
+                                <button mat-button matDatepickerCancel>Cancel</button>
+                                <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                            </mat-datepicker-actions>
+                        </mat-datepicker>
+                    </div>
+
+                </div>
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="mb-3">
+                        <label>Heure de service</label>
+                        <input type="datetime" class="form-control"
+                            formControlName="heureFin" placeholder="heure fin de service"
+                            [matDatepicker]="datepicker3">
+                        <mat-datepicker-toggle matSuffix [for]="datepicker3"></mat-datepicker-toggle>
+                        <mat-datepicker #datepicker3>
+                            <mat-datepicker-actions>
+                                <button mat-button matDatepickerCancel>Cancel</button>
+                                <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                            </mat-datepicker-actions>
+                        </mat-datepicker>
+                    </div>
+                </div>
+            </div>
+
+            <!--Ligne 4 salaire, prime et numero cni-->
+            <div class="row">
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="mb-3">
+                        <label>Salaire</label>
+                        <input type="number" class="form-control"
+                            formControlName="salaireMedecin" placeholder="salaire">
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="mb-3">
+                        <label>Prime</label>
+                        <input type="number" class="form-control "
+                            formControlName="primeMedecin" placeholder="Prime">
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="mb-3">
+                        <label>Numéro CNI</label>
+                        <input type="text" class="form-control "
+                            formControlName="numeroCni" placeholder="Numero CNI">
+                    </div>
+                </div>
+            </div>
+
+              <!--Ligne 5 e-mail et numéro de telephone-->
+            <div class="row">
+                <div class="col-md-6 col-lg-6 col-sm-12">
+                    <div class="mb-3">
+                        <label>E-mail</label>
+                        <input type="email" class="form-control" formControlName="email"
+                            placeholder="E-mail">
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-sm-12">
+                    <div class="mb-3">
+                        <label>Numéro de Téléphone</label>
+                        <input type="text" class="form-control" formControlName="tel"
+                            placeholder="numéro Téléphone">
+                    </div>
+                </div>
+            </div>
+             <!--Ligne 6 password et photo-->
+            <div class="row">
+                <div class="col-md-6 col-lg-6 col-sm-12">
+                    <div class="mb-3">
+                        <label>Mot de passe</label>
+                        <input type="text" class="form-control" formControlName="password"
+                            placeholder="Mot de passe">
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-sm-12">
+                    <div class="mb-3">
+                        <label>Photo de profile</label>
+                        <input type="text" class="form-control" formControlName="photo"
+                            placeholder="Photo">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2 col-lg-2 col-sm-12">
+                    <button mat-raised-button color="primary" type="submit">Enregistrer
+                        <mat-icon>done</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</mat-dialog-content>

@@ -1,0 +1,130 @@
+<h2 mat-dialog-title>nouveau patient</h2>
+<mat-dialog-content class="mat-typography e">
+    <div class="container">
+        <form [formGroup]="MedecinForms" (ngSubmit)="SeveData()">
+            <div class="row mt-5">
+                <div class="col-md-6 col-lg-6 col-sm-12">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Nom"
+                            formControlName="nom">
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-sm-12">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Prénom"
+                            formControlName="prenom">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Genre"
+                            formControlName="genre">
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="mb-3">
+                        <!--
+                        <input type="text" class="form-control" aria-describedby="emailHelp"
+                            placeholder="Date de naissance"
+                            formControlName="dateNaissance"
+                            >
+                            -->
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Résidence"
+                            formControlName="residence">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" aria-describedby="emailHelp"
+                            formControlName="specialite" placeholder="Specialite">
+                    </div>
+                </div>
+                <div class="col-md-8 col-lg-8 col-sm-12">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" aria-describedby="emailHelp" formControlName="type"
+                            placeholder="type de medecin">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="mb-3">
+                        <input type="email" class="form-control" aria-describedby="emailHelp" formControlName="email"
+                            placeholder="E-mail">
+                    </div>
+                </div>
+                <div class="col-md-8 col-lg-8 col-sm-12">
+                    <div class="mb-3">
+                        <input type="number" class="form-control" aria-describedby="emailHelp"
+                            formControlName="telephone" placeholder="Numéro Téléphone">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="mb-3">
+                        <input type="number" class="form-control" aria-describedby="emailHelp"
+                            formControlName="numeroCNI" placeholder="Numéro CNI">
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4 col-sm-12">
+
+                </div>
+                <div class="col-md-4 col-lg-4 col-sm-12">
+
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="mb-3">
+                        <input type="number" class="form-control" aria-describedby="emailHelp" formControlName="salaire"
+                            placeholder="salaire">
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="mb-3">
+                        <input type="number" class="form-control" aria-describedby="emailHelp" formControlName="prime"
+                            placeholder="prime">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-lg-6 col-sm-12">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" aria-describedby="emailHelp" formControlName="password"
+                            placeholder="Mot de passe">
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-sm-12">
+                    <div class="mb-3">
+                        <input type="email" class="form-control" aria-describedby="emailHelp" formControlName="photo"
+                            placeholder="Photo">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2 col-lg-2 col-sm-12">
+                    <button mat-raised-button color="primary" type="submit">Enregistrer
+                        <mat-icon>done</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</mat-dialog-content>

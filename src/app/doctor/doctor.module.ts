@@ -22,29 +22,53 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatRadioModule } from "@angular/material/radio";
 import { DragDropModule } from "@angular/cdk/drag-drop";
 import { HttpClientModule } from "@angular/common/http";
+import { MatChipsModule } from '@angular/material/chips';
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { MatCardModule } from '@angular/material/card'
+import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { FullCalendarModule } from '@fullcalendar/angular'
 
+import { OWL_DATE_TIME_LOCALE, OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+
+//import { OwlDateTimeModule, OWL_DATE_TIME_FORMATS} from 'ng-pick-datetime';
+
+
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
+import interactionPlugin from '@fullcalendar/interaction'; // a plugin!
+
+FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+  dayGridPlugin,
+  interactionPlugin
+]);
+
+//import { MatDialogModule} from '@angular/material/dialog';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { DoctorRoutingModule } from "./doctor-routing.module";
 import { ComponentsModule } from "../shared/components/components.module";
 import { MedecinViewComponent } from './composents/medecin-view/medecin-view.component';
-import { MedecinFormsComponent } from './composents/medecin-forms/medecin-forms.component';
+import { MedecinFormsComponent } from './composents/medecin-view/medecin-forms.component';
 import { MedecinDetailComponent } from './composents/medecin-detail/medecin-detail.component';
-import { MedecinRechercheComponent } from './composents/medecin-recherche/medecin-recherche.component';
 import { ProfileMedecinComponent } from './composents/profile-medecin/profile-medecin.component';
 import { DashboardMedecinComponent } from "./dashboard-medecin/dashboard-medecin.component";
 import { RapportComponent } from './composents/rapport/rapport.component';
 import { MedecinCalendrierComponent } from './composents/medecin-calendrier/medecin-calendrier.component';
 import { MedecinService } from "./service/medecin.service";
+import { FactureComponent } from "./composents/facture/facture.component";
+import { MedecinView2Component } from './composents/medecin-view2/medecin-view2.component';
+
 
 @NgModule({
   declarations: [
     MedecinViewComponent,
     MedecinFormsComponent,
     MedecinDetailComponent,
-    MedecinRechercheComponent,
     ProfileMedecinComponent,
     DashboardMedecinComponent,
     RapportComponent,
-    MedecinCalendrierComponent
+    MedecinCalendrierComponent,
+    FactureComponent,
+    MedecinView2Component
+
   ],
   imports: [
     CommonModule,
@@ -56,6 +80,11 @@ import { MedecinService } from "./service/medecin.service";
     HttpClientModule,
     PerfectScrollbarModule,
     MatIconModule,
+    FullCalendarModule,
+    MatDatepickerModule,
+    ToastrModule.forRoot({}),
+    MatToolbarModule,
+    MatChipsModule,
     MatButtonModule,
     MatDialogModule,
     NgApexchartsModule,
@@ -65,7 +94,9 @@ import { MedecinService } from "./service/medecin.service";
     MatSortModule,
     MatTabsModule,
     MatMenuModule,
-    MatDatepickerModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatCardModule,
     MatTableModule,
     MatSelectModule,
     MatCheckboxModule,
@@ -74,6 +105,12 @@ import { MedecinService } from "./service/medecin.service";
     MatRadioModule,
     DragDropModule,
     ComponentsModule,
-  ],providers:[MedecinService]
+    /*OwlDateTimeModule,
+    OwlNativeDateTimeModule*/
+
+  ], providers: [MedecinService, ToastrService,
+    //{provide: OWL_DATE_TIME_LOCALE, useValue: 'fr'},
+
+  ]
 })
 export class DoctorModule { }

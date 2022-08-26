@@ -13,7 +13,18 @@
             <div class="body">
   
               <!-- Add content here -->
-  
+              <apx-chart [series]="serie" [chart]="chart">
+              </apx-chart>
+              <div echarts [options]="options1" class="demo-chart"></div>
+
+
+              <div class="button-groups">
+                <button (click)="theme=undefined" mat-button>default</button>
+                <button (click)="theme='dark'" mat-raised-button color="primary">Foncé</button>
+                <button (click)="theme=coolTheme" mat-raised-button color="warn">change de coleur</button>
+              </div>
+              <div echarts [options]="options" [theme]="theme" class="demo-chart"></div>
+
             </div>
           </div>
         </div>

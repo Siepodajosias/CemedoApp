@@ -1,6 +1,8 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
+import { ToastrService,ToastrModule } from "ngx-toastr";
+
 import { AuthenticationRoutingModule } from "./authentication-routing.module";
 import { Page500Component } from "./page500/page500.component";
 import { Page404Component } from "./page404/page404.component";
@@ -26,11 +28,13 @@ import { MatButtonModule } from "@angular/material/button";
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    ToastrModule,
     AuthenticationRoutingModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
     MatButtonModule,
   ],
+  providers:[ToastrService]
 })
 export class AuthenticationModule {}

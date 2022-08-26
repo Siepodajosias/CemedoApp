@@ -1,1 +1,27 @@
-<p>infirmier-calendrier works!</p>
+<section class="content">
+    <div class="content-block">
+      <div class="block-header">
+        <!-- breadcrumb -->
+        <app-breadcrumb [title]="'Calendrier'" [items]="[]" [active_item]="'Rendez-Vous'"></app-breadcrumb>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="card">
+            <div class="header">
+              <h2>Calendrier des rendez-vous</h2>
+            </div>
+            <div class="body">
+  
+              <!-- Add content here -->
+  
+              <full-calendar [options]="calendarOptions"></full-calendar>
+
+              <!-- Add content here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  

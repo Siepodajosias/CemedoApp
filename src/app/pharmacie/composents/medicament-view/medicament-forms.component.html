@@ -1,0 +1,50 @@
+<h2 mat-dialog-title>nouvelle Medicament</h2>
+<mat-dialog-content class="mat-typography e">
+    <div class="container">
+        <form [formGroup]="medicamentForms">
+            <div class="row mt-5">
+                <div class="col-md-6 col-lg-6 col-sm-12">
+                    <div class="mb-3">
+                        <input type="text" class="form-control"
+                            [ngClass]="{'is-invalid':medicamentForms.controls['libelle'].touched && !medicamentForms.controls['libelle'].valid}"
+                            formControlName="libelle" placeholder="Nom du medicament">
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-sm-12">
+                    <div class="mb-3">
+                        <input type="date" class="form-control" aria-describedby="emailHelp"
+                            formControlName="dateArrive" placeholder="Date d'arriver"
+                            [ngClass]="{'is-invalid':medicamentForms.controls['dateArrive'].touched && !medicamentForms.controls['dateArrive'].valid}">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-12">
+                    <div class="mb-3">
+                        <input type="number" class="form-control" formControlName="quantite"
+                            placeholder="quantite"
+                            [ngClass]="{'is-invalid':medicamentForms.controls['quantite'].touched && !medicamentForms.controls['quantite'].valid}">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-12">
+                    <div class="mb-3">
+                        <input type="number" class="form-control" formControlName="prix"
+                            placeholder="Prix du médicament"
+                            [ngClass]="{'is-invalid':medicamentForms.controls['prix'].touched && !medicamentForms.controls['prix'].valid}">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-md-2 col-lg-2 col-sm-12">
+                  <button mat-raised-button color="primary" (click)="sendData()"
+                      [disabled]="!medicamentForms.valid">Enregistrer
+                      <mat-icon>done</mat-icon>
+                  </button>
+              </div>
+          </div>
+
+        </form>
+    </div>
+</mat-dialog-content>

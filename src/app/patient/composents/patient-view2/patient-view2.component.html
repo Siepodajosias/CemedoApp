@@ -1,0 +1,99 @@
+<section class="content">
+    <div class="content-block">
+      <div class="block-header">
+        <!-- breadcrumb -->
+        <app-breadcrumb [title]="'Patients'" [items]="[]" [active_item]="'Liste'"></app-breadcrumb>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="card">
+            <div class="header">
+              <div class="col-md-3 col-lg-3">
+                <button mat-raised-button color="primary" (click)="openDialog()">Ajouter</button>
+               </div>
+            </div>
+  
+            <div class="body">
+  
+              <!-- Add content here -->
+
+              <mat-tab-group dynamicHeight>
+                <mat-tab label="Liste des patients">
+                  <div class="mat-elevation-z8">
+                    <input class="form-control" (keyup)="applyFilter($event)" placeholder="nom du patient" #input>
+  
+                    <table mat-table [dataSource]="patient">
+  
+                      <!-- Name Column -->
+                      <ng-container matColumnDef="nom">
+                        <th mat-header-cell *matHeaderCellDef> Nom </th>
+                        <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
+                      </ng-container>
+  
+                      <!-- Weight Column -->
+                      <ng-container matColumnDef="prenoms">
+                        <th mat-header-cell *matHeaderCellDef> prenom </th>
+                        <td mat-cell *matCellDef="let element"> {{element.prenoms}} </td>
+                      </ng-container>
+  
+                      <!-- Symbol Column -->
+                      <ng-container matColumnDef="sexe">
+                        <th mat-header-cell *matHeaderCellDef> genre </th>
+                        <td mat-cell *matCellDef="let element"> {{element.sexe}} </td>
+                      </ng-container>
+  
+                      <ng-container matColumnDef="profession">
+                        <th mat-header-cell *matHeaderCellDef>profession </th>
+                        <td mat-cell *matCellDef="let element"> {{element.profession}} </td>
+                      </ng-container>
+  
+                      <ng-container matColumnDef="lieuHabitation">
+                        <th mat-header-cell *matHeaderCellDef> residence </th>
+                        <td mat-cell *matCellDef="let element"> {{element.lieuHabitation}} </td>
+                      </ng-container>
+  
+                      <ng-container matColumnDef="tel">
+                        <th mat-header-cell *matHeaderCellDef> Téléphone 1</th>
+                        <td mat-cell *matCellDef="let element"> {{element.tel}} </td>
+                      </ng-container>
+  
+                      <ng-container matColumnDef="tel2">
+                        <th mat-header-cell *matHeaderCellDef> Téléphone 2 </th>
+                        <td mat-cell *matCellDef="let element"> {{element.tel2}} </td>
+                      </ng-container>
+  
+                      <ng-container matColumnDef="assurance">
+                        <th mat-header-cell *matHeaderCellDef> assurance </th>
+                        <td mat-cell *matCellDef="let element"> {{element.assurance}} </td>
+                      </ng-container>
+  
+                      <ng-container matColumnDef="edit">
+                        <th mat-header-cell *matHeaderCellDef>Detail</th>
+                        <td mat-cell *matCellDef="let element">
+                          <button mat-button (click)="detail(element.id)">
+                            <mat-icon color="primary">
+                              login
+                            </mat-icon>
+                          </button>
+                        </td>
+                      </ng-container>
+  
+                      <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="4">Aucun patient ne correspond au filtre :"{{input.value}}"</td>
+                      </tr>
+                      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                    <mat-paginator [pageSizeOptions]="[10,15, 20]" showFirstLastButtons
+                      aria-label="Select page of periodic elements">
+                    </mat-paginator>
+                  </div>
+                </mat-tab>
+              </mat-tab-group>
+              <!---->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
