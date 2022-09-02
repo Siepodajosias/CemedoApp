@@ -1,0 +1,72 @@
+[
+    {
+      "id":"1234S",
+      "nom":"NSIA",
+      "emailAssur":"infonsia@gmail.com",
+      "telephone":"0748508240",
+      "nomCorresp":"diaby kader",
+      "emailCorresp":"diabykader@gmail.com",
+      "telCorresp":"0778452123",
+      "ville":"Bingerville"
+    },
+    {
+        "id":"1234D",
+        "nom":"CNPS",
+        "emailAssur":"infocnps@gmail.com",
+        "telephone":"0748508840",
+        "nomCorresp":"ibo ezechiel",
+        "emailCorresp":"iboezechiel@gmail.com",
+        "telCorresp":"0547213698",
+        "ville":"Bouaké"
+      },
+      {
+        "id":"1234I",
+        "nom":"IPASSURANCE",
+        "emailAssur":"infoipassurance@gmail.com",
+        "telephone":"0748508210",
+        "nomCorresp":"yao elfride",
+        "emailCorresp":"yaoelfride@gmail.com",
+        "telCorresp":"0787451236",
+        "ville":"Abidjan"
+      },
+      {
+          "id":"1234Y",
+          "nom":"TCPASSURANCE",
+          "emailAssur":"infotcpassurance@gmail.com",
+          "telephone":"0748587210",
+          "nomCorresp":"tiemelé olivier",
+          "emailCorresp":"tiemeléolivier@gmail.com",
+          "telCorresp":"0754789850",
+          "ville":"Abidjan"
+        },
+        {
+          "id":"1234T",
+          "nom":"UMLASSURANCE",
+          "emailAssur":"infoumlassurance@gmail.com",
+          "telephone":"0742008210",
+          "nomCorresp":"yao yvan",
+          "emailCorresp":"yaoyvan@gmail.com",
+          "telCorresp":"0717828963",
+          "ville":"Bouaké"
+        },
+        {
+          "id":"8234T",
+          "nom":"QPASSURANCE",
+          "emailAssur":"infoqpassurance@gmail.com",
+          "telephone":"0742008210",
+          "nomCorresp":"yao yvan",
+          "emailCorresp":"yaoyvan@gmail.com",
+          "telCorresp":"0717828963",
+          "ville":"Bassam"
+        },
+        {
+          "id":"78234T",
+          "nom":"MLASSURANCE",
+          "emailAssur":"infomlassurance@gmail.com",
+          "telephone":"0742008210",
+          "nomCorresp":"yao atta",
+          "emailCorresp":"yaoatta@gmail.com",
+          "telCorresp":"0717828963",
+          "ville":"Bouaké"
+        }
+  ]
