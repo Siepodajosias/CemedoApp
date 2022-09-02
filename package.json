@@ -7,10 +7,12 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "heroku-postbuild": "ng build"
+    "heroku-postbuild": "ng build --prod"
   },
   "private": true,
   "dependencies": {
+    "@angular/cli": "~13.1.1",
+    "@angular/compiler-cli": "~13.1.0",
     "@agm/core": "^1.1.0",
     "@angular/animations": "~13.1.0",
     "@angular/cdk": "^13.1.1",
