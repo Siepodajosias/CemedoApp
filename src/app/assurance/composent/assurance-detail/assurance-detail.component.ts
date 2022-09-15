@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Assurance1 } from '../../model/assurance1';
+import { Assurance } from '../../model/assurance';
 import { AssuranceService } from '../../service/assurance.service';
 
 
@@ -43,7 +43,7 @@ export type ChartOptions = {
   styleUrls: ['./assurance-detail.component.scss']
 })
 export class AssuranceDetailComponent implements OnInit {
- assurance:Assurance1
+ assurance:Assurance
   constructor(private assurService:AssuranceService,
     private routeParams:ActivatedRoute) { }
 
@@ -66,12 +66,14 @@ export class AssuranceDetailComponent implements OnInit {
 
 
   ngOnInit(): void {
+   
     const z=this.routeParams.snapshot.params['id'];
         this.assurService.getAssuranceById(z).subscribe({
           next:(value:any)=>{
-            this.assurance=value
+            this.assurance=value.data
           }
         })
+        
   }
 
 }

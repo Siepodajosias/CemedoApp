@@ -6,24 +6,23 @@
                 <div class="col-md-6 col-lg-6 col-sm-12">
                     <div class="mb-3">
                         <input type="text" class="form-control"
-                            [ngClass]="{'is-invalid':assuranceForm.controls['libelle'].touched && !assuranceForm.controls['libelle'].valid}"
                             formControlName="libelle" placeholder="Nom Assurance">
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-6 col-sm-12">
                     <div class="mb-3">
                         <input type="email" class="form-control" aria-describedby="emailHelp"
-                            formControlName="emailAssurance" placeholder="E-mail assurance"
-                            [ngClass]="{'is-invalid':assuranceForm.controls['emailAssurance'].touched && !assuranceForm.controls['emailAssurance'].valid}">
+                            formControlName="email" placeholder="E-mail assurance"
+                            >
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 col-lg-12 col-sm-12">
                     <div class="mb-3">
-                        <input type="text" class="form-control" formControlName="contact"
-                            placeholder="Téléphone assurance"
-                            [ngClass]="{'is-invalid':assuranceForm.controls['contact'].touched && !assuranceForm.controls['contact'].valid}">
+                        <input type="text" class="form-control" formControlName="tel"
+                            placeholder="Contact de l'assurance"
+                           >
                     </div>
                 </div>
             </div>
@@ -32,7 +31,7 @@
                 <div class="col-md-12 col-lg-12 col-sm-12">
                     <div class="mb-3">
                         <input type="text" class="form-control" formControlName="ville"
-                            [ngClass]="{'is-invalid':assuranceForm.controls['ville'].touched && !assuranceForm.controls['ville'].valid}"
+                            
                             placeholder="Ville">
                     </div>
                 </div>
@@ -49,3 +48,10 @@
         </form>
     </div>
 </mat-dialog-content>
+
+
+
+
+<!--
+    assuranceForm.controls['libelle'].touched && !assuranceForm.controls['libelle'].valid}
+-->

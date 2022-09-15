@@ -1,30 +1,13 @@
 export class Patient1{
         id:number
-        pieceIdRecto:string
-        pieceIdVerso:string
-        assuranceRecto:string
-        assuranceVerso:string
-        email:string
-        password:string
-        nom:string
-        prenoms:string
-        assurance:string
-        tel:string
-        tel2:string
-        sexe:string
-        fcmtoken:string
         tauxCouverture:number
         autreAntecedent:string
         numeroAssure:string
         lieuHabitation:string
-        dateNaissance:string
         createdAt:string
         updatedAt:string
         version:number
-        active:boolean
-        userIdentifier:string
-        username:string
-        salt:string
+        active:number
         profession:string
-        rendezVous:string
+
 }

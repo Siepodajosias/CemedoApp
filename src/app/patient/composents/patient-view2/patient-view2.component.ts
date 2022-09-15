@@ -15,7 +15,7 @@ import { PatientFormsComponent } from './patient-forms.component';
   styleUrls: ['./patient-view2.component.scss']
 })
 export class PatientView2Component implements OnInit {
-  displayedColumns: string[] = ['nom', 'prenoms', 'sexe', 'profession', 'lieuHabitation', 'tel', 'tel2','assurance','edit'];
+  displayedColumns: string[] = ['nom', 'prenoms', 'genre', 'profession', 'lieuHabitation', 'tel', 'tel2','edit'];
   patient!:MatTableDataSource<Patient>
   posts: any
   doctor:any=[{'age':25},{'age':40},{'age':28}]
@@ -30,8 +30,8 @@ export class PatientView2Component implements OnInit {
 
     this.patientH.getPatientP().subscribe({
       next: (value: any) => {
-        this.posts = value ? value : []
-        this.patient = new MatTableDataSource(this.posts)
+        this.posts = value.data ? value : []
+        this.patient = new MatTableDataSource(this.posts.data)
           this.cdr.detectChanges();
           this.patient.paginator = this.paginator
       },
@@ -39,6 +39,7 @@ export class PatientView2Component implements OnInit {
       complete: () => {
       }
     })
+    
   }
   detail(a:any){
     //this.route.navigate(['admin/patient/detail',a]);

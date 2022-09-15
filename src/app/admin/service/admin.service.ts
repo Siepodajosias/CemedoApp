@@ -8,8 +8,8 @@ import { Facture } from '../model/facture';
   providedIn: 'root'
 })
 export class AdminService {
-  private config1:string="http://cemedo.openslearning.com/cemedo/administrateurs"
-  private config2:string="http://cemedo.openslearning.com/cemedo/factures"
+  private config1:string="https://cemedo-api-java.herokuapp.com/administrateurs"
+  private config2:string="https://cemedo-api-java.herokuapp.com/factures"
   constructor(private httpadmin:HttpClient) { }
 
 

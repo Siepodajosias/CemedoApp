@@ -1,35 +1,30 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Medecin1 } from '../model/medecin1';
+import { Medecin } from '../model/medecin';
 import { Rendezvous } from '../model/rendezvous';
 @Injectable({
   providedIn: 'root'
 })
 export class MedecinService {
-  private config1:string='api/medecin.json';
 
-  private config:string="https://cemedos.openslearning.com/cemedo/medecins"
-  private config2:string="https://cemedos.openslearning.com/cemedo/rendez_vouses"
+  private config:string="https://cemedo-api-java.herokuapp.com/employe/medecin"
+  private config2:string="https://cemedo-api-java.herokuapp.com/rendez_vouses"
 
   constructor(private httpMed:HttpClient) { }
-  getMedecin1():Observable<any>{
-    return this.httpMed.get<any>(this.config1)
-  }
-
 
   //medecin ressource
   getMedecin():Observable<any>{
-    return this.httpMed.get<any>(this.config)
+    return this.httpMed.get<any>(this.config+"/getAll")
   }
 
-  sendMedecin(med:Medecin1):Observable<Medecin1>{
-    return this.httpMed.post<Medecin1>(this.config,med,{
+  sendMedecin(med:Medecin):Observable<Medecin>{
+    return this.httpMed.post<Medecin>(this.config+"/create",med,{
       headers:new HttpHeaders({'Content-Type':'application/json'})
     })
   }
   getMedecinById(a:number):Observable<any>{
-    return this.httpMed.get<any>(this.config+"/"+a,
+    return this.httpMed.get<any>(this.config+"/getOne/"+a,
     {
       headers:new HttpHeaders({'Content-Type':'application/json'})
     }

@@ -39,15 +39,15 @@
                     </ng-container>
 
                     <!-- Weight Column -->
-                    <ng-container matColumnDef="emailAssurance">
+                    <ng-container matColumnDef="email">
                       <th mat-header-cell *matHeaderCellDef> E-mail Assurance </th>
-                      <td mat-cell *matCellDef="let element"> {{element.emailAssurance}} </td>
+                      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
                     </ng-container>
 
                     <!-- Symbol Column -->
-                    <ng-container matColumnDef="contact">
+                    <ng-container matColumnDef="tel">
                       <th mat-header-cell *matHeaderCellDef> Contact </th>
-                      <td mat-cell *matCellDef="let element"> {{element.contact}} </td>
+                      <td mat-cell *matCellDef="let element"> {{element.tel}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="ville">
@@ -61,17 +61,6 @@
                         <button mat-button (click)="detail(element.id)">
                           <mat-icon color="primary">
                             login
-                          </mat-icon>
-                        </button>
-                      </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="retirer">
-                      <th mat-header-cell *matHeaderCellDef>Supprimer </th>
-                      <td mat-cell *matCellDef="let element">
-                        <button mat-button (click)=" supprimer(element.id)">
-                          <mat-icon color="warn">
-                            delete
                           </mat-icon>
                         </button>
                       </td>
@@ -141,17 +130,6 @@
                         <button mat-button (click)="detail1(element.id)">
                           <mat-icon color="primary">
                             login
-                          </mat-icon>
-                        </button>
-                      </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="retirer">
-                      <th mat-header-cell *matHeaderCellDef>Supprimer </th>
-                      <td mat-cell *matCellDef="let element">
-                        <button mat-button (click)=" supprimer1(element.id)">
-                          <mat-icon color="warn">
-                            delete
                           </mat-icon>
                         </button>
                       </td>

@@ -15,7 +15,6 @@
   
             <div class="body">
   
-              <!-- Add content here -->
 
               <mat-tab-group dynamicHeight>
                 <mat-tab label="Liste des patients">
@@ -24,22 +23,22 @@
   
                     <table mat-table [dataSource]="patient">
   
-                      <!-- Name Column -->
+                      
                       <ng-container matColumnDef="nom">
                         <th mat-header-cell *matHeaderCellDef> Nom </th>
-                        <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
+                        <td mat-cell *matCellDef="let element"> {{element.user.nom}} </td>
                       </ng-container>
   
-                      <!-- Weight Column -->
+                      
                       <ng-container matColumnDef="prenoms">
                         <th mat-header-cell *matHeaderCellDef> prenom </th>
-                        <td mat-cell *matCellDef="let element"> {{element.prenoms}} </td>
+                        <td mat-cell *matCellDef="let element"> {{element.user.prenoms}} </td>
                       </ng-container>
   
-                      <!-- Symbol Column -->
-                      <ng-container matColumnDef="sexe">
+                      
+                      <ng-container matColumnDef="genre">
                         <th mat-header-cell *matHeaderCellDef> genre </th>
-                        <td mat-cell *matCellDef="let element"> {{element.sexe}} </td>
+                        <td mat-cell *matCellDef="let element"> {{element.user.genre}} </td>
                       </ng-container>
   
                       <ng-container matColumnDef="profession">
@@ -48,23 +47,18 @@
                       </ng-container>
   
                       <ng-container matColumnDef="lieuHabitation">
-                        <th mat-header-cell *matHeaderCellDef> residence </th>
+                        <th mat-header-cell *matHeaderCellDef> résidence </th>
                         <td mat-cell *matCellDef="let element"> {{element.lieuHabitation}} </td>
                       </ng-container>
   
                       <ng-container matColumnDef="tel">
                         <th mat-header-cell *matHeaderCellDef> Téléphone 1</th>
-                        <td mat-cell *matCellDef="let element"> {{element.tel}} </td>
+                        <td mat-cell *matCellDef="let element"> {{element.user.tel}} </td>
                       </ng-container>
   
                       <ng-container matColumnDef="tel2">
                         <th mat-header-cell *matHeaderCellDef> Téléphone 2 </th>
-                        <td mat-cell *matCellDef="let element"> {{element.tel2}} </td>
-                      </ng-container>
-  
-                      <ng-container matColumnDef="assurance">
-                        <th mat-header-cell *matHeaderCellDef> assurance </th>
-                        <td mat-cell *matCellDef="let element"> {{element.assurance}} </td>
+                        <td mat-cell *matCellDef="let element"> {{element.user.tel2}} </td>
                       </ng-container>
   
                       <ng-container matColumnDef="edit">
@@ -90,7 +84,7 @@
                   </div>
                 </mat-tab>
               </mat-tab-group>
-              <!---->
+
             </div>
           </div>
         </div>

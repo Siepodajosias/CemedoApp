@@ -26,7 +26,9 @@ import { MatChipsModule } from '@angular/material/chips';
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { MatCardModule } from '@angular/material/card'
 import { ToastrModule, ToastrService } from 'ngx-toastr';
-import { FullCalendarModule } from '@fullcalendar/angular'
+
+
+//import { FullCalendarModule } from '@fullcalendar/angular'
 
 import { OWL_DATE_TIME_LOCALE, OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
@@ -36,10 +38,10 @@ import { OWL_DATE_TIME_LOCALE, OwlDateTimeModule, OwlNativeDateTimeModule } from
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import interactionPlugin from '@fullcalendar/interaction'; // a plugin!
 
-FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+/*FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
   interactionPlugin
-]);
+]);*/
 
 //import { MatDialogModule} from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -80,7 +82,7 @@ import { MedecinView2Component } from './composents/medecin-view2/medecin-view2.
     HttpClientModule,
     PerfectScrollbarModule,
     MatIconModule,
-    FullCalendarModule,
+    //FullCalendarModule,
     MatDatepickerModule,
     ToastrModule.forRoot({}),
     MatToolbarModule,

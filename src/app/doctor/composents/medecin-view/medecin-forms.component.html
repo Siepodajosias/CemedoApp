@@ -2,39 +2,50 @@
 <mat-dialog-content class="mat-typography e">
     <div class="container">
 
-        <form [formGroup]="MedecinForms" (ngSubmit)="SeveData()">
-            <!--Ligne 1 nom et prenom-->
+        <form [formGroup]="MedecinForms">
+            <!--Ligne 1 nom, prenom et login-->
             <div class="row mt-5">
-                <div class="col-md-6 col-lg-6 col-sm-12">
+                <div class="col-md-4 col-lg-4 col-sm-12">
                     <div class="mb-3">
-                        <label>Nom</label>
-                        <input type="text" class="" placeholder="Nom"
+                        <input type="text" formControlName="nom" placeholder="Nom"
                         class="form-control"
-                            formControlName="nom">
+                            >
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-6 col-sm-12">
+                <div class="col-md-4 col-lg-4 col-sm-12">
                     <div class="mb-3">
-                        <label>Prenom</label>
-                        <input type="text" class="form-control" placeholder="Prénom"
-                            formControlName="prenoms">
+                        <input type="text" 
+                        formControlName="prenoms"
+                        class="form-control" placeholder="Prénom"
+                            >
                     </div>
                 </div>
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="mb-3">
+                        <input type="text" 
+                        formControlName="login"
+                        class="form-control" placeholder="Nom d'utilisateur"
+                            >
+                    </div>
+                </div>
+
+
             </div>
-             <!--Ligne 2 gnere,date naissance et residence-->
+             <!--Ligne 2 genre,date naissance et email-->
             <div class="row">
                 <div class="col-md-4 col-lg-4 col-sm-12">
                     <div class="mb-3">
-                        <label>Genre</label>
-                        <input type="text" class="form-control" placeholder="Genre"
-                            formControlName="genre">
+                        <input type="text" 
+                        formGroupName="genre"
+                        class="form-control" placeholder="Genre"
+                            >
                     </div>
                 </div>
                 <div class="col-md-4 col-lg-4 col-sm-12">
                     <div class="mb-3">
-                        <label>Date de naissance</label>
                         <input type="datetime" class="form-control"
-                            placeholder="date de naissance" formControlName="dateNaissance"
+                        formGroupName="dateNaissance"
+                            placeholder="date de naissance"
                             [matDatepicker]="datepicker1">
                         <mat-datepicker-toggle matSuffix [for]="datepicker1"></mat-datepicker-toggle>
                         <mat-datepicker #datepicker1>
@@ -47,118 +58,107 @@
                 </div>
                 <div class="col-md-4 col-lg-4 col-sm-12">
                     <div class="mb-3">
-                        <label>Residence</label>
-                        <input type="text" class="form-control" placeholder="Résidence"
-                            formControlName="residence">
+                        <input type="email" class="form-control" aria-describedby="emailHelp"
+                            formControlName="email" placeholder="E-mail"
+                            >
                     </div>
                 </div>
             </div>
-                <!--Ligne 3 spécialité et heure debut et fin-->
+                <!--Ligne 3 tel,tel2 et password-->
             <div class="row">
                 <div class="col-md-4 col-lg-4 col-sm-12">
                     <div class="mb-3">
-                        <label>Spécialité</label>
                         <input type="text" class="form-control"
-                            formControlName="sepecialiteMedecin" placeholder="specialite">
+                        formControlName="tel"
+                             placeholder="Téléphone">
                     </div>
                 </div>
                 <div class="col-md-4 col-lg-4 col-sm-12">
                     <div class="mb-3">
-                        <label>Heure de service</label>
-                        <input type="datetime" class="form-control"
-                            formControlName="heureDebut" placeholder="heure debut de service"
-                            [matDatepicker]="datepicker2">
-                        <mat-datepicker-toggle matSuffix [for]="datepicker2"></mat-datepicker-toggle>
-                        <mat-datepicker #datepicker2>
-                            <mat-datepicker-actions>
-                                <button mat-button matDatepickerCancel>Cancel</button>
-                                <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
-                            </mat-datepicker-actions>
-                        </mat-datepicker>
+                        <input type="text" class="form-control"
+                        formControlName="tel2"
+                             placeholder="Téléphone"
+                            >
                     </div>
 
                 </div>
                 <div class="col-md-4 col-lg-4 col-sm-12">
                     <div class="mb-3">
-                        <label>Heure de service</label>
-                        <input type="datetime" class="form-control"
-                            formControlName="heureFin" placeholder="heure fin de service"
-                            [matDatepicker]="datepicker3">
-                        <mat-datepicker-toggle matSuffix [for]="datepicker3"></mat-datepicker-toggle>
-                        <mat-datepicker #datepicker3>
-                            <mat-datepicker-actions>
-                                <button mat-button matDatepickerCancel>Cancel</button>
-                                <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
-                            </mat-datepicker-actions>
-                        </mat-datepicker>
+                        <input type="password" class="form-control"
+                        formControlName="password"
+                             placeholder="Mot de passe"
+                        >
                     </div>
                 </div>
             </div>
 
-            <!--Ligne 4 salaire, prime et numero cni-->
+            <!--Ligne 
             <div class="row">
                 <div class="col-md-4 col-lg-4 col-sm-12">
                     <div class="mb-3">
                         <label>Salaire</label>
                         <input type="number" class="form-control"
-                            formControlName="salaireMedecin" placeholder="salaire">
+                           placeholder="salaire">
                     </div>
                 </div>
                 <div class="col-md-4 col-lg-4 col-sm-12">
                     <div class="mb-3">
                         <label>Prime</label>
                         <input type="number" class="form-control "
-                            formControlName="primeMedecin" placeholder="Prime">
+                            placeholder="Prime">
                     </div>
                 </div>
                 <div class="col-md-4 col-lg-4 col-sm-12">
                     <div class="mb-3">
                         <label>Numéro CNI</label>
                         <input type="text" class="form-control "
-                            formControlName="numeroCni" placeholder="Numero CNI">
+                            placeholder="Numero CNI">
                     </div>
                 </div>
             </div>
 
-              <!--Ligne 5 e-mail et numéro de telephone-->
+              
             <div class="row">
                 <div class="col-md-6 col-lg-6 col-sm-12">
                     <div class="mb-3">
                         <label>E-mail</label>
-                        <input type="email" class="form-control" formControlName="email"
+                        <input type="email" class="form-control"
                             placeholder="E-mail">
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-6 col-sm-12">
                     <div class="mb-3">
                         <label>Numéro de Téléphone</label>
-                        <input type="text" class="form-control" formControlName="tel"
+                        <input type="text" class="form-control"
                             placeholder="numéro Téléphone">
                     </div>
                 </div>
             </div>
-             <!--Ligne 6 password et photo-->
+            
             <div class="row">
                 <div class="col-md-6 col-lg-6 col-sm-12">
                     <div class="mb-3">
                         <label>Mot de passe</label>
-                        <input type="text" class="form-control" formControlName="password"
+                        <input type="text" class="form-control"
                             placeholder="Mot de passe">
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-6 col-sm-12">
                     <div class="mb-3">
                         <label>Photo de profile</label>
-                        <input type="text" class="form-control" formControlName="photo"
+                        <input type="text" class="form-control"
                             placeholder="Photo">
                     </div>
 
                 </div>
             </div>
-
-            <div class="row">
+             -->
+            
+             <div class="row">
                 <div class="col-md-2 col-lg-2 col-sm-12">
-                    <button mat-raised-button color="primary" type="submit">Enregistrer
+                    <button mat-raised-button color="primary"
+                    (click)="SaveData()"
+                    >Enregistrer
                         <mat-icon>done</mat-icon>
                     </button>
                 </div>

@@ -8,30 +8,24 @@ import { Rendezvous } from '../model/rendezvous';
   providedIn: 'root'
 })
 export class ReceptionService {
-private config:string="https://cemedos.openslearning.com/cemedo/gerants"
-private config2:string="https://cemedos.openslearning.com/cemedo/rendez_vouses"
+private config:string="https://cemedo-api-java.herokuapp.com/employe/gerant/"
+private config2:string="https://cemedo-api-java.herokuapp.com/rendez_vouses"
   constructor(private httpRecep:HttpClient) { }
-
-  private config1:string='api/reception.json';
-
-  getReception1():Observable<any>{
-    return this.httpRecep.get<any>(this.config1)
-  }
 
   //reception ressources
   getReception():Observable<any>{
-    return this.httpRecep.get<any>(this.config,{
+    return this.httpRecep.get<any>(this.config+"getAll",{
       headers:new HttpHeaders({'Content-Type':'application/json'})
     })
   }
 
   sendReception(phar:Reception):Observable<Reception>{
-    return this.httpRecep.post<Reception>(this.config,phar,{
+    return this.httpRecep.post<Reception>(this.config+"create",phar,{
       headers:new HttpHeaders({'Content-Type':'application/json'})
     })
   }
   getReceptionById(a:number):Observable<any>{
-    return this.httpRecep.get<any>(this.config+"/"+a,
+    return this.httpRecep.get<any>(this.config+"getOne/"+a,
     {
       headers:new HttpHeaders({'Content-Type':'application/json'})
     }

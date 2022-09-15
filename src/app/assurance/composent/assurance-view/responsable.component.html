@@ -2,7 +2,7 @@
 <mat-dialog-content class="mat-typography e">
     <div class="container">
 
-        <form [formGroup]="responsableForms" (ngSubmit)="SeveData()">
+        <form>
             <!--Ligne 1 nom et prenom-->
             <div class="row mt-5">
                 <div class="col-md-6 col-lg-6 col-sm-12">
@@ -10,16 +10,14 @@
                         <label>Nom</label>
                         <input type="text" class="" placeholder="Nom"
                         class="form-control"
-                        [ngClass]="{'is-invalid':responsableForms.controls['nom'].touched && !responsableForms.controls['nom'].valid}"
-                            formControlName="nom">
+                        
+                           >
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-6 col-sm-12">
                     <div class="mb-3">
                         <label>Prenom</label>
-                        <input type="text" class="form-control" placeholder="Prénom"
-                        [ngClass]="{'is-invalid':responsableForms.controls['prenoms'].touched && !responsableForms.controls['prenoms'].valid}"
-                            formControlName="prenoms">
+                        <input type="text" class="form-control" placeholder="Prénom">
                     </div>
                 </div>
             </div>
@@ -28,26 +26,21 @@
                 <div class="col-md-4 col-lg-4 col-sm-12">
                     <div class="mb-3">
                         <label>Genre</label>
-                        <input type="text" class="form-control" placeholder="Genre"
-                        [ngClass]="{'is-invalid':responsableForms.controls['genre'].touched && !responsableForms.controls['genre'].valid}"
-                            formControlName="genre">
+                        <input type="text" class="form-control" placeholder="Genre">
                     </div>
                 </div>
                 <div class="col-md-4 col-lg-4 col-sm-12">
                     <div class="mb-3">
                         <label>Date de naissance</label>
                         <input type="date" class="form-control"
-                        [ngClass]="{'is-invalid':responsableForms.controls['dateNaissance'].touched && !responsableForms.controls['dateNaissance'].valid}"
-                            placeholder="date de naissance" formControlName="dateNaissance"
+                            placeholder="date de naissance" 
                            >
                     </div>
                 </div>
                 <div class="col-md-4 col-lg-4 col-sm-12">
                     <div class="mb-3">
                         <label>Residence</label>
-                        <input type="text" class="form-control" placeholder="Résidence"
-                        [ngClass]="{'is-invalid':responsableForms.controls['residence'].touched && !responsableForms.controls['residence'].valid}"
-                            formControlName="residence">
+                        <input type="text" class="form-control" placeholder="Résidence">
                     </div>
                 </div>
             </div>
@@ -57,23 +50,20 @@
                 <div class="col-md-4 col-lg-4 col-sm-12">
                     <div class="mb-3">
                         <label>Numéro CNI</label>
-                        <input type="text" class="form-control "
-                        [ngClass]="{'is-invalid':responsableForms.controls['numeroCni'].touched && !responsableForms.controls['numeroCni'].valid}"
-                            formControlName="numeroCni" placeholder="Numero CNI">
+                        <input type="text" class="form-control " placeholder="Numero CNI">
                     </div>
                 </div>
                 <div class="col-md-4 col-lg-4 col-sm-12">
                     <div class="mb-3">
                         <label>Assurance</label>
                         <input type="text" class="form-control "
-                            formControlName="assurance" placeholder="Assurance">
+                             placeholder="Assurance">
                     </div>
                 </div>
                 <div class="col-md-4 col-lg-4 col-sm-12">
                     <div class="mb-3">
                         <label>Mot de passe</label>
-                        <input type="password" class="form-control" formControlName="password"
-                        [ngClass]="{'is-invalid':responsableForms.controls['password'].touched && !responsableForms.controls['password'].valid}"
+                        <input type="password" class="form-control"
                             placeholder="Mot de passe">
                     </div>
                 </div>
@@ -84,16 +74,14 @@
                 <div class="col-md-6 col-lg-6 col-sm-12">
                     <div class="mb-3">
                         <label>E-mail</label>
-                        <input type="email" class="form-control" formControlName="email"
-                        [ngClass]="{'is-invalid':responsableForms.controls['email'].touched && !responsableForms.controls['email'].valid}"
+                        <input type="email" class="form-control"
                             placeholder="E-mail">
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-6 col-sm-12">
                     <div class="mb-3">
                         <label>Numéro de Téléphone</label>
-                        <input type="text" class="form-control" formControlName="tel"
-                        [ngClass]="{'is-invalid':responsableForms.controls['tel'].touched && !responsableForms.controls['tel'].valid}"
+                        <input type="text" class="form-control"
                             placeholder="numéro Téléphone">
                     </div>
                 </div>
@@ -101,7 +89,6 @@
             <div class="row">
                 <div class="col-md-2 col-lg-2 col-sm-12">
                     <button mat-raised-button color="primary" type="submit"
-                    [disabled]="!responsableForms.valid"
                     >Enregistrer
                         <mat-icon>done</mat-icon>
                     </button>

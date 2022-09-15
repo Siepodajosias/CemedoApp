@@ -7,7 +7,7 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { NgApexchartsModule } from "ng-apexcharts";
 import { HttpClientModule } from "@angular/common/http";
 
-import { FullCalendarModule } from '@fullcalendar/angular'
+//import { FullCalendarModule } from '@fullcalendar/angular'
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -29,11 +29,11 @@ import interactionPlugin from '@fullcalendar/interaction'; // a plugin!
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
-
+/*
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
   interactionPlugin
-]);
+]);*/
 
 @NgModule({
   declarations: [
@@ -58,8 +58,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     MaterialFileInputModule,
 
     ReactiveFormsModule,
-    FullCalendarModule,
-    FullCalendarModule,
+    //FullCalendarModule,
     FormsModule,
     ToastrModule.forRoot({}),
     MatCardModule,

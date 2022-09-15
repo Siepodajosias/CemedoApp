@@ -13,7 +13,7 @@ import { PharmacienFormsComponent } from './pharmacien-forms.component';
   styleUrls: ['./pharmacien-view.component.scss']
 })
 export class PharmacienViewComponent implements OnInit {
-  displayedColumns: string[] = ['nom', 'prenom', 'genre', 'residence','tel','edit','retirer'];
+  displayedColumns: string[] = ['nom', 'prenom', 'genre', 'email','tel','tel2','edit'];
   pharmacien!:MatTableDataSource<Pharmacien>
   posts: any
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -23,10 +23,10 @@ export class PharmacienViewComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.pharService.getPharmacien1().subscribe({
+    this.pharService.getPharmacien().subscribe({
       next: (value: any) => {
-        this.posts = value ? value : []
-        this.pharmacien = new MatTableDataSource(this.posts)
+        this.posts = value.data ? value : []
+        this.pharmacien = new MatTableDataSource(this.posts.data)
           this.cdr.detectChanges();
           this.pharmacien.paginator = this.paginator
       },

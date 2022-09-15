@@ -13,7 +13,7 @@ import { InfirmierFormsComponent } from './infirmier-forms.component';
   styleUrls: ['./infirmier-view.component.scss']
 })
 export class InfirmierViewComponent implements OnInit {
-  displayedColumns: string[] = ['nom', 'prenom', 'genre', 'residence','tel','edit','retirer'];
+  displayedColumns: string[] = ['nom', 'prenom', 'genre', 'email','tel','tel2','edit'];
   infirmier!:MatTableDataSource<Infirmier>
   posts: any
 
@@ -26,10 +26,10 @@ export class InfirmierViewComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.infirmierS.getInfirmier1().subscribe({
+    this.infirmierS.getInfirmier().subscribe({
       next: (value: any) => {
-        this.posts = value ? value : []
-        this.infirmier = new MatTableDataSource(this.posts)
+        this.posts = value.data ? value : []
+        this.infirmier = new MatTableDataSource(this.posts.data)
           this.cdr.detectChanges();
           this.infirmier.paginator = this.paginator
       },

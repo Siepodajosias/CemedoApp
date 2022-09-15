@@ -2,93 +2,80 @@
   <h2 mat-dialog-title>nouveau receptionniste</h2>
   <mat-dialog-content class="mat-typography e">
       <div class="container">
-                  <form [formGroup]="receptionForms">
-                    <div class="row mt-5">
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <div class="mb-3">
-                                <input type="text" class="form-control" placeholder="Nom" formControlName="nom">
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <div class="mb-3">
-                                <input type="text" class="form-control" placeholder="Prénom" formControlName="prenoms">
-                            </div>
-                        </div>
+        <form [formGroup]="receptionForms">
+            <div class="row mt-5">
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="mb-3">
+                        <input type="text" class="form-control"
+                            formControlName="nom" placeholder="Nom">
                     </div>
-                    <div class="row">
-                        <div class="col-md-4 col-lg-4 col-sm-12">
-                            <div class="mb-3">
-                                <input type="text" class="form-control" placeholder="Genre" formControlName="genre">
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-lg-4 col-sm-12">
-                            <div class="mb-3">
-        
-                                <input type="date" class="form-control" placeholder="Date de naissance"
-                                    formControlName="dateNaissance">
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-lg-4 col-sm-12">
-                            <div class="mb-3">
-                                <input type="text" class="form-control" placeholder="Résidence" formControlName="residence">
-                            </div>
-                        </div>
+                </div>
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="mb-3">
+                        <input type="text" class="form-control"
+                            formControlName="prenoms" placeholder="Prénom"
+                            >
                     </div>
-        
-                    <div class="row">
-                        <div class="col-md-4 col-lg-4 col-sm-12">
-                            <div class="mb-3">
-                                <input type="text" class="form-control" formControlName="salaireInfirmier"
-                                    placeholder="Salaire">
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-lg-4 col-sm-12">
-                            <div class="mb-3">
-                                <input type="text" class="form-control" formControlName="password"
-                                    placeholder="Mot de passe">
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-lg-4 col-sm-12">
-                            <div class="mb-3">
-                                <input type="text" class="form-control" formControlName="numeroCni" placeholder="Numéro CNI">
-                            </div>
-                        </div>
+                </div>
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="mb-3">
+                        <input type="text" class="form-control"
+                            formControlName="login" placeholder="Nom d'utilisateur"
+                            >
                     </div>
-        
-                    <div class="row">
-                        <div class="col-md-12 col-lg-12 col-sm-12">
-                            <div class="mb-3">
-                                <input type="email" class="form-control" aria-describedby="emailHelp" formControlName="email"
-                                    placeholder="E-mail">
-                            </div>
-                        </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" formControlName="genre"
+                            placeholder="Genre"
+                           >
                     </div>
-                    <div class="row">
-                        <div class="col-md-12 col-lg-12 col-sm-12">
-                            <div class="mb-3">
-                                <input type="text" class="form-control" formControlName="tel" placeholder="Numéro Téléphone">
-                            </div>
-                        </div>
+                </div>
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="mb-3">
+                        <input type="date" class="form-control" formControlName="dateNaissance"
+                            placeholder="Date de Naissance">
                     </div>
-        
-                    <div class="row">
-                        <div class="col-md-4 col-lg-4 col-sm-12">
-                            <mat-form-field>
-                                <ngx-mat-file-input formControlName="photo"
-                                (change)="detectfile($event)" accept="imge/*"
-                                placeholder="Choisissez une photo">
-                                </ngx-mat-file-input>
-                                <mat-icon  matSuffix> content_paste </mat-icon> 
-                            </mat-form-field>
-                        </div>
+                </div>
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="mb-3">
+                        <input type="email" class="form-control" formControlName="email"
+                            placeholder="E-mail">
                     </div>
-                    <div class="row">
-                        <div class="col-md-2 col-lg-2 col-sm-12">
-                            <button mat-raised-button color="primary" type="submit">Enregistrer
-                                <mat-icon>done</mat-icon>
-                            </button>
-                        </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" formControlName="tel"
+                            placeholder="Téléphone 1"
+                           >
                     </div>
-                  </form>
+                </div>
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" formControlName="tel2"
+                            placeholder="Téléphone 2">
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="mb-3">
+                        <input type="password" class="form-control" formControlName="password"
+                            placeholder="Mot de passe">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2 col-lg-2 col-sm-12">
+                    <button mat-raised-button color="primary" (click)="SaveData()"
+                        [disabled]="!receptionForms.valid">Enregistrer
+                        <mat-icon>done</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </form>
         </div>
   </mat-dialog-content>

@@ -1,9 +1,11 @@
 export class Assurance {
 id:number
-nomAssurance:string
-emailAssurance:string
+libelle:string
+email:string
 createdAt:string
 updatedAt:string
 version:number
-active:boolean
+active:number
+tel:string
+ville:string
 }

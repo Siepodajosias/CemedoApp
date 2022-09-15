@@ -21,7 +21,7 @@ export class MedecinView2Component implements OnInit {
  public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    
+    /*
     this.medecinservice.getMedecin1().subscribe({
       next: (value: any) => {
         this.posts = value ? value : []
@@ -33,12 +33,15 @@ export class MedecinView2Component implements OnInit {
       complete: () => {
       }
     })
+    */
   }
   detail(a:any){
     //this.route.navigate(['administrateur/detailM',a]);
+    /*
     this.medecinservice.getMedecin().subscribe({
       next:(val) => {console.log(val)}
     })
+    */
   }
 
   applyFilter(event: Event) {

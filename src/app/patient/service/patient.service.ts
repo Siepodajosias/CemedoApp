@@ -9,26 +9,20 @@ import { PageCarnetSante } from '../model/page-carnet-sante';
   providedIn: 'root'
 })
 export class PatientService {
-  private config:string="https://cemedos.openslearning.com/cemedo/patients"
-  private config2:string="https://cemedos.openslearning.com/cemedo/ordonnances"
-  private config3:string="https://cemedos.openslearning.com/cemedo/page_carnet_santes"
+  private config:string="https://cemedo-api-java.herokuapp.com/assures/patient/"
+  private config2:string="https://cemedo-api-java.herokuapp.com/ordonnances"
+  private config3:string="https://cemedo-api-java.herokuapp.com/page_carnet_santes"
   constructor(private httpPat:HttpClient) { }
-
-  private config1:string='api/patient.json';
-  //reccuperation
- getPatient():Observable<Patient[]>{
-   return this.httpPat.get<Patient[]>(this.config1)
- }
 
  //patients ressource
  getPatientP():Observable<any>{
-  return this.httpPat.get<any>(this.config,{
+  return this.httpPat.get<any>(this.config+"all",{
     headers:new HttpHeaders({'Content-Type':'application/json'})
   })
 }
 
 sendPatient(pat:Patient1):Observable<Patient1>{
-  return this.httpPat.post<Patient1>(this.config,pat,{
+  return this.httpPat.post<Patient1>(this.config+"create",pat,{
     headers:new HttpHeaders({'Content-Type':'application/json'})
   })
 }

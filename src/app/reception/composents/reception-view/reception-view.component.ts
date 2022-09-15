@@ -17,16 +17,16 @@ export class ReceptionViewComponent implements OnInit {
   constructor(private receptService:ReceptionService,private route:Router,private cdr:ChangeDetectorRef,
  public dialog: MatDialog) { }
 
-  displayedColumns: string[] = ['nom', 'prenom', 'genre', 'residence','tel','edit','retirer'];
+  displayedColumns: string[] = ['nom', 'prenom', 'genre', 'email','tel','tel2','edit'];
   reception!:MatTableDataSource<Reception>
   posts: any
 
   ngOnInit(): void {
 
-    this.receptService.getReception1().subscribe({
+    this.receptService.getReception().subscribe({
       next: (value: any) => {
-        this.posts = value ? value : []
-        this.reception = new MatTableDataSource(this.posts)
+        this.posts = value.data ? value : []
+        this.reception = new MatTableDataSource(this.posts.data)
           this.cdr.detectChanges();
           this.reception.paginator = this.paginator
       },
@@ -34,6 +34,7 @@ export class ReceptionViewComponent implements OnInit {
       complete: () => {
       }
     })
+    
   }
   detail(a:any){
     //this.route.navigate(['administrateur/detailM',a]);

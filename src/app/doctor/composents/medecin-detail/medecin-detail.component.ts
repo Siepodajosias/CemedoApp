@@ -32,7 +32,7 @@ export type ChartOptions = {
 
 import { ActivatedRoute} from '@angular/router';
 import { MedecinService } from '../../service/medecin.service';
-import { Medecin2 } from '../../model/medecin2';
+import { Medecin } from '../../model/medecin';
 
 @Component({
   selector: 'app-medecin-detail',
@@ -40,8 +40,9 @@ import { Medecin2 } from '../../model/medecin2';
   styleUrls: ['./medecin-detail.component.scss']
 })
 export class MedecinDetailComponent implements OnInit {
-  medecin2:Medecin2
-
+  InfoMed:any
+  medecin2:Medecin =new Medecin()
+  md:any
   constructor(private routeParams:ActivatedRoute,
     private  medService:MedecinService,
     ) { }
@@ -50,12 +51,14 @@ export class MedecinDetailComponent implements OnInit {
     this.chart1();
     const r=this.routeParams.snapshot.params['id'];
     this.medService.getMedecinById(r).subscribe({
-      next:(v)=>{this.medecin2=v
-      console.log(this.medecin2)
+      next:(v)=>{this.md=v.data
+        this.medecin2=this.md.user
+        this.InfoMed="Mr" +"."+ this.medecin2.nom +" "+ this.medecin2.prenoms
       },
       error:()=>{},
       complete:()=>{}
     })
+    
   }
 
 

@@ -1,6 +1,6 @@
 
 import { Component, OnInit,ViewChild, ChangeDetectorRef  } from '@angular/core';
-import { Assurance1 } from '../../model/assurance1';
+import { Assurance } from '../../model/assurance';
 import { AssuranceService } from '../../service/assurance.service';
 
 import { MatPaginator } from '@angular/material/paginator';
@@ -19,11 +19,11 @@ import { Responsable } from '../../model/responsable';
 })
 export class AssuranceViewComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'libelle', 'emailAssurance','contact','ville','edit','retirer'];
-  assurance!:MatTableDataSource<Assurance1>
+  displayedColumns: string[] = ['id', 'libelle', 'email','tel','ville','edit'];
+  assurance!:MatTableDataSource<Assurance>
   posts: any
 
-  displayedColumns3: string[] = ['id', 'nom', 'prenoms','genre','residence','tel','email','edit','retirer'];
+  displayedColumns3: string[] = ['id', 'nom', 'prenoms','genre','residence','tel','email','edit'];
   responsable1!:MatTableDataSource<Responsable>
   posts2: any
 
@@ -35,10 +35,11 @@ export class AssuranceViewComponent implements OnInit {
 
     this.assurService.getAssurance().subscribe({
       next: (value: any) => {
-        this.posts = value ? value : []
-        this.assurance = new MatTableDataSource(this.posts)
+        this.posts = value.data ? value : []
+        this.assurance = new MatTableDataSource(this.posts.data)
           this.cdr.detectChanges();
           this.assurance.paginator = this.paginator
+          
 
       },
       error: (e) => { console.log("erreur :" + e) },
@@ -47,10 +48,11 @@ export class AssuranceViewComponent implements OnInit {
     })
     this.assurService.getResponsable().subscribe({
       next:(value:any)=>{
-        this.posts2 = value ? value : []
-        this.responsable1 = new MatTableDataSource(this.posts2)
+        this.posts2 = value.data ? value : []
+        this.responsable1 = new MatTableDataSource(this.posts2.data)
           this.cdr.detectChanges();
           this.responsable1.paginator = this.paginator
+          console.log(this.posts2.data)
 
       },
       error: (e) => { console.log("erreur :" + e) },
@@ -60,28 +62,6 @@ export class AssuranceViewComponent implements OnInit {
   }
   detail(a:any){
     this.route.navigate(['admin/assurance/detail',a]);
-  }
-  supprimer(a:any){
-    console.log(a)
-    const conf:boolean=confirm("Voullez-vous Vraiment Supprimer cet assurance?");
-    if(conf==true){
-      this.assurService.deleteAssurance(a).subscribe({
-        next:(v)=>{
-          this.Msg.info("Assurance supprimer","",{
-            closeButton:true,
-            progressAnimation:'decreasing',
-            progressBar:true,
-            positionClass:'toast-top-right'
-            
-          })
-      },
-        error:(e)=>{
-          this.Msg.error("erreur lors de la suppession","échec",{
-            closeButton:true
-          })
-        }
-      })
-    }
   }
 
   openDialog1() {
@@ -114,27 +94,6 @@ export class AssuranceViewComponent implements OnInit {
    
     this.route.navigate(['admin/assurance/detailresponsable',a]);
   }
-  supprimer1(a:any){
-    console.log(a)
-    const conf:boolean=confirm("Voullez-vous Vraiment Supprimer ce responsable?");
-    if(conf==true){
-      this.assurService.deleteResponsable(a).subscribe({
-        next:(v)=>{
-          this.Msg.info("Responsable supprimer","",{
-            closeButton:true,
-            progressAnimation:'decreasing',
-            progressBar:true,
-            positionClass:'toast-top-right'
-            
-          })
-      },
-        error:(e)=>{
-          this.Msg.error("erreur lors de la suppession","échec",{
-            closeButton:true
-          })
-        }
-      })
-    }
-  }
+
 
 }

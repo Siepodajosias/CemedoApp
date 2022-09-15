@@ -11,7 +11,7 @@ import { Responsable } from '../../model/responsable';
 })
 export class ResponsableComponent implements OnInit {
   responsableForms: FormGroup = new FormGroup({})
-  responsable:Responsable=new Responsable()
+  responsable:any //Responsable=new Responsable()
 
   constructor(private responsableForm: FormBuilder,
     private respService:AssuranceService,
@@ -57,7 +57,7 @@ export class ResponsableComponent implements OnInit {
     this.responsable.numeroCni=this.responsableForms.get('numeroCni')?.value
     this.responsable.residence=this.responsableForms.get('residence')?.value
     this.responsable.tel=this.responsableForms.get('tel')?.value
-    this.responsable.assurance="/cemedo/assurances/7"
+    //this.responsable.assurance="/cemedo/assurances/7"
     //this.responsable.assurance="/cemedo/assurances/"+this.responsableForms.get('assurance')?.value
 
     console.log(this.responsable)

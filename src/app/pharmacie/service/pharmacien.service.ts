@@ -8,29 +8,19 @@ import { Pharmacien } from '../model/pharmacien';
   providedIn: 'root'
 })
 export class PharmacienService {
-  private config:string="https://cemedos.openslearning.com/cemedo/pharmaciens"
-  private config2:string="https://cemedos.openslearning.com/cemedo/medicaments"
+  private config:string="https://cemedo-api-java.herokuapp.com/employe/pharmacien"
+  private config2:string="https://cemedo-api-java.herokuapp.com/medicaments"
   constructor(private httpPhar:HttpClient) { }
-
-
-
-  private config1:string='api/infirmier.json';
-
-  getPharmacien1():Observable<any>{
-    return this.httpPhar.get<any>(this.config1)
-  }
-
-
 
   //pharmacien ressource
   getPharmacien():Observable<any>{
-    return this.httpPhar.get<any>(this.config,{
+    return this.httpPhar.get<any>(this.config+"/getAll",{
       headers:new HttpHeaders({'Content-Type':'application/json'})
     })
   }
 
   sendPharmacien(phar:Pharmacien):Observable<Pharmacien>{
-    return this.httpPhar.post<Pharmacien>(this.config,phar,{
+    return this.httpPhar.post<Pharmacien>(this.config+"/create",phar,{
       headers:new HttpHeaders({'Content-Type':'application/json'})
     })
   }

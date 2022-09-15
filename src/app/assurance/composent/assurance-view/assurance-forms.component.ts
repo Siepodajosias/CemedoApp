@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Assurance } from '../../model/assurance';
-import { Assurance1 } from '../../model/assurance1';
 import { AssuranceService } from '../../service/assurance.service';
 
 @Component({
@@ -12,8 +11,7 @@ import { AssuranceService } from '../../service/assurance.service';
 })
 export class AssuranceFormsComponent implements OnInit {
 assuranceForm:FormGroup=new FormGroup({})
-assurance:Assurance=new Assurance()
-assurance1:Assurance1=new Assurance1()
+assurance1:Assurance=new Assurance()
   constructor(private assurService:AssuranceService,private Msg:ToastrService,
    private assurForm:FormBuilder
     ) { }
@@ -21,10 +19,10 @@ assurance1:Assurance1=new Assurance1()
   ngOnInit(): void {
       this.assuranceForm = this.assurForm.group({
       id:null,
-      emailAssurance: ['', [Validators.required, Validators.maxLength(30), Validators.email]],
+      email: ['', [Validators.required, Validators.maxLength(30), Validators.email]],
       libelle: ['', [Validators.required, Validators.maxLength(30)]],
       ville: ['', [Validators.required, Validators.maxLength(30)]],
-      contact: ['', [Validators.required, Validators.maxLength(15)]],
+      tel: ['', [Validators.required, Validators.maxLength(15)]],
       createdAt:{value:'', disabled:true},
       updatedAt: {value:'', disabled:true},
       version: {value:'indisponible',disabled:true},
@@ -36,10 +34,10 @@ assurance1:Assurance1=new Assurance1()
   sendData():void{
 
     this.assurance1.id=null
-    this.assurance1.emailAssurance=this.assuranceForm.get('emailAssurance')?.value
+    this.assurance1.email=this.assuranceForm.get('email')?.value
     this.assurance1.libelle=this.assuranceForm.get('libelle')?.value
     this.assurance1.ville=this.assuranceForm.get('ville')?.value
-    this.assurance1.contact=this.assuranceForm.get('contact')?.value
+    this.assurance1.tel=this.assuranceForm.get('tel')?.value
 
     this.assurService.sendAssurance(this.assurance1).subscribe({
        next:(v)=>{
@@ -59,10 +57,10 @@ assurance1:Assurance1=new Assurance1()
        complete:()=>{
         this.assuranceForm.setValue({
           id:null,
-          emailAssurance:"",
+          email:"",
           libelle: "",
           ville: "",
-          contact: "",
+          tel: "",
           createdAt:"",
           updatedAt: "",
           version:0,

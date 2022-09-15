@@ -20,6 +20,7 @@ export class PatientFormsComponent implements OnInit {
    ) { }
 
   ngOnInit(): void {
+    /*
     this.MedecinForms = this.medecinForm.group({
       id:null,
       firstName: ['', [Validators.required, Validators.minLength(3)]],
@@ -48,6 +49,7 @@ export class PatientFormsComponent implements OnInit {
       username:['', [Validators.required, Validators.maxLength(10)]],
       salt:['', [Validators.required, Validators.maxLength(10)]]
     })
+    */
   }
    SeveData(){
 

@@ -13,28 +13,28 @@
   
             <div class="body">
   
-              <!-- Add content here -->
+              
               <mat-tab-group dynamicHeight>
                 <mat-tab label="Liste des patients">
                   <div class="mat-elevation-z8">
                     <table mat-table [dataSource]="patient">
   
-                      <!-- Name Column -->
+                    
                       <ng-container matColumnDef="nom">
                         <th mat-header-cell *matHeaderCellDef> Nom </th>
-                        <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
+                        <td mat-cell *matCellDef="let element"> {{element.user.nom}} </td>
                       </ng-container>
   
-                      <!-- Weight Column -->
+                      
                       <ng-container matColumnDef="prenoms">
                         <th mat-header-cell *matHeaderCellDef> Prenom </th>
-                        <td mat-cell *matCellDef="let element"> {{element.prenoms}} </td>
+                        <td mat-cell *matCellDef="let element"> {{element.user.prenoms}} </td>
                       </ng-container>
   
-                      <!-- Symbol Column -->
-                      <ng-container matColumnDef="sexe">
+                      
+                      <ng-container matColumnDef="genre">
                         <th mat-header-cell *matHeaderCellDef> Genre </th>
-                        <td mat-cell *matCellDef="let element"> {{element.sexe}} </td>
+                        <td mat-cell *matCellDef="let element"> {{element.user.genre}} </td>
                       </ng-container>
   
                       <ng-container matColumnDef="profession">
@@ -49,17 +49,12 @@
   
                       <ng-container matColumnDef="tel">
                         <th mat-header-cell *matHeaderCellDef> Téléphone 1</th>
-                        <td mat-cell *matCellDef="let element"> {{element.tel}} </td>
+                        <td mat-cell *matCellDef="let element"> {{element.user.tel}} </td>
                       </ng-container>
   
                       <ng-container matColumnDef="tel2">
                         <th mat-header-cell *matHeaderCellDef> Téléphone 2 </th>
-                        <td mat-cell *matCellDef="let element"> {{element.tel2}} </td>
-                      </ng-container>
-  
-                      <ng-container matColumnDef="assurance">
-                        <th mat-header-cell *matHeaderCellDef> Assurance </th>
-                        <td mat-cell *matCellDef="let element"> {{element.assurance}} </td>
+                        <td mat-cell *matCellDef="let element"> {{element.user.tel2}} </td>
                       </ng-container>
   
                       <ng-container matColumnDef="edit">
@@ -87,22 +82,22 @@
   
                     <table mat-table [dataSource]="patient2">
   
-                      <!-- Name Column -->
+                      
                       <ng-container matColumnDef="nom">
                         <th mat-header-cell *matHeaderCellDef> Nom </th>
-                        <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
+                        <td mat-cell *matCellDef="let element"> {{element.user.nom}} </td>
                       </ng-container>
   
-                      <!-- Weight Column -->
+                      
                       <ng-container matColumnDef="prenoms">
                         <th mat-header-cell *matHeaderCellDef> Prenom </th>
-                        <td mat-cell *matCellDef="let element"> {{element.prenoms}} </td>
+                        <td mat-cell *matCellDef="let element"> {{element.user.prenoms}} </td>
                       </ng-container>
   
-                      <!-- Symbol Column -->
-                      <ng-container matColumnDef="sexe">
+                      
+                      <ng-container matColumnDef="genre">
                         <th mat-header-cell *matHeaderCellDef> Genre </th>
-                        <td mat-cell *matCellDef="let element"> {{element.sexe}} </td>
+                        <td mat-cell *matCellDef="let element"> {{element.user.genre}} </td>
                       </ng-container>
   
                       <ng-container matColumnDef="profession">
@@ -117,23 +112,18 @@
   
                       <ng-container matColumnDef="tel">
                         <th mat-header-cell *matHeaderCellDef> Téléphone 1</th>
-                        <td mat-cell *matCellDef="let element"> {{element.tel}} </td>
+                        <td mat-cell *matCellDef="let element"> {{element.user.tel}} </td>
                       </ng-container>
   
                       <ng-container matColumnDef="tel2">
                         <th mat-header-cell *matHeaderCellDef> Téléphone 2 </th>
-                        <td mat-cell *matCellDef="let element"> {{element.tel2}} </td>
-                      </ng-container>
-  
-                      <ng-container matColumnDef="assurance">
-                        <th mat-header-cell *matHeaderCellDef> assurance </th>
-                        <td mat-cell *matCellDef="let element"> {{element.assurance}} </td>
+                        <td mat-cell *matCellDef="let element"> {{element.user.tel2}} </td>
                       </ng-container>
   
                       <ng-container matColumnDef="edit">
                         <th mat-header-cell *matHeaderCellDef>Detail</th>
                         <td mat-cell *matCellDef="let element">
-                          <button mat-button (click)="detail(element.id)">
+                          <button mat-button (click)="detail(element.user.id)">
                             <mat-icon color="primary">
                               login
                             </mat-icon>
@@ -144,7 +134,7 @@
                       <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
                       <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
   
-                      <!-- Row shown when there is no matching data. -->
+                     
                       <tr class="mat-row" *matNoDataRow>
                         <td class="mat-cell" colspan="4">Aucun patient ne correspond au filtre :"{{input.value}}"</td>
                       </tr>
@@ -153,7 +143,7 @@
                   </div>
                 </mat-tab>
               </mat-tab-group>
-              <!---->
+              
             </div>
           </div>
         </div>

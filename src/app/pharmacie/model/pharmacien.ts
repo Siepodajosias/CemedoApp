@@ -1,22 +1,14 @@
 export class Pharmacien {
-    file:string
-    salaireInfirmier:number
-    photo:string
     id:number
-    tel:string
+    dateNaissance: string
     email:string
-    password:string
-    nom:string
-    prenoms:string
-    createdAt:string
-    updatedAt:string
-    version:number
-    active:boolean
+    fcmToken:string
     genre:string
-    dateNaissance:string
-    residence:string
-    numeroCni:string
-    userIdentifier:string
-    username:string
-    salt:string
+    login:string
+    nom:string
+    password:string
+    prenoms:string
+    tel:string
+    tel2:string
+    typeEmploye:number
 }

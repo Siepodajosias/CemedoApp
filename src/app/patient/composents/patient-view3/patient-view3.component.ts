@@ -15,9 +15,9 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./patient-view3.component.scss']
 })
 export class PatientView3Component implements OnInit,OnDestroy{
-  displayedColumns: string[] = ['nom', 'prenoms', 'sexe', 'profession', 'lieuHabitation', 'tel', 'tel2','assurance','edit'];
+  displayedColumns: string[] = ['nom', 'prenoms', 'genre', 'profession', 'lieuHabitation', 'tel', 'tel2','edit'];
   patient!:MatTableDataSource<Patient1>
-  displayedColumns2: string[] = ['nom', 'prenoms', 'sexe', 'profession', 'lieuHabitation', 'tel', 'tel2','assurance','edit'];
+  displayedColumns2: string[] = ['nom', 'prenoms', 'genre', 'profession', 'lieuHabitation', 'tel', 'tel2','edit'];
   patient2!:MatTableDataSource<Patient1>
   posts: any
   doctor:any=[{'age':25},{'age':40},{'age':28}]
@@ -29,12 +29,12 @@ export class PatientView3Component implements OnInit,OnDestroy{
     private Msg:ToastrService) {
   }
   ngOnInit(): void {
-
+     
    this.patientH.getPatientP().subscribe({
       next: (value: any) => {
-        this.posts = value ? value : []
-        this.patient = new MatTableDataSource(this.posts)
-        this.patient2 = new MatTableDataSource(this.posts)
+        this.posts = value.data ? value : []
+        this.patient = new MatTableDataSource(this.posts.data)
+        this.patient2 = new MatTableDataSource(this.posts.data)
           this.cdr.detectChanges();
           this.patient.paginator = this.paginator
       },
@@ -42,6 +42,7 @@ export class PatientView3Component implements OnInit,OnDestroy{
       complete: () => {
       }
     })
+    
   }
   detail(a:any){
     this.route.navigate(['doctor/patient/detail',a]);

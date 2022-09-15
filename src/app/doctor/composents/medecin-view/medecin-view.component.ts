@@ -13,7 +13,7 @@ import { MedecinFormsComponent } from './medecin-forms.component';
   styleUrls: ['./medecin-view.component.scss']
 })
 export class MedecinViewComponent implements OnInit {
-  displayedColumns: string[] = ['nom', 'prenom', 'genre', 'residence', 'specialite', 'type','tel','edit','retirer'];
+  displayedColumns: string[] = ['nom', 'prenom', 'genre','specialite','email','tel','tel2','edit'];
   medecin!:MatTableDataSource<Medecin>
   posts: any
 
@@ -23,20 +23,24 @@ export class MedecinViewComponent implements OnInit {
 
   ngOnInit(): void {
     
-    this.medecinservice.getMedecin1().subscribe({
+    this.medecinservice.getMedecin().subscribe({
       next: (value: any) => {
-        this.posts = value ? value : []
-        this.medecin = new MatTableDataSource(this.posts)
+        this.posts = value.data ? value : []
+        this.medecin = new MatTableDataSource(this.posts.data)
           this.cdr.detectChanges();
           this.medecin.paginator = this.paginator
+          console.log(this.posts.data)
+          console.log(value)
       },
       error: (e) => { console.log("erreur :" + e) },
       complete: () => {
       }
     })
+    
   }
   detail(a:any){
-    //this.route.navigate(['administrateur/detailM',a]);
+    this.route.navigate(['admin/medecin/detail',a]);
+  
     this.medecinservice.getMedecin().subscribe({
       next:(val) => {console.log(val)}
     })

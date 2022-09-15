@@ -8,19 +8,10 @@ import { Responsable } from '../model/responsable';
   providedIn: 'root'
 })
 export class AssuranceService {
-  private config:string="https://cemedos.openslearning.com/cemedo/assurances"
-  private config2:string="https://cemedos.openslearning.com/cemedo/responsable_assurances"
+  private config:string="https://cemedo-api-java.herokuapp.com/assurances/"
+  private config2:string="https://cemedo-api-java.herokuapp.com/responsableAssurance/"
   constructor(private httpAssu:HttpClient) { }
   
-
-  private config1:string='api/assurance.json';
-  getAssurance1():Observable<any>{
-    return this.httpAssu.get<any>(this.config1)
-  }
-
-
-
-
   //ressource assurance
   getAssurance():Observable<any>{
     return this.httpAssu.get<any>(this.config,{
@@ -28,12 +19,12 @@ export class AssuranceService {
     })
   }
   sendAssurance(assu:any):Observable<Assurance>{
-    return this.httpAssu.post<Assurance>(this.config,assu,{
+    return this.httpAssu.post<Assurance>(this.config+"create",assu,{
       headers:new HttpHeaders({'Content-Type':'application/json'})
     })
   }
   getAssuranceById(a:number):Observable<any>{
-    return this.httpAssu.get<any>(this.config+"/"+a,
+    return this.httpAssu.get<any>(this.config+"getOne/"+a,
     {
       headers:new HttpHeaders({'Content-Type':'application/json'})
     }

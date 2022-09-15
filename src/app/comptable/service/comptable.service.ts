@@ -8,7 +8,7 @@ import { Comptable } from '../model/comptable';
 })
 export class ComptableService {
   private config1:string='api/comptable.json';
-  private config:string="https://cemedos.openslearning.com/comptables"
+  private config:string="https://cemedo-api-java.herokuapp.com/comptables"
   constructor(private httpCompt:HttpClient) { }
 
   getComptable1():Observable<any>{

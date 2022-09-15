@@ -3,7 +3,7 @@ import { AssuranceService } from '../../service/assurance.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { Assurance1 } from '../../model/assurance1';
+import { Assurance } from '../../model/assurance';
 import { Responsable } from '../../model/responsable';
 
 @Component({
@@ -14,7 +14,7 @@ import { Responsable } from '../../model/responsable';
 export class AssuranceView2Component implements OnInit {
 
   displayedColumns: string[] = ['id', 'libelle', 'emailAssurance','contact','ville','edit'];
-  assurance!:MatTableDataSource<Assurance1>
+  assurance!:MatTableDataSource<Assurance>
   posts: any
 
   displayedColumns3: string[] = ['id', 'nom', 'prenoms','genre','residence','tel','email','edit'];
@@ -25,7 +25,7 @@ export class AssuranceView2Component implements OnInit {
   constructor(private assurService:AssuranceService,private route:Router,private cdr:ChangeDetectorRef) { }
 
   ngOnInit(): void {
-
+/*
     this.assurService.getAssurance().subscribe({
       next: (value: any) => {
         this.posts = value ? value : []
@@ -50,6 +50,8 @@ export class AssuranceView2Component implements OnInit {
       complete: () => {
       }
     })
+
+    */
   }
   detail(a:any){
     this.route.navigate(['comptable/assurance/detail',a]);

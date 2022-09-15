@@ -8,37 +8,24 @@ import { Rendezvous } from '../model/rendezvous';
   providedIn: 'root'
 })
 export class InfirmierService {
-  private config:string="https://cemedos.openslearning.com/cemedo/infirmiers"
-  private config2:string="https://cemedos.openslearning.com/cemedo/rendez_vouses"
+  private config:string="https://cemedo-api-java.herokuapp.com/employe/infirmier/"
+  private config2:string="https://cemedo-api-java.herokuapp.com/rendez_vouses"
   constructor(private httpInfir:HttpClient) { }
-
-
-  private config1:string='api/infirmier.json';
-
-  getInfirmier1():Observable<any>{
-    return this.httpInfir.get<any>(this.config1)
-  }
-
-
-
-
-
-
 
   //infirmier ressource
   getInfirmier():Observable<any>{
-    return this.httpInfir.get<any>(this.config,{
+    return this.httpInfir.get<any>(this.config+"getAll",{
       headers:new HttpHeaders({'Content-Type':'application/json'})
     })
   }
 
   sendInfirmier(infir:Infirmier):Observable<Infirmier>{
-    return this.httpInfir.post<Infirmier>(this.config,infir,{
+    return this.httpInfir.post<Infirmier>(this.config+"create",infir,{
       headers:new HttpHeaders({'Content-Type':'application/json'})
     })
   }
   getInfirmierById(a:number):Observable<any>{
-    return this.httpInfir.get<any>(this.config+"/"+a,
+    return this.httpInfir.get<any>(this.config+"getOne/"+a,
     {
       headers:new HttpHeaders({'Content-Type':'application/json'})
     }

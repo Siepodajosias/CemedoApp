@@ -1,19 +1,16 @@
 export class Medecin {
-    id:number=1
-    nom:string
-    prenom:string
-    genre:string
-    //dateN:string
-    residence:string
-    specialite:string
-    type:string
-    email:string
-    tel:string
-    password:string
-    numeroCNI:string
-    heureDebut:string
-    heureFin:string
-    photo:string
-    salaire:string
-    prime:string
+id:number
+dateNaissance: string
+email:string
+fcmToken:string
+genre:string
+login:string
+nom:string
+password:string
+prenoms:string
+specialite:number
+tel:string
+tel2:string
+typeEmploye:number
+typeMedecin:number
 }
