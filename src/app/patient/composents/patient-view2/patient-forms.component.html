@@ -1,17 +1,25 @@
 <h2 mat-dialog-title>nouveau patient</h2>
 <mat-dialog-content class="mat-typography e">
     <div class="container">
-        <form>
+        <form [formGroup]="PatientForms">
             <div class="row mt-5">
-                <div class="col-md-6 col-lg-6 col-sm-12">
+                <div class="col-md-4 col-lg-4 col-sm-12">
                     <div class="mb-3">
-                        <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Nom"
+                        <input type="text" class="form-control"
+                            formControlName="nom" placeholder="Nom">
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="mb-3">
+                        <input type="text" class="form-control"
+                            formControlName="prenoms" placeholder="Prénom"
                             >
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-6 col-sm-12">
+                <div class="col-md-4 col-lg-4 col-sm-12">
                     <div class="mb-3">
-                        <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Prénom"
+                        <input type="text" class="form-control"
+                            formControlName="login" placeholder="Nom dutilisateur"
                             >
                     </div>
                 </div>
@@ -19,39 +27,22 @@
             <div class="row">
                 <div class="col-md-4 col-lg-4 col-sm-12">
                     <div class="mb-3">
-                        <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Genre"
+                        <input type="text" class="form-control"
+                            formControlName="genre" placeholder="Genre">
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="mb-3">
+                        <input type="date" class="form-control"
+                            formControlName="dateNaissance" placeholder="Date de naissance"
                             >
                     </div>
                 </div>
                 <div class="col-md-4 col-lg-4 col-sm-12">
                     <div class="mb-3">
-                        <!--
-                        <input type="text" class="form-control" aria-describedby="emailHelp"
-                            placeholder="Date de naissance"
-                            formControlName="dateNaissance"
+                        <input type="text" class="form-control"
+                            formControlName="lieuHabitation" placeholder="Ville"
                             >
-                            -->
-                    </div>
-                </div>
-                <div class="col-md-4 col-lg-4 col-sm-12">
-                    <div class="mb-3">
-                        <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Résidence"
-                            >
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-4 col-lg-4 col-sm-12">
-                    <div class="mb-3">
-                        <input type="text" class="form-control" aria-describedby="emailHelp"
-                            placeholder="Specialite">
-                    </div>
-                </div>
-                <div class="col-md-8 col-lg-8 col-sm-12">
-                    <div class="mb-3">
-                        <input type="text" class="form-control" aria-describedby="emailHelp"
-                            placeholder="type de medecin">
                     </div>
                 </div>
             </div>
@@ -59,68 +50,80 @@
             <div class="row">
                 <div class="col-md-4 col-lg-4 col-sm-12">
                     <div class="mb-3">
-                        <input type="email" class="form-control" aria-describedby="emailHelp"
+                        <input type="text" class="form-control"
+                            formControlName="profession" placeholder="Profession"
+                            >
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="mb-3">
+                        <input type="text" class="form-control"
+                            formControlName="assurance" placeholder="Assurance">
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="mb-3">
+                        <input type="number" class="form-control"
+                            formControlName="tauxCouverture" placeholder="Taux de couverture"
+                            >
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-12">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" formControlName="tel"
+                            placeholder="Téléphone 1"
+                           >
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-12">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" formControlName="tel2"
+                            placeholder="Téléphone 2">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-12">
+                    <div class="mb-3">
+                        <input type="email" class="form-control" formControlName="email"
                             placeholder="E-mail">
                     </div>
                 </div>
-                <div class="col-md-8 col-lg-8 col-sm-12">
-                    <div class="mb-3">
-                        <input type="number" class="form-control" aria-describedby="emailHelp"
-                         placeholder="Numéro Téléphone">
-                    </div>
-                </div>
             </div>
 
             <div class="row">
                 <div class="col-md-4 col-lg-4 col-sm-12">
                     <div class="mb-3">
-                        <input type="number" class="form-control" aria-describedby="emailHelp"
-                            placeholder="Numéro CNI">
-                    </div>
-                </div>
-                <div class="col-md-4 col-lg-4 col-sm-12">
-
-                </div>
-                <div class="col-md-4 col-lg-4 col-sm-12">
-
-
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-4 col-lg-4 col-sm-12">
-                    <div class="mb-3">
-                        <input type="number" class="form-control" aria-describedby="emailHelp"
-                            placeholder="salaire">
+                        <input type="text" class="form-control"
+                            formControlName="numeroAssure" placeholder="Numero d'assurance">
                     </div>
                 </div>
                 <div class="col-md-4 col-lg-4 col-sm-12">
                     <div class="mb-3">
-                        <input type="number" class="form-control" aria-describedby="emailHelp"
-                            placeholder="prime">
+                        <input type="text" class="form-control"
+                            formControlName="role" placeholder="Role"
+                            >
                     </div>
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6 col-lg-6 col-sm-12">
+                <div class="col-md-4 col-lg-4 col-sm-12">
                     <div class="mb-3">
-                        <input type="text" class="form-control" aria-describedby="emailHelp" 
-                            placeholder="Mot de passe">
+                        <input type="password" class="form-control"
+                            formControlName="password" placeholder="Mot de passe"
+                            >
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-6 col-sm-12">
-                    <div class="mb-3">
-                        <input type="email" class="form-control" aria-describedby="emailHelp" 
-                            placeholder="Photo">
-                    </div>
-
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-2 col-lg-2 col-sm-12">
-                    <button mat-raised-button color="primary" type="submit">Enregistrer
+                    <button mat-raised-button color="primary" (click)="sendData()"
+                        [disabled]="!PatientForms.valid">Enregistrer
                         <mat-icon>done</mat-icon>
                     </button>
                 </div>

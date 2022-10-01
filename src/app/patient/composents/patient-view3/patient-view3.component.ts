@@ -17,8 +17,7 @@ import { ToastrService } from 'ngx-toastr';
 export class PatientView3Component implements OnInit,OnDestroy{
   displayedColumns: string[] = ['nom', 'prenoms', 'genre', 'profession', 'lieuHabitation', 'tel', 'tel2','edit'];
   patient!:MatTableDataSource<Patient1>
-  displayedColumns2: string[] = ['nom', 'prenoms', 'genre', 'profession', 'lieuHabitation', 'tel', 'tel2','edit'];
-  patient2!:MatTableDataSource<Patient1>
+
   posts: any
   doctor:any=[{'age':25},{'age':40},{'age':28}]
    serie: ApexAxisChartSeries;
@@ -34,7 +33,6 @@ export class PatientView3Component implements OnInit,OnDestroy{
       next: (value: any) => {
         this.posts = value.data ? value : []
         this.patient = new MatTableDataSource(this.posts.data)
-        this.patient2 = new MatTableDataSource(this.posts.data)
           this.cdr.detectChanges();
           this.patient.paginator = this.paginator
       },
@@ -73,7 +71,7 @@ export class PatientView3Component implements OnInit,OnDestroy{
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.patient2.filter = filterValue.trim().toLowerCase();
+    this.patient.filter = filterValue.trim().toLowerCase();
   }
   ngOnDestroy(): void {
          

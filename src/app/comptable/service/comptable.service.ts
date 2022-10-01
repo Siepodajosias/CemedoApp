@@ -7,28 +7,25 @@ import { Comptable } from '../model/comptable';
   providedIn: 'root'
 })
 export class ComptableService {
-  private config1:string='api/comptable.json';
-  private config:string="https://cemedo-api-java.herokuapp.com/comptables"
+ 
+  private config:string="https://cemedo-api-java.herokuapp.com/employe/comptable/"
   constructor(private httpCompt:HttpClient) { }
 
-  getComptable1():Observable<any>{
-    return this.httpCompt.get<any>(this.config1)
-  }
 
   //Comptable ressource
   getComptable():Observable<any>{
-    return this.httpCompt.get<any>(this.config,{
+    return this.httpCompt.get<any>(this.config+"getAll",{
       headers:new HttpHeaders({'Content-Type':'application/json'})
     })
   }
 
-  sendComptable(infir:Comptable):Observable<Comptable>{
-    return this.httpCompt.post<Comptable>(this.config,infir,{
+  sendComptable(compt:Comptable):Observable<Comptable>{
+    return this.httpCompt.post<Comptable>(this.config+"create",compt,{
       headers:new HttpHeaders({'Content-Type':'application/json'})
     })
   }
   getComptableById(a:number):Observable<any>{
-    return this.httpCompt.get<any>(this.config+"/"+a,
+    return this.httpCompt.get<any>(this.config+"getOne/"+a,
     {
       headers:new HttpHeaders({'Content-Type':'application/json'})
     }

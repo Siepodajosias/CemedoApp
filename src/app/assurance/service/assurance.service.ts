@@ -9,7 +9,7 @@ import { Responsable } from '../model/responsable';
 })
 export class AssuranceService {
   private config:string="https://cemedo-api-java.herokuapp.com/assurances/"
-  private config2:string="https://cemedo-api-java.herokuapp.com/responsableAssurance/"
+  private config2:string="https://cemedo-api-java.herokuapp.com/employe/responsableAssurance/"
   constructor(private httpAssu:HttpClient) { }
   
   //ressource assurance
@@ -37,17 +37,17 @@ export class AssuranceService {
 
     //ressource responsable
     getResponsable():Observable<any>{
-      return this.httpAssu.get<any>(this.config2,{
+      return this.httpAssu.get<any>(this.config2+"getAll",{
         headers:new HttpHeaders({'Content-Type':'application/json'})
       })
     }
     sendResponsable(assu:any):Observable<Responsable>{
-      return this.httpAssu.post<Responsable>(this.config2,assu,{
+      return this.httpAssu.post<Responsable>(this.config2+"create",assu,{
         headers:new HttpHeaders({'Content-Type':'application/json'})
       })
     }
     getResponsableById(a:number):Observable<any>{
-      return this.httpAssu.get<any>(this.config2+"/"+a,
+      return this.httpAssu.get<any>(this.config2+"getOne/"+a,
       {
         headers:new HttpHeaders({'Content-Type':'application/json'})
       }

@@ -403,19 +403,19 @@ export class MainComponent implements OnInit {
     this.barChartOptions = {
       series: [
         {
-          name: "Colds and Flu",
+          name: "Chat",
           data: [44, 55, 41, 67, 22, 43],
         },
         {
-          name: "Headaches",
+          name: "Consultation",
           data: [13, 23, 20, 8, 13, 27],
         },
         {
-          name: "Malaria",
+          name: "Appel téléphonique",
           data: [11, 17, 15, 15, 21, 14],
         },
         {
-          name: "Typhoid",
+          name: "Appel vidéo",
           data: [21, 7, 25, 13, 22, 8],
         },
       ],
@@ -451,7 +451,7 @@ export class MainComponent implements OnInit {
       },
       xaxis: {
         type: "category",
-        categories: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+        categories: ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
       },
       legend: {
         show: false,

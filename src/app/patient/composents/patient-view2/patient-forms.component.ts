@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Patient1 } from '../../model/patient1';
+import { Patient } from '../../model/patient';
 import { PatientService } from '../../service/patient.service';
 
 
@@ -11,8 +11,8 @@ import { PatientService } from '../../service/patient.service';
   styleUrls: ['./patient-forms.component.scss']
 })
 export class PatientFormsComponent implements OnInit {
-  MedecinForms: FormGroup = new FormGroup({})
-  patient:Patient1=new Patient1()
+  PatientForms: FormGroup = new FormGroup({})
+  patient:Patient=new Patient()
 
   constructor(private medecinForm: FormBuilder,
     private medService:PatientService,
@@ -20,38 +20,39 @@ export class PatientFormsComponent implements OnInit {
    ) { }
 
   ngOnInit(): void {
-    /*
-    this.MedecinForms = this.medecinForm.group({
-      id:null,
-      firstName: ['', [Validators.required, Validators.minLength(3)]],
-      lastName: ['', [Validators.required, Validators.maxLength(20)]],
+    
+    this.PatientForms = this.medecinForm.group({
+      active:[true, [Validators.required, Validators.maxLength(10)]],
       assurance: ['', [Validators.required, Validators.maxLength(10)]],
+      createdAt:['', [Validators.required, Validators.maxLength(10)]],
       dateNaissance: ['', [Validators.required, Validators.maxLength(10)]],
-      pieceIdRecto: ['', [Validators.required, Validators.maxLength(30)]],
-      pieceIdVerso: ['', [Validators.required, Validators.maxLength(30)]],
-      assuranceRecto: ['', [Validators.required, Validators.maxLength(30)]],
       email: ['', [Validators.required, Validators.maxLength(30), Validators.email]],
-      assuranceVerso: ['', [Validators.required, Validators.maxLength(12)]],
-      telephone1: ['', [Validators.required, Validators.maxLength(15)]],
-      telephone2: ['', [Validators.required, Validators.maxLength(10)]],
+      genre: ['', [Validators.required, Validators.maxLength(10)]],
+      id:null,
+      lieuHabitation: ['', [Validators.required, Validators.maxLength(20)]],
+      login: ['', [Validators.required, Validators.maxLength(20)]],
+      nom: ['', [Validators.required, Validators.minLength(3)]],
       numeroAssure: ['', [Validators.required, Validators.maxLength(10)]],
       password: ['', [Validators.required, Validators.maxLength(8)]],
-      sexe: ['', [Validators.required, Validators.maxLength(10)]],
-      fcmtoken: ['', [Validators.required, Validators.maxLength(10)]],
-      lieuHabitation: ['', [Validators.required, Validators.maxLength(20)]],
+      prenoms: ['', [Validators.required, Validators.maxLength(20)]],
+      profession: ['', [Validators.required, Validators.maxLength(20)]],
+      role: ['', [Validators.required, Validators.maxLength(20)]],
       tauxCouverture:[null, [Validators.required, Validators.maxLength(10)]],
-      autreAntecedent:['', [Validators.required, Validators.maxLength(10)]],
-      createdAt:['', [Validators.required, Validators.maxLength(10)]],
+      tel: ['', [Validators.required, Validators.maxLength(15)]],
+      tel2: ['', [Validators.required, Validators.maxLength(10)]],
+      fcmtoken: ['', [Validators.required, Validators.maxLength(10)]],
       updatedAt:['', [Validators.required, Validators.maxLength(10)]],
-      version:[null, [Validators.required, Validators.maxLength(10)]],
-      active:[true, [Validators.required, Validators.maxLength(10)]],
-      userIdentifier:['', [Validators.required, Validators.maxLength(10)]],
-      username:['', [Validators.required, Validators.maxLength(10)]],
-      salt:['', [Validators.required, Validators.maxLength(10)]]
+      version:[null, [Validators.required, Validators.maxLength(10)]]
+      //pieceIdRecto: ['', [Validators.required, Validators.maxLength(30)]],
+      //pieceIdVerso: ['', [Validators.required, Validators.maxLength(30)]],
+      //assuranceRecto: ['', [Validators.required, Validators.maxLength(30)]],
+      //assuranceVerso: ['', [Validators.required, Validators.maxLength(12)]],
+      //autreAntecedent:['', [Validators.required, Validators.maxLength(10)]],
+
     })
-    */
+    
   }
-   SeveData(){
+   sendData(){
 
    }
 }

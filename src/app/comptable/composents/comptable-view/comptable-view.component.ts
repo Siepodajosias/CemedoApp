@@ -15,7 +15,7 @@ import { ComptableFormsComponent } from './comptable-forms.component';
   styleUrls: ['./comptable-view.component.scss']
 })
 export class ComptableViewComponent implements OnInit {
-  displayedColumns: string[] = ['nom', 'prenom', 'genre', 'residence','tel','edit','retirer'];
+  displayedColumns: string[] = ['nom', 'prenom', 'genre', 'email','tel','tel2','edit'];
   comptable!:MatTableDataSource<Comptable>
 
   posts: any
@@ -26,10 +26,10 @@ export class ComptableViewComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.cptservice.getComptable1().subscribe({
+    this.cptservice.getComptable().subscribe({
       next: (value: any) => {
-        this.posts = value ? value : []
-        this.comptable = new MatTableDataSource(this.posts)
+        this.posts = value.data ? value : []
+        this.comptable = new MatTableDataSource(this.posts.data)
           this.cdr.detectChanges();
           this.comptable.paginator = this.paginator
       },

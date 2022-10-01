@@ -29,7 +29,8 @@ export const ROUTES: RouteInfo[] = [
     submenu: [
       {
         path: "/admin/dashboard/main",
-        title: "MENUITEMS.DASHBOARD.LIST.DASHBOARD1",
+        title: "Principal",
+        //title: "MENUITEMS.DASHBOARD.LIST.DASHBOARD1",
         moduleName: "dashboard",
         iconType: "",
         icon: "",
@@ -791,7 +792,7 @@ export const ROUTES: RouteInfo[] = [
 
       {
         path: "/comptable/dashboard/main",
-        title: "MENUITEMS.DASHBOARD.LIST.DASHBOARD1",
+        title: "Principal",
         moduleName: "dashboard",
         iconType: "",
         icon: "",

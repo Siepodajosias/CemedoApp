@@ -10,6 +10,7 @@ import { PageCarnetSante } from '../model/page-carnet-sante';
 })
 export class PatientService {
   private config:string="https://cemedo-api-java.herokuapp.com/assures/patient/"
+  private config4:string="https://cemedo-api-java.herokuapp.com/assures/"
   private config2:string="https://cemedo-api-java.herokuapp.com/ordonnances"
   private config3:string="https://cemedo-api-java.herokuapp.com/page_carnet_santes"
   constructor(private httpPat:HttpClient) { }
@@ -27,7 +28,7 @@ sendPatient(pat:Patient1):Observable<Patient1>{
   })
 }
 getPatientById(a:number):Observable<any>{
-  return this.httpPat.get<any>(this.config+"/"+a+"/update",
+  return this.httpPat.get<any>(this.config4+"getOne/"+a,
   {
     headers:new HttpHeaders({'Content-Type':'application/json'})
   }

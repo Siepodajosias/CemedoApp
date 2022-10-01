@@ -12,8 +12,7 @@ import { Responsable } from '../../model/responsable';
   styleUrls: ['./assurance-view2.component.scss']
 })
 export class AssuranceView2Component implements OnInit {
-
-  displayedColumns: string[] = ['id', 'libelle', 'emailAssurance','contact','ville','edit'];
+  displayedColumns: string[] = ['id', 'libelle', 'email','tel','ville','edit'];
   assurance!:MatTableDataSource<Assurance>
   posts: any
 
@@ -25,11 +24,11 @@ export class AssuranceView2Component implements OnInit {
   constructor(private assurService:AssuranceService,private route:Router,private cdr:ChangeDetectorRef) { }
 
   ngOnInit(): void {
-/*
+
     this.assurService.getAssurance().subscribe({
       next: (value: any) => {
-        this.posts = value ? value : []
-        this.assurance = new MatTableDataSource(this.posts)
+        this.posts = value.data ? value : []
+        this.assurance = new MatTableDataSource(this.posts.data)
           this.cdr.detectChanges();
           this.assurance.paginator = this.paginator
 
@@ -40,10 +39,11 @@ export class AssuranceView2Component implements OnInit {
     })
     this.assurService.getResponsable().subscribe({
       next:(value:any)=>{
-        this.posts2 = value ? value : []
-        this.responsable = new MatTableDataSource(this.posts2)
+        this.posts2 = value.data ? value : []
+        this.responsable = new MatTableDataSource(this.posts2.data)
           this.cdr.detectChanges();
           this.responsable.paginator = this.paginator
+          console.log(this.posts2.data)
 
       },
       error: (e) => { console.log("erreur :" + e) },
@@ -51,7 +51,7 @@ export class AssuranceView2Component implements OnInit {
       }
     })
 
-    */
+    
   }
   detail(a:any){
     this.route.navigate(['comptable/assurance/detail',a]);
@@ -68,7 +68,6 @@ export class AssuranceView2Component implements OnInit {
   }
 
   detail1(a:any){
-   
     this.route.navigate(['comptable/assurance/detailresponsable',a]);
   }
 }

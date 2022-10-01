@@ -224,24 +224,25 @@ export class DashboardMedecinComponent implements OnInit {
       },
       colors: ['#ffc107', '#3f51b5', '#8bc34a'],
 
-      labels: ['Face TO Face', 'E-Consult', 'Available'],
+      labels: ['Appel video', 'Appel téléphonique', 'Consultation'],
     };
   }
   private chart3() {
     this.linechartOptions = {
       series: [
         {
-          name: 'Male',
-          data: [44, 55, 57, 56, 61, 58],
+          name: 'homme',
+          data: [44, 55, 57, 56, 61, 58,44, 50, 58, 60, 67, 78],
         },
         {
-          name: 'Female',
-          data: [76, 85, 101, 98, 87, 105],
+          name: 'femme',
+          data: [76, 85, 101, 98, 87, 105,77, 86, 107, 100, 88, 100],
         },
       ],
       chart: {
         type: 'bar',
-        height: 350,
+        height: 400,
+        width:560,
         dropShadow: {
           enabled: true,
           color: '#000',
@@ -272,7 +273,7 @@ export class DashboardMedecinComponent implements OnInit {
         colors: ['transparent'],
       },
       xaxis: {
-        categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        categories: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jui','Juil','Aoû','Sep','Oct','Nov','Dec'],
       },
       yaxis: {},
       fill: {

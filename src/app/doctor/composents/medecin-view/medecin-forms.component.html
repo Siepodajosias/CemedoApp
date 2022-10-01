@@ -3,162 +3,75 @@
     <div class="container">
 
         <form [formGroup]="MedecinForms">
-            <!--Ligne 1 nom, prenom et login-->
             <div class="row mt-5">
                 <div class="col-md-4 col-lg-4 col-sm-12">
                     <div class="mb-3">
-                        <input type="text" formControlName="nom" placeholder="Nom"
-                        class="form-control"
-                            >
-                    </div>
-                </div>
-                <div class="col-md-4 col-lg-4 col-sm-12">
-                    <div class="mb-3">
-                        <input type="text" 
-                        formControlName="prenoms"
-                        class="form-control" placeholder="Prénom"
-                            >
-                    </div>
-                </div>
-                <div class="col-md-4 col-lg-4 col-sm-12">
-                    <div class="mb-3">
-                        <input type="text" 
-                        formControlName="login"
-                        class="form-control" placeholder="Nom d'utilisateur"
-                            >
-                    </div>
-                </div>
-
-
-            </div>
-             <!--Ligne 2 genre,date naissance et email-->
-            <div class="row">
-                <div class="col-md-4 col-lg-4 col-sm-12">
-                    <div class="mb-3">
-                        <input type="text" 
-                        formGroupName="genre"
-                        class="form-control" placeholder="Genre"
-                            >
-                    </div>
-                </div>
-                <div class="col-md-4 col-lg-4 col-sm-12">
-                    <div class="mb-3">
-                        <input type="datetime" class="form-control"
-                        formGroupName="dateNaissance"
-                            placeholder="date de naissance"
-                            [matDatepicker]="datepicker1">
-                        <mat-datepicker-toggle matSuffix [for]="datepicker1"></mat-datepicker-toggle>
-                        <mat-datepicker #datepicker1>
-                            <mat-datepicker-actions>
-                                <button mat-button matDatepickerCancel>Cancel</button>
-                                <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
-                            </mat-datepicker-actions>
-                        </mat-datepicker>
-                    </div>
-                </div>
-                <div class="col-md-4 col-lg-4 col-sm-12">
-                    <div class="mb-3">
-                        <input type="email" class="form-control" aria-describedby="emailHelp"
-                            formControlName="email" placeholder="E-mail"
-                            >
-                    </div>
-                </div>
-            </div>
-                <!--Ligne 3 tel,tel2 et password-->
-            <div class="row">
-                <div class="col-md-4 col-lg-4 col-sm-12">
-                    <div class="mb-3">
                         <input type="text" class="form-control"
-                        formControlName="tel"
-                             placeholder="Téléphone">
+                            formControlName="nom" placeholder="Nom">
                     </div>
                 </div>
                 <div class="col-md-4 col-lg-4 col-sm-12">
                     <div class="mb-3">
                         <input type="text" class="form-control"
-                        formControlName="tel2"
-                             placeholder="Téléphone"
+                            formControlName="prenoms" placeholder="Prénom"
                             >
                     </div>
-
                 </div>
                 <div class="col-md-4 col-lg-4 col-sm-12">
                     <div class="mb-3">
-                        <input type="password" class="form-control"
-                        formControlName="password"
-                             placeholder="Mot de passe"
-                        >
+                        <input type="text" class="form-control"
+                            formControlName="login" placeholder="Nom d'utilisateur"
+                            >
                     </div>
                 </div>
             </div>
-
-            <!--Ligne 
             <div class="row">
                 <div class="col-md-4 col-lg-4 col-sm-12">
                     <div class="mb-3">
-                        <label>Salaire</label>
-                        <input type="number" class="form-control"
-                           placeholder="salaire">
+                        <input type="text" class="form-control" formControlName="genre"
+                            placeholder="Genre"
+                           >
                     </div>
                 </div>
                 <div class="col-md-4 col-lg-4 col-sm-12">
                     <div class="mb-3">
-                        <label>Prime</label>
-                        <input type="number" class="form-control "
-                            placeholder="Prime">
+                        <input type="date" class="form-control" formControlName="dateNaissance"
+                            placeholder="Date de Naissance">
                     </div>
                 </div>
                 <div class="col-md-4 col-lg-4 col-sm-12">
                     <div class="mb-3">
-                        <label>Numéro CNI</label>
-                        <input type="text" class="form-control "
-                            placeholder="Numero CNI">
-                    </div>
-                </div>
-            </div>
-
-              
-            <div class="row">
-                <div class="col-md-6 col-lg-6 col-sm-12">
-                    <div class="mb-3">
-                        <label>E-mail</label>
-                        <input type="email" class="form-control"
+                        <input type="email" class="form-control" formControlName="email"
                             placeholder="E-mail">
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-6 col-sm-12">
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-lg-4 col-sm-12">
                     <div class="mb-3">
-                        <label>Numéro de Téléphone</label>
-                        <input type="text" class="form-control"
-                            placeholder="numéro Téléphone">
+                        <input type="text" class="form-control" formControlName="tel"
+                            placeholder="Téléphone 1"
+                           >
                     </div>
                 </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-md-6 col-lg-6 col-sm-12">
+                <div class="col-md-4 col-lg-4 col-sm-12">
                     <div class="mb-3">
-                        <label>Mot de passe</label>
-                        <input type="text" class="form-control"
+                        <input type="text" class="form-control" formControlName="tel2"
+                            placeholder="Téléphone 2">
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="mb-3">
+                        <input type="password" class="form-control" formControlName="password"
                             placeholder="Mot de passe">
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-6 col-sm-12">
-                    <div class="mb-3">
-                        <label>Photo de profile</label>
-                        <input type="text" class="form-control"
-                            placeholder="Photo">
-                    </div>
-
-                </div>
             </div>
-             -->
-            
-             <div class="row">
+
+            <div class="row">
                 <div class="col-md-2 col-lg-2 col-sm-12">
-                    <button mat-raised-button color="primary"
-                    (click)="SaveData()"
-                    >Enregistrer
+                    <button mat-raised-button color="primary" (click)="SaveData()"
+                        [disabled]="!MedecinForms.valid">Enregistrer
                         <mat-icon>done</mat-icon>
                     </button>
                 </div>

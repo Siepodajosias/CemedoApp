@@ -20,51 +20,52 @@ export class ComptableFormsComponent implements OnInit {
 
   ngOnInit(): void {
     this.comptableForms = this.comptableForm.group({
+
       id:null,
       nom: ['', [Validators.required, Validators.minLength(3)]],
       prenoms: ['', [Validators.required, Validators.maxLength(20)]],
+      login:['', [Validators.required, Validators.maxLength(20)]],
+      email: ['', [Validators.required, Validators.maxLength(30), Validators.email]],
+      password: ['', [Validators.required, Validators.maxLength(8)]],
+      tel:['', [Validators.required, Validators.maxLength(20)]],
+      tel2:['', [Validators.required, Validators.maxLength(20)]],
+      genre:['', [Validators.required, Validators.maxLength(20)]],
+      dateNaissance:['', [Validators.required, Validators.maxLength(30)]],
+      role:null,
+      fcmToken:"",
+      typeEmploye:null
 
+/*
       salt: ['', [Validators.required, Validators.maxLength(30)]],
       username: ['', [Validators.required, Validators.maxLength(30)]],
-      email: ['', [Validators.required, Validators.maxLength(30), Validators.email]],
       userIdentifier: ['', [Validators.required, Validators.maxLength(15)]],
       active: [null, [Validators.required, Validators.maxLength(10)]],
-      password: ['', [Validators.required, Validators.maxLength(8)]],
       createdAt: [null, [Validators.required, Validators.maxLength(10)]],
       updatedAt: ['', [Validators.required, Validators.maxLength(10)]],
       version: [null, [Validators.required, Validators.maxLength(20)]],
-
       file:['', [Validators.required, Validators.maxLength(30)]],
       photo:['', [Validators.required, Validators.maxLength(20)]],
-
-      tel:['', [Validators.required, Validators.maxLength(20)]],
-      genre:['', [Validators.required, Validators.maxLength(20)]],
-      dateNaissance:['', [Validators.required, Validators.maxLength(30)]],
       residence:['', [Validators.required, Validators.maxLength(30)]],
       numeroCni:['', [Validators.required, Validators.maxLength(20)]]
+      */
     })
   }
 
-  SeveData(){
+  SaveData(){
     this.comptable.id=null
-    this.comptable.userIdentifier=""
-    this.comptable.username=""
-
-    if(this.img && this.img !==''){
-      //this.infirmier.photo=this.img
-      this.comptable.file=this.img
-    }
-    
     this.comptable.email=this.comptableForms.get('email')?.value
     this.comptable.password=this.comptableForms.get('password')?.value
     this.comptable.nom=this.comptableForms.get('nom')?.value
     this.comptable.prenoms=this.comptableForms.get('prenoms')?.value
+    this.comptable.login=this.comptableForms.get('login')?.value
     this.comptable.dateNaissance=this.comptableForms.get('dateNaissance')?.value
     this.comptable.genre=this.comptableForms.get('genre')?.value
-    this.comptable.numeroCni=this.comptableForms.get('numeroCni')?.value
-    this.comptable.residence=this.comptableForms.get('residence')?.value
     this.comptable.tel=this.comptableForms.get('tel')?.value
-    this.comptable.photo=this.comptableForms.get('photo')?.value
+    this.comptable.tel2=this.comptableForms.get('tel')?.value
+
+    this.comptable.fcmToken=""
+    this.comptable.typeEmploye=null
+    this.comptable.role=null
 
     console.log(this.comptable)
 
@@ -83,13 +84,26 @@ export class ComptableFormsComponent implements OnInit {
           closeButton:true
         })
 
+      },
+      complete:()=>{
+        this.comptableForms.setValue({
+          id:null,
+          email:"",
+          password:"",
+          nom:"",
+          prenoms:"",
+          tel:"",
+          tel2:"",
+          genre:"",
+          dateNaissance:"",
+          login:"",
+          role:"",
+          fcmToken:"",
+          typeEmploye:null,
+        })
       }
     })
    }
-
-   detectfile(event:any) {
-    this.img=event.target.files[0]
-  }
 
 
 }

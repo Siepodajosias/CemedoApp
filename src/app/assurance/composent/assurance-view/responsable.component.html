@@ -2,98 +2,80 @@
 <mat-dialog-content class="mat-typography e">
     <div class="container">
 
-        <form>
-            <!--Ligne 1 nom et prenom-->
-            <div class="row mt-5">
-                <div class="col-md-6 col-lg-6 col-sm-12">
-                    <div class="mb-3">
-                        <label>Nom</label>
-                        <input type="text" class="" placeholder="Nom"
-                        class="form-control"
-                        
-                           >
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-6 col-sm-12">
-                    <div class="mb-3">
-                        <label>Prenom</label>
-                        <input type="text" class="form-control" placeholder="Prénom">
-                    </div>
-                </div>
+<form [formGroup]="responsableForms">
+    <div class="row mt-5">
+        <div class="col-md-4 col-lg-4 col-sm-12">
+            <div class="mb-3">
+                <input type="text" class="form-control"
+                    formControlName="nom" placeholder="Nom">
             </div>
-             <!--Ligne 2 gnere,date naissance et residence-->
-            <div class="row">
-                <div class="col-md-4 col-lg-4 col-sm-12">
-                    <div class="mb-3">
-                        <label>Genre</label>
-                        <input type="text" class="form-control" placeholder="Genre">
-                    </div>
-                </div>
-                <div class="col-md-4 col-lg-4 col-sm-12">
-                    <div class="mb-3">
-                        <label>Date de naissance</label>
-                        <input type="date" class="form-control"
-                            placeholder="date de naissance" 
-                           >
-                    </div>
-                </div>
-                <div class="col-md-4 col-lg-4 col-sm-12">
-                    <div class="mb-3">
-                        <label>Residence</label>
-                        <input type="text" class="form-control" placeholder="Résidence">
-                    </div>
-                </div>
+        </div>
+        <div class="col-md-4 col-lg-4 col-sm-12">
+            <div class="mb-3">
+                <input type="text" class="form-control"
+                    formControlName="prenoms" placeholder="Prénom"
+                    >
             </div>
+        </div>
+        <div class="col-md-4 col-lg-4 col-sm-12">
+            <div class="mb-3">
+                <input type="text" class="form-control"
+                    formControlName="login" placeholder="Nom d'utilisateur"
+                    >
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-lg-4 col-sm-12">
+            <div class="mb-3">
+                <input type="text" class="form-control" formControlName="genre"
+                    placeholder="Genre"
+                   >
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-4 col-sm-12">
+            <div class="mb-3">
+                <input type="date" class="form-control" formControlName="dateNaissance"
+                    placeholder="Date de Naissance">
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-4 col-sm-12">
+            <div class="mb-3">
+                <input type="email" class="form-control" formControlName="email"
+                    placeholder="E-mail">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-lg-4 col-sm-12">
+            <div class="mb-3">
+                <input type="text" class="form-control" formControlName="tel"
+                    placeholder="Téléphone 1"
+                   >
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-4 col-sm-12">
+            <div class="mb-3">
+                <input type="text" class="form-control" formControlName="tel2"
+                    placeholder="Téléphone 2">
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-4 col-sm-12">
+            <div class="mb-3">
+                <input type="password" class="form-control" formControlName="password"
+                    placeholder="Mot de passe">
+            </div>
+        </div>
+    </div>
 
-            <!--Ligne 4 numero cni-->
-            <div class="row">
-                <div class="col-md-4 col-lg-4 col-sm-12">
-                    <div class="mb-3">
-                        <label>Numéro CNI</label>
-                        <input type="text" class="form-control " placeholder="Numero CNI">
-                    </div>
-                </div>
-                <div class="col-md-4 col-lg-4 col-sm-12">
-                    <div class="mb-3">
-                        <label>Assurance</label>
-                        <input type="text" class="form-control "
-                             placeholder="Assurance">
-                    </div>
-                </div>
-                <div class="col-md-4 col-lg-4 col-sm-12">
-                    <div class="mb-3">
-                        <label>Mot de passe</label>
-                        <input type="password" class="form-control"
-                            placeholder="Mot de passe">
-                    </div>
-                </div>
-            </div>
-
-            <!--Ligne 5 e-mail et numéro de telephone-->
-            <div class="row">
-                <div class="col-md-6 col-lg-6 col-sm-12">
-                    <div class="mb-3">
-                        <label>E-mail</label>
-                        <input type="email" class="form-control"
-                            placeholder="E-mail">
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-6 col-sm-12">
-                    <div class="mb-3">
-                        <label>Numéro de Téléphone</label>
-                        <input type="text" class="form-control"
-                            placeholder="numéro Téléphone">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-2 col-lg-2 col-sm-12">
-                    <button mat-raised-button color="primary" type="submit"
-                    >Enregistrer
-                        <mat-icon>done</mat-icon>
-                    </button>
-                </div>
-            </div>
-        </form>
+    <div class="row">
+        <div class="col-md-2 col-lg-2 col-sm-12">
+            <button mat-raised-button color="primary" (click)="SaveData()"
+                [disabled]="!responsableForms.valid">Enregistrer
+                <mat-icon>done</mat-icon>
+            </button>
+        </div>
+    </div>
+</form>
     </div>
 </mat-dialog-content>

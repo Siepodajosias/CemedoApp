@@ -2,7 +2,7 @@
   <div class="content-block">
     <div class="block-header">
       <!-- breadcrumb -->
-      <app-breadcrumb [title]="'Patient'" [items]="[]" [active_item]="'patient.nom'"></app-breadcrumb>
+      <app-breadcrumb [title]="'Patient'" [items]="[]" [active_item]="InfoPat"></app-breadcrumb>
     </div>
     <div class="row clearfix">
       <!-- Bar chart with line -->
@@ -101,7 +101,7 @@
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="card">
           <div class="header">
-            <h2>Recent Report</h2>
+            <h2 class="font-weight-light col-orange">Informations</h2>
             <button mat-button [matMenuTriggerFor]="menu" class="header-dropdown">
               <mat-icon>more_vert</mat-icon>
             </button>
@@ -113,73 +113,76 @@
           </div>
           <div class="body">
             <div class="row">
-              <div class="col-md-12 col-xl-4 d-flex flex-column justify-content-center">
-                <div class="ml-xl-3 m-b-20">
-                  <h2>$1,17,289</h2>
-                  <h4 class="font-weight-light col-green">Total Income</h4>
-                  <p class="mb-2">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                    Aenean commodo ligula eget dolor.
-                  </p>
-                </div>
-                <div class="ml-xl-3">
-                  <h2>$1,17,289</h2>
-                  <h4 class="font-weight-light col-orange">Total Expense</h4>
-                  <p class="mb-2"> Cras dapibus. Vivamus elementum semper nisi. Aenean
-                    vulputate eleifend tellus.
-                  </p>
-                </div>
-              </div>
-              <div class="col-md-12 col-xl-8">
+              <div class="col-md-12 col-xl-12">
                 <div class="row">
-                  <div class="col-md-5">
-                    <h3 class="font-weight-light col-orange">Information sur le Patients</h3>
+                  <div class="col-md-4">
+                    
                     <div class="progress-list m-b-10">
                       <div class="details">
-                        <div class="title">Nom : </div>
+                        <div class="title">Nom : {{users.nom}} </div>
                       </div>
                     </div>
                     <div class="progress-list m-b-10">
                       <div class="details">
-                        <div class="title">Prenom : </div>
+                        <div class="title">Prenom : {{users.prenoms}}</div>
                       </div>
                     </div>
                     <div class="progress-list m-b-10">
                       <div class="details">
-                        <div class="title">Genre : </div>
+                        <div class="title">Genre :{{users.genre}} </div>
                       </div>
                     </div>
                     <div class="progress-list m-b-10">
                       <div class="details">
-                        <div class="title">Date de naissance :</div>
+                        <div class="title">Date de naissance : {{users.dateNaissance}}</div>
                       </div>
                     </div>
                     <div class="progress-list m-b-10">
                       <div class="details">
-                        <div class="title">Residence : </div>
+                        <div class="title">Residence :{{md2.lieuHabitation}}</div>
                       </div>
                     </div>
                     <div class="progress-list m-b-10">
                       <div class="details">
-                        <div class="title">Numéro : </div>
+                        <div class="title">Numéro de Téléphone: {{users.tel}} </div>
                       </div>
                     </div>
                     <div class="progress-list m-b-10">
                       <div class="details">
-                        <div class="title">E-mail : </div>
+                        <div class="title">E-mail : {{users.email}}</div>
                       </div>
                     </div>
                     <div class="progress-list m-b-10">
                       <div class="details">
-                        <div class="title">Assurance : </div>
+                        <div class="title">Assurance : {{md2.assurance.libelle}}</div>
                       </div>
                     </div>
                     <div class="progress-list m-b-10">
                       <div class="details">
-                        <div class="title">Taux d'assurance :</div>
+                        <div class="title">Taux d'assurance :{{md2.tauxCouverture}}</div>
+                      </div>
+                    </div>
+                    <div class="progress-list m-b-10">
+                      <div class="details">
+                        <div class="title">Numéro d'assurance : {{md2.numeroAssure}} </div>
+                      </div>
+                    </div>
+                    <div class="progress-list m-b-10">
+                      <div class="details">
+                        <div class="title">Profession: {{md2.profession}}</div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-7 mt-3">
+                  <div class="col-md-2">
+                    <!--
+                    <h5>Antécedents</h5>
+                     <ul *ngFor="let i of ant">
+                      <li>{{i.affection.libelle}}</li>
+                     </ul>
+                     -->
+                  </div>
+
+                  <div class="col-md-6 mt-3">
                     <!-- chart [chartType]="doughnutChartType"-->
                     <div class="recent-report__chart">
                       <canvas baseChart class="chart" [data]="doughnutChartData" [labels]="doughnutChartLabels"

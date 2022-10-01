@@ -12,7 +12,7 @@ import {MatDialog} from '@angular/material/dialog';
   styleUrls: ['./medecin-view2.component.scss']
 })
 export class MedecinView2Component implements OnInit {
-  displayedColumns: string[] = ['nom', 'prenom', 'genre', 'residence', 'specialite', 'type','tel','edit'];
+  displayedColumns: string[] = ['nom', 'prenom', 'genre','specialite','email','tel','tel2','edit'];
   medecin!:MatTableDataSource<Medecin>
   posts: any
 
@@ -21,11 +21,11 @@ export class MedecinView2Component implements OnInit {
  public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    /*
-    this.medecinservice.getMedecin1().subscribe({
+    
+    this.medecinservice.getMedecin().subscribe({
       next: (value: any) => {
-        this.posts = value ? value : []
-        this.medecin = new MatTableDataSource(this.posts)
+        this.posts = value.data ? value : []
+        this.medecin = new MatTableDataSource(this.posts.data)
           this.cdr.detectChanges();
           this.medecin.paginator = this.paginator
       },
@@ -33,15 +33,13 @@ export class MedecinView2Component implements OnInit {
       complete: () => {
       }
     })
-    */
+    
   }
   detail(a:any){
-    //this.route.navigate(['administrateur/detailM',a]);
-    /*
+    this.route.navigate(['comptable/medecin/detail',a]);
     this.medecinservice.getMedecin().subscribe({
       next:(val) => {console.log(val)}
     })
-    */
   }
 
   applyFilter(event: Event) {

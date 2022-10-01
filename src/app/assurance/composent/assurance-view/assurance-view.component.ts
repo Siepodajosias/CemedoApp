@@ -23,7 +23,7 @@ export class AssuranceViewComponent implements OnInit {
   assurance!:MatTableDataSource<Assurance>
   posts: any
 
-  displayedColumns3: string[] = ['id', 'nom', 'prenoms','genre','residence','tel','email','edit'];
+  displayedColumns3: string[] = ['nom', 'prenom', 'genre', 'email','tel','tel2','edit'];
   responsable1!:MatTableDataSource<Responsable>
   posts2: any
 
@@ -39,8 +39,6 @@ export class AssuranceViewComponent implements OnInit {
         this.assurance = new MatTableDataSource(this.posts.data)
           this.cdr.detectChanges();
           this.assurance.paginator = this.paginator
-          
-
       },
       error: (e) => { console.log("erreur :" + e) },
       complete: () => {
@@ -53,7 +51,6 @@ export class AssuranceViewComponent implements OnInit {
           this.cdr.detectChanges();
           this.responsable1.paginator = this.paginator
           console.log(this.posts2.data)
-
       },
       error: (e) => { console.log("erreur :" + e) },
       complete: () => {

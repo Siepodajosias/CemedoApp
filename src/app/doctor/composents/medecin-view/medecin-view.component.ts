@@ -40,7 +40,6 @@ export class MedecinViewComponent implements OnInit {
   }
   detail(a:any){
     this.route.navigate(['admin/medecin/detail',a]);
-  
     this.medecinservice.getMedecin().subscribe({
       next:(val) => {console.log(val)}
     })

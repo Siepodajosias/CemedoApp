@@ -38,7 +38,6 @@ import { OrdonnanceComponent } from './composents/ordonnance/ordonnance.componen
 import { PatientView2Component } from './composents/patient-view2/patient-view2.component';
 import { PatientView3Component } from './composents/patient-view3/patient-view3.component';
 
-import { PatientRechercherComponent } from "./composents/Patient-rechercher/patient-rechercher.component";
 import { SharedModule } from "src/app/shared/shared.module";
 
 @NgModule({
@@ -49,7 +48,7 @@ import { SharedModule } from "src/app/shared/shared.module";
     PatientDossierComponent, 
     OrdonnanceComponent, PatientView2Component, 
     PatientView3Component,
-    PatientRechercherComponent
+
   ],
   imports: [
     CommonModule,

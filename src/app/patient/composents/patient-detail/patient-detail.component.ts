@@ -31,8 +31,8 @@ export type ChartOptions = {
 };
 
 import { ActivatedRoute } from '@angular/router';
-import { Patient1 } from '../../model/patient1';
 import { PatientService } from '../../service/patient.service';
+import { Users } from "src/app/users";
 
 
 @Component({
@@ -41,8 +41,11 @@ import { PatientService } from '../../service/patient.service';
   styleUrls: ['./patient-detail.component.scss']
 })
 export class PatientDetailComponent implements OnInit {
-patient:Patient1
-
+  InfoPat:any
+  md1:any
+  md2:any
+  ant:any
+  users: Users=new Users()
   constructor(private patService:PatientService,
     private routeParams:ActivatedRoute
     ) { }
@@ -52,8 +55,12 @@ patient:Patient1
     const r=this.routeParams.snapshot.params['id'];
     this.patService.getPatientById(r).subscribe({
       next:(v)=>{
-        this.patient=v ? v :[]
-        console.log(this.patient)
+        this.md1=v.data ? v :{}
+        this.md2=this.md1.data
+        this.users=this.md2.user
+        this.ant=this.md2.antecedents
+        this.InfoPat="Mr" +"."+ this.users.nom +" "+ this.users.prenoms
+        console.log(this.md2)
         },
         error:()=>{},
         complete:()=>{}
