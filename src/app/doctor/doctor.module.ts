@@ -27,21 +27,9 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { MatCardModule } from '@angular/material/card'
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 
-
-//import { FullCalendarModule } from '@fullcalendar/angular'
-
 import { OWL_DATE_TIME_LOCALE, OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 //import { OwlDateTimeModule, OWL_DATE_TIME_FORMATS} from 'ng-pick-datetime';
-
-
-import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
-import interactionPlugin from '@fullcalendar/interaction'; // a plugin!
-
-/*FullCalendarModule.registerPlugins([ // register FullCalendar plugins
-  dayGridPlugin,
-  interactionPlugin
-]);*/
 
 //import { MatDialogModule} from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';

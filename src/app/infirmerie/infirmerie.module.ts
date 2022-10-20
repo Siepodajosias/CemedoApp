@@ -24,16 +24,9 @@ import { DashboardInfirmerieComponent } from './dashboard-infirmerie/dashboard-i
 import { InfirmierCalendrierComponent } from './composents/infirmier-calendrier/infirmier-calendrier.component';
 import { InfirmierService } from './service/infirmier.service';
 
-import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
-import interactionPlugin from '@fullcalendar/interaction'; // a plugin!
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
-/*
-FullCalendarModule.registerPlugins([ // register FullCalendar plugins
-  dayGridPlugin,
-  interactionPlugin
-]);*/
 
 @NgModule({
   declarations: [
@@ -58,7 +51,6 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     MaterialFileInputModule,
 
     ReactiveFormsModule,
-    //FullCalendarModule,
     FormsModule,
     ToastrModule.forRoot({}),
     MatCardModule,

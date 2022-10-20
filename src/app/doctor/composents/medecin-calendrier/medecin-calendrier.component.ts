@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CalendarOptions } from '@fullcalendar/angular';
 
 
 @Component({
@@ -13,9 +12,5 @@ export class MedecinCalendrierComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  calendarOptions: CalendarOptions = {
-    initialView: 'dayGridMonth'
-  };
-
 
 }
