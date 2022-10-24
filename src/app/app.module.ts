@@ -17,6 +17,13 @@ import { fakeBackendProvider } from "./core/interceptor/fake-backend";
 import { ErrorInterceptor } from "./core/interceptor/error.interceptor";
 import { JwtInterceptor } from "./core/interceptor/jwt.interceptor";
 import { LocationStrategy, HashLocationStrategy } from "@angular/common";
+import { TableModule } from "primeng/table";
+import { ToolbarModule } from "primeng/toolbar";
+import { ButtonModule } from "primeng/button";
+import { SplitButtonModule } from "primeng/splitbutton";
+import { ToastModule } from "primeng/toast";
+
+
 import {
   PerfectScrollbarModule,
   PERFECT_SCROLLBAR_CONFIG,
@@ -32,6 +39,7 @@ import {
 } from "@angular/common/http";
 
 import { LoadingBarRouterModule } from "@ngx-loading-bar/router";
+import { SpecialiteComponent } from "./specialite/specialite.component";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -50,7 +58,10 @@ export function createTranslateLoader(http: HttpClient): any {
         SidebarComponent,
         RightSidebarComponent,
         AuthLayoutComponent,
-        MainLayoutComponent
+        MainLayoutComponent,
+        SpecialiteComponent
+
+
     ],
     imports: [
         BrowserModule,
@@ -67,9 +78,16 @@ export function createTranslateLoader(http: HttpClient): any {
                 deps: [HttpClient],
             },
         }),
+       /* RouterModule.forRoot
+        ([{ path: "/admin/specialite", component: SpecialiteComponent }]),*/
         // core & shared
         CoreModule,
         SharedModule,
+        TableModule,
+        ToolbarModule,
+        ToastModule,
+        ButtonModule,
+        SplitButtonModule
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

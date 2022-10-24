@@ -12,6 +12,16 @@ export class AssuranceService {
   private config2:string="https://cemedo-api-java.herokuapp.com/employe/responsableAssurance/"
   constructor(private httpAssu:HttpClient) { }
   
+  getProducts() {
+    return this.httpAssu
+        .get<any>(this.config)
+        .toPromise()
+        .then((res) => <Assurance[]>res.data)
+        .then((data) => {
+            return data;
+        });
+}
+
   //ressource assurance
   getAssurance():Observable<any>{
     return this.httpAssu.get<any>(this.config,{

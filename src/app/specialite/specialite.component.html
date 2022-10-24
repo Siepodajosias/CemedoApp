@@ -1,0 +1,79 @@
+
+<section class="content">
+    <div class="content-block">
+<h2 style="color: green">GeeksforGeeks</h2>
+<h4>Angular PrimeNG Table Page</h4>
+
+
+
+
+<div class="card">
+    <p-toolbar>
+        <div class="p-toolbar-group-left">
+            <p-button label="New" icon="pi pi-plus"></p-button>
+            <p-button label="Upload" icon="pi pi-upload" styleClass="p-button-success"></p-button>
+                
+            <i class="pi pi-bars"></i>
+            
+            <p-splitButton label="Save" icon="pi pi-check"  styleClass="p-button-warning"></p-splitButton>
+        </div>
+        
+        <div class="p-toolbar-group-right">
+            <p-button icon="pi pi-search"></p-button>
+            <p-button icon="pi pi-calendar" styleClass="p-button-success"></p-button>
+            <p-button icon="pi pi-times" styleClass="p-button-danger"></p-button>
+        </div>
+    </p-toolbar>
+    <p-table  [value]="tableData" [rows]="10" [paginator]="true" responsiveLayout="scroll" [lazy]="true"
+         [rowHover]="true" dataKey="id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between block-header">
+                <h5 class="m-0">Manage Products</h5>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" placeholder="Search..." />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 3rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th pSortableColumn="firstname">First Name
+                    <p-sortIcon></p-sortIcon>
+                </th>
+    
+                <th pSortableColumn="age">Age
+                    <p-sortIcon></p-sortIcon>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-people>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="people"></p-tableCheckbox>
+                </td>
+              
+                    <td>
+                        {{ people.id }}
+                    </td>
+                    <td>
+                        {{ people.libelle }}
+                    </td>
+              
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                In total there are {{tableData ? tableData.length : 0 }} tableData.
+            </div>
+        </ng-template>
+    </p-table>
+</div>
+
+
+</div>
+</section>
+
