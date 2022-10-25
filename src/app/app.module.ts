@@ -27,8 +27,8 @@ import { DialogModule } from "primeng/dialog";
 import { FileUploadModule } from "primeng/fileupload";
 import { MultiSelectModule } from "primeng/multiselect";
 import { ConfirmDialogModule } from "primeng/confirmdialog";
-
-
+import { CommonModule } from '@angular/common';
+import { Routes, RouterModule } from '@angular/router';
 import {
   PerfectScrollbarModule,
   PERFECT_SCROLLBAR_CONFIG,
@@ -44,7 +44,7 @@ import {
 } from "@angular/common/http";
 
 import { LoadingBarRouterModule } from "@ngx-loading-bar/router";
-import { SpecialiteComponent } from "./specialite/specialite.component";
+import { SpecialiteComponent } from "./_controllers/specialite/specialite.component";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -97,7 +97,9 @@ export function createTranslateLoader(http: HttpClient): any {
         MultiSelectModule,
         DynamicDialogModule,
         FileUploadModule,
-        DialogModule
+        DialogModule,
+        CommonModule,
+        RouterModule
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

@@ -23,6 +23,15 @@ const routes: Routes = [
           import('./admin/admin.module').then((m) => m.AdminModule),
       },
       {
+        path: 'specialite',
+        canActivate: [AuthGuard],
+        data: {
+          role: Role.Doctor,
+        },
+        loadChildren: () =>
+          import('./_controllers/specialite/specialite.module').then((m) => m.SpecialiteModule),
+      },
+      {
         path: 'doctor',
         canActivate: [AuthGuard],
         data: {

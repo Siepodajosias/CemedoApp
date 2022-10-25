@@ -1,32 +1,22 @@
 import { Component, Injectable, OnInit, ViewChild } from '@angular/core';
-import { Assurance } from '../assurance/model/assurance';
-import { AssuranceService } from '../assurance/service/assurance.service';
+import { Assurance } from '../../assurance/model/assurance';
+import { AssuranceService } from '../../assurance/service/assurance.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { AssuranceViewComponent } from '../../app/assurance/composent/assurance-view/assurance-view.component';
+import { AssuranceViewComponent } from '../../assurance/composent/assurance-view/assurance-view.component';
 import { ConfirmationService, LazyLoadEvent } from 'primeng/api';
 import {DialogService} from 'primeng/dynamicdialog';
 import { MessageService } from 'primeng/api';
-interface People {
-firstname?: string;
-lastname?: string;
-age?: string;
-}
+
+
 
 @Component({
   selector: 'app-specialite',
   templateUrl: './specialite.component.html',
-  styles: [
-    `button .p-button-icon {
-      font-size: 30px;
-      color: red;
-  }
-    `
-],
+  styleUrls: ['./specialite.component.scss'],
+
 providers: [MessageService,ConfirmationService,DialogService]
 })
-
-
 export class SpecialiteComponent implements OnInit {
 tableData: Assurance[] ;
 
@@ -52,7 +42,6 @@ ngOnInit() {
 	];
   this.customerService.getProducts().then(
     data => this.tableData = data);
-//console.log(this.tableData);
 }
 
 show() {

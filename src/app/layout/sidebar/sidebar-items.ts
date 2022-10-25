@@ -77,7 +77,7 @@ export const ROUTES: RouteInfo[] = [
 
   // Common Modules admin
 {
-    path: "/admin/Rdv",
+    path: "/admin/specialite/liste",
     title: "Département",
     moduleName: "extra-pages",
     iconType: "material-icons-two-tone",

@@ -44,6 +44,11 @@ const routes: Routes = [
     path: 'assurance',
     loadChildren: () => import('../assurance/assurance.module').then((r) => r.AssuranceModule)
   }
+  ,
+  {
+    path: 'specialite',
+    loadChildren: () => import('../_controllers/specialite/specialite.module').then((r) => r.SpecialiteModule)
+  }
 
 ];
 
