@@ -22,6 +22,11 @@ import { ToolbarModule } from "primeng/toolbar";
 import { ButtonModule } from "primeng/button";
 import { SplitButtonModule } from "primeng/splitbutton";
 import { ToastModule } from "primeng/toast";
+import { DynamicDialogModule } from "primeng/dynamicdialog";
+import { DialogModule } from "primeng/dialog";
+import { FileUploadModule } from "primeng/fileupload";
+import { MultiSelectModule } from "primeng/multiselect";
+import { ConfirmDialogModule } from "primeng/confirmdialog";
 
 
 import {
@@ -87,7 +92,12 @@ export function createTranslateLoader(http: HttpClient): any {
         ToolbarModule,
         ToastModule,
         ButtonModule,
-        SplitButtonModule
+        SplitButtonModule,
+        ConfirmDialogModule,
+        MultiSelectModule,
+        DynamicDialogModule,
+        FileUploadModule,
+        DialogModule
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

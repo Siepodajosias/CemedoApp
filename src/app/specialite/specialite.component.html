@@ -4,36 +4,32 @@
 <h2 style="color: green">GeeksforGeeks</h2>
 <h4>Angular PrimeNG Table Page</h4>
 
-
-
-
 <div class="card">
-    <p-toolbar>
-        <div class="p-toolbar-group-left">
-            <p-button label="New" icon="pi pi-plus"></p-button>
-            <p-button label="Upload" icon="pi pi-upload" styleClass="p-button-success"></p-button>
-                
-            <i class="pi pi-bars"></i>
+    <p-toolbar styleClass="mb-4">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="Nouveau" icon="pi pi-plus" class="p-button-success mr-2" (click)="show()"></button>
+            &nbsp; <button pButton pRipple label="Supprimer" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()" [disabled]="!selectedProducts || !selectedProducts.length"></button>
+        </ng-template>
+
+        <ng-template pTemplate="right">
             
-            <p-splitButton label="Save" icon="pi pi-check"  styleClass="p-button-warning"></p-splitButton>
-        </div>
-        
-        <div class="p-toolbar-group-right">
-            <p-button icon="pi pi-search"></p-button>
-            <p-button icon="pi pi-calendar" styleClass="p-button-success"></p-button>
-            <p-button icon="pi pi-times" styleClass="p-button-danger"></p-button>
-        </div>
+            <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="mr-2 inline-block"></p-fileUpload>
+            &nbsp; <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button>
+        </ng-template>
     </p-toolbar>
-    <p-table  [value]="tableData" [rows]="10" [paginator]="true" responsiveLayout="scroll" [lazy]="true"
-         [rowHover]="true" dataKey="id"
+
+    <p-table #dt [value]="tableData" [rows]="8" [paginator]="true"
+    styleClass="p-datatable-gridlines"
+    selectionMode="single"
+    [resizableColumns]="true"
+    [globalFilterFields]="['name','country.name','representative.name','status']" responsiveLayout="scroll"
+        [(selection)]="selectedProducts" [rowHover]="true" dataKey="id"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
         <ng-template pTemplate="caption">
-            <div class="flex align-items-center justify-content-between block-header">
-                <h5 class="m-0">Manage Products</h5>
-                <span class="p-input-icon-left">
-                    <i class="pi pi-search"></i>
-                    <input pInputText type="text" placeholder="Search..." />
-                </span>
+            <div class="flex align-items-center justify-content-between ng-star-inserted">
+             
+                    <h3 class="m-0">Manage Products</h3>
+                 
             </div>
         </ng-template>
         <ng-template pTemplate="header">
@@ -41,39 +37,73 @@
                 <th style="width: 3rem">
                     <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                 </th>
-                <th pSortableColumn="firstname">First Name
-                    <p-sortIcon></p-sortIcon>
+                <th pResizableColumn pSortableColumn="id">id <p-sortIcon field="id"></p-sortIcon></th>
+                <th pResizableColumn pSortableColumn="libelle">libelle <p-sortIcon field="libelle"></p-sortIcon></th>
+            
+                <th pResizableColumn>Actions</th>
+            </tr>
+            <tr>
+                <th style="width: 3rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                 </th>
-    
-                <th pSortableColumn="age">Age
-                    <p-sortIcon></p-sortIcon>
+                <th>
+                    <p-columnFilter type="text" field="id"></p-columnFilter>
                 </th>
+               
+                <th>
+                    <p-columnFilter type="text" field="libelle"></p-columnFilter>
+                </th>
+                <th></th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-people>
-            <tr>
+        <ng-template pTemplate="body" let-product>
+            <tr [pSelectableRow]="product">
                 <td>
-                    <p-tableCheckbox [value]="people"></p-tableCheckbox>
+                    <p-tableCheckbox [value]="product"></p-tableCheckbox>
                 </td>
-              
-                    <td>
-                        {{ people.id }}
-                    </td>
-                    <td>
-                        {{ people.libelle }}
-                    </td>
-              
+                <td>{{product.id}}</td>
+                <td>{{product.libelle}}</td>
+                <td width="200px">
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success  btn-sm" (click)="editProduct(product)"></button> &nbsp;
+                    <button pButton pRipple icon="pi pi-check" class="p-button p-button-help btn-sm" (click)="deleteProduct(product)"></button>&nbsp;
+                    <button pButton pRipple icon="pi pi-trash" class="p-button p-button-warning btn-sm" (click)="deleteProduct(product)"></button>
+               
+                </td>
             </tr>
         </ng-template>
         <ng-template pTemplate="summary">
             <div class="flex align-items-center justify-content-between">
-                In total there are {{tableData ? tableData.length : 0 }} tableData.
+                Au total il y a  {{tableData ? tableData.length : 0 }} enregistrement(s).
             </div>
         </ng-template>
     </p-table>
 </div>
 
+<p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Assurance Details" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+       
+        <div class="field">
+            <label for="name">Name</label>
+            <input type="text" pInputText id="id" [(ngModel)]="product.id" required autofocus />
+            <small class="p-error" *ngIf="submitted && !product.id">Name is required.</small>
+        </div>
+        <div class="field">
+            <label for="name">Name</label>
+            <input type="text" pInputText id="id" [(ngModel)]="product.libelle" required autofocus />
+            <small class="p-error" *ngIf="submitted && !product.libelle">Name is required.</small>
+        </div>
+        
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
+    </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
 
 </div>
 </section>
+
 

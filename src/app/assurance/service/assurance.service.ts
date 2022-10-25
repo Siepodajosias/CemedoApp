@@ -21,7 +21,9 @@ export class AssuranceService {
             return data;
         });
 }
-
+getCustomers(params?: any) {
+  return this.httpAssu.get<any>(this.config, { params: params }).toPromise();
+}
   //ressource assurance
   getAssurance():Observable<any>{
     return this.httpAssu.get<any>(this.config,{
