@@ -22,11 +22,12 @@ import { ToolbarModule } from "primeng/toolbar";
 import { ButtonModule } from "primeng/button";
 import { SplitButtonModule } from "primeng/splitbutton";
 import { ToastModule } from "primeng/toast";
-import { DynamicDialogModule } from "primeng/dynamicdialog";
+//import { DynamicDialogModule } from "primeng/dynamicdialog";
 import { DialogModule } from "primeng/dialog";
 import { FileUploadModule } from "primeng/fileupload";
 import { MultiSelectModule } from "primeng/multiselect";
 import { ConfirmDialogModule } from "primeng/confirmdialog";
+import { CheckboxModule } from "primeng/checkbox";
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import {
@@ -45,6 +46,26 @@ import {
 
 import { LoadingBarRouterModule } from "@ngx-loading-bar/router";
 import { SpecialiteComponent } from "./_controllers/specialite/specialite.component";
+import { RoleComponent } from "./_controllers/role/role.component";
+import { ServiceComponent } from "./_controllers/service/service.component";
+import { TypeServiceComponent } from "./_controllers/type-service/type-service.component";
+import { TypeMedecinComponent } from "./_controllers/type-medecin/type-medecin.component";
+import { TypeFichierMedicalComponent } from "./_controllers/type-fichier-medical/type-fichier-medical.component";
+import { TypeEmployeComponent } from "./_controllers/type-employe/type-employe.component";
+import { ResponsableAssuranceComponent } from "./_controllers/responsable-assurance/responsable-assurance.component";
+import { PatientComponent } from "./_controllers/patient/patient.component";
+import { MedecinComponent } from "./_controllers/medecin/medecin.component";
+import { FichierComponent } from "./_controllers/fichier/fichier.component";
+import { MedicamentComponent } from "./_controllers/medicament/medicament.component";
+import { ModePaiementComponent } from "./_controllers/mode-paiement/mode-paiement.component";
+import { RelationComponent } from "./_controllers/relation/relation.component";
+import { ComptableComponent } from "./_controllers/comptable/comptable.component";
+import { GerantComponent } from "./_controllers/gerant/gerant.component";
+import { PharmacienComponent } from "./_controllers/pharmacien/pharmacien.component";
+import { InfirmierComponent } from "./_controllers/infirmier/infirmier.component";
+import { AssuranceComponent } from "./_controllers/assurance/assurance.component";
+
+
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -64,8 +85,25 @@ export function createTranslateLoader(http: HttpClient): any {
         RightSidebarComponent,
         AuthLayoutComponent,
         MainLayoutComponent,
-        SpecialiteComponent
-
+        SpecialiteComponent,
+       TypeServiceComponent,
+       TypeMedecinComponent,
+       TypeFichierMedicalComponent,
+       TypeEmployeComponent,
+       ServiceComponent,
+       RoleComponent,
+       ResponsableAssuranceComponent,
+PatientComponent,
+MedecinComponent,
+FichierComponent,
+MedicamentComponent,
+ModePaiementComponent,
+RelationComponent,
+ComptableComponent,
+GerantComponent,
+PharmacienComponent,
+InfirmierComponent,
+AssuranceComponent,
 
     ],
     imports: [
@@ -95,11 +133,12 @@ export function createTranslateLoader(http: HttpClient): any {
         SplitButtonModule,
         ConfirmDialogModule,
         MultiSelectModule,
-        DynamicDialogModule,
+       // DynamicDialogModule,
         FileUploadModule,
         DialogModule,
         CommonModule,
-        RouterModule
+        RouterModule,
+        CheckboxModule
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
@@ -111,6 +150,7 @@ export function createTranslateLoader(http: HttpClient): any {
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         fakeBackendProvider,
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    
 })
 export class AppModule {}

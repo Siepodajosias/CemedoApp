@@ -21,11 +21,7 @@ const routes: Routes = [
   {path:'calendrier',component:MedecinCalendrierComponent},
   {path:'profile',component:ProfileMedecinComponent},
   {path:'facture',component:FactureComponent},
-  {path:'patient',loadChildren:()=>import('../patient/patient.module').then((e)=>e.PatientModule)},
-  {
-    path: 'assurance',
-    loadChildren: () => import('../assurance/assurance.module').then((r) => r.AssuranceModule)
-  },
+  
   {path: '**', component: Page404Component },
 ];
 

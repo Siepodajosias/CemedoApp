@@ -17,8 +17,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MaterialFileInputModule } from 'ngx-material-file-input';
-import { AssuranceService } from 'src/app/assurance/service/assurance.service';
-import { AssuranceViewComponent } from 'src/app/assurance/composent/assurance-view/assurance-view.component';
 
 
 @NgModule({
@@ -43,6 +41,6 @@ import { AssuranceViewComponent } from 'src/app/assurance/composent/assurance-vi
     SpecialiteRoutingModule,
     ComponentsModule,
     ToastrModule.forRoot({})
-  ], providers: [ToastrService,AssuranceService]
+  ], providers: [ToastrService]
 })
 export class SpecialiteModule { }

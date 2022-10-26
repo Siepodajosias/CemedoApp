@@ -1,0 +1,24 @@
+export class Medecin {
+    active:number
+    assurance:number
+    createdAt:string
+    dateNaissance:string
+    email:string
+    genre:string
+    id:number
+    lieuHabitation:string
+    login:string
+    nom:string
+    specialite:string
+    typeEmploye:string
+    typeMedecin:string
+    numeroAssure:string
+    password:string
+    prenoms:string
+    role:string
+    tauxCouverture:number
+    tel:string
+    tel2:string
+    updatedAt:string
+    version:number
+}

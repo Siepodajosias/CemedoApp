@@ -22,14 +22,51 @@ const routes: Routes = [
         loadChildren: () =>
           import('./admin/admin.module').then((m) => m.AdminModule),
       },
+      
       {
         path: 'specialite',
         canActivate: [AuthGuard],
         data: {
-          role: Role.Doctor,
+          role: Role.Specialite,
         },
         loadChildren: () =>
           import('./_controllers/specialite/specialite.module').then((m) => m.SpecialiteModule),
+      },
+      {
+        path: 'service',
+        canActivate: [AuthGuard],
+        data: {
+          role: Role.Service,
+        },
+        loadChildren: () =>
+          import('./_controllers/service/service.module').then((m) => m.ServiceModule),
+      },
+      {
+        path: 'type-employe',
+        canActivate: [AuthGuard],
+        data: {
+          role: Role.TypeEmploye,
+        },
+        loadChildren: () =>
+          import('./_controllers/type-employe/type-employe.module').then((m) => m.TypeEmployeModule),
+      },
+      {
+        path: 'type-medecin',
+        canActivate: [AuthGuard],
+        data: {
+          role: Role.Admin,
+        },
+        loadChildren: () =>
+          import('./_controllers/type-medecin/type-medecin.module').then((m) => m.TypeMedecinModule),
+      },
+      {
+        path: 'type-service',
+        canActivate: [AuthGuard],
+        data: {
+          role: Role.Admin,
+        },
+        loadChildren: () =>
+          import('./_controllers/type-service/type-service.module').then((m) => m.TypeServiceModule),
       },
       {
         path: 'doctor',
@@ -41,13 +78,13 @@ const routes: Routes = [
           import('./doctor/doctor.module').then((m) => m.DoctorModule),
       },
       {
-        path: 'reception',
+        path: 'assurance',
         canActivate: [AuthGuard],
         data: {
-          role: Role.Reception,
+          role: Role.TypeEmploye,
         },
         loadChildren: () =>
-          import('./reception/reception.module').then((m) => m.ReceptionModule),
+          import('./_controllers/assurance/assurance.module').then((m) => m.AssuranceModule),
       },
       {
         path: 'comptable',
@@ -56,54 +93,158 @@ const routes: Routes = [
           role:Role.Comptable
         },
         loadChildren: () =>
-          import('./comptable/comptable.module').then(
+          import('./_controllers/comptable/comptable.module').then(
             (m) => m.ComptableModule
           ),
       },
       {
-        path: 'infirmerie',
+        path: 'infirmier',
         canActivate: [AuthGuard],
         data:{
           role:Role.Infirmier
         },
         loadChildren: () =>
-          import('./infirmerie/infirmerie.module').then(
-            (m) => m.InfirmerieModule
+          import('./_controllers/infirmier/infirmier.module').then(
+            (m) => m.InfirmierModule
           ),
       },
       {
-        path: 'pharmacie',
+        path: 'fichier',
         canActivate: [AuthGuard],
         data:{
-          role:Role.Pharmacien
+          role:Role.Infirmier
         },
         loadChildren: () =>
-          import('./pharmacie/pharmacie.module').then(
-            (m) => m.PharmacieModule
+          import('./_controllers/fichier/fichier.module').then(
+            (m) => m.FichierModule
           ),
       },
       {
-        path: 'assurance',
+        path: 'gerant',
         canActivate: [AuthGuard],
         data:{
-          role:Role.Assurance
+          role:Role.Infirmier
         },
         loadChildren: () =>
-          import('./assurance/assurance.module').then(
-            (m) => m.AssuranceModule
+          import('./_controllers/gerant/gerant.module').then(
+            (m) => m.GerantModule
           ),
       },
       {
-        path: 'informatique',
+        path: 'medecin',
         canActivate: [AuthGuard],
         data:{
-          role:Role.Informaticien
+          role:Role.Infirmier
         },
         loadChildren: () =>
-          import('./informatique/informatique.module').then(
-            (m) => m.InformatiqueModule
+          import('./_controllers/medecin/medecin.module').then(
+            (m) => m.MedecinModule
           ),
       },
+      {
+        path: 'medicament',
+        canActivate: [AuthGuard],
+        data:{
+          role:Role.Infirmier
+        },
+        loadChildren: () =>
+          import('./_controllers/medicament/medicament.module').then(
+            (m) => m.MedicamentModule
+          ),
+      },
+      {
+        path: 'medicament',
+        canActivate: [AuthGuard],
+        data:{
+          role:Role.Infirmier
+        },
+        loadChildren: () =>
+          import('./_controllers/medicament/medicament.module').then(
+            (m) => m.MedicamentModule
+          ),
+      },
+      {
+        path: 'mode-paiement',
+        canActivate: [AuthGuard],
+        data:{
+          role:Role.Infirmier
+        },
+        loadChildren: () =>
+          import('./_controllers/mode-paiement/mode-paiement.module').then(
+            (m) => m.ModePaiementModule
+          ),
+      },
+      {
+        path: 'patient',
+        canActivate: [AuthGuard],
+        data:{
+          role:Role.Infirmier
+        },
+        loadChildren: () =>
+          import('./_controllers/patient/patient.module').then(
+            (m) => m.PatientModule
+          ),
+      },
+      {
+        path: 'pharmacien',
+        canActivate: [AuthGuard],
+        data:{
+          role:Role.Infirmier
+        },
+        loadChildren: () =>
+          import('./_controllers/pharmacien/pharmacien.module').then(
+            (m) => m.PharmacienModule
+          ),
+      },
+      {
+        path: 'relation',
+        canActivate: [AuthGuard],
+        data:{
+          role:Role.Infirmier
+        },
+        loadChildren: () =>
+          import('./_controllers/relation/relation.module').then(
+            (m) => m.RelationModule
+          ),
+      },
+      
+      {
+        path: 'responsable-assurance',
+        canActivate: [AuthGuard],
+        data:{
+          role:Role.Infirmier
+        },
+        loadChildren: () =>
+          import('./_controllers/responsable-assurance/responsable-assurance.module').then(
+            (m) => m.ResponsableAssuranceModule
+          ),
+      },
+      
+      {
+        path: 'type-fichier-medical',
+        canActivate: [AuthGuard],
+        data:{
+          role:Role.Infirmier
+        },
+        loadChildren: () =>
+          import('./_controllers/type-fichier-medical/type-fichier-medical.module').then(
+            (m) => m.TypeFichierMedicalModule
+          ),
+      },
+      
+      {
+        path: 'role',
+        canActivate: [AuthGuard],
+        data:{
+          role:Role.Infirmier
+        },
+        loadChildren: () =>
+          import('./_controllers/role/role.module').then(
+            (m) => m.RoleModule
+          ),
+      },
+      
+      
     ],
   },
   {

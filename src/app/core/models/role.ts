@@ -3,6 +3,8 @@ export enum Role {
   Admin = 'Admin',
   Doctor = 'Doctor',
   Specialite = 'Specialite',
+  Service = 'Service',
+  TypeEmploye = 'TypeEmploye',
   Reception = 'Reception',
   Comptable = 'Comptable',
   Assurance= 'Assurance',

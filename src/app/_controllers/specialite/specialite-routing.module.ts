@@ -1,11 +1,11 @@
 import { Page404Component } from './../../authentication/page404/page404.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SpecialiteComponent } from './../specialite/specialite.component';
+import { ServiceComponent } from './../service/service.component';
 
 const routes: Routes = [
 
-  {path:'liste',component:SpecialiteComponent},
+  {path:'liste',component:ServiceComponent},
  
 ];
 

@@ -1,0 +1,93 @@
+<section class="content">
+    <div class="content-block">
+      <div class="block-header">
+        <!-- breadcrumb 
+        <p-breadcrumb  [home]="home"></p-breadcrumb>-->
+      <div class="row"><br>
+        <h1>Liste des types employés</h1>
+      </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="card">
+        
+            <div class="body">
+  
+              <!-- Assurance -->
+  
+              <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                    <button pButton pRipple label="Nouveau" icon="pi pi-plus" class="p-button-success mr-2" ></button>
+                    &nbsp; <button pButton pRipple label="Supprimer" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()" [disabled]="!selectedEntity || !selectedEntity.length"></button>
+                </ng-template>
+        
+                <ng-template pTemplate="right">
+                    
+                    <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="mr-2 inline-block"></p-fileUpload>
+                    &nbsp; <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button>
+                </ng-template>
+            </p-toolbar>
+            <p-table #dt [value]="liste" [rows]="7" [paginator]="true"
+            styleClass="p-datatable-gridlines"
+            selectionMode="single"
+            [resizableColumns]="true"
+            [globalFilterFields]="['name','country.name','representative.name','status']" responsiveLayout="scroll"
+                [(selection)]="selectedEntity" [rowHover]="true" dataKey="id"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+               
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                        <!--<th pResizableColumn pSortableColumn="id">id <p-sortIcon field="id"></p-sortIcon></th>-->
+                        <th pResizableColumn pSortableColumn="libelle">libelle <p-sortIcon field="libelle"></p-sortIcon></th>
+                    
+                        <th pResizableColumn>Actions</th>
+                    </tr>
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                       <!-- <th>
+                            <p-columnFilter type="text" field="id"></p-columnFilter>
+                        </th>-->
+                       
+                        <th>
+                            <p-columnFilter type="text" field="libelle"></p-columnFilter>
+                        </th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-element>
+                    <tr [pSelectableRow]="element">
+                        <td>
+                            <p-tableCheckbox [value]="element"></p-tableCheckbox>
+                        </td>
+                        <!--<td>{{element.id}}</td>-->
+                        <td>{{element.libelle}}</td>
+                        <td width="200px">
+                            <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success  btn-sm" (click)="editProduct(element)"></button> &nbsp;
+                            <button pButton pRipple icon="pi pi-check" class="p-button p-button-help btn-sm" (click)="deleteProduct(element)"></button>&nbsp;
+                            <button pButton pRipple icon="pi pi-trash" class="p-button p-button-warning btn-sm" (click)="deleteProduct(element)"></button>
+                       
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <div class="flex align-items-center justify-content-between">
+                        Au total il y a  {{liste ? liste.length : 0 }} enregistrement(s).
+                    </div>
+                </ng-template>
+            </p-table>
+              <!---->
+              <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+

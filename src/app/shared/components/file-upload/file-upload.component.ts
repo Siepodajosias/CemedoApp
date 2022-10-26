@@ -16,7 +16,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 export class FileUploadComponent implements ControlValueAccessor {
   @Input() progress;
   onChange: Function;
-  myFiles: any[] = [];
+  myFiles: string[] = [];
 
   constructor(private host: ElementRef<HTMLInputElement>) {}
 
