@@ -243,6 +243,61 @@ const routes: Routes = [
             (m) => m.RoleModule
           ),
       },
+      {
+        path: 'administrateur',
+        canActivate: [AuthGuard],
+        data:{
+          role:Role.Infirmier
+        },
+        loadChildren: () =>
+          import('./_controllers/administrateur/administrateur.module').then(
+            (m) => m.AdministrateurModule
+          ),
+      },
+      {
+        path: 'role',
+        canActivate: [AuthGuard],
+        data:{
+          role:Role.Infirmier
+        },
+        loadChildren: () =>
+          import('./_controllers/ordonnance/ordonnance.module').then(
+            (m) => m.OrdonnanceModule
+          ),
+      },
+      {
+        path: 'rendez-vous',
+        canActivate: [AuthGuard],
+        data:{
+          role:Role.Infirmier
+        },
+        loadChildren: () =>
+          import('./_controllers/rendez-vous/rendez-vous.module').then(
+            (m) => m.RendezVousModule
+          ),
+      },
+      {
+        path: 'affection',
+        canActivate: [AuthGuard],
+        data:{
+          role:Role.Infirmier
+        },
+        loadChildren: () =>
+          import('./_controllers/affection/affection.module').then(
+            (m) => m.AffectionModule
+          ),
+      },
+      {
+        path: 'facture',
+        canActivate: [AuthGuard],
+        data:{
+          role:Role.Infirmier
+        },
+        loadChildren: () =>
+          import('./_controllers/facture/facture.module').then(
+            (m) => m.FactureModule
+          ),
+      },
       
       
     ],

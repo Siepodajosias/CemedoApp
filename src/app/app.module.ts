@@ -65,7 +65,11 @@ import { PharmacienComponent } from "./_controllers/pharmacien/pharmacien.compon
 import { InfirmierComponent } from "./_controllers/infirmier/infirmier.component";
 import { AssuranceComponent } from "./_controllers/assurance/assurance.component";
 import { ResponsableAssuranceService } from "./_services/responsable-assurance/responsable-assurance.service";
-
+import { OrdonnanceComponent } from './_controllers/ordonnance/ordonnance.component';
+import { RendezVousComponent } from './_controllers/rendez-vous/rendez-vous.component';
+import { FactureComponent } from './_controllers/facture/facture.component';
+import { AffectionComponent } from './_controllers/affection/affection.component';
+import { AdministrateurComponent } from './_controllers/administrateur/administrateur.component';
 
 
 
@@ -95,17 +99,22 @@ export function createTranslateLoader(http: HttpClient): any {
        ServiceComponent,
        RoleComponent,
        ResponsableAssuranceComponent,
-PatientComponent,
-MedecinComponent,
-FichierComponent,
-MedicamentComponent,
-ModePaiementComponent,
-RelationComponent,
-ComptableComponent,
-GerantComponent,
-PharmacienComponent,
-InfirmierComponent,
-AssuranceComponent,
+        PatientComponent,
+        MedecinComponent,
+        FichierComponent,
+        MedicamentComponent,
+        ModePaiementComponent,
+        RelationComponent,
+        ComptableComponent,
+        GerantComponent,
+        PharmacienComponent,
+        InfirmierComponent,
+        AssuranceComponent,
+        OrdonnanceComponent,
+        RendezVousComponent,
+        FactureComponent,
+        AffectionComponent,
+        AdministrateurComponent,
 
     ],
     imports: [

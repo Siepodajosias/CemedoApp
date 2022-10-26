@@ -23,10 +23,8 @@
               </ng-template>
       
               <ng-template pTemplate="right">
-                  
-                  <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="mr-2 inline-block"></p-fileUpload>
-                  &nbsp; <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button>
-              </ng-template>
+                <button pButton pRipple label="Imprimer" icon="pi pi-upload" class="p-button-help"></button>
+                </ng-template>
           </p-toolbar>
           <p-table #dt [value]="liste" [rows]="7" [paginator]="true"
           styleClass="p-datatable-gridlines"

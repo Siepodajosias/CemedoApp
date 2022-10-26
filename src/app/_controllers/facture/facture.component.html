@@ -1,0 +1,143 @@
+<section class="content">
+    <div class="content-block">
+      <div class="block-header">
+        <!-- breadcrumb 
+        <p-breadcrumb  [home]="home"></p-breadcrumb>-->
+      <div class="row"><br>
+        <h1>Liste des factures</h1>
+      </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="card">
+        
+            <div class="body">
+            
+              
+              <!-- Assurance -->
+  
+              <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                    <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()" ></button>
+                    &nbsp; <button pButton pRipple label="Supprimer" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()" [disabled]="!selectedEntity || !selectedEntity.length"></button>
+                
+                  </ng-template>
+        
+                <ng-template pTemplate="right">
+                    
+                  <button pButton pRipple label="Imprimer" icon="pi pi-upload" class="p-button-help"></button>
+                  </ng-template>
+            </p-toolbar>
+            <p-table #dt [value]="liste" [rows]="7" [paginator]="true"
+            styleClass="p-datatable-gridlines"
+            selectionMode="single"
+            [resizableColumns]="true"
+            [globalFilterFields]="['name','country.name','representative.name','status']" responsiveLayout="scroll"
+                [(selection)]="selectedEntity" [rowHover]="true" dataKey="id"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+               
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                     
+                        <!--<th pResizableColumn pSortableColumn="id">id <p-sortIcon field="id"></p-sortIcon></th>-->
+                        <th pResizableColumn pSortableColumn="assure">Assure <p-sortIcon field="assure"></p-sortIcon></th>
+                        <th pResizableColumn pSortableColumn="modePaiement">Mode de paiement <p-sortIcon field="modePaiement"></p-sortIcon></th>
+                        <th pResizableColumn pSortableColumn="dateEmission">Date emission <p-sortIcon field="dateEmission"></p-sortIcon></th>
+                        <th pResizableColumn pSortableColumn="montant">Montant <p-sortIcon field="montant"></p-sortIcon></th>
+                      
+                        <th pResizableColumn>Actions</th>
+                    </tr>
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                       <!-- <th>
+                            <p-columnFilter type="text" field="id"></p-columnFilter>
+                        </th>-->
+                        
+                        <th>
+                            <p-columnFilter type="text" field="assure.nom"></p-columnFilter>
+                        </th>
+                        <th>
+                          <p-columnFilter type="text" field="modePaiement.libelle"></p-columnFilter>
+                      </th>
+                      <th>
+                        <p-columnFilter type="text" field="dateEmission"></p-columnFilter>
+                    </th>
+                    <th>
+                      <p-columnFilter type="text" field="montant"></p-columnFilter>
+                      
+                  </th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-element>
+                    <tr [pSelectableRow]="element">
+                        <td>
+                            <p-tableCheckbox [value]="element"></p-tableCheckbox>
+                        </td>
+                        <!--<td>{{element.id}}</td>-->
+                        
+                        <td>{{element.assure.nom }} {{element.assure.prenoms }}</td>
+                        <td>{{element.modePaiement.libelle}}</td>
+                        <td>{{element.dateEmission}}</td>
+                        <td>{{element.montant}}</td>
+                        <td width="200px">
+                            <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success  btn-sm" (click)="editProduct(element)"></button> &nbsp;
+                            <button pButton pRipple icon="pi pi-check" class="p-button p-button-help btn-sm" (click)="deleteProduct(element)"></button>&nbsp;
+                            <button pButton pRipple icon="pi pi-trash" class="p-button p-button-warning btn-sm" (click)="deleteProduct(element)"></button>
+                       
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <div class="flex align-items-center justify-content-between">
+                        Au total il y a  {{liste ? liste.length : 0 }} enregistrement(s).
+                    </div>
+                </ng-template>
+            </p-table>
+              <!--
+              <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+              <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#staticBackdrop">
+                Launch static backdrop modal
+              </button>-->
+             
+  
+              <div
+              class="modal fade"
+              id="staticBackdrop"
+              data-mdb-backdrop="static"
+              data-mdb-keyboard="false"
+              tabindex="-1"
+              aria-labelledby="staticBackdropLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content" >
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">konate</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">specialite.nom</div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+         
+        <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  

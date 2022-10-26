@@ -162,6 +162,47 @@ const routes: Routes = [
       ),
   },
 
+  {
+    path: 'administrateur',
+  
+    loadChildren: () =>
+      import('../_controllers/administrateur/administrateur.module').then(
+        (m) => m.AdministrateurModule
+      ),
+  },
+  {
+    path: 'role',
+   
+    loadChildren: () =>
+      import('../_controllers/ordonnance/ordonnance.module').then(
+        (m) => m.OrdonnanceModule
+      ),
+  },
+  {
+    path: 'rendez-vous',
+    
+    loadChildren: () =>
+      import('../_controllers/rendez-vous/rendez-vous.module').then(
+        (m) => m.RendezVousModule
+      ),
+  },
+  {
+    path: 'affection',
+   
+    loadChildren: () =>
+      import('../_controllers/affection/affection.module').then(
+        (m) => m.AffectionModule
+      ),
+  },
+  {
+    path: 'facture',
+    loadChildren: () =>
+      import('../_controllers/facture/facture.module').then(
+        (m) => m.FactureModule
+      ),
+  },
+  
+
 
 ];
 
