@@ -3,7 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { FactureComponent } from "./composents/facture/facture.component";
 
 const routes: Routes = [
-
+ {
+    path: 'dashboard',
+    loadChildren: () =>
+      import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+  },
   {
     path:'facture',component:FactureComponent
   },

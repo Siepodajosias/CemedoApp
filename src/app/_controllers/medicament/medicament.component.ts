@@ -30,6 +30,8 @@ export class MedicamentComponent implements OnInit {
     this.cols = [
     { field: "id", header: "Identifiant" },
     { field: "libelle", header: "Libelle" },
+    { field: "posologie", header: "Posologie" },
+    { field: "quantite", header: "Quantité" },
     ];
    
     this.service.getListe().then(

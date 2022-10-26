@@ -64,6 +64,8 @@ import { GerantComponent } from "./_controllers/gerant/gerant.component";
 import { PharmacienComponent } from "./_controllers/pharmacien/pharmacien.component";
 import { InfirmierComponent } from "./_controllers/infirmier/infirmier.component";
 import { AssuranceComponent } from "./_controllers/assurance/assurance.component";
+import { ResponsableAssuranceService } from "./_services/responsable-assurance/responsable-assurance.service";
+
 
 
 
@@ -150,7 +152,7 @@ AssuranceComponent,
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         fakeBackendProvider,
     ],
-    bootstrap: [AppComponent],
+    bootstrap: [AppComponent,ResponsableAssuranceService],
     
 })
 export class AppModule {}

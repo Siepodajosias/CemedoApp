@@ -134,7 +134,7 @@ const routes: Routes = [
         path: 'medecin',
         canActivate: [AuthGuard],
         data:{
-          role:Role.Infirmier
+          role:Role.Medecin
         },
         loadChildren: () =>
           import('./_controllers/medecin/medecin.module').then(

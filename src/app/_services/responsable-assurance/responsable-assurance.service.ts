@@ -9,7 +9,10 @@ export class ResponsableAssuranceService {
 
   private path_liste:string="https://cemedo-api-java.herokuapp.com/employe/responsableAssurance/"
   constructor(private http:HttpClient) { }
-  
+
+  getCustomers(params?: any) {
+    return this.http.get<any>(this.path_liste+"getAll", { params: params }).toPromise();
+}
   getListe() {
     return this.http
         .get<any>(this.path_liste+"getAll")

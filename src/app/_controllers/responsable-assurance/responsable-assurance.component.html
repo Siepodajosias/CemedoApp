@@ -4,7 +4,7 @@
       <!-- breadcrumb 
       <p-breadcrumb  [home]="home"></p-breadcrumb>-->
     <div class="row"><br>
-      <h1>Liste des responsable assurance</h1>
+      <h1>Liste des responsable assurances</h1>
     </div>
     </div>
     <div class="row clearfix">
@@ -18,14 +18,12 @@
 
             <p-toolbar styleClass="mb-4">
               <ng-template pTemplate="left">
-                  <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()" ></button>
+                  <button pButton pRipple label="Nouveau" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()" ></button>
                   &nbsp; <button pButton pRipple label="Supprimer" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()" [disabled]="!selectedEntity || !selectedEntity.length"></button>
               </ng-template>
       
               <ng-template pTemplate="right">
-                  
-                  <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="mr-2 inline-block"></p-fileUpload>
-                  &nbsp; <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button>
+                 <button pButton pRipple label="Imprimer" icon="pi pi-upload" class="p-button-help"></button>
               </ng-template>
           </p-toolbar>
           <p-table #dt [value]="liste" [rows]="7" [paginator]="true"
@@ -36,7 +34,7 @@
               [(selection)]="selectedEntity" [rowHover]="true" dataKey="id"
               currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
              
-              <ng-template pTemplate="header">
+          <ng-template pTemplate="header">
                   <tr>
                       <th style="width: 3rem">
                           <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
@@ -103,8 +101,8 @@
             <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
             <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#staticBackdrop">
               Launch static backdrop modal
-            </button>-->
-           
+            </button>
+           -->
 
             <div
             class="modal fade"
@@ -115,18 +113,53 @@
             aria-labelledby="staticBackdropLabel"
             aria-hidden="true"
           >
-            <div class="modal-dialog modal-lg">
+            <div class="modal-dialog modal-xl">   <form action="" method="POST" enctype="multipart/form-data"  method="POST" id="ModalForm">
+                   
               <div class="modal-content" >
                 <div class="modal-header">
                   <h5 class="modal-title" id="staticBackdropLabel">konate</h5>
                   <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">specialite.nom</div>
+                <div class="modal-body">
+               
+                    <input type="hidden" id="editId" value="">
+                    <div class="form-group">
+                        <label for="editName">First Name</label>
+                        <input type="text" name="name" class="form-control" id="editName" placeholder="First Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editSurname">Surname</label>
+                        <input type="text" name="surname" class="form-control" id="editSurname" placeholder="Surname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editEmail">E-mail address</label>
+                        <input type="email"  name="email" class="form-control" id="editEmail" placeholder="name@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editPhone">Mobile Phone</label>
+                        <input type="tel"  name="mobilePhone" class="form-control" id="editPhone" placeholder="+44" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editLevel">Level</label>
+                        <select class="form-control" id="editLevel" name="level">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                   
+               
+                </div>
+                <hr>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Understood</button>
+                  <button type="submit" class="btn btn-primary">Valider</button>
                 </div>
               </div>
+               </form>
             </div>
           </div>
           </div>

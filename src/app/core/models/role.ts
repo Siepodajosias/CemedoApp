@@ -9,6 +9,7 @@ export enum Role {
   Comptable = 'Comptable',
   Assurance= 'Assurance',
   Infirmier='Infirmier',
+  Medecin='Medecin',
   Pharmacien='Pharmacien',
   Informaticien='Informaticien',
   Logistique='Logistique'

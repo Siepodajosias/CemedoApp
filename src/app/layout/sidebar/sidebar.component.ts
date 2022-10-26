@@ -43,7 +43,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.routerObj = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         // logic for select active menu in dropdown
-        const role = ["admin", "doctor","specialite","type-employe", "reception","comptable","infirmier","pharmacien","informaticien","assurance"];
+        const role = ["admin", "doctor","specialite","type-employe", "reception","medecin","comptable","infirmier","pharmacien","informaticien","assurance"];
         const currenturl = event.url.split("?")[0];
         const firstString = currenturl.split("/").slice(1)[0];
 
@@ -135,6 +135,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
     }
     else if (userRole === Role.Service) {
       this.userType = Role.Service;
+    }
+    else if (userRole === Role.Medecin) {
+      this.userType = Role.Medecin;
     }
       else {
         this.userType = Role.Admin;

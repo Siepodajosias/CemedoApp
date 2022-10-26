@@ -58,7 +58,7 @@ export const ROUTES: RouteInfo[] = [
       },
   */
   {
-    path: "",
+    path: "/admin/dashboard/main",
     title: "Tableau de bord",
     moduleName: "dashboard",
     iconType: "material-icons-two-tone",
@@ -77,7 +77,7 @@ export const ROUTES: RouteInfo[] = [
 
   // Common Modules admin
 {
-    path: "/admin/specialite/liste",
+    path: "#",
     title: "Département",
     moduleName: "extra-pages",
     iconType: "material-icons-two-tone",
@@ -91,7 +91,7 @@ export const ROUTES: RouteInfo[] = [
   },
 
   {
-    path: "#",
+    path: "/admin/medecin/liste",
     title: "Médecins",
     moduleName: "doctor",
     iconType: "material-icons-two-tone",
@@ -103,7 +103,7 @@ export const ROUTES: RouteInfo[] = [
     role: ["Admin"],
     submenu: [
       {
-        path: "/admin/medecin/rapport",
+        path: "/admin/medecin/liste",
         title: "Liste des médecins",
         moduleName: "Medecin",
         iconType: "",
@@ -116,7 +116,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: [],
       },
       {
-        path: "/admin/medecin/rapport",
+        path: "/admin/medecin/liste",
         title: "Historique des traitements",
         moduleName: "Medecin",
         iconType: "",
@@ -145,7 +145,7 @@ export const ROUTES: RouteInfo[] = [
     role: ["Admin"],
     submenu: [
       {
-        path: "/admin/medecin/rapport",
+        path: "/admin/patient/liste",
         title: "Liste des patients",
         moduleName: "Medecin",
         iconType: "",
@@ -199,7 +199,7 @@ export const ROUTES: RouteInfo[] = [
     ],
   },
   {
-    path: "#",
+    path: "/admin/rendez-vous/liste",
     title: "Rendez-vous",
     moduleName: "extra-pages",
     iconType: "material-icons-two-tone",
@@ -212,7 +212,7 @@ export const ROUTES: RouteInfo[] = [
     submenu: [
      
       {
-        path: "/admin/medecin/rapport",
+        path: "/admin/rendez-vous/liste",
         title: "Tout les rendez-vous",
         moduleName: "Patient",
         iconType: "",
@@ -225,7 +225,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: [],
       },
       {
-        path: "/admin/medecin/rapport",
+        path: "/admin/rendez-vous/today",
         title: "Aujourd'hui",
         moduleName: "Patient",
         iconType: "",
@@ -238,7 +238,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: [],
       },
       {
-        path: "/admin/medecin/rapport",
+        path: "/admin/rendez-vous/next",
         title: "Prochains",
         moduleName: "Patient",
         iconType: "",
@@ -251,7 +251,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: [],
       },
       {
-        path: "/admin/medecin/rapport",
+        path: "/admin/renez-vous/calendrier",
         title: "Calendrier",
         moduleName: "Patient",
         iconType: "",
@@ -279,7 +279,7 @@ export const ROUTES: RouteInfo[] = [
     submenu: [],
   },
   {
-    path: "#",
+    path: "/admin/infirmier/liste",
     title: "Ressources humaines",
     moduleName: "Rh",
     iconType: "material-icons-two-tone",
@@ -291,8 +291,8 @@ export const ROUTES: RouteInfo[] = [
     role: ["Admin"],
     submenu: [
       {
-        path: "/admin/medecin/rapport",
-        title: "Infirmier",
+        path: "/admin/infirmier/liste",
+        title: "Liste des infirmiers",
         moduleName: "Rh",
         iconType: "",
         icon: "",
@@ -304,8 +304,8 @@ export const ROUTES: RouteInfo[] = [
         submenu: [],
       },
       {
-        path: "/admin/medecin/rapport",
-        title: "Laboratin",
+        path: "/admin/laboratin/liste",
+        title: "Liste des laboratins",
         moduleName: "Rh",
         iconType: "",
         icon: "",
@@ -317,8 +317,8 @@ export const ROUTES: RouteInfo[] = [
         submenu: [],
       },
       {
-        path: "/admin/medecin/rapport",
-        title: "Pharmacien",
+        path: "/admin/pharmacien/liste",
+        title: "Liste des pharmaciens",
         moduleName: "Rh",
         iconType: "",
         icon: "",
@@ -330,8 +330,8 @@ export const ROUTES: RouteInfo[] = [
         submenu: [],
       },
       {
-        path: "/admin/medecin/rapport",
-        title: "Gerant",
+        path: "/admin/gerant/liste",
+        title: "Liste des gérants",
         moduleName: "Rh",
         iconType: "",
         icon: "",
@@ -343,8 +343,8 @@ export const ROUTES: RouteInfo[] = [
         submenu: [],
       },
       {
-        path: "/admin/medecin/rapport",
-        title: "Comptable",
+        path: "/admin/comptable/liste",
+        title: "Liste des comptables",
         moduleName: "Rh",
         iconType: "",
         icon: "",
@@ -356,8 +356,8 @@ export const ROUTES: RouteInfo[] = [
         submenu: [],
       },
       {
-        path: "/admin/medecin/rapport",
-        title: "Responsable assurance",
+        path: "/admin/responsable-assurance/liste",
+        title: "Liste des responsables",
         moduleName: "Rh",
         iconType: "",
         icon: "",
@@ -842,7 +842,7 @@ export const ROUTES: RouteInfo[] = [
   },
 
   {
-    path: "#",
+    path: "/admin/medicament/liste",
     title: "Médicaments",
     moduleName: "Me",
     iconType: "material-icons-two-tone",
@@ -854,7 +854,7 @@ export const ROUTES: RouteInfo[] = [
     role: ["Admin"],
     submenu: [
       {
-        path: "/admin/medecin/rapport",
+        path: "/admin/medicament/liste",
         title: "Liste des médicaments",
         moduleName: "HL",
         iconType: "",
@@ -880,7 +880,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: [],
       },
       {
-        path: "/admin/medecin/rapport",
+        path: "/admin/medicament/liste",
         title: "Alerte stock médicament",
         moduleName: "HL",
         iconType: "",

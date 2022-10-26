@@ -41,7 +41,9 @@
                             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                         </th>
                         <!--<th pResizableColumn pSortableColumn="id">id <p-sortIcon field="id"></p-sortIcon></th>-->
-                        <th pResizableColumn pSortableColumn="libelle">libelle <p-sortIcon field="libelle"></p-sortIcon></th>
+                        <th pResizableColumn pSortableColumn="libelle">Libelle <p-sortIcon field="libelle"></p-sortIcon></th>
+                        <th pResizableColumn pSortableColumn="posologie">Posologie <p-sortIcon field="posologie"></p-sortIcon></th>
+                        <th pResizableColumn pSortableColumn="quantite">Quantité <p-sortIcon field="quantite"></p-sortIcon></th>
                     
                         <th pResizableColumn>Actions</th>
                     </tr>
@@ -56,6 +58,14 @@
                         <th>
                             <p-columnFilter type="text" field="libelle"></p-columnFilter>
                         </th>
+                        
+                        <th>
+                          <p-columnFilter type="text" field="posologie"></p-columnFilter>
+                      </th>
+                      
+                      <th>
+                        <p-columnFilter type="text" field="quantite"></p-columnFilter>
+                    </th>
                         <th></th>
                     </tr>
                 </ng-template>
@@ -66,6 +76,8 @@
                         </td>
                         <!--<td>{{element.id}}</td>-->
                         <td>{{element.libelle}}</td>
+                        <td>{{element.posologie}}</td>
+                        <td>{{element.quantite}}</td>
                         <td width="200px">
                             <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success  btn-sm" (click)="editProduct(element)"></button> &nbsp;
                             <button pButton pRipple icon="pi pi-check" class="p-button p-button-help btn-sm" (click)="deleteProduct(element)"></button>&nbsp;

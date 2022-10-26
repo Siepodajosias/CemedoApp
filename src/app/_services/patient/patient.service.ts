@@ -13,7 +13,7 @@ export class PatientService {
   
   getListe() {
     return this.http
-        .get<any>(this.path_liste+"getAll")
+        .get<any>(this.path_liste+"all")
         .toPromise()
         .then((res) => <Patient[]>res.data)
         .then((data) => {

@@ -32,7 +32,7 @@
             styleClass="p-datatable-gridlines"
             selectionMode="single"
             [resizableColumns]="true"
-            [globalFilterFields]="['name','country.name','representative.name','status']" responsiveLayout="scroll"
+            [globalFilterFields]="['user.nom']" responsiveLayout="scroll"
                 [(selection)]="selectedEntity" [rowHover]="true" dataKey="id"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
                

@@ -26,6 +26,7 @@ export class MedecinComponent implements OnInit {
   
   
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild('dt', { static: true }) dt: any;
   constructor(public dialogService: DialogService,private service: MedecinService,private messageService: MessageService, private confirmationService: ConfirmationService) { }
   ngOnInit() {
     this.cols = [

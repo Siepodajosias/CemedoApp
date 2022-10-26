@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { ResponsableAssurance } from 'src/app/_modeles/responsable-assurance/ResponsableAssurance';
 import { ResponsableAssuranceService } from 'src/app/_services/responsable-assurance/responsable-assurance.service';
@@ -36,11 +36,38 @@ export class ResponsableAssuranceComponent implements OnInit {
       { field: "user", header: "Users" },
       ];
    
-    this.service.getListe().then(
-      data => this.liste = data);
-  console.log(this.liste);
+    this.service.getListe().then(data => this.liste = data);
+   this.loading = true;
   }
-  
+  loadCustomers(event: LazyLoadEvent) {
+    this.loading = true;
+
+    setTimeout(() => {
+        this.service.getCustomers({lazyEvent: JSON.stringify(event)}).then(res => {
+         
+            this.liste = res.data;
+            this.totalRecords = res.data.length;
+            this.loading = false;
+        })
+    }, 1000);
+}
+
+
+
+onSelectAllChange(event) {
+    const checked = event.checked;
+
+    if (checked) {
+        this.service.getCustomers().then(res => {
+            this.selectedEntity = res.data;
+            this.selectAll = true;
+        });
+    }
+    else {
+        this.selectedEntity = [];
+        this.selectAll = false;
+    }
+}
   
   
   openNew() {
