@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { RendezVous } from 'src/app/_modeles/rendez-vous/RendezVous';
 
@@ -8,12 +8,14 @@ import { RendezVous } from 'src/app/_modeles/rendez-vous/RendezVous';
 export class RendezVousService {
 
  
-  private path_liste:string="https://cemedo-api-java.herokuapp.com/rendez-vous/"
+  private path_liste:string="https://cemedo-api-java.herokuapp.com:443/rendez_vous/"
   constructor(private http:HttpClient) { }
   
   getListe() {
     return this.http
-        .get<any>(this.path_liste+"getAll")
+        .get<any>(this.path_liste,{
+          headers:new HttpHeaders({'Content-Type':'application/json'})
+        })
         .toPromise()
         .then((res) => <RendezVous[]>res.data)
         .then((data) => {

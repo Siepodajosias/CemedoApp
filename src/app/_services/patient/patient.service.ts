@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Patient } from 'src/app/_modeles/patient/Patient';
 
@@ -13,7 +13,9 @@ export class PatientService {
   
   getListe() {
     return this.http
-        .get<any>(this.path_liste+"all")
+        .get<any>(this.path_liste+"all",{
+          headers:new HttpHeaders({'Content-Type':'application/json'})
+        })
         .toPromise()
         .then((res) => <Patient[]>res.data)
         .then((data) => {

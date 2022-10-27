@@ -255,10 +255,10 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'role',
+        path: 'ordonnance',
         canActivate: [AuthGuard],
         data:{
-          role:Role.Infirmier
+          role:Role.Admin
         },
         loadChildren: () =>
           import('./_controllers/ordonnance/ordonnance.module').then(
@@ -269,7 +269,7 @@ const routes: Routes = [
         path: 'rendez-vous',
         canActivate: [AuthGuard],
         data:{
-          role:Role.Infirmier
+          role:Role.Admin
         },
         loadChildren: () =>
           import('./_controllers/rendez-vous/rendez-vous.module').then(
@@ -282,6 +282,7 @@ const routes: Routes = [
         data:{
           role:Role.Infirmier
         },
+        
         loadChildren: () =>
           import('./_controllers/affection/affection.module').then(
             (m) => m.AffectionModule

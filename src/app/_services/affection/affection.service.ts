@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Affection } from 'src/app/_modeles/affection/Affection';
 
@@ -13,7 +13,9 @@ export class AffectionService {
   
   getListe() {
     return this.http
-        .get<any>(this.path_liste)
+        .get<any>(this.path_liste,{
+          headers:new HttpHeaders({'Content-Type':'application/json'})
+        })
         .toPromise()
         .then((res) => <Affection[]>res.data)
         .then((data) => {

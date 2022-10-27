@@ -59,10 +59,10 @@
                         </th>-->
                         
                         <th>
-                            <p-columnFilter type="text" field="assure.nom"></p-columnFilter>
+                            <p-columnFilter type="text" field="assure.user.fullName"></p-columnFilter>
                         </th>
                         <th>
-                          <p-columnFilter type="text" field="medecin.nom"></p-columnFilter>
+                          <p-columnFilter type="text" field="medecin.user.fullName"></p-columnFilter>
                       </th>
                       <th>
                         <p-columnFilter type="text" field="dateEmission"></p-columnFilter>
@@ -81,8 +81,8 @@
                         </td>
                         <!--<td>{{element.id}}</td>-->
                         
-                        <td>{{element.assure.nom }} {{element.assure.prenoms }}</td>
-                        <td>{{element.medecin.nom }} {{element.medecin.prenoms }}</td>
+                        <td>{{element.assure.user.fullName }} </td>
+                        <td>{{element.medecin.user.fullName }} </td>
                         <td>{{element.dateEmission}}</td>
                         <td>{{element.livre}}</td>
                         <td width="200px">

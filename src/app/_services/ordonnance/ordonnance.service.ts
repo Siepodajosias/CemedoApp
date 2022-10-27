@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Ordonnance } from 'src/app/_modeles/ordonnance/Ordonnance';
 
@@ -13,7 +13,9 @@ export class OrdonnanceService {
   
   getListe() {
     return this.http
-        .get<any>(this.path_liste+"getAll")
+        .get<any>(this.path_liste,{
+          headers:new HttpHeaders({'Content-Type':'application/json'})
+        })
         .toPromise()
         .then((res) => <Ordonnance[]>res.data)
         .then((data) => {

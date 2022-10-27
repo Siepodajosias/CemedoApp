@@ -8,7 +8,8 @@ import { FactureService } from 'src/app/_services/facture/facture.service';
 @Component({
   selector: 'app-facture',
   templateUrl: './facture.component.html',
-  styleUrls: ['./facture.component.scss']
+  styleUrls: ['./facture.component.scss'],
+  providers: [MessageService,ConfirmationService,DialogService]
 })
 export class FactureComponent implements OnInit {
 

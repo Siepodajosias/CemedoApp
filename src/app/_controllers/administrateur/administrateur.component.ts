@@ -8,7 +8,8 @@ import { AdministrateurService } from 'src/app/_services/administrateur/administ
 @Component({
   selector: 'app-administrateur',
   templateUrl: './administrateur.component.html',
-  styleUrls: ['./administrateur.component.scss']
+  styleUrls: ['./administrateur.component.scss'],
+  providers: [MessageService,ConfirmationService,DialogService]
 })
 export class AdministrateurComponent implements OnInit {
 
@@ -37,7 +38,7 @@ export class AdministrateurComponent implements OnInit {
    
     this.service.getListe().then(
       data => this.liste = data);
-  console.log(this.liste);
+  //console.log(this.liste);
   }
   
   

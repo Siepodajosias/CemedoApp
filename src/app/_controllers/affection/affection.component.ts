@@ -8,7 +8,8 @@ import { AffectionService } from 'src/app/_services/affection/affection.service'
 @Component({
   selector: 'app-affection',
   templateUrl: './affection.component.html',
-  styleUrls: ['./affection.component.scss']
+  styleUrls: ['./affection.component.scss'],
+  providers: [MessageService,ConfirmationService,DialogService]
 })
 export class AffectionComponent implements OnInit {
 

@@ -171,7 +171,7 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'role',
+    path: 'ordonnance',
    
     loadChildren: () =>
       import('../_controllers/ordonnance/ordonnance.module').then(

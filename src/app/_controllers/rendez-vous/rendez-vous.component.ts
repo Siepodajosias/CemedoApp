@@ -8,7 +8,8 @@ import { RendezVousService } from 'src/app/_services/rendez-vous/rendez-vous.ser
 @Component({
   selector: 'app-rendez-vous',
   templateUrl: './rendez-vous.component.html',
-  styleUrls: ['./rendez-vous.component.scss']
+  styleUrls: ['./rendez-vous.component.scss'],
+  providers: [MessageService,ConfirmationService,DialogService]
 })
 export class RendezVousComponent implements OnInit {
 
@@ -36,9 +37,8 @@ export class RendezVousComponent implements OnInit {
      
       ];
    
-    this.service.getListe().then(
-      data => this.liste = data);
-  console.log(this.liste);
+    this.service.getListe().then(data => this.liste = data);
+  
   }
   
   

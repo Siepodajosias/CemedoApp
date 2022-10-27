@@ -59,7 +59,7 @@
                         </th>-->
                         
                         <th>
-                            <p-columnFilter type="text" field="assure.nom"></p-columnFilter>
+                            <p-columnFilter type="text" field="assure.user.fullName"></p-columnFilter>
                         </th>
                         <th>
                           <p-columnFilter type="text" field="modePaiement.libelle"></p-columnFilter>
@@ -81,7 +81,7 @@
                         </td>
                         <!--<td>{{element.id}}</td>-->
                         
-                        <td>{{element.assure.nom }} {{element.assure.prenoms }}</td>
+                        <td>{{element.assure.user.fullName }}</td>
                         <td>{{element.modePaiement.libelle}}</td>
                         <td>{{element.dateEmission}}</td>
                         <td>{{element.montant}}</td>

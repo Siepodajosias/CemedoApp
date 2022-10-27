@@ -44,7 +44,6 @@
                       
                         <!--<th pResizableColumn pSortableColumn="id">id <p-sortIcon field="id"></p-sortIcon></th>-->
                         <th pResizableColumn pSortableColumn="assure">Assure <p-sortIcon field="assure"></p-sortIcon></th>
-                        <th pResizableColumn pSortableColumn="medecin">Médecin <p-sortIcon field="medecin"></p-sortIcon></th>
                         <th pResizableColumn pSortableColumn="dateHeure">Date  <p-sortIcon field="dateHeure"></p-sortIcon></th>
                         <th pResizableColumn pSortableColumn="statut">Statut <p-sortIcon field="statut"></p-sortIcon></th>
                       
@@ -59,11 +58,9 @@
                         </th>-->
                         
                         <th>
-                            <p-columnFilter type="text" field="assure.nom"></p-columnFilter>
+                            <p-columnFilter type="text" field="assure.user.fullName"></p-columnFilter>
                         </th>
-                        <th>
-                          <p-columnFilter type="text" field="medecin.nom"></p-columnFilter>
-                      </th>
+                      
                       <th>
                         <p-columnFilter type="text" field="dateHeure"></p-columnFilter>
                     </th>
@@ -81,8 +78,7 @@
                         </td>
                         <!--<td>{{element.id}}</td>-->
                         
-                        <td>{{element.assure.nom }} {{element.assure.prenoms }}</td>
-                        <td>{{element.medecin.nom }} {{element.medecin.prenoms }}</td>
+                        <td>{{element.assure.user.fullName }}</td>
                         <td>{{element.dateHeure}}</td>
                         <td>{{element.statut}}</td>
                         <td width="200px">

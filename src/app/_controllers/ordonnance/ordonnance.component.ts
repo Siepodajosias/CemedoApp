@@ -8,7 +8,8 @@ import { OrdonnanceService } from 'src/app/_services/ordonnance/ordonnance.servi
 @Component({
   selector: 'app-ordonnance',
   templateUrl: './ordonnance.component.html',
-  styleUrls: ['./ordonnance.component.scss']
+  styleUrls: ['./ordonnance.component.scss'],
+  providers: [MessageService,ConfirmationService,DialogService]
 })
 export class OrdonnanceComponent implements OnInit {
 
@@ -37,7 +38,7 @@ export class OrdonnanceComponent implements OnInit {
    
     this.service.getListe().then(
       data => this.liste = data);
-  console.log(this.liste);
+  //console.log(this.liste);
   }
   
   
