@@ -4,138 +4,67 @@
       <!-- breadcrumb -->
       <app-breadcrumb [title]="'Assurance'" [items]="[]" [active_item]="'assurance'"></app-breadcrumb>
     </div>
-    <div class="row clearfix">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="card">
-          <div class="header">
-
-          </div>
-          <div class="body">
-
-            <mat-tab-group dynamicHeight>
-              <mat-tab label="Liste des assurances">
-                <div class="mat-elevation-z8">
-                  <input class="form-control" (keyup)="applyFilter($event)" placeholder="nom de l'assurance" #input>
-                  <table mat-table [dataSource]="assurance">
-                    
-                    <ng-container matColumnDef="id">
-                      <th mat-header-cell *matHeaderCellDef> ID </th>
-                      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-
-                    </ng-container>
-
-                    <ng-container matColumnDef="libelle">
-                      <th mat-header-cell *matHeaderCellDef> Nom de l'assurance </th>
-                      <td mat-cell *matCellDef="let element"> {{element.libelle}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="email">
-                      <th mat-header-cell *matHeaderCellDef> E-mail Assurance </th>
-                      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="tel">
-                      <th mat-header-cell *matHeaderCellDef> Contact </th>
-                      <td mat-cell *matCellDef="let element"> {{element.tel}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="ville">
-                      <th mat-header-cell *matHeaderCellDef>Ville</th>
-                      <td mat-cell *matCellDef="let element"> {{element.ville}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="edit">
-                      <th mat-header-cell *matHeaderCellDef> Detail </th>
-                      <td mat-cell *matCellDef="let element">
-                        <button mat-button (click)="detail(element.id)">
-                          <mat-icon color="primary">
-                            login
-                          </mat-icon>
-                        </button>
-                      </td>
-                    </ng-container>
-
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                  </table>
-                  <mat-paginator [pageSizeOptions]="[10,15,20]" showFirstLastButtons
-                    aria-label="Select page of periodic elements">
-                  </mat-paginator>
-                </div>
-              </mat-tab>
-               <!--
-              <mat-tab label="Liste des responsables">
-                <div class="mat-elevation-z8">
-                  <input class="form-control" (keyup)="applyFilter1($event)" placeholder="nom du responsable" #input>
-
-                  <table mat-table [dataSource]="responsable">
-                    
-                    <ng-container matColumnDef="id">
-                      <th mat-header-cell *matHeaderCellDef> ID </th>
-                      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-
-                    </ng-container>
-
-
-                    
-                    <ng-container matColumnDef="nom">
-                      <th mat-header-cell *matHeaderCellDef> Nom</th>
-                      <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
-                    </ng-container>
-
-                    
-                    <ng-container matColumnDef="prenoms">
-                      <th mat-header-cell *matHeaderCellDef> Prenom</th>
-                      <td mat-cell *matCellDef="let element"> {{element.prenoms}} </td>
-                    </ng-container>
-
-
-                    
-                    <ng-container matColumnDef="genre">
-                      <th mat-header-cell *matHeaderCellDef>Genre </th>
-                      <td mat-cell *matCellDef="let element"> {{element.genre}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="residence">
-                      <th mat-header-cell *matHeaderCellDef>Ville</th>
-                      <td mat-cell *matCellDef="let element"> {{element.residence}} </td>
-                    </ng-container>
-
-                    
-                    <ng-container matColumnDef="tel">
-                      <th mat-header-cell *matHeaderCellDef> Numéro de Télephone </th>
-                      <td mat-cell *matCellDef="let element"> {{element.tel}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="email">
-                      <th mat-header-cell *matHeaderCellDef>E-mail</th>
-                      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="edit">
-                      <th mat-header-cell *matHeaderCellDef> Detail </th>
-                      <td mat-cell *matCellDef="let element">
-                        <button mat-button (click)="detail1(element.id)">
-                          <mat-icon color="primary">
-                            login
-                          </mat-icon>
-                        </button>
-                      </td>
-                    </ng-container>
-
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns3"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns3;"></tr>
-                  </table>
-                  <mat-paginator [pageSizeOptions]="[10,15,20]" showFirstLastButtons
-                    aria-label="Select page of periodic elements">
-                  </mat-paginator>
-                </div>
-              </mat-tab>
-                -->
-            </mat-tab-group>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="card">
+      <p-toolbar styleClass="mb-4">
+          <ng-template pTemplate="left">
+              <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success mr-2"  pTooltip="XLS" tooltipPosition="bottom"></button>
+              <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
+          </ng-template>
+  
+      </p-toolbar>
+  
+      <p-table #dt  [value]="assurances"  [scrollable]="true" scrollHeight="400px"
+      [globalFilterFields]="['libelle','email','ville']"
+      [loading]="loading"
+      [filterDelay]="0"
+          >
+          <ng-template pTemplate="caption">
+              <div class="flex align-items-center justify-content-between">
+                  <h5 class="m-0">Assurance</h5>
+                  <span class="p-input-icon-left">
+                      <i class="pi pi-search"></i>
+  
+                      <input pInputText type="text"
+                      (input)="dt.filterGlobal(getEventValue($event), 'contains')"
+                       placeholder="Rechercher..." 
+                      />
+  
+                  </span>
+              </div>
+          </ng-template>
+          <ng-template pTemplate="header" let-assurance>
+              <tr>
+                  <th pSortableColumn="libelle">Nom<p-sortIcon field="libelle"></p-sortIcon></th>
+                  <th pSortableColumn="email">E-mail <p-sortIcon field="email"></p-sortIcon></th>
+                  <th pSortableColumn="tel">Contact <p-sortIcon field="tel"></p-sortIcon></th>
+                  <th pSortableColumn="ville">Ville<p-sortIcon field="ville"></p-sortIcon></th>
+  
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-assurance let-index="rowIndex">
+              <tr>
+                  <td style="min-width:200px">{{assurance.libelle}}</td>
+                  <td style="min-width:200px">{{assurance.email}}</td>
+                  <td style="min-width:200px">{{assurance.tel}}</td>
+                  <td style="min-width:200px">{{assurance.ville}}</td>
+                  <td style="flex: 0 0 4rem">
+                      <button pButton pRipple type="button"  icon="pi pi-pencil"  (click)="detail(assurance)" 
+                      class="p-button-rounded p-button-text"
+                      ></button>
+                  </td>
+                  <td style="flex: 0 0 4rem">
+                      <button pButton pRipple type="button"  icon="pi pi-angle-right"  (click)="detail(assurance)" 
+                      class="p-button-rounded p-button-text"
+                      ></button>
+                  </td>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="summary">
+              <div class="flex align-items-center justify-content-between">
+               Total: {{assurances ? assurances.length : 0 }}
+              </div>
+          </ng-template>
+      </p-table>
+  </div>
   </div>
 </section>

@@ -29,6 +29,32 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { PharmacienView2Component } from './composents/pharmacien-view2/pharmacien-view2.component';
 
+//primeng
+import { CardModule} from 'primeng/card'
+import { ToastModule} from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { TableModule} from 'primeng/table';
+import { ButtonModule} from 'primeng/button';
+import { DialogModule} from 'primeng/dialog';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
+import { MultiSelectModule} from 'primeng/multiselect';
+import { DropdownModule} from 'primeng/dropdown';
+import { AutoCompleteModule} from 'primeng/autocomplete';
+import { ChipsModule } from 'primeng/chips';
+import { ContextMenuModule } from 'primeng/contextmenu';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { SliderModule } from 'primeng/slider';
+import { RippleModule } from 'primeng/ripple';
+import { OrderListModule } from 'primeng/orderlist';
+import { DividerModule } from 'primeng/divider';
+import { MenubarModule } from 'primeng/menubar';
+import { ToolbarModule } from 'primeng/toolbar';
+import { VenteViewComponent } from './composents/vente-view/vente-view.component';
+import { DepenseViewComponent } from './composents/depense-view/depense-view.component';
+import { CategorieMedicamentViewComponent } from './composents/categorie-medicament-view/categorie-medicament-view.component';
+
+
 @NgModule({
   declarations: [
     MedicamentViewComponent,
@@ -38,7 +64,10 @@ import { PharmacienView2Component } from './composents/pharmacien-view2/pharmaci
     MedicamentDetailComponent,
     MedicamentFormsComponent,
     DashboardPharmacieComponent,
-    PharmacienView2Component
+    PharmacienView2Component,
+    VenteViewComponent,
+    DepenseViewComponent,
+    CategorieMedicamentViewComponent
   ],
   imports: [
     CommonModule,
@@ -58,7 +87,29 @@ import { PharmacienView2Component } from './composents/pharmacien-view2/pharmaci
     MatInputModule,
     MatButtonModule,
     ReactiveFormsModule, 
-    FormsModule
-  ],providers:[PharmacienService,ToastrService]
+    FormsModule,
+
+    CardModule,
+    TableModule,
+    ButtonModule,
+    ToastModule,
+    DialogModule,
+    ConfirmDialogModule,
+    MultiSelectModule,
+    DropdownModule,
+    AutoCompleteModule,
+
+    ChipsModule,
+    ContextMenuModule,
+    ProgressBarModule,
+    SliderModule,
+    RippleModule,
+    OrderListModule,
+    DividerModule ,
+    MenubarModule, 
+    ToolbarModule
+
+    
+  ],providers:[PharmacienService,ConfirmationService,MessageService]
 })
 export class PharmacieModule { }

@@ -12,6 +12,7 @@ import { FactureComponent } from "./composents/facture/facture.component";
 import { AdminService } from "./service/admin.service";
 import { MatTabsModule } from "@angular/material/tabs";
 import { NgApexchartsModule } from "ng-apexcharts";
+
 @NgModule({
   declarations: [
     FactureComponent

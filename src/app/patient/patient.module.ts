@@ -38,6 +38,29 @@ import { OrdonnanceComponent } from './composents/ordonnance/ordonnance.componen
 import { PatientView2Component } from './composents/patient-view2/patient-view2.component';
 import { PatientView3Component } from './composents/patient-view3/patient-view3.component';
 
+
+//primeng
+import { CardModule} from 'primeng/card'
+import { ToastModule} from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { TableModule} from 'primeng/table';
+import { ButtonModule} from 'primeng/button';
+import { DialogModule} from 'primeng/dialog';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
+import { MultiSelectModule} from 'primeng/multiselect';
+import { DropdownModule} from 'primeng/dropdown';
+import { AutoCompleteModule} from 'primeng/autocomplete';
+import { ChipsModule } from 'primeng/chips';
+import { ContextMenuModule } from 'primeng/contextmenu';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { SliderModule } from 'primeng/slider';
+import { RippleModule } from 'primeng/ripple';
+import { OrderListModule } from 'primeng/orderlist';
+import { DividerModule } from 'primeng/divider';
+import { MenubarModule } from 'primeng/menubar';
+import { ToolbarModule } from 'primeng/toolbar';
+
 import { SharedModule } from "src/app/shared/shared.module";
 
 @NgModule({
@@ -78,11 +101,32 @@ import { SharedModule } from "src/app/shared/shared.module";
     MatRadioModule,
     ComponentsModule,
     MatDialogModule,
-
+  
     ToastrModule.forRoot({}),
     MatCardModule,
     ReactiveFormsModule, 
-    FormsModule
-  ],providers:[PatientService,ToastrService]
+    FormsModule,
+
+    CardModule,
+    TableModule,
+    ButtonModule,
+    ToastModule,
+    DialogModule,
+    ConfirmDialogModule,
+    MultiSelectModule,
+    DropdownModule,
+    AutoCompleteModule,
+
+    ChipsModule,
+    ContextMenuModule,
+    ProgressBarModule,
+    SliderModule,
+    RippleModule,
+    OrderListModule,
+    DividerModule ,
+    MenubarModule, 
+    ToolbarModule
+
+  ],providers:[PatientService,MessageService,ConfirmationService]
 })
 export class PatientModule {}

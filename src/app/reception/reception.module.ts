@@ -26,6 +26,29 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 
+//primeng
+import { CardModule} from 'primeng/card'
+import { ToastModule} from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { TableModule} from 'primeng/table';
+import { ButtonModule} from 'primeng/button';
+import { DialogModule} from 'primeng/dialog';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
+import { MultiSelectModule} from 'primeng/multiselect';
+import { DropdownModule} from 'primeng/dropdown';
+import { AutoCompleteModule} from 'primeng/autocomplete';
+import { ChipsModule } from 'primeng/chips';
+import { ContextMenuModule } from 'primeng/contextmenu';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { SliderModule } from 'primeng/slider';
+import { RippleModule } from 'primeng/ripple';
+import { OrderListModule } from 'primeng/orderlist';
+import { DividerModule } from 'primeng/divider';
+import { MenubarModule } from 'primeng/menubar';
+import { ToolbarModule } from 'primeng/toolbar';
+
+
 @NgModule({
   declarations: [
     DashboardReceptionComponent,
@@ -52,8 +75,29 @@ import { MatTableModule } from '@angular/material/table';
     MatInputModule,
     MatButtonModule,
     ReactiveFormsModule, 
-    FormsModule
+    FormsModule,
 
-  ],providers:[ReceptionService,ToastrService]
+
+    CardModule,
+    TableModule,
+    ButtonModule,
+    ToastModule,
+    DialogModule,
+    ConfirmDialogModule,
+    MultiSelectModule,
+    DropdownModule,
+    AutoCompleteModule,
+
+    ChipsModule,
+    ContextMenuModule,
+    ProgressBarModule,
+    SliderModule,
+    RippleModule,
+    OrderListModule,
+    DividerModule ,
+    MenubarModule, 
+    ToolbarModule
+
+  ],providers:[ReceptionService,ConfirmationService,MessageService]
 })
 export class ReceptionModule { }

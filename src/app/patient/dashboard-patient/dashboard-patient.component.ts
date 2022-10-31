@@ -73,7 +73,11 @@ export class DashboardPatientComponent implements OnInit {
   public areaChartOptions: Partial<areaChartOptions>;
   public radialChartOptions: Partial<radialChartOptions>;
   public restRateChartOptions: Partial<restRateChartOptions>;
+  public restRateChartOptions2: Partial<restRateChartOptions>;
+  public restRateChartOptions3: Partial<restRateChartOptions>;
   public performanceRateChartOptions: Partial<performanceRateChartOptions>;
+  public performanceRateChartOptions2: Partial<performanceRateChartOptions>;
+
 
   constructor() {}
   ngOnInit() {
@@ -81,6 +85,9 @@ export class DashboardPatientComponent implements OnInit {
     this.chart2();
     this.chart3();
     this.chart4();
+    this.chart5();
+    this.chart6();
+    this.chart7();
   }
   private chart1() {
     this.areaChartOptions = {
@@ -172,8 +179,8 @@ export class DashboardPatientComponent implements OnInit {
     this.restRateChartOptions = {
       series: [
         {
-          name: 'Heart Rate',
-          data: [69, 75, 72, 69, 75, 80, 87],
+          name: 'appel vidéo',
+          data: [69, 75, 72, 69, 75, 80, 87,72, 69, 75, 80, 87],
         },
       ],
       chart: {
@@ -203,7 +210,7 @@ export class DashboardPatientComponent implements OnInit {
         size: 1,
       },
       xaxis: {
-        categories: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        categories: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jui', 'Juil','Aoû','Sep','Oct','Nov','Dec'],
         title: {
           text: 'Weekday',
         },
@@ -228,8 +235,8 @@ export class DashboardPatientComponent implements OnInit {
     this.performanceRateChartOptions = {
       series: [
         {
-          name: 'Heart Rate',
-          data: [113, 120, 130, 120, 125, 119, 126],
+          name: 'appel vidéo',
+          data: [113, 120, 130, 120, 125, 119, 126,130, 120, 125, 119, 126],
         },
       ],
       chart: {
@@ -259,9 +266,9 @@ export class DashboardPatientComponent implements OnInit {
         size: 1,
       },
       xaxis: {
-        categories: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        categories: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jui', 'Juil','Aoû','Sep','Oct','Nov','Dec'],
         title: {
-          text: 'Weekday',
+          text: '2022',
         },
       },
       yaxis: {
@@ -280,5 +287,172 @@ export class DashboardPatientComponent implements OnInit {
       },
     };
   }
-
+  private chart5() {
+    this.restRateChartOptions2 = {
+      series: [
+        {
+          name: 'appel téléphonique',
+          data: [69, 75, 72, 69, 75, 80, 87,72, 69, 75, 80, 87],
+        },
+      ],
+      chart: {
+        height: 350,
+        type: 'line',
+        dropShadow: {
+          enabled: true,
+          color: '#000',
+          top: 18,
+          left: 7,
+          blur: 10,
+          opacity: 0.2,
+        },
+        foreColor: '#9aa0ac',
+        toolbar: {
+          show: false,
+        },
+      },
+      colors: ['#FCB939'],
+      dataLabels: {
+        enabled: true,
+      },
+      stroke: {
+        curve: 'smooth',
+      },
+      markers: {
+        size: 1,
+      },
+      xaxis: {
+        categories: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jui', 'Juil','Aoû','Sep','Oct','Nov','Dec'],
+        title: {
+          text: '2022',
+        },
+      },
+      yaxis: {
+        title: {
+          text: 'Heart Rate',
+        },
+      },
+      tooltip: {
+        theme: 'dark',
+        marker: {
+          show: true,
+        },
+        x: {
+          show: true,
+        },
+      },
+    };
+  }
+  private chart6() {
+    this.restRateChartOptions3 = {
+      series: [
+        {
+          name: 'consultation à domicile',
+          data: [69, 75, 72, 69, 75, 80, 87,72, 69, 75, 80, 87],
+        },
+      ],
+      chart: {
+        height: 350,
+        type: 'line',
+        dropShadow: {
+          enabled: true,
+          color: '#000',
+          top: 18,
+          left: 7,
+          blur: 10,
+          opacity: 0.2,
+        },
+        foreColor: '#9aa0ac',
+        toolbar: {
+          show: false,
+        },
+      },
+      colors: ['#FCB939'],
+      dataLabels: {
+        enabled: true,
+      },
+      stroke: {
+        curve: 'smooth',
+      },
+      markers: {
+        size: 1,
+      },
+      xaxis: {
+        categories: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jui', 'Juil','Aoû','Sep','Oct','Nov','Dec'],
+        title: {
+          text: '2022',
+        },
+      },
+      yaxis: {
+        title: {
+          text: 'Heart Rate',
+        },
+      },
+      tooltip: {
+        theme: 'dark',
+        marker: {
+          show: true,
+        },
+        x: {
+          show: true,
+        },
+      },
+    };
+  }
+  private chart7() {
+    this.performanceRateChartOptions2 = {
+      series: [
+        {
+          name: 'appel téléphonique',
+          data: [113, 120, 130, 120, 125, 119, 126,130, 120, 125, 119, 126],
+        },
+      ],
+      chart: {
+        height: 350,
+        type: 'line',
+        dropShadow: {
+          enabled: true,
+          color: '#000',
+          top: 18,
+          left: 7,
+          blur: 10,
+          opacity: 0.2,
+        },
+        foreColor: '#9aa0ac',
+        toolbar: {
+          show: false,
+        },
+      },
+      colors: ['#545454'],
+      dataLabels: {
+        enabled: true,
+      },
+      stroke: {
+        curve: 'smooth',
+      },
+      markers: {
+        size: 1,
+      },
+      xaxis: {
+        categories: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jui', 'Juil','Aoû','Sep','Oct','Nov','Dec'],
+        title: {
+          text: '2022',
+        },
+      },
+      yaxis: {
+        title: {
+          text: 'Heart Rate',
+        },
+      },
+      tooltip: {
+        theme: 'dark',
+        marker: {
+          show: true,
+        },
+        x: {
+          show: true,
+        },
+      },
+    };
+  }
 }

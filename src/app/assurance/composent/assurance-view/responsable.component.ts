@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
 import { AssuranceService } from '../../service/assurance.service';
 import { Responsable } from '../../model/responsable';
 
@@ -15,7 +14,7 @@ export class ResponsableComponent implements OnInit {
 
   constructor(private responsableForm: FormBuilder,
     private respService:AssuranceService,
-    private Msg:ToastrService 
+
    ) { }
 
   ngOnInit(): void {
@@ -65,18 +64,10 @@ export class ResponsableComponent implements OnInit {
 
    this.respService.sendResponsable(this.responsable).subscribe({
       next:(v)=>{
-        this.Msg.success("Responsable enregistrer","",{
-          closeButton:true,
-          progressAnimation:'increasing',
-          progressBar:true,
-          positionClass:'toast-top-right'
-          
-        })
+
     },
       error:(e)=>{
-        this.Msg.error("erreur lors de l'enregistrement","échec",{
-          closeButton:true
-        })
+
 
       },
       complete:()=>{

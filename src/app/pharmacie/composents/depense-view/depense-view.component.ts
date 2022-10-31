@@ -1,6 +1,8 @@
 import { Component, OnInit,ViewChild} from '@angular/core';
-import { InfirmierService } from '../../service/infirmier.service';
+import { PharmacienService } from '../../service/pharmacien.service';
 import { Router } from '@angular/router';
+
+
 import { MessageService } from 'primeng/api';
 
 import * as saveAs from 'file-saver';
@@ -17,16 +19,15 @@ interface jsPDFWithPlugin extends jspdf.jsPDF{
 
 
 @Component({
-  selector: 'app-infirmier-view',
-  templateUrl: './infirmier-view.component.html',
-  styleUrls: ['./infirmier-view.component.scss']
+  selector: 'app-depense-view',
+  templateUrl: './depense-view.component.html',
+  styleUrls: ['./depense-view.component.scss']
 })
-export class InfirmierViewComponent implements OnInit {
-  displayedColumns: string[] = ['nom', 'prenom', 'genre', 'email','tel','tel2','edit'];
+export class DepenseViewComponent implements OnInit {
 
   posts: any
 
-  infirmiers:any[]=[];
+  depenses:any[]=[];
   dragdrop:boolean=true
 
   @ViewChild('dt') dt: Table | undefined | any;
@@ -41,29 +42,39 @@ export class InfirmierViewComponent implements OnInit {
 
   personneDialog: any | boolean;
 
-  constructor(private infirmierS:InfirmierService,private route:Router,
-    private masseService:MessageService
-    ) { }
+
+  constructor(private pharService:PharmacienService,private route:Router,
+    private masseService:MessageService) { }
 
   ngOnInit(): void {
 
-    this.infirmierS.getInfirmier().subscribe({
+    this.pharService.getMedicament().subscribe({
       next: (value: any) => {
-        this.posts = value.data ? value : []
-        this.infirmiers=this.posts.data
-        this.loading=false
-        console.log(this.infirmiers)
+        this.posts = value ? value : []
+
       },
       error: (e) => { console.log("erreur :" + e) },
       complete: () => {
       }
     })
   }
+
   detail(a:any){
-    //this.route.navigate(['administrateur/detailM',a]);
-    this.infirmierS.getInfirmier().subscribe({
-      next:(e)=>console.log(e)
-    })
+    this.route.navigate(['pharmacie/detailMed',a]);
+  }
+  supprimer(a:any){
+    console.log(a)
+    const conf:boolean=confirm("Voullez-vous Vraiment retirer ce Medicament de la base de donnée?");
+    if(conf==true){
+      this.pharService.deleteMedicament(a).subscribe({
+        next:(v)=>{
+
+      },
+        error:(e)=>{
+ 
+        }
+      })
+    }
   }
 
   saveAsExcelFile(buffer: any, fileName: string): void {
@@ -115,11 +126,10 @@ exportPdf() {
   const doc = new jspdf.jsPDF('portrait','px','a4') as jsPDFWithPlugin;
         doc.autoTable({
           head:this.exportColumns,
-          body:this.infirmiers
+          body:this.depenses
         })
     doc.save("Pomptables.pdf")
 }
-
 
 exportExcel() {/*
 import("xlsx").then(xlsx => {
@@ -132,4 +142,5 @@ const excelBuffer: any = xlsx.write(workbook, {
 this.saveAsExcelFile(excelBuffer, "personne");
 });*/
 }
+
 }

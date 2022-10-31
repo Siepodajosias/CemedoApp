@@ -1,0 +1,126 @@
+<section class="content">
+    <div class="content-block">
+      <div class="block-header">
+        <!-- breadcrumb -->
+        <app-breadcrumb [title]="'Pharmacie'" [items]="[]" [active_item]="'vente'"></app-breadcrumb>
+      </div>
+      <div class="card">
+        <p-toolbar styleClass="mb-4">
+            <ng-template pTemplate="left">
+                <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success mr-2"  pTooltip="XLS" tooltipPosition="bottom"></button>
+                <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
+            </ng-template>
+    
+            <ng-template pTemplate="right">
+                
+                <button pButton pRipple label="Enregistrer" icon="pi pi-send" class="p-button-help" (click)="openNew()"></button>
+            </ng-template>
+        </p-toolbar>
+    
+        <p-table #dt  [value]="categorieMedicaments"  [scrollable]="true" scrollHeight="400px"
+        [globalFilterFields]="['id','libelle','quantite']"
+        [loading]="loading"
+        [filterDelay]="0"
+            >
+            <ng-template pTemplate="caption">
+                <div class="flex align-items-center justify-content-between">
+                    <h4 class="m-0">Categories de medicaments</h4>
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+    
+                        <input pInputText type="text"
+                        (input)="dt.filterGlobal(getEventValue($event), 'contains')"
+                         placeholder="Rechercher..." 
+                        />
+    
+                    </span>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header" let-categorieMedicament>
+                <tr>
+                    <th pSortableColumn="id">Identifiant<p-sortIcon field="libelle"></p-sortIcon></th>
+                    <th pSortableColumn="libelle">Designation <p-sortIcon field="email"></p-sortIcon></th>
+                    <th pSortableColumn="quantite">Quantite<p-sortIcon field="ville"></p-sortIcon></th>
+    
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-categorieMedicament let-index="rowIndex">
+                <tr>
+                    <td style="min-width:200px">{{categorieMedicament.id}}</td>
+                    <td style="min-width:200px">{{categorieMedicament.libelle}}</td>
+                    <td style="min-width:200px">{{categorieMedicament.posologie}}</td>
+                    <td style="flex: 0 0 4rem">
+                        <button pButton pRipple type="button"  icon="pi pi-pencil"  (click)="detail(categorieMedicament)" 
+                        class="p-button-rounded p-button-text"
+                        ></button>
+                    </td>
+                    <td style="flex: 0 0 4rem">
+                        <button pButton pRipple type="button"  icon="pi pi-angle-right"  (click)="detail(categorieMedicament)" 
+                        class="p-button-rounded p-button-text"
+                        ></button>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="summary">
+                <div class="flex align-items-center justify-content-between">
+                 Total: {{categorieMedicaments ? categorieMedicaments.length : 0 }}
+                </div>
+            </ng-template>
+        </p-table>
+    </div>
+    
+    <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    
+    <p-dialog [(visible)]="personneDialog" [style]="{width: '450px'}" header="Nouvelle categorie" [modal]="true" styleClass="p-fluid">
+    
+      <form >
+    
+        <div class="grid">
+    
+          <div class="col-12">
+            <p-autoComplete  [showEmptyMessage]="true"   field="designation" [minLength]="1"></p-autoComplete>
+          </div>
+          <div class="col-12">
+                        <span class="p-float-label">
+                            <input type="text" id="inputtext1" pInputText>
+                            <label for="inputtext1">Nom</label>
+                        </span>
+          </div>
+    
+                 <p-divider layout="vertical"></p-divider>
+    
+          <div class="col-12">
+            <span class="p-float-label">
+              <input type="text" id="inputtext2" pInputText >
+              <label for="inputtext2">Prenom</label>
+            </span>
+          </div>
+                <p-divider align="left" type="dashed">
+                    <b>Left</b>
+                  </p-divider>
+          <div class="col-12">
+                        <span class="p-float-label">
+                            <input type="text" id="inputtext3" pInputText>
+                            <label for="inputtext3">Age</label>
+                        </span>
+          </div>
+    
+    
+          <div class="col-12">
+                    <p-divider align="left">
+                        <div class="inline-flex align-items-center">
+                          <i class="pi pi-user mr-2"></i>
+                          <b>Icon</b>
+                        </div>
+                      </p-divider>
+            </div>
+    
+    
+          <button  type="submit" pButton pRipple label="Save" icon="pi pi-check" class="p-button-text p-button-sm"></button>
+    
+        </div>
+    
+      </form>
+    </p-dialog>
+    </div>
+  </section>
