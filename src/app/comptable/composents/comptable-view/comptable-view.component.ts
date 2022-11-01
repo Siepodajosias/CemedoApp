@@ -1,16 +1,13 @@
 import { Component, OnInit,ViewChild, ChangeDetectorRef  } from '@angular/core';
 import { ComptableService } from '../../service/comptable.service';
-
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Comptable } from '../../model/comptable';
 import { MessageService } from 'primeng/api';
-
 import * as saveAs from 'file-saver';
-
 import * as jspdf from 'jspdf'
 import 'jspdf-autotable'
 import { UserOptions } from 'jspdf-autotable';
-
 import { Table } from 'primeng/table'
 
 interface jsPDFWithPlugin extends jspdf.jsPDF{
@@ -27,7 +24,7 @@ export class ComptableViewComponent implements OnInit {
   posts: any
 
   comptables:any[]=[];
-	//list: Personne = new Personne();
+
   dragdrop:boolean=true
 
   @ViewChild('dt') dt: Table | undefined | any;
@@ -41,9 +38,13 @@ export class ComptableViewComponent implements OnInit {
   exportColumns: any[]=[];
 
   personneDialog: any | boolean;
-
+ 
+  comptableForms: FormGroup = new FormGroup({})
+  comptable:Comptable=new Comptable()
+  genres:any
   constructor(private cptservice:ComptableService,
-    private route:Router,private masseService:MessageService
+    private route:Router,private messageService:MessageService,
+    private comptableForm: FormBuilder
 ) { }
 
   ngOnInit(): void {
@@ -56,6 +57,37 @@ export class ComptableViewComponent implements OnInit {
       error: (e) => { console.log("erreur :" + e) },
       complete: () => {
       }
+    })
+
+    this.comptableForms = this.comptableForm.group({
+
+      id:null,
+      nom: ['', [Validators.required, Validators.minLength(3)]],
+      prenoms: ['', [Validators.required, Validators.maxLength(20)]],
+      login:['', [Validators.required, Validators.maxLength(20)]],
+      email: ['', [Validators.required, Validators.maxLength(30), Validators.email]],
+      password: ['', [Validators.required, Validators.maxLength(8)]],
+      tel:['', [Validators.required, Validators.maxLength(20)]],
+      tel2:['', [Validators.required, Validators.maxLength(20)]],
+      genre:['', [Validators.required, Validators.maxLength(20)]],
+      dateNaissance:['', [Validators.required, Validators.maxLength(30)]],
+      role:null,
+      fcmToken:"",
+      typeEmploye:null
+
+/*
+      salt: ['', [Validators.required, Validators.maxLength(30)]],
+      username: ['', [Validators.required, Validators.maxLength(30)]],
+      userIdentifier: ['', [Validators.required, Validators.maxLength(15)]],
+      active: [null, [Validators.required, Validators.maxLength(10)]],
+      createdAt: [null, [Validators.required, Validators.maxLength(10)]],
+      updatedAt: ['', [Validators.required, Validators.maxLength(10)]],
+      version: [null, [Validators.required, Validators.maxLength(20)]],
+      file:['', [Validators.required, Validators.maxLength(30)]],
+      photo:['', [Validators.required, Validators.maxLength(20)]],
+      residence:['', [Validators.required, Validators.maxLength(30)]],
+      numeroCni:['', [Validators.required, Validators.maxLength(20)]]
+      */
     })
   }
   detail(a:any){
@@ -104,6 +136,10 @@ toggleLock(data:any, frozen:any, index:any) {
 }
  openNew() {
   this.personneDialog = true;
+  this.genres=[
+    {name:'homme'},
+    {name:'femme'}
+  ]
 }
 
 exportPdf() {
@@ -117,15 +153,61 @@ exportPdf() {
 }
 
 
-exportExcel() {/*
+exportExcel() {
 import("xlsx").then(xlsx => {
-const worksheet = xlsx.utils.json_to_sheet(this.personne);
+const worksheet = xlsx.utils.json_to_sheet(this.comptables);
 const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
 const excelBuffer: any = xlsx.write(workbook, {
   bookType: "xlsx",
   type: "array"
 });
 this.saveAsExcelFile(excelBuffer, "personne");
-});*/
+});
 }
+
+SaveData(){
+  this.comptable.id=null
+  this.comptable.email=this.comptableForms.get('email')?.value
+  this.comptable.password=this.comptableForms.get('password')?.value
+  this.comptable.nom=this.comptableForms.get('nom')?.value
+  this.comptable.prenoms=this.comptableForms.get('prenoms')?.value
+  this.comptable.login=this.comptableForms.get('login')?.value
+  this.comptable.dateNaissance=this.comptableForms.get('dateNaissance')?.value
+  this.comptable.genre=this.comptableForms.get('genre')?.value
+  this.comptable.tel=this.comptableForms.get('tel')?.value
+  this.comptable.tel2=this.comptableForms.get('tel')?.value
+
+  this.comptable.fcmToken=""
+  this.comptable.typeEmploye=null
+  this.comptable.role=null
+
+  console.log(this.comptable)
+
+ this.cptservice.sendComptable(this.comptable).subscribe({
+    next:(v)=>{
+      this.messageService.add({severity: 'success', summary: 'Service Message', detail: 'Assurance enregistrée' });
+  },
+    error:(e)=>{
+
+
+    },
+    complete:()=>{
+      this.comptableForms.setValue({
+        id:null,
+        email:"",
+        password:"",
+        nom:"",
+        prenoms:"",
+        tel:"",
+        tel2:"",
+        genre:"",
+        dateNaissance:"",
+        login:"",
+        role:"",
+        fcmToken:"",
+        typeEmploye:null,
+      })
+    }
+  })
+ }
 }

@@ -4,17 +4,12 @@ import { Assurance } from '../../model/assurance';
 import { AssuranceService } from '../../service/assurance.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
-
+import { Table } from 'primeng/table'
+import { ConfirmationService, MessageService } from 'primeng/api';
 import * as saveAs from 'file-saver';
-
 import * as jspdf from 'jspdf'
 import 'jspdf-autotable'
 import { UserOptions } from 'jspdf-autotable';
-
-
-import { Table } from 'primeng/table'
-import { ConfirmationService, MessageService } from 'primeng/api';
 
 
 interface jsPDFWithPlugin extends jspdf.jsPDF{
@@ -165,16 +160,16 @@ exportPdf() {
     doc.save("Personne.pdf")
 }
 
-exportExcel() {/*
+exportExcel() {
 import("xlsx").then(xlsx => {
-const worksheet = xlsx.utils.json_to_sheet(this.personne);
+const worksheet = xlsx.utils.json_to_sheet(this.assurances);
 const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
 const excelBuffer: any = xlsx.write(workbook, {
   bookType: "xlsx",
   type: "array"
 });
-this.saveAsExcelFile(excelBuffer, "personne");
-});*/
+this.saveAsExcelFile(excelBuffer, "assurance");
+});
 }
 
 sendData():void{

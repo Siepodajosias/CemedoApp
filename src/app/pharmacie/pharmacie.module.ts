@@ -50,6 +50,10 @@ import { OrderListModule } from 'primeng/orderlist';
 import { DividerModule } from 'primeng/divider';
 import { MenubarModule } from 'primeng/menubar';
 import { ToolbarModule } from 'primeng/toolbar';
+import { CalendarModule } from 'primeng/calendar';
+import { SpeedDialModule } from 'primeng/speeddial';
+import { MenuModule } from 'primeng/menu';
+
 import { VenteViewComponent } from './composents/vente-view/vente-view.component';
 import { DepenseViewComponent } from './composents/depense-view/depense-view.component';
 import { CategorieMedicamentViewComponent } from './composents/categorie-medicament-view/categorie-medicament-view.component';
@@ -107,7 +111,10 @@ import { CategorieMedicamentViewComponent } from './composents/categorie-medicam
     OrderListModule,
     DividerModule ,
     MenubarModule, 
-    ToolbarModule
+    ToolbarModule,
+    CalendarModule,
+    SpeedDialModule,
+    MenuModule
 
     
   ],providers:[PharmacienService,ConfirmationService,MessageService]

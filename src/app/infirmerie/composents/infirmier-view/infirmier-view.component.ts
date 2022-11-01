@@ -2,13 +2,12 @@ import { Component, OnInit,ViewChild} from '@angular/core';
 import { InfirmierService } from '../../service/infirmier.service';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Infirmier } from '../../model/infirmier';
 import * as saveAs from 'file-saver';
-
 import * as jspdf from 'jspdf'
 import 'jspdf-autotable'
 import { UserOptions } from 'jspdf-autotable';
-
 import { Table } from 'primeng/table'
 
 interface jsPDFWithPlugin extends jspdf.jsPDF{
@@ -22,7 +21,6 @@ interface jsPDFWithPlugin extends jspdf.jsPDF{
   styleUrls: ['./infirmier-view.component.scss']
 })
 export class InfirmierViewComponent implements OnInit {
-  displayedColumns: string[] = ['nom', 'prenom', 'genre', 'email','tel','tel2','edit'];
 
   posts: any
 
@@ -41,8 +39,13 @@ export class InfirmierViewComponent implements OnInit {
 
   personneDialog: any | boolean;
 
+  genres:any
+  infirmierForms: FormGroup = new FormGroup({})
+  infirmier:Infirmier=new Infirmier()
+
   constructor(private infirmierS:InfirmierService,private route:Router,
-    private masseService:MessageService
+    private messageService:MessageService,
+    private infirmierForm: FormBuilder
     ) { }
 
   ngOnInit(): void {
@@ -57,6 +60,38 @@ export class InfirmierViewComponent implements OnInit {
       error: (e) => { console.log("erreur :" + e) },
       complete: () => {
       }
+    })
+
+    this.infirmierForms = this.infirmierForm.group({
+      id:null,
+      nom: ['', [Validators.required, Validators.minLength(3)]],
+      prenoms: ['', [Validators.required, Validators.maxLength(20)]],
+      login:['', [Validators.required, Validators.maxLength(20)]],
+      email: ['', [Validators.required, Validators.maxLength(30), Validators.email]],
+      password: ['', [Validators.required, Validators.maxLength(8)]],
+      tel:['', [Validators.required, Validators.maxLength(20)]],
+      tel2:['', [Validators.required, Validators.maxLength(20)]],
+      genre:['', [Validators.required, Validators.maxLength(20)]],
+      dateNaissance:['', [Validators.required, Validators.maxLength(30)]],
+      fcmToken:"",
+      typeEmploye:null
+
+
+      /*
+      salt: ['', [Validators.required, Validators.maxLength(30)]],
+      salaireInfirmier: [null, [Validators.required, Validators.maxLength(30)]],
+      username: ['', [Validators.required, Validators.maxLength(30)]],
+      userIdentifier: ['', [Validators.required, Validators.maxLength(15)]],
+      active: [null, [Validators.required, Validators.maxLength(10)]],
+      createdAt: [null, [Validators.required, Validators.maxLength(10)]],
+      updatedAt: ['', [Validators.required, Validators.maxLength(10)]],
+      version: [null, [Validators.required, Validators.maxLength(20)]],
+      file:['', [Validators.required, Validators.maxLength(30)]],
+      photo:['', [Validators.required, Validators.maxLength(20)]],
+      residence:['', [Validators.required, Validators.maxLength(30)]],
+      numeroCni:['', [Validators.required, Validators.maxLength(20)]]
+      */
+
     })
   }
   detail(a:any){
@@ -108,6 +143,10 @@ toggleLock(data:any, frozen:any, index:any) {
 }
  openNew() {
   this.personneDialog = true;
+  this.genres = [
+    {name: 'homme'},
+    {name: 'femme'}
+];
 }
 
 exportPdf() {
@@ -120,16 +159,71 @@ exportPdf() {
     doc.save("Pomptables.pdf")
 }
 
-
-exportExcel() {/*
+exportExcel() {
 import("xlsx").then(xlsx => {
-const worksheet = xlsx.utils.json_to_sheet(this.personne);
+const worksheet = xlsx.utils.json_to_sheet(this.infirmiers);
 const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
 const excelBuffer: any = xlsx.write(workbook, {
   bookType: "xlsx",
   type: "array"
 });
-this.saveAsExcelFile(excelBuffer, "personne");
-});*/
+this.saveAsExcelFile(excelBuffer, "Infirmier");
+});
 }
+
+SaveData(){
+  /*
+      this.infirmier.id=null
+      this.infirmier.userIdentifier=""
+      this.infirmier.username=""
+      this.infirmier.numeroCni=this.infirmierForms.get('numeroCni')?.value
+      this.infirmier.residence=this.infirmierForms.get('residence')?.value
+         this.infirmier.salaireInfirmier=this.infirmierForms.get('salaireInfirmier')?.value
+      if(this.img && this.img !==''){
+        this.infirmier.photo=this.img
+        this.infirmier.file=this.img
+      }*/
+  
+      this.infirmier.id=null
+      this.infirmier.email=this.infirmierForms.get('email')?.value
+      this.infirmier.password=this.infirmierForms.get('password')?.value
+      this.infirmier.nom=this.infirmierForms.get('nom')?.value
+      this.infirmier.prenoms=this.infirmierForms.get('prenoms')?.value
+      this.infirmier.dateNaissance=this.infirmierForms.get('dateNaissance')?.value
+      this.infirmier.login=this.infirmierForms.get('login')?.value
+      this.infirmier.genre=this.infirmierForms.get('genre')?.value
+      this.infirmier.tel=this.infirmierForms.get('tel')?.value
+      this.infirmier.tel2=this.infirmierForms.get('tel2')?.value
+  
+      this.infirmier.fcmToken=""
+      this.infirmier.typeEmploye=null
+   
+  
+      console.log(this.infirmier)
+         this.infirmierS.sendInfirmier(this.infirmier).subscribe({
+  
+          next:(v)=>{
+            this.messageService.add({severity: 'success', summary: 'Service Message', detail: 'Infirmier enregistré' });
+        },
+          error:(e)=>{
+
+          },
+          complete:()=>{
+            this.infirmierForms.setValue({
+              id:null,
+              email:"",
+              password:"",
+              nom:"",
+              prenoms:"",
+              tel:"",
+              tel2:"",
+              genre:"",
+              dateNaissance:"",
+              login:"",
+              fcmToken:'string',
+              typeEmploye:null,
+            })
+           }
+         })
+     }
 }

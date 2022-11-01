@@ -56,10 +56,9 @@ import { ButtonModule} from 'primeng/button';
 import { DialogModule} from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
-
-import {MultiSelectModule} from 'primeng/multiselect';
-import {DropdownModule} from 'primeng/dropdown';
-import {AutoCompleteModule} from 'primeng/autocomplete';
+import { MultiSelectModule} from 'primeng/multiselect';
+import { DropdownModule} from 'primeng/dropdown';
+import { AutoCompleteModule} from 'primeng/autocomplete';
 import { ChipsModule } from 'primeng/chips';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { ProgressBarModule } from 'primeng/progressbar';
@@ -69,10 +68,9 @@ import { OrderListModule } from 'primeng/orderlist';
 import { DividerModule } from 'primeng/divider';
 import { MenubarModule } from 'primeng/menubar';
 import { ToolbarModule } from 'primeng/toolbar';
-
-
-
-
+import { CalendarModule } from 'primeng/calendar';
+import { SpeedDialModule } from 'primeng/speeddial';
+import { MenuModule } from 'primeng/menu';
 
 
 @NgModule({
@@ -144,7 +142,10 @@ import { ToolbarModule } from 'primeng/toolbar';
     OrderListModule,
     DividerModule ,
     MenubarModule, 
-    ToolbarModule
+    ToolbarModule,
+    CalendarModule,
+    SpeedDialModule,
+    MenuModule
 
   ], providers: [MedecinService, ToastrService,MessageService ,
                 ConfirmationService

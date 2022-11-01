@@ -1,15 +1,13 @@
 import {Component, OnInit,ViewChild } from '@angular/core';
 import { ReceptionService } from '../../service/reception.service';
 import { Router } from '@angular/router';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Reception } from '../../model/reception';
 import { MessageService } from 'primeng/api';
-
 import * as saveAs from 'file-saver';
-
 import * as jspdf from 'jspdf'
 import 'jspdf-autotable'
 import { UserOptions } from 'jspdf-autotable';
-
 import { Table } from 'primeng/table'
 
 interface jsPDFWithPlugin extends jspdf.jsPDF{
@@ -24,7 +22,8 @@ interface jsPDFWithPlugin extends jspdf.jsPDF{
 export class ReceptionViewComponent implements OnInit {
 
   constructor(private receptService:ReceptionService,private route:Router,
-    private masseService:MessageService
+    private messageService:MessageService,
+    private receptionForm:FormBuilder
  ) { }
 
   posts: any
@@ -43,6 +42,9 @@ export class ReceptionViewComponent implements OnInit {
   exportColumns: any[]=[];
 
   personneDialog: any | boolean;
+  receptionForms:FormGroup=new FormGroup({})
+  reception:Reception=new Reception()
+  genres:any
 
   ngOnInit(): void {
 
@@ -56,6 +58,40 @@ export class ReceptionViewComponent implements OnInit {
       error: (e) => { console.log("erreur :" + e) },
       complete: () => {
       }
+    })
+
+    this.receptionForms=this.receptionForm.group({
+
+      id:null,
+      nom: ['', [Validators.required, Validators.minLength(3)]],
+      prenoms: ['', [Validators.required, Validators.maxLength(20)]],
+      login:['', [Validators.required, Validators.maxLength(20)]],
+      email: ['', [Validators.required, Validators.maxLength(30), Validators.email]],
+      password: ['', [Validators.required, Validators.maxLength(8)]],
+      tel:['', [Validators.required, Validators.maxLength(20)]],
+      tel2:['', [Validators.required, Validators.maxLength(20)]],
+      genre:['', [Validators.required, Validators.maxLength(20)]],
+      dateNaissance:['', [Validators.required, Validators.maxLength(30)]],
+      fcmToken:"",
+      typeEmploye:null
+
+   
+   /*
+      salt: ['', [Validators.required, Validators.maxLength(30)]],
+
+      salaireInfirmier: ['', [Validators.required, Validators.maxLength(30)]],
+      username: ['', [Validators.required, Validators.maxLength(30)]],
+      userIdentifier: ['', [Validators.required, Validators.maxLength(15)]],
+      active: [null, [Validators.required, Validators.maxLength(10)]],
+      createdAt: [null, [Validators.required, Validators.maxLength(10)]],
+      updatedAt: ['', [Validators.required, Validators.maxLength(10)]],
+      version: [null, [Validators.required, Validators.maxLength(20)]],
+
+      file:['', [Validators.required, Validators.maxLength(30)]],
+      photo:['', [Validators.required, Validators.maxLength(20)]],
+      residence:['', [Validators.required, Validators.maxLength(30)]],
+      numeroCni:['', [Validators.required, Validators.maxLength(20)]]
+      */
     })
     
   }
@@ -108,6 +144,10 @@ toggleLock(data:any, frozen:any, index:any) {
 }
  openNew() {
   this.personneDialog = true;
+  this.genres=[
+    {name:'homme'},
+    {name:'femme'}
+  ]
 }
 
 exportPdf() {
@@ -120,16 +160,59 @@ exportPdf() {
     doc.save("Pomptables.pdf")
 }
 
-exportExcel() {/*
+exportExcel() {
 import("xlsx").then(xlsx => {
-const worksheet = xlsx.utils.json_to_sheet(this.personne);
+const worksheet = xlsx.utils.json_to_sheet(this.receptions);
 const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
 const excelBuffer: any = xlsx.write(workbook, {
   bookType: "xlsx",
   type: "array"
 });
 this.saveAsExcelFile(excelBuffer, "personne");
-});*/
+});
+}
+
+SaveData(){
+  this.reception.id=null
+  this.reception.email=this.receptionForms.get('email')?.value
+  this.reception.password=this.receptionForms.get('password')?.value
+  this.reception.nom=this.receptionForms.get('nom')?.value
+  this.reception.prenoms=this.receptionForms.get('prenoms')?.value
+  this.reception.dateNaissance=this.receptionForms.get('dateNaissance')?.value
+  this.reception.login=this.receptionForms.get('login')?.value
+  this.reception.genre=this.receptionForms.get('genre')?.value
+  this.reception.tel=this.receptionForms.get('tel')?.value
+  this.reception.tel2=this.receptionForms.get('tel2')?.value
+
+  this.reception.fcmToken=""
+  this.reception.typeEmploye=null
+
+
+  console.log(this.reception)
+     this.receptService.sendReception(this.reception).subscribe({
+
+      next:(v)=>{
+        this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'receptionniste enregistré' });
+      },
+      error:(e)=>{
+      },
+      complete:()=>{
+        this.receptionForms.setValue({
+          id:null,
+          email:"",
+          password:"",
+          nom:"",
+          prenoms:"",
+          tel:"",
+          tel2:"",
+          genre:"",
+          dateNaissance:"",
+          login:"",
+          fcmToken:'string',
+          typeEmploye:null,
+        })
+       }
+     })
 }
 
 }

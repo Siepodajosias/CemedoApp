@@ -1,137 +1,186 @@
 <section class="content">
-      <div class="content-block">
-        <div class="block-header">
-          <!-- breadcrumb -->
-          <app-breadcrumb [title]="'Medecins'" [items]="[]" [active_item]="'médecin'"></app-breadcrumb>
-        </div>
-    
-        <div class="card">
-          <p-toolbar styleClass="mb-4">
-              <ng-template pTemplate="left">
-                  <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success mr-2"  pTooltip="XLS" tooltipPosition="bottom"></button>
-                  <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
-              </ng-template>
-      
-              <ng-template pTemplate="right">
-                  
-                  <button pButton pRipple label="Enregistrer" icon="pi pi-send" class="p-button-help" (click)="openNew()"></button>
-              </ng-template>
-          </p-toolbar>
-      
-          <p-table #dt  [value]="medecins"  [scrollable]="true" scrollHeight="400px"
-          [globalFilterFields]="['user.nom', 'user.prenoms', 'user.genre','user.specialite']"
-          [loading]="loading"
-          [filterDelay]="0"
-              >
-              <ng-template pTemplate="caption">
-                  <div class="flex align-items-center justify-content-between">
-                      <h5 class="m-0">Medecin</h5>
-                      <span class="p-input-icon-left">
-                          <i class="pi pi-search"></i>
-      
-                          <input pInputText type="text"
-                          (input)="dt.filterGlobal(getEventValue($event), 'contains')"
-                           placeholder="Rechercher..." 
-                          />
-      
-                      </span>
-                  </div>
-              </ng-template>
-              <ng-template pTemplate="header" let-medecin>
-                  <tr>
-                      <th pSortableColumn="nom">Nom<p-sortIcon field="libelle"></p-sortIcon></th>
-                      <th pSortableColumn="prenom">Prenom <p-sortIcon field="email"></p-sortIcon></th>
-                      <th pSortableColumn="genre">Genre <p-sortIcon field="tel"></p-sortIcon></th>
-                      <th pSortableColumn="email">E-mail<p-sortIcon field="email"></p-sortIcon></th>
-                      <th pSortableColumn="tel">Téléphone 1<p-sortIcon field="tel"></p-sortIcon></th>
-                      <th pSortableColumn="tel2">Téléphone<p-sortIcon field="tel2"></p-sortIcon></th>
-                      <th></th>
-      
-                  </tr>
-              </ng-template>
-              <ng-template pTemplate="body" let-medecin let-index="rowIndex">
-                  <tr>
-                      <td style="min-width:200px">{{medecin.user.nom}}</td>
-                      <td style="min-width:200px">{{medecin.user.prenoms}}</td>
-                      <td style="min-width:200px">{{medecin.user.genre}}</td>
-                      <td style="min-width:200px">{{medecin.user.email}}</td>
-                      <td style="min-width:200px">{{medecin.user.tel}}</td>
-                      <td style="min-width:200px">{{medecin.user.tel2}}</td>
-                      <td style="flex: 0 0 4rem">
-                          <button pButton pRipple type="button"  icon="pi pi-pencil"  (click)="detail(medecin)" 
-                          class="p-button-rounded p-button-text"
-                          ></button>
-                      </td>
-                      <td style="flex: 0 0 4rem">
-                          <button pButton pRipple type="button"  icon="pi pi-angle-right"  (click)="detail(medecin)" 
-                          class="p-button-rounded p-button-text"
-                          ></button>
-                      </td>
-                  </tr>
-              </ng-template>
-              <ng-template pTemplate="summary">
-                  <div class="flex align-items-center justify-content-between">
-                   Total: {{medecins ? medecins.length : 0 }}
-                  </div>
-              </ng-template>
-          </p-table>
-      </div>
-      
-      <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
-    
-      <p-dialog [(visible)]="personneDialog" [style]="{width: '450px'}" header="mise à jour personne" [modal]="true" styleClass="p-fluid">
-      
-        <form >
-      
-          <div class="grid">
-      
-            <div class="col-12">
-              <p-autoComplete  [showEmptyMessage]="true"   field="designation" [minLength]="1"></p-autoComplete>
-            </div>
-            <div class="col-12">
-                          <span class="p-float-label">
-                              <input type="text" id="inputtext1" pInputText>
-                              <label for="inputtext1">Nom</label>
-                          </span>
-            </div>
-      
-                   <p-divider layout="vertical"></p-divider>
-      
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="'Medecins'" [items]="[]" [active_item]="'médecin'"></app-breadcrumb>
+    </div>
+
+    <div class="card">
+      <p-toolbar styleClass="mb-4">
+        <ng-template pTemplate="left">
+          <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
+            class="p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom"></button>
+          <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()"
+            class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
+        </ng-template>
+
+        <ng-template pTemplate="right">
+
+          <button pButton pRipple label="Enregistrer" icon="pi pi-send" class="p-button-help"
+            (click)="openNew()"></button>
+        </ng-template>
+      </p-toolbar>
+
+      <p-table #dt [value]="medecins" [scrollable]="true" scrollHeight="400px"
+        [globalFilterFields]="['user.nom', 'user.prenoms', 'user.genre','user.specialite']" [loading]="loading"
+        [filterDelay]="0">
+        <ng-template pTemplate="caption">
+          <div class="flex align-items-center justify-content-between">
+            <h5 class="m-0">Medecin</h5>
+            <span class="p-input-icon-left">
+              <i class="pi pi-search"></i>
+
+              <input pInputText type="text" (input)="dt.filterGlobal(getEventValue($event), 'contains')"
+                placeholder="Rechercher..." />
+
+            </span>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-medecin>
+          <tr>
+            <th pSortableColumn="nom">Nom<p-sortIcon field="libelle"></p-sortIcon>
+            </th>
+            <th pSortableColumn="prenom">Prenom <p-sortIcon field="email"></p-sortIcon>
+            </th>
+            <th pSortableColumn="genre">Genre <p-sortIcon field="tel"></p-sortIcon>
+            </th>
+            <th pSortableColumn="email">E-mail<p-sortIcon field="email"></p-sortIcon>
+            </th>
+            <th pSortableColumn="tel">Téléphone 1<p-sortIcon field="tel"></p-sortIcon>
+            </th>
+            <th pSortableColumn="tel2">Téléphone<p-sortIcon field="tel2"></p-sortIcon>
+            </th>
+            <th></th>
+
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-medecin let-index="rowIndex">
+          <tr>
+            <td style="min-width:200px">{{medecin.user.nom}}</td>
+            <td style="min-width:200px">{{medecin.user.prenoms}}</td>
+            <td style="min-width:200px">{{medecin.user.genre}}</td>
+            <td style="min-width:200px">{{medecin.user.email}}</td>
+            <td style="min-width:200px">{{medecin.user.tel}}</td>
+            <td style="min-width:200px">{{medecin.user.tel2}}</td>
+            <td style="flex: 0 0 4rem">
+              <button pButton pRipple type="button" icon="pi pi-pencil" (click)="detail(medecin)"
+                class="p-button-rounded p-button-text"></button>
+            </td>
+            <td style="flex: 0 0 4rem">
+              <button pButton pRipple type="button" icon="pi pi-angle-right" (click)="detail(medecin)"
+                class="p-button-rounded p-button-text"></button>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+          <div class="flex align-items-center justify-content-between">
+            Total: {{medecins ? medecins.length : 0 }}
+          </div>
+        </ng-template>
+      </p-table>
+    </div>
+
+    <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+
+    <p-toast></p-toast>
+    <p-dialog [(visible)]="personneDialog" [style]="{width: '750px'}" header="Nouveau medecin" [modal]="true"
+      styleClass="p-fluid">
+      <form [formGroup]="MedecinForms" (ngSubmit)="SaveData()">
+        <div class="grid">
+  
+          <div class="col-12 md:col-7">
             <div class="col-12">
               <span class="p-float-label">
-                <input type="text" id="inputtext2" pInputText >
-                <label for="inputtext2">Prenom</label>
+                <input type="text" id="inputtext6" pInputText formControlName="nom">
+                <label for="inputtext6">Nom</label>
               </span>
             </div>
-                  <p-divider align="left" type="dashed">
-                      <b>Left</b>
-                    </p-divider>
+  
             <div class="col-12">
-                          <span class="p-float-label">
-                              <input type="text" id="inputtext3" pInputText>
-                              <label for="inputtext3">Age</label>
-                          </span>
+              <span class="p-float-label">
+                <input type="text" id="inputtext5" pInputText formControlName="prenoms">
+                <label for="inputtext5">Prénom</label>
+              </span>
             </div>
-      
-      
+  
             <div class="col-12">
-                      <p-divider align="left">
-                          <div class="inline-flex align-items-center">
-                            <i class="pi pi-user mr-2"></i>
-                            <b>Icon</b>
-                          </div>
-                        </p-divider>
-              </div>
-      
-      
-            <button  type="submit" pButton pRipple label="Save" icon="pi pi-check" class="p-button-text p-button-sm"></button>
-      
+              <span class="p-float-label">
+                <input type="text" id="inputtext5" pInputText formControlName="login">
+                <label for="inputtext5">Nom d'utilisateur</label>
+              </span>
+            </div>
+  
+            <div class="col-12">
+  
+              <p-dropdown [options]="genres" placeholder="Genre" optionLabel="name" [showClear]="true"
+                formControlName="genre">
+                </p-dropdown>
+            </div>
+  
+            <div class="col-12">
+              <p-calendar [showIcon]="true" inputId="icon"></p-calendar>
+            </div>
           </div>
-      
-        </form>
-      </p-dialog>
-    
-    
-    
-      </div>
+  
+          <div class="col-5">
+            <div class="col-12">
+              <span class="p-float-label">
+                <input type="password" id="inputtext6" pInputText formControlName="password">
+                <label for="inputtext6">Mot de passe</label>
+              </span>
+            </div>
+          </div>
+  
+          <div class="col-12">
+  
+            <p-divider align="center" type="dashed" layout="horizontal">
+              <div class="inline-flex align-items-center">
+                <i class="pi pi-user mr-2"></i>
+                <b>Contacts</b>
+              </div>
+            </p-divider>
+  
+          </div>
+  
+          <div class="col-12">
+            <span class="p-float-label">
+              <input type="email" id="inputtext6" pInputText formControlName="email">
+              <label for="inputtext6">E-mail</label>
+            </span>
+          </div>
+  
+          <div class="col-12">
+            <span class="p-float-label">
+              <input type="text" id="inputtext5" pInputText formControlName="tel">
+              <label for="inputtext5">Téléphone 1</label>
+            </span>
+          </div>
+  
+          <div class="col-12">
+            <span class="p-float-label">
+              <input type="text" id="inputtext5" pInputText formControlName="tel2">
+              <label for="inputtext5">Téléphone 2</label>
+            </span>
+          </div>
+  
+          <div class="col-12 md:col-12">
+            <div class="flex justifier-content-end">
+  
+              <button type="submit" pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-bouton-texte p-bouton-sm
+                      flex align-items-center justifier-content-center w-10rem h-2rem m-2
+                      
+                      " pTooltip="Click pour enregistrer"
+                      [disabled]="!MedecinForms.valid"
+                      ></button>
+            </div>
+  
+          </div>
+  
+        </div>
+      </form>
+    </p-dialog>
+
+
+
+  </div>
 </section>

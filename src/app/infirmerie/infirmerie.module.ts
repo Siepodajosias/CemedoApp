@@ -49,6 +49,9 @@ import { OrderListModule } from 'primeng/orderlist';
 import { DividerModule } from 'primeng/divider';
 import { MenubarModule } from 'primeng/menubar';
 import { ToolbarModule } from 'primeng/toolbar';
+import { CalendarModule } from 'primeng/calendar';
+import { SpeedDialModule } from 'primeng/speeddial';
+import { MenuModule } from 'primeng/menu';
 
 @NgModule({
   declarations: [
@@ -100,7 +103,10 @@ import { ToolbarModule } from 'primeng/toolbar';
     OrderListModule,
     DividerModule ,
     MenubarModule, 
-    ToolbarModule
+    ToolbarModule,
+    CalendarModule,
+    SpeedDialModule,
+    MenuModule
   ],providers:[InfirmierService,MessageService,ConfirmationService]
 })
 export class InfirmerieModule { }

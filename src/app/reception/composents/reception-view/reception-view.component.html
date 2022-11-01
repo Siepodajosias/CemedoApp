@@ -78,55 +78,101 @@
   
   <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
   
-  <p-dialog [(visible)]="personneDialog" [style]="{width: '450px'}" header="Nouvelle recetionniste" [modal]="true" styleClass="p-fluid">
-  
-    <form >
-  
+  <p-toast></p-toast>
+  <p-dialog [(visible)]="personneDialog" [style]="{width: '750px'}" header="Nouveau receptionniste" [modal]="true"
+    styleClass="p-fluid">
+    <form [formGroup]="receptionForms" (ngSubmit)="SaveData()">
       <div class="grid">
-  
-        <div class="col-12">
-          <p-autoComplete  [showEmptyMessage]="true"   field="designation" [minLength]="1"></p-autoComplete>
+
+        <div class="col-12 md:col-7">
+          <div class="col-12">
+            <span class="p-float-label">
+              <input type="text" id="inputtext6" pInputText formControlName="nom">
+              <label for="inputtext6">Nom</label>
+            </span>
+          </div>
+
+          <div class="col-12">
+            <span class="p-float-label">
+              <input type="text" id="inputtext5" pInputText formControlName="prenoms">
+              <label for="inputtext5">Prénom</label>
+            </span>
+          </div>
+
+          <div class="col-12">
+            <span class="p-float-label">
+              <input type="text" id="inputtext5" pInputText formControlName="login">
+              <label for="inputtext5">Nom d'utilisateur</label>
+            </span>
+          </div>
+
+          <div class="col-12">
+
+            <p-dropdown [options]="genres" placeholder="Genre" optionLabel="name" [showClear]="true"
+              formControlName="genre">
+              </p-dropdown>
+          </div>
+
+          <div class="col-12">
+            <p-calendar [showIcon]="true" inputId="icon"></p-calendar>
+          </div>
         </div>
-        <div class="col-12">
-                      <span class="p-float-label">
-                          <input type="text" id="inputtext1" pInputText>
-                          <label for="inputtext1">Nom</label>
-                      </span>
+
+        <div class="col-5">
+          <div class="col-12">
+            <span class="p-float-label">
+              <input type="password" id="inputtext6" pInputText formControlName="password">
+              <label for="inputtext6">Mot de passe</label>
+            </span>
+          </div>
         </div>
-  
-               <p-divider layout="vertical"></p-divider>
-  
+
+        <div class="col-12">
+
+          <p-divider align="center" type="dashed" layout="horizontal">
+            <div class="inline-flex align-items-center">
+              <i class="pi pi-user mr-2"></i>
+              <b>Contacts</b>
+            </div>
+          </p-divider>
+
+        </div>
+
         <div class="col-12">
           <span class="p-float-label">
-            <input type="text" id="inputtext2" pInputText >
-            <label for="inputtext2">Prenom</label>
+            <input type="email" id="inputtext6" pInputText formControlName="email">
+            <label for="inputtext6">E-mail</label>
           </span>
         </div>
-              <p-divider align="left" type="dashed">
-                  <b>Left</b>
-                </p-divider>
+
         <div class="col-12">
-                      <span class="p-float-label">
-                          <input type="text" id="inputtext3" pInputText>
-                          <label for="inputtext3">Age</label>
-                      </span>
+          <span class="p-float-label">
+            <input type="text" id="inputtext5" pInputText formControlName="tel">
+            <label for="inputtext5">Téléphone 1</label>
+          </span>
         </div>
-  
-  
+
         <div class="col-12">
-                  <p-divider align="left">
-                      <div class="inline-flex align-items-center">
-                        <i class="pi pi-user mr-2"></i>
-                        <b>Icon</b>
-                      </div>
-                    </p-divider>
+          <span class="p-float-label">
+            <input type="text" id="inputtext5" pInputText formControlName="tel2">
+            <label for="inputtext5">Téléphone 2</label>
+          </span>
+        </div>
+
+        <div class="col-12 md:col-12">
+          <div class="flex justifier-content-end">
+
+            <button type="submit" pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-bouton-texte p-bouton-sm
+                    flex align-items-center justifier-content-center w-10rem h-2rem m-2
+                    
+                    " pTooltip="Click pour enregistrer"
+                    [disabled]="!receptionForms.valid"
+                    ></button>
           </div>
-  
-  
-        <button  type="submit" pButton pRipple label="Save" icon="pi pi-check" class="p-button-text p-button-sm"></button>
-  
+
+        </div>
+
       </div>
-  
     </form>
   </p-dialog>
   </div>
