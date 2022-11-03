@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { InfirmierCalendrierComponent } from './composents/infirmier-calendrier/infirmier-calendrier.component';
 import { InfirmierDetailComponent } from './composents/infirmier-detail/infirmier-detail.component';
-import { InfirmierFormsComponent } from './composents/infirmier-view/infirmier-forms.component';
 import { InfirmierViewComponent } from './composents/infirmier-view/infirmier-view.component';
 import { DashboardInfirmerieComponent } from './dashboard-infirmerie/dashboard-infirmerie.component';
 
@@ -10,7 +9,6 @@ const routes: Routes = [
   {path: 'dashboard',component:DashboardInfirmerieComponent},
   {path:'liste',component:InfirmierViewComponent},
   {path:'detail',component:InfirmierDetailComponent},
-  {path:'forms',component:InfirmierFormsComponent},
   {path:'calendrier',component:InfirmierCalendrierComponent},
   {
     path:'patient',

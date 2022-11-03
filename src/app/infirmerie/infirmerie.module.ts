@@ -3,30 +3,19 @@ import { CommonModule } from '@angular/common';
 import { ComponentsModule } from "../shared/components/components.module";
 import { ReactiveFormsModule, FormsModule} from '@angular/forms'
 import { MatIconModule } from "@angular/material/icon";
-import { MatTabsModule } from "@angular/material/tabs";
 import { NgApexchartsModule } from "ng-apexcharts";
 import { HttpClientModule } from "@angular/common/http";
 
-//import { FullCalendarModule } from '@fullcalendar/angular'
-import { ToastrModule, ToastrService } from 'ngx-toastr';
-import { MatCardModule } from '@angular/material/card';
+import { FullCalendarModule } from '@fullcalendar/angular'
 import { MatFormFieldModule } from "@angular/material/form-field";
-import { MaterialFileInputModule } from 'ngx-material-file-input';
-import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from "@angular/material/input";
 
 import { InfirmerieRoutingModule } from './infirmerie-routing.module';
-import { InfirmierFormsComponent } from './composents/infirmier-view/infirmier-forms.component';
 import { InfirmierViewComponent } from './composents/infirmier-view/infirmier-view.component';
 import { InfirmierDetailComponent } from './composents/infirmier-detail/infirmier-detail.component';
 import { DashboardInfirmerieComponent } from './dashboard-infirmerie/dashboard-infirmerie.component';
 import { InfirmierCalendrierComponent } from './composents/infirmier-calendrier/infirmier-calendrier.component';
 import { InfirmierService } from './service/infirmier.service';
-
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatTableModule } from '@angular/material/table';
 
 //primeng
 import { CardModule} from 'primeng/card'
@@ -55,7 +44,6 @@ import { MenuModule } from 'primeng/menu';
 
 @NgModule({
   declarations: [
-    InfirmierFormsComponent,
     InfirmierViewComponent,
     InfirmierDetailComponent,
     DashboardInfirmerieComponent,
@@ -67,23 +55,11 @@ import { MenuModule } from 'primeng/menu';
     HttpClientModule,
     ComponentsModule,
     MatIconModule,
+    MatButtonModule,
     NgApexchartsModule,
-    MatTabsModule,
-    MatTableModule ,
-    MatDialogModule,
-    MatPaginatorModule,
-    
-    MaterialFileInputModule,
-
+    FullCalendarModule,
     ReactiveFormsModule,
     FormsModule,
-    ToastrModule.forRoot({}),
-    MatCardModule,
-    MatFormFieldModule ,
-    MatDatepickerModule,
-    MatInputModule,
-    MatButtonModule,
-    
 
     CardModule,
     TableModule,

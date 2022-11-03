@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { FactureComponent } from "./composents/facture/facture.component";
-
+import { RendezVousComponent } from './composents/rendez-vous/rendez-vous.component';
+import { RendezVousCalendrierComponent } from './composents/rendez-vous-calendrier/rendez-vous-calendrier.component';
 const routes: Routes = [
   {
     path: 'dashboard',
@@ -43,7 +44,10 @@ const routes: Routes = [
   {
     path: 'assurance',
     loadChildren: () => import('../assurance/assurance.module').then((r) => r.AssuranceModule)
-  }
+  },{
+    path:'Rdv',component:RendezVousComponent
+  },
+  {path:'calendrier',component:RendezVousCalendrierComponent}
 
 ];
 

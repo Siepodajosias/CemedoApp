@@ -101,11 +101,6 @@ export class AssuranceViewComponent implements OnInit {
     this.route.navigate(['admin/assurance/detail',a.id]);
   }
 
-  detail1(a:any){
-   
-    this.route.navigate(['admin/assurance/detailresponsable',a.id]);
-  }
-
   saveAsExcelFile(buffer: any, fileName: string): void {
 
     let EXCEL_TYPE =

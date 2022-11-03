@@ -89,7 +89,7 @@ export class PatientDetailComponent implements OnInit {
     this.lineChartOptions = {
       series: [
         {
-          name: "Consultation",
+          name: "Consultation à domicile",
           data: [70, 200, 80, 180, 170, 105, 210],
         },
         {
@@ -98,7 +98,15 @@ export class PatientDetailComponent implements OnInit {
         },
         {
           name: "Appel Vidéo",
-          data: [85, 130, 85, 225, 80, 190, 120, 30, 120, 260, 100, 180],
+          data: [85, 130, 89, 225, 85, 190, 190, 30, 120, 260, 102, 180],
+        },
+        {
+          name: "Chat",
+          data: [89, 140, 86, 225, 80, 192, 120, 30, 120, 260, 100, 180],
+        },
+        {
+          name: "Hospitalisation à domicile",
+          data: [87, 150, 85, 225, 80, 170, 120, 30, 120, 260, 101, 180],
         },
       ],
       chart: {
@@ -117,7 +125,7 @@ export class PatientDetailComponent implements OnInit {
           show: false,
         },
       },
-      colors: ["#A5A5A5", "#875692", "#4CB5AC"],
+      colors: ["#A5A5A5", "#875692", "#4CB5AC", "#6C63FF", "#475C7A"],
       stroke: {
         curve: "smooth",
       },
@@ -131,9 +139,9 @@ export class PatientDetailComponent implements OnInit {
         size: 3,
       },
       xaxis: {
-        categories: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet","Août","septembre","Octobre","Novembre","Decembre"],
+        categories: ["Jan", "Fév", "Mar", "Avr", "Mai", "Jui", "Juil","Aoû","Sep","Oct","Nov","Déc"],
         title: {
-          text: "Service",
+          text: "2022",
         },
       },
       yaxis: {

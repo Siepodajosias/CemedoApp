@@ -25,18 +25,15 @@ import { HttpClientModule } from "@angular/common/http";
 import { MatChipsModule } from '@angular/material/chips';
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { MatCardModule } from '@angular/material/card'
-import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 import { OWL_DATE_TIME_LOCALE, OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 //import { OwlDateTimeModule, OWL_DATE_TIME_FORMATS} from 'ng-pick-datetime';
 
-//import { MatDialogModule} from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { DoctorRoutingModule } from "./doctor-routing.module";
 import { ComponentsModule } from "../shared/components/components.module";
 import { MedecinViewComponent } from './composents/medecin-view/medecin-view.component';
-import { MedecinFormsComponent } from './composents/medecin-view/medecin-forms.component';
 import { MedecinDetailComponent } from './composents/medecin-detail/medecin-detail.component';
 import { ProfileMedecinComponent } from './composents/profile-medecin/profile-medecin.component';
 import { DashboardMedecinComponent } from "./dashboard-medecin/dashboard-medecin.component";
@@ -45,7 +42,9 @@ import { MedecinCalendrierComponent } from './composents/medecin-calendrier/mede
 import { MedecinService } from "./service/medecin.service";
 import { FactureComponent } from "./composents/facture/facture.component";
 import { MedecinView2Component } from './composents/medecin-view2/medecin-view2.component';
-
+import { RendezVousCalendrierComponent } from './composents/rendez-vous-calendrier/rendez-vous-calendrier.component';
+import { RendezVousViewComponent } from './composents/rendez-vous-view/rendez-vous-view.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 //primeng
 import { CardModule} from 'primeng/card'
@@ -71,19 +70,21 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { CalendarModule } from 'primeng/calendar';
 import { SpeedDialModule } from 'primeng/speeddial';
 import { MenuModule } from 'primeng/menu';
+import { FieldsetModule} from 'primeng/fieldset';
 
 
 @NgModule({
   declarations: [
     MedecinViewComponent,
-    MedecinFormsComponent,
     MedecinDetailComponent,
     ProfileMedecinComponent,
     DashboardMedecinComponent,
     RapportComponent,
     MedecinCalendrierComponent,
     FactureComponent,
-    MedecinView2Component
+    MedecinView2Component,
+    RendezVousCalendrierComponent,
+    RendezVousViewComponent
 
   ],
   imports: [
@@ -96,9 +97,8 @@ import { MenuModule } from 'primeng/menu';
     HttpClientModule,
     PerfectScrollbarModule,
     MatIconModule,
-    //FullCalendarModule,
+    FullCalendarModule,
     MatDatepickerModule,
-    ToastrModule.forRoot({}),
     MatToolbarModule,
     MatChipsModule,
     MatButtonModule,
@@ -145,9 +145,10 @@ import { MenuModule } from 'primeng/menu';
     ToolbarModule,
     CalendarModule,
     SpeedDialModule,
-    MenuModule
+    MenuModule,
+    FieldsetModule
 
-  ], providers: [MedecinService, ToastrService,MessageService ,
+  ], providers: [MedecinService,MessageService ,
                 ConfirmationService
 
     //{provide: OWL_DATE_TIME_LOCALE, useValue: 'fr'},

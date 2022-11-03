@@ -200,13 +200,13 @@ SaveData(){
    
   
       console.log(this.infirmier)
+      /*
          this.infirmierS.sendInfirmier(this.infirmier).subscribe({
   
           next:(v)=>{
             this.messageService.add({severity: 'success', summary: 'Service Message', detail: 'Infirmier enregistré' });
         },
           error:(e)=>{
-
           },
           complete:()=>{
             this.infirmierForms.setValue({
@@ -224,6 +224,7 @@ SaveData(){
               typeEmploye:null,
             })
            }
-         })
+         })*/
      }
+     
 }

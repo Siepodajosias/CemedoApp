@@ -1,17 +1,21 @@
 import { Component, OnInit } from '@angular/core';
+import { CalendarOptions } from '@fullcalendar/angular';
 
-@Component({ 
-  selector: 'app-infirmier-calendrier',
-  templateUrl: './infirmier-calendrier.component.html',
-  styleUrls: ['./infirmier-calendrier.component.scss']
+@Component({
+  selector: 'app-rendez-vous-calendrier',
+  templateUrl: './rendez-vous-calendrier.component.html',
+  styleUrls: ['./rendez-vous-calendrier.component.scss']
 })
-export class InfirmierCalendrierComponent implements OnInit {
+export class RendezVousCalendrierComponent implements OnInit {
 
-  options: any;
+  options: CalendarOptions;
+
   header: any;
+
   constructor() { }
 
   ngOnInit(): void {
+
     this.options = {
       initialDate : '2019-01-01',
       headerToolbar: {
@@ -25,4 +29,5 @@ export class InfirmierCalendrierComponent implements OnInit {
       dayMaxEvents: true
       };
   }
+
 }
