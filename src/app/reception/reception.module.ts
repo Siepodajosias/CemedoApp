@@ -16,7 +16,6 @@ import { MatInputModule } from "@angular/material/input";
 
 import { ReceptionDetailComponent } from './composents/reception-detail/reception-detail.component';
 import { ReceptionViewComponent } from './composents/reception-view/reception-view.component';
-import { ReceptionFormComponent } from './composents/reception-view/reception-form.component';
 
 
 import { ReceptionRoutingModule } from './reception-routing.module';
@@ -56,7 +55,6 @@ import { MenuModule } from 'primeng/menu';
   declarations: [
     DashboardReceptionComponent,
     ReceptionDetailComponent,
-    ReceptionFormComponent,
     ReceptionViewComponent
     
   ],

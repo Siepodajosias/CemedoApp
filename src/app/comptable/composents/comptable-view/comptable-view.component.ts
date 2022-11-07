@@ -89,10 +89,10 @@ export class ComptableViewComponent implements OnInit {
       numeroCni:['', [Validators.required, Validators.maxLength(20)]]
       */
     })
-  }
+   }
   detail(a:any){
     this.route.navigate(['administrateur/detailM',a]);
-  }
+   }
 
   saveAsExcelFile(buffer: any, fileName: string): void {
 
@@ -107,7 +107,7 @@ export class ComptableViewComponent implements OnInit {
       fileName + "_export_" + new Date() + EXCEL_EXTENSION
     );
 
-}
+  }
 
 applyFilterGlobal($event:any, stringVal:any) {
   this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
@@ -152,7 +152,6 @@ exportPdf() {
     doc.save("Pomptables.pdf")
 }
 
-
 exportExcel() {
 import("xlsx").then(xlsx => {
 const worksheet = xlsx.utils.json_to_sheet(this.comptables);
@@ -173,7 +172,8 @@ SaveData(){
   this.comptable.prenoms=this.comptableForms.get('prenoms')?.value
   this.comptable.login=this.comptableForms.get('login')?.value
   this.comptable.dateNaissance=this.comptableForms.get('dateNaissance')?.value
-  this.comptable.genre=this.comptableForms.get('genre')?.value
+  let val=this.comptableForms.get('genre')?.value
+  this.comptable.genre=val.name
   this.comptable.tel=this.comptableForms.get('tel')?.value
   this.comptable.tel2=this.comptableForms.get('tel')?.value
 
@@ -188,7 +188,6 @@ SaveData(){
       this.messageService.add({severity: 'success', summary: 'Service Message', detail: 'Assurance enregistrée' });
   },
     error:(e)=>{
-
 
     },
     complete:()=>{

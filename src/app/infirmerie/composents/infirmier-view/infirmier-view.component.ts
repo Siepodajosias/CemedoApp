@@ -191,16 +191,15 @@ SaveData(){
       this.infirmier.prenoms=this.infirmierForms.get('prenoms')?.value
       this.infirmier.dateNaissance=this.infirmierForms.get('dateNaissance')?.value
       this.infirmier.login=this.infirmierForms.get('login')?.value
-      this.infirmier.genre=this.infirmierForms.get('genre')?.value
+      let val=this.infirmierForms.get('genre')?.value
+      this.infirmier.genre=val.name
       this.infirmier.tel=this.infirmierForms.get('tel')?.value
       this.infirmier.tel2=this.infirmierForms.get('tel2')?.value
   
       this.infirmier.fcmToken=""
       this.infirmier.typeEmploye=null
    
-  
-      console.log(this.infirmier)
-      /*
+
          this.infirmierS.sendInfirmier(this.infirmier).subscribe({
   
           next:(v)=>{
@@ -224,7 +223,7 @@ SaveData(){
               typeEmploye:null,
             })
            }
-         })*/
+         })
      }
      
 }

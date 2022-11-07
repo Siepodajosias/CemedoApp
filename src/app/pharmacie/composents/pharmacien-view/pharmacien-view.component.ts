@@ -14,7 +14,6 @@ interface jsPDFWithPlugin extends jspdf.jsPDF{
     autoTable: (options: UserOptions)=> jspdf.jsPDF;
 }
 
-
 @Component({
   selector: 'app-pharmacien-view',
   templateUrl: './pharmacien-view.component.html',
@@ -86,9 +85,8 @@ export class PharmacienViewComponent implements OnInit {
         this.posts = value.data ? value : []
         this.pharmaciens=this.posts.data
         this.loading=false
-        console.log(this.pharmaciens)
       },
-      error: (e) => { console.log("erreur :" + e) },
+      error: (e) => {},
       complete: () => {
       }
     })
@@ -113,7 +111,7 @@ export class PharmacienViewComponent implements OnInit {
       fileName + "_export_" + new Date() + EXCEL_EXTENSION
     );
 
-}
+  }
 
 applyFilterGlobal($event:any, stringVal:any) {
   this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
@@ -172,7 +170,6 @@ this.saveAsExcelFile(excelBuffer, "pharmaciens");
 
 SaveData(){
 
-    
   this.pharmacien.id=null
   this.pharmacien.email=this.pharmacienForms.get('email')?.value
   this.pharmacien.password=this.pharmacienForms.get('password')?.value
@@ -180,15 +177,14 @@ SaveData(){
   this.pharmacien.prenoms=this.pharmacienForms.get('prenoms')?.value
   this.pharmacien.dateNaissance=this.pharmacienForms.get('dateNaissance')?.value
   this.pharmacien.login=this.pharmacienForms.get('login')?.value
-  this.pharmacien.genre=this.pharmacienForms.get('genre')?.value
+  let val=this.pharmacienForms.get('genre')?.value
+  this.pharmacien.genre=val.name
   this.pharmacien.tel=this.pharmacienForms.get('tel')?.value
   this.pharmacien.tel2=this.pharmacienForms.get('tel2')?.value
 
   this.pharmacien.fcmToken=""
   this.pharmacien.typeEmploye=null
 
-
-  console.log(this.pharmacien)
      this.pharService.sendPharmacien(this.pharmacien).subscribe({
 
       next:(v)=>{

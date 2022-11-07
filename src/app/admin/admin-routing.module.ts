@@ -47,7 +47,9 @@ const routes: Routes = [
   },{
     path:'Rdv',component:RendezVousComponent
   },
-  {path:'calendrier',component:RendezVousCalendrierComponent}
+  {path:'calendrier',component:RendezVousCalendrierComponent},
+  {path:'informatique',loadChildren:()=>import('../informatique/informatique.module').then((m)=>m.InformatiqueModule)},
+  {path:'logistique',loadChildren:()=>import('../logistique/logistique.module').then((m)=>m.LogistiqueModule)}
 
 ];
 

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ReceptionDetailComponent } from './composents/reception-detail/reception-detail.component';
-import { ReceptionFormComponent } from './composents/reception-view/reception-form.component';
 import { ReceptionViewComponent } from './composents/reception-view/reception-view.component';
 import { DashboardReceptionComponent } from './dashboard-reception/dashboard-reception.component';
 
@@ -20,8 +19,7 @@ const routes: Routes = [
     import('../doctor/doctor.module').then((m) =>m.DoctorModule),
   },
   {path:'liste',component:ReceptionViewComponent},
-  {path:'detail/:id',component:ReceptionDetailComponent},
-  {path:'forms',component:ReceptionFormComponent}
+  {path:'detail/:id',component:ReceptionDetailComponent}
 ];
 
 @NgModule({

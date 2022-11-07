@@ -8,10 +8,7 @@ import * as saveAs from 'file-saver';
 import * as jspdf from 'jspdf'
 import 'jspdf-autotable'
 import { UserOptions } from 'jspdf-autotable';
-
-
 import { Table } from 'primeng/table'
-
 
 interface jsPDFWithPlugin extends jspdf.jsPDF{
     autoTable: (options: UserOptions)=> jspdf.jsPDF;
@@ -165,7 +162,8 @@ export class MedecinViewComponent implements OnInit {
     this.medecin2.nom=this.MedecinForms.get('nom')?.value
     this.medecin2.prenoms=this.MedecinForms.get('prenoms')?.value
     this.medecin2.dateNaissance=this.MedecinForms.get('dateNaissance')?.value
-    this.medecin2.genre=this.MedecinForms.get('genre')?.value
+    let val=this.MedecinForms.get('genre')?.value
+    this.medecin2.genre=val.name
     this.medecin2.tel=this.MedecinForms.get('tel')?.value
     this.medecin2.tel2=this.MedecinForms.get('tel2')?.value
     this.medecin2.login=this.MedecinForms.get('login')?.value

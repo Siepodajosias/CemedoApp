@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { MaterielViewComponent } from './composents/materiel-view/materiel-view.component';
 
 const routes: Routes = [
   {
@@ -7,6 +8,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('../admin/dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
+  {path:'materiel',component:MaterielViewComponent}
 ];
 
 @NgModule({

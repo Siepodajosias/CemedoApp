@@ -95,6 +95,13 @@ const routes: Routes = [
             (m) => m.InformatiqueModule
           ),
       },
+      {path:'logistique',        
+      canActivate: [AuthGuard],
+      data:{
+        role:Role.Informaticien
+      },loadChildren:()=>import('./logistique/logistique.module').then(
+        (m)=>m.LogistiqueModule
+      )}
     ],
   },
   {

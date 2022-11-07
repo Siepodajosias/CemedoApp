@@ -4,7 +4,6 @@ import { PharmacienView2Component } from './composents/pharmacien-view2/pharmaci
 import { MedicamentDetailComponent } from './composents/medicament-detail/medicament-detail.component';
 import { MedicamentViewComponent } from './composents/medicament-view/medicament-view.component';
 import { PharmacienDetailComponent } from './composents/pharmacien-detail/pharmacien-detail.component';
-import { PharmacienFormsComponent } from './composents/pharmacien-view/pharmacien-forms.component';
 import { PharmacienViewComponent } from './composents/pharmacien-view/pharmacien-view.component';
 import { DashboardPharmacieComponent } from './dashboard-pharmacie/dashboard-pharmacie.component';
 import { DepenseViewComponent } from './composents/depense-view/depense-view.component';
@@ -19,10 +18,8 @@ const routes: Routes = [
   {path:'liste',component:PharmacienView2Component},
   {path:'detailMed/:id',component:MedicamentDetailComponent},
   {path:'detailPhar',component:PharmacienDetailComponent},
-  {path:'formsPhar',component:PharmacienFormsComponent},
   {path:'listeVente',component:VenteViewComponent},
   {path:'listeDepense',component:DepenseViewComponent},
-  {path:'listeCDD',component:PharmacienFormsComponent},
   {path:'listeCDM',component:CategorieMedicamentViewComponent},
   {
     path:'patient',

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ComptableDetailComponent } from './composents/comptable-detail/comptable-detail.component';
-import { ComptableFormsComponent } from './composents/comptable-view/comptable-forms.component';
 import { ComptableViewComponent } from './composents/comptable-view/comptable-view.component';
 
 const routes: Routes = [
@@ -30,7 +29,6 @@ const routes: Routes = [
   },
   {path:'liste',component:ComptableViewComponent},
   {path:'detail',component:ComptableDetailComponent},
-  {path:'forms',component:ComptableFormsComponent},
   {path:'**',component:ComptableViewComponent},
 ];
 

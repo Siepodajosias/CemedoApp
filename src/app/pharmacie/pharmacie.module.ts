@@ -14,11 +14,9 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from "@angular/material/input";
 
-
 import { PharmacieRoutingModule } from './pharmacie-routing.module';
 import { MedicamentViewComponent } from './composents/medicament-view/medicament-view.component';
 import { PharmacienViewComponent } from './composents/pharmacien-view/pharmacien-view.component';
-import { PharmacienFormsComponent } from './composents/pharmacien-view/pharmacien-forms.component';
 import { PharmacienDetailComponent } from './composents/pharmacien-detail/pharmacien-detail.component';
 import { MedicamentDetailComponent } from './composents/medicament-detail/medicament-detail.component';
 import { MedicamentFormsComponent } from './composents/medicament-view/medicament-forms.component';
@@ -63,7 +61,6 @@ import { CategorieMedicamentViewComponent } from './composents/categorie-medicam
   declarations: [
     MedicamentViewComponent,
     PharmacienViewComponent,
-    PharmacienFormsComponent,
     PharmacienDetailComponent,
     MedicamentDetailComponent,
     MedicamentFormsComponent,

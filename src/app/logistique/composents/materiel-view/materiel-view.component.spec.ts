@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ReceptionFormComponent } from './reception-form.component';
+import { MaterielViewComponent } from './materiel-view.component';
 
-describe('ReceptionFormComponent', () => {
-  let component: ReceptionFormComponent;
-  let fixture: ComponentFixture<ReceptionFormComponent>;
+describe('MaterielViewComponent', () => {
+  let component: MaterielViewComponent;
+  let fixture: ComponentFixture<MaterielViewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ReceptionFormComponent ]
+      declarations: [ MaterielViewComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ReceptionFormComponent);
+    fixture = TestBed.createComponent(MaterielViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

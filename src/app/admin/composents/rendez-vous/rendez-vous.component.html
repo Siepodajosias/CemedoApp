@@ -10,7 +10,7 @@
     <div class="grid">
     
         <div class="col-12 md:col-6 lg:col-4">
-            <div class="shadow-2 p-3 border-round" [style]="{'background-color':'green'}">
+            <div class="shadow-4 p-3 border-round" [style]="{'background-color':'green'}">
                 <div class="flex justify-content-between mb-3">
                     <div>
                         <span class="block text-500 font-medium mb-3  text-cyan-50">Rendez-vous éffectuer</span>
@@ -24,7 +24,7 @@
         </div>
         
         <div class="col-12 md:col-6 lg:col-4">
-            <div class="shadow-2 p-3 border-round" [style]="{'background-color':'blue'}">
+            <div class="shadow-4 p-3 border-round" [style]="{'background-color':'blue'}">
                 <div class="flex justify-content-between mb-3">
                     <div>
                         <span class="block text-500 font-medium mb-3 text-cyan-50">Rendez-vous en cour..</span>
@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="col-12 md:col-6 lg:col-4">
-            <div class="shadow-2 p-3 border-round" [style]="{'background-color':'red'}">
+            <div class="shadow-4 p-3 border-round" [style]="{'background-color':'red'}">
                 <div class="flex justify-content-between mb-3">
                     <div>
                         <span class="block text-500 font-medium mb-3 text-cyan-50">Rendez-vous annuler</span>
@@ -51,7 +51,7 @@
         </div>
     </div>
 
-    <p-fieldset legend="Liste" [toggleable]="true">
+    <p-fieldset legend="Liste" [toggleable]="true" class="shadow-4">
 
         <p-table #dt  [value]="rdvs"  [scrollable]="true" scrollHeight="400px"
         [globalFilterFields]="['dateDPrdv','daterdv','medecin','patient']"

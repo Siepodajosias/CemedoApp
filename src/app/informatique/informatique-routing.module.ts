@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardInformatiqueComponent } from './dashboard-informatique/dashboard-informatique.component';
-
+import { InformaticienViewComponent } from './composents/informaticien-view/informaticien-view.component';
 const routes: Routes = [
   {path: 'dashboard',component:DashboardInformatiqueComponent},
   {
@@ -13,7 +13,8 @@ const routes: Routes = [
     path:'medecin',
     loadChildren: () =>
     import('../doctor/doctor.module').then((m) =>m.DoctorModule),
-  }
+  },
+  {path:'informaticien',component:InformaticienViewComponent}
 ];
 
 @NgModule({

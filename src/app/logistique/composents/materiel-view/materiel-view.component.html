@@ -1,0 +1,72 @@
+<section class="content">
+    <div class="content-block">
+      <div class="block-header">
+        <!-- breadcrumb -->
+        <app-breadcrumb [title]="'Matériels'" [items]="[]" [active_item]="'le matériel cemedo'"></app-breadcrumb>
+      </div>
+  
+      <div class="card shadow-4">
+        <p-toolbar styleClass="mb-4">
+          <ng-template pTemplate="left">
+            <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
+              class="p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom"></button>
+            <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()"
+              class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
+          </ng-template>
+
+        </p-toolbar>
+  
+        <p-table #dt [value]="materiels" [scrollable]="true" scrollHeight="400px"
+          [globalFilterFields]="['user.nom', 'user.prenoms', 'user.genre','user.specialite']" [loading]="loading"
+          [filterDelay]="0">
+          <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+              <h5 class="m-0">Matériel</h5>
+              <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+  
+                <input pInputText type="text" (input)="dt.filterGlobal(getEventValue($event), 'contains')"
+                  placeholder="Rechercher..." />
+  
+              </span>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header" let-materiel>
+            <tr>
+              <th pSortableColumn="id">Identifiant<p-sortIcon field="id"></p-sortIcon>
+              </th>
+              <th pSortableColumn="désignation">Désignation<p-sortIcon field="désignation"></p-sortIcon>
+              </th>
+              <th pSortableColumn="prix">Prix<p-sortIcon field="prix"></p-sortIcon>
+              </th>
+              <th pSortableColumn="dateAchat">Date d'achat<p-sortIcon field="dateAchat"></p-sortIcon>
+              </th>
+              <th pSortableColumn="quantite">Quantité<p-sortIcon field="quantite"></p-sortIcon>
+              </th>
+              <th></th>
+  
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-materiel let-index="rowIndex">
+            <tr>
+              <td style="min-width:200px">{{materiel.user.nom}}</td>
+              <td style="min-width:200px">{{materiel.user.prenoms}}</td>
+              <td style="min-width:200px">{{materiel.user.genre}}</td>
+              <td style="min-width:200px">{{materiel.user.email}}</td>
+              <td style="min-width:200px">{{materiel.user.tel}}</td>
+              <td style="flex: 0 0 4rem">
+                <button pButton pRipple type="button" icon="pi pi-angle-right" 
+                  class="p-button-rounded p-button-text"></button>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+              Total: 
+            </div>
+          </ng-template>
+        </p-table>
+      </div>
+  
+    </div>
+  </section>

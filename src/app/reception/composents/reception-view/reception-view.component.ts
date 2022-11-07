@@ -55,7 +55,7 @@ export class ReceptionViewComponent implements OnInit {
         this.loading=false
 
       },
-      error: (e) => { console.log("erreur :" + e) },
+      error: (e) => {},
       complete: () => {
       }
     })
@@ -180,15 +180,14 @@ SaveData(){
   this.reception.prenoms=this.receptionForms.get('prenoms')?.value
   this.reception.dateNaissance=this.receptionForms.get('dateNaissance')?.value
   this.reception.login=this.receptionForms.get('login')?.value
-  this.reception.genre=this.receptionForms.get('genre')?.value
+  let val=this.receptionForms.get('genre')?.value
+  this.reception.genre=val.name
   this.reception.tel=this.receptionForms.get('tel')?.value
   this.reception.tel2=this.receptionForms.get('tel2')?.value
 
   this.reception.fcmToken=""
   this.reception.typeEmploye=null
 
-
-  console.log(this.reception)
      this.receptService.sendReception(this.reception).subscribe({
 
       next:(v)=>{
