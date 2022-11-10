@@ -10,7 +10,7 @@ import * as saveAs from 'file-saver';
 import * as jspdf from 'jspdf'
 import 'jspdf-autotable'
 import { UserOptions } from 'jspdf-autotable';
-
+import {PrimeNGConfig} from 'primeng/api';
 
 interface jsPDFWithPlugin extends jspdf.jsPDF{
     autoTable: (options: UserOptions)=> jspdf.jsPDF;
@@ -57,13 +57,12 @@ export class AssuranceViewComponent implements OnInit {
     private assurForm:FormBuilder,
     private confirmationService: ConfirmationService, 
     private messageService: MessageService,
+    private primeNgConfig: PrimeNGConfig,
 
  ) { }
 
   ngOnInit(): void {
-    /**
-     * formulaire pour enregistrer une assurance
-     */
+
     this.assuranceForm = this.assurForm.group({
       id:null,
       email: ['', [Validators.required, Validators.maxLength(30), Validators.email]],
@@ -81,21 +80,20 @@ export class AssuranceViewComponent implements OnInit {
         this.posts = value.data ? value : []
         this.assurances = this.posts.data
         this.loading=false
-
       },
       error: (e) => { console.log("erreur :" + e) },
       complete: () => {
       }
     })
-    this.assurService.getResponsable().subscribe({
-      next:(value:any)=>{
-        this.posts2 = value.data ? value : []
-          console.log(this.posts2.data)
-      },
-      error: (e) => { console.log("erreur :" + e) },
-      complete: () => {
-      }
-    })
+    this.primeNgConfig.setTranslation({
+      startsWith: 'Commence par',
+      contains : 'Contient',
+      notContains : 'Ne contient pas',
+      endsWith: 'Fini par',
+      equals : 'Egale à',
+      notEquals : 'différent de',
+      noFilter : 'Pas de filtre',
+    });
   }
   detail(a:any){
     this.route.navigate(['admin/assurance/detail',a.id]);

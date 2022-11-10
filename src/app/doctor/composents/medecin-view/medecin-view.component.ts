@@ -118,6 +118,9 @@ export class MedecinViewComponent implements OnInit {
       {name:'femme'}
     ]
   }
+  hideOpen(){
+    this.personneDialog = false;
+  }
   
   exportPdf() {
   

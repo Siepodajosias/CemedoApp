@@ -150,7 +150,7 @@
     
             <ng-template pTemplate="right">
     
-              <button pButton pRipple label="Enregistrer" icon="pi pi-send" class="p-button-help"
+              <button pButton pRipple label="Créer un nouveau responsable" icon="pi pi-plus" class="p-button-help"
                 (click)="openNew()"></button>
             </ng-template>
           </p-toolbar>
@@ -198,7 +198,7 @@
           </p-table>
         </div>
     
-        <p-dialog [(visible)]="personneDialog" [style]="{width: '650px'}" header="Nouveau responsable" [modal]="true"
+        <p-dialog [(visible)]="personneDialog" [style]="{width: '650px'}" header="Formulaire d'enregistrement d'un responsable" [modal]="true"
           styleClass="p-fluid">
           <form [formGroup]="responsableForms">
             <div class="p-fluid grid">

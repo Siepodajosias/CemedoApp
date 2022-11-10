@@ -16,13 +16,20 @@
 
         <ng-template pTemplate="right">
 
-          <button pButton pRipple label="Enregistrer" icon="pi pi-send" class="p-button-help"
+          <button pButton pRipple label="Créer une nouvel assurance" icon="pi pi-plus" class="p-button-help"
             (click)="openNew()"></button>
         </ng-template>
       </p-toolbar>
 
-      <p-table #dt [value]="assurances" [scrollable]="true" scrollHeight="400px"
-        [globalFilterFields]="['libelle','email','ville']" [loading]="loading" [filterDelay]="0">
+      <p-table #dt [value]="assurances" 
+      [scrollable]="true" 
+      scrollHeight="400px"
+        [globalFilterFields]="['libelle','email','ville']" 
+        [loading]="loading" 
+        [filterDelay]="0"
+        styleClass="p-datatable-gridlines"
+				[resizableColumns]="true"
+        >
         <ng-template pTemplate="caption">
           <div class="flex align-items-center justify-content-between">
             <h5 class="m-0">Assurance</h5>
@@ -35,7 +42,7 @@
             </span>
           </div>
         </ng-template>
-        <ng-template pTemplate="header" let-assurance>
+        <ng-template pTemplate="header">
           <tr>
             <th pSortableColumn="libelle">Nom<p-sortIcon field="libelle"></p-sortIcon>
             </th>
@@ -45,30 +52,41 @@
             </th>
             <th pSortableColumn="ville">Ville<p-sortIcon field="ville"></p-sortIcon>
             </th>
-            <th></th>
-            <th></th>
+          </tr>
 
+          <tr>	
+            <th>
+              <p-columnFilter type="text" field="libelle"></p-columnFilter>
+            </th>
+            <th>
+              <p-columnFilter type="text" field="email"></p-columnFilter>
+            </th>
+            <th>
+              <p-columnFilter type="text" field="tel"></p-columnFilter>
+            </th>
+            <th>
+              <p-columnFilter type="text" field="ville"></p-columnFilter>
+            </th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-assurance let-index="rowIndex">
           <tr>
-            <td style="min-width:200px">{{assurance.libelle}}</td>
-            <td style="min-width:200px">{{assurance.email}}</td>
-            <td style="min-width:200px">{{assurance.tel}}</td>
-            <td style="min-width:200px">{{assurance.ville}}</td>
-            <td style="flex: 0 0 4rem">
-              <button pButton pRipple type="button" icon="pi pi-pencil" (click)="detail(assurance)"
-                class="p-button-rounded p-button-text"></button>
+            <td>{{assurance.libelle}}</td>
+            <td>{{assurance.email}}</td>
+            <td>{{assurance.tel}}</td>
+            <td>{{assurance.ville}}
+              <button pButton pRipple type="button" pTooltip="Modifier" icon="pi pi-pencil" (click)="detail(assurance)"
+                class="p-button-rounded p-button-text text-rigth"></button>
+                <button pButton pRipple type="button" pTooltip="Detail de l'assurance" icon="pi pi-angle-right" (click)="detail(assurance)"
+                class="p-button-rounded p-button-text text-rigth"></button>
+
             </td>
-            <td style="flex: 0 0 4rem">
-              <button pButton pRipple type="button" icon="pi pi-angle-right" (click)="detail(assurance)"
-                class="p-button-rounded p-button-text"></button>
-            </td>
+ 
           </tr>
         </ng-template>
         <ng-template pTemplate="summary">
           <div class="flex align-items-center justify-content-between">
-            Total: {{assurances ? assurances.length : 0 }}
+            Total: {{assurances ? assurances.length : 0 }} assurances
           </div>
         </ng-template>
       </p-table>
@@ -76,7 +94,7 @@
 
     <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
 
-    <p-dialog [(visible)]="personneDialog" [style]="{width: '450px'}" header="Nouvelle assurance" [modal]="true"
+    <p-dialog [(visible)]="personneDialog" [style]="{width: '450px'}" header="Formulaire d'enregistrement d'une assurance" [modal]="true"
       styleClass="p-fluid">
 
       <form [formGroup]="assuranceForm">

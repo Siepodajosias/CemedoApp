@@ -16,7 +16,7 @@
 
         <ng-template pTemplate="right">
 
-          <button pButton pRipple label="Enregistrer" icon="pi pi-send" class="p-button-help"
+          <button pButton pRipple label="Créer un nouveau medecin" icon="pi pi-plus" class="p-button-help"
             (click)="openNew()"></button>
         </ng-template>
       </p-toolbar>
@@ -83,7 +83,7 @@
     <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
 
     <p-toast></p-toast>
-    <p-dialog [(visible)]="personneDialog" [style]="{width: '750px'}" header="Nouveau medecin" [modal]="true"
+    <p-dialog [(visible)]="personneDialog" [style]="{width: '750px'}" header="Formulaire de création d'un medecin" [modal]="true"
       styleClass="p-fluid">
       <form [formGroup]="MedecinForms" (ngSubmit)="SaveData()">
         <div class="grid">
@@ -167,11 +167,14 @@
             <div class="flex justifier-content-end">
   
               <button type="submit" pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-bouton-texte p-bouton-sm
-                      flex align-items-center justifier-content-center w-10rem h-2rem m-2
-                      
+                       w-10rem h-2rem m-2
                       " pTooltip="Click pour enregistrer"
                       [disabled]="!MedecinForms.valid"
                       ></button>
+
+                      <button type="button" pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-danger p-bouton-sm
+                      w-10rem h-2rem m-2
+                     " (click)="hideOpen()"></button>
             </div>
   
           </div>

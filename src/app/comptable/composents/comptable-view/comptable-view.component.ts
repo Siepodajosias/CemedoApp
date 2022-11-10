@@ -141,7 +141,9 @@ toggleLock(data:any, frozen:any, index:any) {
     {name:'femme'}
   ]
 }
-
+hideOpen(){
+  this.personneDialog=false
+}
 exportPdf() {
 
   const doc = new jspdf.jsPDF('portrait','px','a4') as jsPDFWithPlugin;
