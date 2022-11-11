@@ -9,9 +9,9 @@
       <p-toolbar styleClass="mb-4">
         <ng-template pTemplate="left">
           <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
-            class="p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom"></button>
+            class="p-button-success mr-2" pTooltip="Export XLSX" tooltipPosition="bottom"></button>
           <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()"
-            class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
+            class="p-button-warning mr-2" pTooltip="Export PDF" tooltipPosition="bottom"></button>
         </ng-template>
 
         <ng-template pTemplate="right">
@@ -76,9 +76,9 @@
             <td>{{assurance.tel}}</td>
             <td>{{assurance.ville}}
               <button pButton pRipple type="button" pTooltip="Modifier" icon="pi pi-pencil" (click)="detail(assurance)"
-                class="p-button-rounded p-button-text text-rigth"></button>
+                class="p-button-rounded p-button-text right"></button>
                 <button pButton pRipple type="button" pTooltip="Detail de l'assurance" icon="pi pi-angle-right" (click)="detail(assurance)"
-                class="p-button-rounded p-button-text text-rigth"></button>
+                class="p-button-rounded p-button-text text-center"></button>
 
             </td>
  

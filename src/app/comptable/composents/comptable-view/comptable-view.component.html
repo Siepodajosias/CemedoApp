@@ -13,7 +13,6 @@
           </ng-template>
   
           <ng-template pTemplate="right">
-              
               <button pButton pRipple label="Créer un nouveau comptable" icon="pi pi-plus" class="p-button-help" (click)="openNew()"></button>
           </ng-template>
       </p-toolbar>
@@ -22,6 +21,8 @@
       [globalFilterFields]="['nom','prenom']"
       [loading]="loading"
       [filterDelay]="0"
+      styleClass="p-datatable-gridlines"
+      [resizableColumns]="true"
           >
           <ng-template pTemplate="caption">
               <div class="flex align-items-center justify-content-between">
@@ -39,28 +40,38 @@
           </ng-template>
           <ng-template pTemplate="header" let-comptable>
               <tr>
-                  <th pSortableColumn="nom">Nom<p-sortIcon field="libelle"></p-sortIcon></th>
-                  <th pSortableColumn="prenom">Prenom <p-sortIcon field="email"></p-sortIcon></th>
-                  <th pSortableColumn="genre">Genre <p-sortIcon field="tel"></p-sortIcon></th>
-                  <th pSortableColumn="email">E-mail<p-sortIcon field="ville"></p-sortIcon></th>
-  
+                  <th pSortableColumn="nom">Nom<p-sortIcon field="nom"></p-sortIcon></th>
+                  <th pSortableColumn="prenoms">Prenom <p-sortIcon field="prenoms"></p-sortIcon></th>
+                  <th pSortableColumn="genre">Genre <p-sortIcon field="genre"></p-sortIcon></th>
+                  <th pSortableColumn="email">E-mail<p-sortIcon field="email"></p-sortIcon></th>
+              </tr>
+              <tr>	
+                <th>
+                  <p-columnFilter type="text" field="nom"></p-columnFilter>
+                </th>
+                <th>
+                  <p-columnFilter type="text" field="prenoms"></p-columnFilter>
+                </th>
+                <th>
+                  <p-columnFilter type="text" field="genre"></p-columnFilter>
+                </th>
+                <th>
+                  <p-columnFilter type="text" field="email"></p-columnFilter>
+                </th>
               </tr>
           </ng-template>
           <ng-template pTemplate="body" let-comptable let-index="rowIndex">
               <tr>
-                  <td style="min-width:200px">{{comptable.nom}}</td>
-                  <td style="min-width:200px">{{comptable.prenoms}}</td>
-                  <td style="min-width:200px">{{comptable.age}}</td>
-                  <td style="min-width:200px">{{comptable.email}}</td>
-                  <td style="flex: 0 0 4rem">
-                      <button pButton pRipple type="button"  icon="pi pi-pencil"  (click)="detail(comptable)" 
-                      class="p-button-rounded p-button-text"
-                      ></button>
-                  </td>
-                  <td style="flex: 0 0 4rem">
-                      <button pButton pRipple type="button"  icon="pi pi-angle-right"  (click)="detail(comptable)" 
-                      class="p-button-rounded p-button-text"
-                      ></button>
+                  <td >{{comptable.nom}}</td>
+                  <td >{{comptable.prenoms}}</td>
+                  <td >{{comptable.age}}</td>
+                  <td >{{comptable.email}}
+                    <button pButton pRipple type="button" pTooltip="Modifier"  icon="pi pi-pencil"  (click)="detail(comptable)" 
+                    class="p-button-rounded p-button-text"
+                    ></button>
+                    <button pButton pRipple type="button" pTooltip="Detail du comptable"  icon="pi pi-angle-right"  (click)="detail(comptable)" 
+                    class="p-button-rounded p-button-text"
+                    ></button>
                   </td>
               </tr>
           </ng-template>

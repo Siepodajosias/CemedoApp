@@ -20,8 +20,13 @@
         </ng-template>
       </p-toolbar>
 
-      <p-table #dt [value]="infirmiers" [scrollable]="true" scrollHeight="400px"
-        [globalFilterFields]="['user.nom','user.prenoms']" [loading]="loading" [filterDelay]="0">
+      <p-table #dt [value]="infirmiers" 
+        [scrollable]="true" scrollHeight="400px"
+        [globalFilterFields]="['user.nom','user.prenoms']" 
+        [loading]="loading" [filterDelay]="0"
+        styleClass="p-datatable-gridlines"
+				[resizableColumns]="true"
+        >
         <ng-template pTemplate="caption">
           <div class="flex align-items-center justify-content-between">
             <h5 class="m-0">Infirmiers</h5>
@@ -48,23 +53,40 @@
             </th>
             <th pSortableColumn="tel2">E-mail<p-sortIcon field="tel2"></p-sortIcon>
             </th>
-            <th></th>
+          </tr>
+          
+          <tr>	
+            <th>
+              <p-columnFilter type="text" field="nom"></p-columnFilter>
+            </th>
+            <th>
+              <p-columnFilter type="text" field="prenoms"></p-columnFilter>
+            </th>
+            <th>
+              <p-columnFilter type="text" field="genre"></p-columnFilter>
+            </th>
+            <th>
+              <p-columnFilter type="text" field="email"></p-columnFilter>
+            </th>
+            <th>
+              <p-columnFilter type="text" field="tel"></p-columnFilter>
+            </th>
+            <th>
+              <p-columnFilter type="text" field="tel2"></p-columnFilter>
+            </th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-infirmier let-index="rowIndex">
           <tr>
-            <td style="min-width:200px">{{infirmier.user.nom}}</td>
-            <td style="min-width:200px">{{infirmier.user.prenoms}}</td>
-            <td style="min-width:200px">{{infirmier.user.genre}}</td>
-            <td style="min-width:200px">{{infirmier.user.email}}</td>
-            <td style="min-width:200px">{{infirmier.user.tel}}</td>
-            <td style="min-width:200px">{{infirmier.user.tel2}}</td>
-            <td style="flex: 0 0 4rem">
-              <button pButton pRipple type="button" icon="pi pi-pencil" (click)="detail(infirmier)"
+            <td>{{infirmier.user.nom}}</td>
+            <td>{{infirmier.user.prenoms}}</td>
+            <td>{{infirmier.user.genre}}</td>
+            <td>{{infirmier.user.email}}</td>
+            <td>{{infirmier.user.tel}}</td>
+            <td>{{infirmier.user.tel2}}
+              <button pButton pRipple type="button" pTooltip="Modifier" icon="pi pi-pencil" (click)="detail(infirmier)"
                 class="p-button-rounded p-button-text"></button>
-            </td>
-            <td style="flex: 0 0 4rem">
-              <button pButton pRipple type="button" icon="pi pi-angle-right" (click)="detail(infirmier)"
+                <button pButton pRipple type="button" pTooltip="Detail de l'infirmier"  icon="pi pi-angle-right" (click)="detail(infirmier)"
                 class="p-button-rounded p-button-text"></button>
             </td>
           </tr>

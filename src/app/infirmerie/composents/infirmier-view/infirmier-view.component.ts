@@ -9,6 +9,7 @@ import * as jspdf from 'jspdf'
 import 'jspdf-autotable'
 import { UserOptions } from 'jspdf-autotable';
 import { Table } from 'primeng/table'
+import {PrimeNGConfig} from 'primeng/api';
 
 interface jsPDFWithPlugin extends jspdf.jsPDF{
     autoTable: (options: UserOptions)=> jspdf.jsPDF;
@@ -45,7 +46,8 @@ export class InfirmierViewComponent implements OnInit {
 
   constructor(private infirmierS:InfirmierService,private route:Router,
     private messageService:MessageService,
-    private infirmierForm: FormBuilder
+    private infirmierForm: FormBuilder,
+    private primeNgConfig: PrimeNGConfig
     ) { }
 
   ngOnInit(): void {
@@ -93,6 +95,16 @@ export class InfirmierViewComponent implements OnInit {
       */
 
     })
+
+    this.primeNgConfig.setTranslation({
+      startsWith: 'Commence par',
+      contains : 'Contient',
+      notContains : 'Ne contient pas',
+      endsWith: 'Fini par',
+      equals : 'Egale à',
+      notEquals : 'différent de',
+      noFilter : 'Pas de filtre',
+    });
   }
   detail(a:any){
     //this.route.navigate(['administrateur/detailM',a]);

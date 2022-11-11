@@ -9,11 +9,11 @@ import * as jspdf from 'jspdf'
 import 'jspdf-autotable'
 import { UserOptions } from 'jspdf-autotable';
 import { Table } from 'primeng/table'
+import {PrimeNGConfig} from 'primeng/api';
 
 interface jsPDFWithPlugin extends jspdf.jsPDF{
     autoTable: (options: UserOptions)=> jspdf.jsPDF;
 }
-
 
 
 @Component({
@@ -52,7 +52,8 @@ export class MedecinViewComponent implements OnInit {
 
   constructor(private medecinservice:MedecinService,private route:Router,
     private medecinForm: FormBuilder,
-    private messageService:MessageService) { }
+    private messageService:MessageService,
+    private primeNgConfig: PrimeNGConfig) { }
 
   ngOnInit(): void {
     
@@ -99,6 +100,15 @@ export class MedecinViewComponent implements OnInit {
       //numeroCni:['',[Validators.required, Validators.maxLength(10)]]
 
     })
+    this.primeNgConfig.setTranslation({
+      startsWith: 'Commence par',
+      contains : 'Contient',
+      notContains : 'Ne contient pas',
+      endsWith: 'Fini par',
+      equals : 'Egale à',
+      notEquals : 'différent de',
+      noFilter : 'Pas de filtre',
+    });
   }
   detail(a:any){
     this.route.navigate(['admin/medecin/detail',a]);

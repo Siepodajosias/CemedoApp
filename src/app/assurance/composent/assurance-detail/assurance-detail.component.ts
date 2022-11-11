@@ -4,6 +4,7 @@ import { Assurance } from '../../model/assurance';
 import { AssuranceService } from '../../service/assurance.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Responsable } from '../../model/responsable';
+import { PrimeNGConfig} from 'primeng/api';
 
 
 import * as saveAs from 'file-saver';
@@ -99,6 +100,7 @@ export class AssuranceDetailComponent implements OnInit {
     private responsableForm:FormBuilder,
     private confirmationService: ConfirmationService, 
     private messageService: MessageService,
+    private primeNgConfig: PrimeNGConfig,
     
     ) { }
 
@@ -155,6 +157,15 @@ export class AssuranceDetailComponent implements OnInit {
           username:['']*/
     
         })
+        this.primeNgConfig.setTranslation({
+          startsWith: 'Commence par',
+          contains : 'Contient',
+          notContains : 'Ne contient pas',
+          endsWith: 'Fini par',
+          equals : 'Egale à',
+          notEquals : 'différent de',
+          noFilter : 'Pas de filtre',
+        });
         
   }
 

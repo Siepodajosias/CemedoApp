@@ -155,8 +155,13 @@
             </ng-template>
           </p-toolbar>
     
-          <p-table #dt [value]="responsables" [scrollable]="true" scrollHeight="400px"
-            [globalFilterFields]="['nom','prenoms','ville']" [loading]="loading" [filterDelay]="0">
+          <p-table #dt [value]="responsables" [scrollable]="true" scrollHeight="200px"
+            [globalFilterFields]="['nom','prenoms','ville']"
+             [loading]="loading" 
+             [filterDelay]="0"
+             styleClass="p-datatable-gridlines"
+             [resizableColumns]="true"
+             >
             <ng-template pTemplate="caption">
               <div class="flex align-items-center justify-content-between">
                 <h5 class="m-0">Responsables</h5>
@@ -179,20 +184,34 @@
                 </th>
                 <th pSortableColumn="ville">Ville<p-sortIcon field="ville"></p-sortIcon>
                 </th>
-    
+              </tr>
+              
+              <tr>	
+                <th>
+                  <p-columnFilter type="text" field="libelle"></p-columnFilter>
+                </th>
+                <th>
+                  <p-columnFilter type="text" field="email"></p-columnFilter>
+                </th>
+                <th>
+                  <p-columnFilter type="text" field="tel"></p-columnFilter>
+                </th>
+                <th>
+                  <p-columnFilter type="text" field="ville"></p-columnFilter>
+                </th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-responsable let-index="rowIndex">
               <tr>
-                <td style="min-width:200px">{{responsable.nom}}</td>
-                <td style="min-width:200px">{{responsable.prenoms}}</td>
-                <td style="min-width:200px">{{responsable.genre}}</td>
-                <td style="min-width:200px">{{assurance.ville}}</td>
+                <td >{{responsable.nom}}</td>
+                <td >{{responsable.prenoms}}</td>
+                <td >{{responsable.genre}}</td>
+                <td >{{assurance.ville}}</td>
               </tr>
             </ng-template>
             <ng-template pTemplate="summary">
               <div class="flex align-items-center justify-content-between">
-                Total: {{responsables ? responsables.length : 0 }}
+                Total: {{responsables ? responsables.length : 0 }}responsable
               </div>
             </ng-template>
           </p-table>

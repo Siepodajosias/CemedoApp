@@ -9,6 +9,7 @@ import * as jspdf from 'jspdf'
 import 'jspdf-autotable'
 import { UserOptions } from 'jspdf-autotable';
 import { Table } from 'primeng/table'
+import {PrimeNGConfig} from 'primeng/api';
 
 interface jsPDFWithPlugin extends jspdf.jsPDF{
     autoTable: (options: UserOptions)=> jspdf.jsPDF;
@@ -44,7 +45,8 @@ export class ComptableViewComponent implements OnInit {
   genres:any
   constructor(private cptservice:ComptableService,
     private route:Router,private messageService:MessageService,
-    private comptableForm: FormBuilder
+    private comptableForm: FormBuilder,
+    private primeNgConfig: PrimeNGConfig
 ) { }
 
   ngOnInit(): void {
@@ -58,7 +60,6 @@ export class ComptableViewComponent implements OnInit {
       complete: () => {
       }
     })
-
     this.comptableForms = this.comptableForm.group({
 
       id:null,
@@ -89,6 +90,15 @@ export class ComptableViewComponent implements OnInit {
       numeroCni:['', [Validators.required, Validators.maxLength(20)]]
       */
     })
+    this.primeNgConfig.setTranslation({
+      startsWith: 'Commence par',
+      contains : 'Contient',
+      notContains : 'Ne contient pas',
+      endsWith: 'Fini par',
+      equals : 'Egale à',
+      notEquals : 'différent de',
+      noFilter : 'Pas de filtre',
+    });
    }
   detail(a:any){
     this.route.navigate(['administrateur/detailM',a]);
