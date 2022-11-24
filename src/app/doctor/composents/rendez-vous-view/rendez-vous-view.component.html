@@ -51,7 +51,7 @@
 
         <p-fieldset legend="Filtre" [toggleable]="true">
     
-            <p-table #dt  [value]="rdvs"  [scrollable]="true" scrollHeight="400px"
+            <p-table #dt  [value]="rdvs"  [scrollable]="true" scrollHeight="490px"
             [globalFilterFields]="['dateDPrdv','daterdv','medecin','patient']"
             [filterDelay]="0"
                 >
@@ -61,7 +61,7 @@
                         <div class="left">
                             <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success mr-2"  pTooltip="XLS" tooltipPosition="bottom"></button>
                             <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
-                            <button pButton pRipple label="Enregistrer" icon="pi pi-send" class="p-button-help" pTooltip="Prendre un rendez-vous"></button>
+                            <button pButton pRipple label="Créer un rendez-vous" icon="pi pi-plus" class="p-button-help"></button>
                         </div>
         
                         <span class="p-input-icon-left">

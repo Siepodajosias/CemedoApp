@@ -473,7 +473,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: [],
       },
       {
-        path: "/doctor/patient/liste3",
+        path: "/doctor/patient/liste",
         title: "Lister",
         moduleName: "",
         iconType: "",
@@ -862,8 +862,8 @@ export const ROUTES: RouteInfo[] = [
     role: ["Reception"],
     submenu: [
       {
-        path: "/reception/Rdv",
-        title: "Prendre un rendez-vous",
+        path: "/reception/medecin/Rdv",
+        title: "Liste des rendez-vous",
         moduleName: "",
         iconType: "material-icons-two-tone",
         icon: "",
@@ -875,8 +875,8 @@ export const ROUTES: RouteInfo[] = [
         submenu: [],
       },
       {
-        path: "/reception/Rdv",
-        title: "Rendez-vous en cour...",
+        path: "/reception/medecin/RdvCalendrier",
+        title: "Calendrier des rendez-vous",
         moduleName: "",
         iconType: "material-icons-two-tone",
         icon: "",
@@ -891,7 +891,7 @@ export const ROUTES: RouteInfo[] = [
     ],
   },
   {
-    path: "/reception/medecin/liste2",
+    path: "/reception/medecin/liste",
     title: "Médecins",
     moduleName: "",
     iconType: "material-icons-two-tone",
@@ -904,7 +904,7 @@ export const ROUTES: RouteInfo[] = [
     submenu: [],
   },
   {
-    path: "/reception/patient/liste2",
+    path: "/reception/patient/liste",
     title: "Patients",
     moduleName: "patient",
     iconType: "material-icons-two-tone",

@@ -24,7 +24,7 @@ import { MatTableModule} from '@angular/material/table';
 
 import { MatDialogModule } from "@angular/material/dialog";
 import { ReactiveFormsModule, FormsModule} from '@angular/forms'
-import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { ToastrModule} from 'ngx-toastr';
 import { MatCardModule } from '@angular/material/card';
 
 import { PatientRoutingModule } from "./patient-routing.module";
@@ -35,9 +35,6 @@ import { PatientFormsComponent } from './composents/patient-view2/patient-forms.
 import { PatientDossierComponent } from './composents/patient-dossier/patient-dossier.component';
 import { PatientService } from "./service/patient.service";
 import { OrdonnanceComponent } from './composents/ordonnance/ordonnance.component';
-import { PatientView2Component } from './composents/patient-view2/patient-view2.component';
-import { PatientView3Component } from './composents/patient-view3/patient-view3.component';
-
 
 //primeng
 import { CardModule} from 'primeng/card'
@@ -69,8 +66,7 @@ import { SharedModule } from "src/app/shared/shared.module";
     PatientDetailComponent,
     PatientFormsComponent, 
     PatientDossierComponent, 
-    OrdonnanceComponent, PatientView2Component, 
-    PatientView3Component,
+    OrdonnanceComponent,
 
   ],
   imports: [

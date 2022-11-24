@@ -14,8 +14,7 @@
             class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
         </ng-template>
 
-        <ng-template pTemplate="right">
-
+        <ng-template pTemplate="right" *ngIf="getActif()">
           <button pButton pRipple label="Créer un nouveau medecin" icon="pi pi-plus" class="p-button-help"
             (click)="openNew()"></button>
         </ng-template>
@@ -25,8 +24,8 @@
         [globalFilterFields]="['user.nom', 'user.prenoms', 'user.genre','user.specialite']" [loading]="loading"
         [filterDelay]="0"
         styleClass="p-datatable-gridlines"
-				[resizableColumns]="true"
-        >
+        selectionMode="multiple"
+				[resizableColumns]="true">
         <ng-template pTemplate="caption">
           <div class="flex align-items-center justify-content-between">
             <h5 class="m-0">Medecin</h5>
@@ -53,7 +52,6 @@
             </th>
             <th pSortableColumn="tel2">Téléphone<p-sortIcon field="tel2"></p-sortIcon>
             </th>
-
             <tr>	
               <th>
                 <p-columnFilter type="text" field="nom"></p-columnFilter>
@@ -136,7 +134,7 @@
             </div>
   
             <div class="col-12">
-              <p-calendar [showIcon]="true" inputId="icon"></p-calendar>
+              <p-calendar [baseZIndex]="3000" appendTo="body" [showIcon]="true" inputId="icon"></p-calendar>
             </div>
           </div>
   

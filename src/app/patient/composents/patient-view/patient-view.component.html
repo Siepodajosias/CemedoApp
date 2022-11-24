@@ -10,12 +10,17 @@
             <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success mr-2"  pTooltip="XLS" tooltipPosition="bottom"></button>
             <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
         </ng-template>
+        <ng-template pTemplate="right" *ngIf="getActif()">
+            <button pButton pRipple label="Créer un nouveau patient" icon="pi pi-plus" class="p-button-help"
+            ></button>
+        </ng-template>
     </p-toolbar>
       <p-table #dt  [value]="patients"  [scrollable]="true" scrollHeight="400px"
       [globalFilterFields]="['user.nom','user.prenoms','lieuHabitation','profession']"
       [loading]="loading"
       [filterDelay]="0"
-          >
+      styleClass="p-datatable-gridlines"
+      selectionMode="multiple">
           <ng-template pTemplate="caption">
               <div class="flex align-items-center justify-content-between">
                   <h5 class="m-0">Patients</h5>

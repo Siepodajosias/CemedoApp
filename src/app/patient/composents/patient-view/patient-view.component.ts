@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, ViewChild, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Patient1} from '../../model/patient1';
 import { PatientService } from '../../service/patient.service';
 import { MatTableDataSource } from '@angular/material/table';
@@ -24,12 +24,11 @@ interface jsPDFWithPlugin extends jspdf.jsPDF{
   templateUrl: './patient-view.component.html',
   styleUrls: ['./patient-view.component.scss']
 })
-export class PatientViewComponent implements OnInit,OnDestroy {
+export class PatientViewComponent implements OnInit {
   displayedColumns: string[] = ['nom', 'prenoms', 'genre', 'profession', 'lieuHabitation', 'tel', 'tel2','edit'];
   patient!:MatTableDataSource<Patient1>
   posts: any
   post1: any
-  
   patients:any[]=[];
   dragdrop:boolean=true
 
@@ -48,11 +47,8 @@ export class PatientViewComponent implements OnInit,OnDestroy {
    serie: ApexAxisChartSeries;
    chart:ApexChart;
    options: any;
-  constructor(private patientH: PatientService,private route:Router,
-) {
-  }
+  constructor(private patientH: PatientService,private route:Router) {}
   ngOnInit(): void {
-     
    this.patientH.getPatientP().subscribe({
       next: (value: any) => {
         this.posts = value.data ? value : []
@@ -68,7 +64,6 @@ export class PatientViewComponent implements OnInit,OnDestroy {
   }
   detail(a:any){
     this.route.navigate(['admin/patient/detail',a]);
-
   }
   supprimer(a:any){
     console.log(a)
@@ -90,9 +85,6 @@ export class PatientViewComponent implements OnInit,OnDestroy {
     const filterValue = (event.target as HTMLInputElement).value;
     this.patient.filter = filterValue.trim().toLowerCase();
   }
-  ngOnDestroy(): void {
-         
-    }
 
     saveAsExcelFile(buffer: any, fileName: string): void {
 
@@ -104,7 +96,7 @@ export class PatientViewComponent implements OnInit,OnDestroy {
       });
         saveAs(
         data,
-        fileName + "_export_" + new Date() + EXCEL_EXTENSION
+        fileName + "_" + EXCEL_EXTENSION
       );
   
   }
@@ -114,7 +106,6 @@ export class PatientViewComponent implements OnInit,OnDestroy {
   }
   
   getEventValue($event:any) :string {
-    console.log($event.target.value);
     return $event.target.value;
   } 
   
@@ -142,18 +133,21 @@ export class PatientViewComponent implements OnInit,OnDestroy {
             head:this.exportColumns,
             body:this.patients
           })
-      doc.save("Pomptables.pdf")
+      doc.save("rapport-patient.pdf")
   }
   
-  exportExcel() {/*
+  exportExcel() {
   import("xlsx").then(xlsx => {
-  const worksheet = xlsx.utils.json_to_sheet(this.personne);
+  const worksheet = xlsx.utils.json_to_sheet(this.patients);
   const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
   const excelBuffer: any = xlsx.write(workbook, {
     bookType: "xlsx",
     type: "array"
   });
-  this.saveAsExcelFile(excelBuffer, "personne");
-  });*/
+  this.saveAsExcelFile(excelBuffer, "rapport-patient");
+  });
+  }
+  getActif():boolean{
+    return this.route.url.includes('/reception/patient/liste')
   }
 }

@@ -8,14 +8,12 @@ import { DashboardMedecinComponent } from './dashboard-medecin/dashboard-medecin
 import { RapportComponent } from './composents/rapport/rapport.component';
 import { MedecinCalendrierComponent } from './composents/medecin-calendrier/medecin-calendrier.component';
 import { FactureComponent } from './composents/facture/facture.component';
-import { MedecinView2Component } from './composents/medecin-view2/medecin-view2.component';
 import { RendezVousCalendrierComponent } from './composents/rendez-vous-calendrier/rendez-vous-calendrier.component';
 import { RendezVousViewComponent } from './composents/rendez-vous-view/rendez-vous-view.component';
 
 const routes: Routes = [
   {path: 'dashboard',component:DashboardMedecinComponent},
   {path:'liste',component:MedecinViewComponent},
-  {path:'liste2',component:MedecinView2Component},
   {path:'detail/:id',component:MedecinDetailComponent},
   {path:'rapport',component:RapportComponent},
   {path:'calendrier',component:MedecinCalendrierComponent},

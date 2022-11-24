@@ -41,7 +41,6 @@ import { RapportComponent } from './composents/rapport/rapport.component';
 import { MedecinCalendrierComponent } from './composents/medecin-calendrier/medecin-calendrier.component';
 import { MedecinService } from "./service/medecin.service";
 import { FactureComponent } from "./composents/facture/facture.component";
-import { MedecinView2Component } from './composents/medecin-view2/medecin-view2.component';
 import { RendezVousCalendrierComponent } from './composents/rendez-vous-calendrier/rendez-vous-calendrier.component';
 import { RendezVousViewComponent } from './composents/rendez-vous-view/rendez-vous-view.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -82,7 +81,6 @@ import { FieldsetModule} from 'primeng/fieldset';
     RapportComponent,
     MedecinCalendrierComponent,
     FactureComponent,
-    MedecinView2Component,
     RendezVousCalendrierComponent,
     RendezVousViewComponent
 

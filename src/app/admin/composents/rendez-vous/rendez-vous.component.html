@@ -52,11 +52,12 @@
     </div>
 
     <p-fieldset legend="Liste" [toggleable]="true" class="shadow-4">
-
         <p-table #dt  [value]="rdvs"  [scrollable]="true" scrollHeight="400px"
         [globalFilterFields]="['dateDPrdv','daterdv','medecin','patient']"
         [filterDelay]="0"
-            >
+        styleClass="p-datatable-gridlines"
+        selectionMode="multiple"
+        styleClass="p-datatable-gridlines">
             <ng-template pTemplate="caption">
                 <div class="flex align-items-center justify-content-between">
                     <!--la class ne change rien-->
@@ -67,7 +68,6 @@
     
                     <span class="p-input-icon-left">
                         <i class="pi pi-search"></i>
-    
                         <input pInputText type="text"
                         (input)="dt.filterGlobal(getEventValue($event), 'contains')"
                          placeholder="Rechercher..." 
@@ -77,21 +77,32 @@
             </ng-template>
             <ng-template pTemplate="header" let-rdv>
                 <tr>
-                    <th pSortableColumn="dateDPrdv">Date de prise de rendez-vous<p-sortIcon field="dateDPrdv"></p-sortIcon></th>
-                    <th pSortableColumn="daterdv">Date de rendez-vous <p-sortIcon field="daterdv"></p-sortIcon></th>
-                    <th pSortableColumn="medecin">Medecin <p-sortIcon field="medecin"></p-sortIcon></th>
-                    <th pSortableColumn="patient">Patient <p-sortIcon field="patient"></p-sortIcon></th>
-                    <th ></th>
+                    <th class="text-center" pSortableColumn="dateDPrdv">Date de prise de rendez-vous<p-sortIcon field="dateDPrdv"></p-sortIcon></th>
+                    <th class="text-center" pSortableColumn="daterdv">Date de rendez-vous <p-sortIcon field="daterdv"></p-sortIcon></th>
+                    <th class="text-center" pSortableColumn="medecin">Medecin <p-sortIcon field="medecin"></p-sortIcon></th>
+                    <th class="text-center" pSortableColumn="patient">Patient <p-sortIcon field="patient"></p-sortIcon></th>
                 </tr>
+                <tr>	
+                    <th>
+                      <p-columnFilter type="text" field="dateDPrdv"></p-columnFilter>
+                    </th>
+                    <th>
+                      <p-columnFilter type="text" field="daterdv"></p-columnFilter>
+                    </th>
+                    <th>
+                      <p-columnFilter type="text" field="medecin"></p-columnFilter>
+                    </th>
+                    <th>
+                      <p-columnFilter type="text" field="patient"></p-columnFilter>
+                    </th>
+                  </tr>
             </ng-template>
             <ng-template pTemplate="body" let-rdv let-index="rowIndex">
                 <tr>
-                    <td style="min-width:200px">{{rdv.dateDPrdv}}</td>
-                    <td style="min-width:200px">{{rdv.daterdv}}</td>
-                    <td style="min-width:200px">{{rdv.medecin}}</td>
-                    <td style="min-width:200px">{{rdv.patient}}</td>
-    
-                    <td style="flex: 0 0 4rem">
+                    <td class="text-right">{{rdv.dateDPrdv}}</td>
+                    <td class="text-right">{{rdv.daterdv}}</td>
+                    <td class="text-right">{{rdv.medecin}}</td>
+                    <td class="text-right">{{rdv.patient}}
                         <button pButton pRipple type="button"  icon="pi pi-angle-right"  (click)="toggleLock(rdv,false,index)" 
                         class="p-button-rounded p-button-text"
                         ></button>

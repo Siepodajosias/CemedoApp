@@ -222,4 +222,7 @@ export class MedecinViewComponent implements OnInit {
     })
     
    }
+   getActif():boolean{
+    return this.route.url.includes('/admin/medecin/liste')
+   }
 }

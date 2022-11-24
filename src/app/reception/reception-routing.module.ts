@@ -19,7 +19,8 @@ const routes: Routes = [
     import('../doctor/doctor.module').then((m) =>m.DoctorModule),
   },
   {path:'liste',component:ReceptionViewComponent},
-  {path:'detail/:id',component:ReceptionDetailComponent}
+  {path:'detail/:id',component:ReceptionDetailComponent},
+  {path:'medecin',loadChildren:() =>import('../doctor/doctor.module').then((m)=>m.DoctorModule)}
 ];
 
 @NgModule({

@@ -15,7 +15,7 @@
 
         <ng-template pTemplate="right">
 
-          <button pButton pRipple label="Enregistrer" icon="pi pi-send" class="p-button-help"
+          <button pButton pRipple label="Créer un nouveau infirmier" icon="pi pi-plus" class="p-button-help"
             (click)="openNew()"></button>
         </ng-template>
       </p-toolbar>
@@ -25,8 +25,8 @@
         [globalFilterFields]="['user.nom','user.prenoms']" 
         [loading]="loading" [filterDelay]="0"
         styleClass="p-datatable-gridlines"
-				[resizableColumns]="true"
-        >
+        selectionMode="multiple"
+				[resizableColumns]="true">
         <ng-template pTemplate="caption">
           <div class="flex align-items-center justify-content-between">
             <h5 class="m-0">Infirmiers</h5>
@@ -104,9 +104,8 @@
     <p-toast></p-toast>
     <p-dialog [(visible)]="personneDialog" 
     [style]="{width: '750px'}" 
-    header="Nouveau infirmier" [modal]="true"
+    header="Création d'un nouveau infirmier" [modal]="true"
       styleClass="p-fluid">
-      
       <form [formGroup]="infirmierForms" (ngSubmit)="SaveData()">
         <div class="grid">
 
@@ -140,7 +139,7 @@
             </div>
 
             <div class="col-12">
-              <p-calendar [showIcon]="true" inputId="icon"
+              <p-calendar [baseZIndex]="3000" appendTo="body" [showIcon]="true" inputId="icon"
               formControlName="dateNaissance"
               ></p-calendar>
             </div>

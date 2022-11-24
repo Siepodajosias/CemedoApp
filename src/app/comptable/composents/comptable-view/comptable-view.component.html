@@ -18,12 +18,12 @@
       </p-toolbar>
   
       <p-table #dt  [value]="comptables"  [scrollable]="true" scrollHeight="400px"
-      [globalFilterFields]="['nom','prenom']"
+      [globalFilterFields]="['nom','prenoms']"
       [loading]="loading"
       [filterDelay]="0"
       styleClass="p-datatable-gridlines"
-      [resizableColumns]="true"
-          >
+      selectionMode="multiple"
+      [resizableColumns]="true">
           <ng-template pTemplate="caption">
               <div class="flex align-items-center justify-content-between">
                   <h5 class="m-0">Comptable</h5>
@@ -121,7 +121,7 @@
           </div>
 
           <div class="col-12">
-            <p-calendar [showIcon]="true" inputId="icon"></p-calendar>
+            <p-calendar [baseZIndex]="3000" appendTo="body" [showIcon]="true" inputId="icon"></p-calendar>
           </div>
         </div>
 

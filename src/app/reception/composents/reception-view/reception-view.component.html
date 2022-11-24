@@ -12,16 +12,16 @@
           </ng-template>
   
           <ng-template pTemplate="right">
-              
-              <button pButton pRipple label="Enregistrer" icon="pi pi-send" class="p-button-help" (click)="openNew()"></button>
+              <button pButton pRipple label="Créer une nouvelle receptionnistre" icon="pi pi-plus" class="p-button-help" (click)="openNew()"></button>
           </ng-template>
       </p-toolbar>
   
       <p-table #dt  [value]="receptions"  [scrollable]="true" scrollHeight="400px"
       [globalFilterFields]="['user.nom','user.prenoms']"
       [loading]="loading"
-      [filterDelay]="0"
-          >
+      styleClass="p-datatable-gridlines"
+      selectionMode="multiple"
+      [filterDelay]="0">
           <ng-template pTemplate="caption">
               <div class="flex align-items-center justify-content-between">
                   <h5 class="m-0">Receptions</h5>
@@ -79,7 +79,7 @@
   <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
   
   <p-toast></p-toast>
-  <p-dialog [(visible)]="personneDialog" [style]="{width: '750px'}" header="Nouveau receptionniste" [modal]="true"
+  <p-dialog [(visible)]="personneDialog" [style]="{width: '750px'}" header="Création d'une nouvelle receptionniste" [modal]="true"
     styleClass="p-fluid">
     <form [formGroup]="receptionForms" (ngSubmit)="SaveData()">
       <div class="grid">
@@ -114,7 +114,7 @@
           </div>
 
           <div class="col-12">
-            <p-calendar [showIcon]="true" inputId="icon"></p-calendar>
+            <p-calendar [baseZIndex]="3000" appendTo="body" [showIcon]="true" inputId="icon"></p-calendar>
           </div>
         </div>
 
