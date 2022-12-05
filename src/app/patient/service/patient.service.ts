@@ -9,10 +9,10 @@ import { PageCarnetSante } from '../model/page-carnet-sante';
   providedIn: 'root'
 })
 export class PatientService {
-  private config:string="https://cemedo-api-java.herokuapp.com/assures/patient/"
-  private config4:string="https://cemedo-api-java.herokuapp.com/assures/"
-  private config2:string="https://cemedo-api-java.herokuapp.com/ordonnances"
-  private config3:string="https://cemedo-api-java.herokuapp.com/page_carnet_santes"
+  private config:string="http://38.242.229.12:80/assures/patient/"
+  private config4:string="http://38.242.229.12:80/assures/"
+  private config2:string="http://38.242.229.12:80/ordonnances"
+  private config3:string="http://38.242.229.12:80/page_carnet_santes"
   constructor(private httpPat:HttpClient) { }
 
  //patients ressource

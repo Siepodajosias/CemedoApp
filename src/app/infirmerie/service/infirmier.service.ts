@@ -8,8 +8,8 @@ import { Rendezvous } from '../model/rendezvous';
   providedIn: 'root'
 })
 export class InfirmierService {
-  private config:string="https://cemedo-api-java.herokuapp.com/employe/infirmier/"
-  private config2:string="https://cemedo-api-java.herokuapp.com/rendez_vouses"
+  private config:string="http://38.242.229.12:80/employe/infirmier/"
+  private config2:string="http://38.242.229.12:80/rendez_vouses"
   constructor(private httpInfir:HttpClient) { }
 
   //infirmier ressource

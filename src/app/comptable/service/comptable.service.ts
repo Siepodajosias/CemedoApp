@@ -8,9 +8,8 @@ import { Comptable } from '../model/comptable';
 })
 export class ComptableService {
  
-  private config:string="https://cemedo-api-java.herokuapp.com/employe/comptable/"
+  private config:string="http://38.242.229.12:80/employe/comptable/"
   constructor(private httpCompt:HttpClient) { }
-
 
   //Comptable ressource
   getComptable():Observable<any>{

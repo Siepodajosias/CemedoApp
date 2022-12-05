@@ -8,8 +8,8 @@ import { Responsable } from '../model/responsable';
   providedIn: 'root'
 })
 export class AssuranceService {
-  private config:string="https://cemedo-api-java.herokuapp.com/assurances/"
-  private config2:string="https://cemedo-api-java.herokuapp.com/employe/responsableAssurance/"
+  private config:string="http://38.242.229.12:80/assurances/"
+  private config2:string="http://38.242.229.12:80/employe/responsableAssurance/"
   constructor(private httpAssu:HttpClient) { }
   
   //ressource assurance

@@ -8,8 +8,8 @@ import { Pharmacien } from '../model/pharmacien';
   providedIn: 'root'
 })
 export class PharmacienService {
-  private config:string="https://cemedo-api-java.herokuapp.com/employe/pharmacien"
-  private config2:string="https://cemedo-api-java.herokuapp.com/medicaments"
+  private config:string="http://38.242.229.12:80/employe/pharmacien"
+  private config2:string="http://38.242.229.12:80/medicaments"
   constructor(private httpPhar:HttpClient) { }
 
   //pharmacien ressource

@@ -8,8 +8,8 @@ import { Rendezvous } from '../model/rendezvous';
 })
 export class MedecinService {
 
-  private config:string="https://cemedo-api-java.herokuapp.com/employe/medecin"
-  private config2:string="https://cemedo-api-java.herokuapp.com/rendez_vouses"
+  private config:string="http://38.242.229.12:80/employe/medecin"
+  private config2:string="http://38.242.229.12:80/rendez_vouses"
 
   constructor(private httpMed:HttpClient) { }
 

@@ -8,11 +8,9 @@ import { Facture } from '../model/facture';
   providedIn: 'root'
 })
 export class AdminService {
-  private config1:string="https://cemedo-api-java.herokuapp.com/administrateurs"
-  private config2:string="https://cemedo-api-java.herokuapp.com/factures"
+  private config1:string="http://38.242.229.12:80/administrateurs"
+  private config2:string="http://38.242.229.12:80/factures"
   constructor(private httpadmin:HttpClient) { }
-
-
 
   //administrateur ressources
   getAdmin():Observable<any>{

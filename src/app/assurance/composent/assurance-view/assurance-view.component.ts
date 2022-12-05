@@ -41,10 +41,10 @@ export class AssuranceViewComponent implements OnInit {
   rowGroupMetadata: any;
 
   loading: boolean = true;
-
+  submitted: boolean = false;
   exportColumns: any[]=[];
 
-  personneDialog: any | boolean;
+  assuranceDialog: boolean;
 
 
   assurances:any[]=[]
@@ -62,7 +62,7 @@ export class AssuranceViewComponent implements OnInit {
  ) { }
 
   ngOnInit(): void {
-
+    this.recupererAssurance();
     this.assuranceForm = this.assurForm.group({
       id:null,
       email: ['', [Validators.required, Validators.maxLength(30), Validators.email]],
@@ -73,17 +73,6 @@ export class AssuranceViewComponent implements OnInit {
       updatedAt: {value:'', disabled:true},
       version: {value:'indisponible',disabled:true},
       active:{value:'indisponible',disabled:true},
-    })
-
-    this.assurService.getAssurance().subscribe({
-      next: (value: any) => {
-        this.posts = value.data ? value : []
-        this.assurances = this.posts.data
-        this.loading=false
-      },
-      error: (e) => { console.log("erreur :" + e) },
-      complete: () => {
-      }
     })
     this.primeNgConfig.setTranslation({
       startsWith: 'Commence par',
@@ -140,7 +129,8 @@ toggleLock(data:any, frozen:any, index:any) {
     });
 }
 openNew() {
-  this.personneDialog = true;
+  this.submitted=false;
+  this.assuranceDialog = !this.assuranceDialog;
 }
 
 exportPdf() {
@@ -165,34 +155,41 @@ this.saveAsExcelFile(excelBuffer, "assurance");
 });
 }
 
-sendData():void{
-    
-  this.assurance1.id=null
-  this.assurance1.email=this.assuranceForm.get('email')?.value
-  this.assurance1.libelle=this.assuranceForm.get('libelle')?.value
-  this.assurance1.ville=this.assuranceForm.get('ville')?.value
-  this.assurance1.tel=this.assuranceForm.get('tel')?.value
-
-  this.assurService.sendAssurance(this.assurance1).subscribe({
-     next:(v)=>{
-      this.messageService.add({key:"myKey1", severity: 'success', summary: 'Service Message', detail: 'Assurance enregistrée' });
-   },
-     error:(e)=>{
-
+enregistrerAssurance():void{
+    this.submitted=true;
+  if(this.assuranceForm.invalid){
+    return;
+  }else{
+    this.assurance1.id=null
+    this.assurance1.email=this.assuranceForm.get('email')?.value
+    this.assurance1.libelle=this.assuranceForm.get('libelle')?.value
+    this.assurance1.ville=this.assuranceForm.get('ville')?.value
+    this.assurance1.tel=this.assuranceForm.get('tel')?.value
+  
+    this.assurService.sendAssurance(this.assurance1).subscribe({
+       next:(v)=>{
+        this.messageService.add({key:"myKey1", severity: 'success', summary: 'Service Message', detail: 'Assurance enregistrée' });
+        this.assuranceForm.reset();
+        this.submitted=false;
      },
-     complete:()=>{
-      this.assuranceForm.setValue({
-        id:null,
-        email:"",
-        libelle: "",
-        ville: "",
-        tel: "",
-        createdAt:"",
-        updatedAt: "",
-        version:0,
-        active:false,
-      })
-     }
-   })
-}
+       error:(e)=>{},
+       complete:()=>{
+         this.recupererAssurance();
+         this.assuranceDialog=false;
+       }
+     })
+  }
+  }
+  recupererAssurance():void{
+    this.assurService.getAssurance().subscribe({
+      next: (value: any) => {
+        this.posts = value.data ? value : []
+        this.assurances = this.posts.data
+        this.loading=false
+      },
+      error: (e) => { console.log("erreur :" + e) },
+      complete: () => {
+      }
+    })
+  }
 }

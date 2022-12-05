@@ -8,8 +8,8 @@ import { Rendezvous } from '../model/rendezvous';
   providedIn: 'root'
 })
 export class ReceptionService {
-private config:string="https://cemedo-api-java.herokuapp.com/employe/gerant/"
-private config2:string="https://cemedo-api-java.herokuapp.com/rendez_vouses"
+private config:string="http://38.242.229.12:80/employe/gerant/"
+private config2:string="http://38.242.229.12:80/rendez_vouses"
   constructor(private httpRecep:HttpClient) { }
 
   //reception ressources
