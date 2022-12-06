@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { Page404Component } from './authentication/page404/page404.component';
+import { Page404Component } from './modules/authentication/page404/page404.component';
 import { AuthGuard } from './core/guard/auth.guard';
 import { Role } from './core/models/role';
 import { AuthLayoutComponent } from './layout/app-layout/auth-layout/auth-layout.component';
@@ -20,7 +20,7 @@ const routes: Routes = [
           role: Role.Admin,
         },
         loadChildren: () =>
-          import('./admin/admin.module').then((m) => m.AdminModule),
+          import('./modules/administrateur/admin.module').then((m) => m.AdminModule),
       },
       {
         path: 'doctor',
@@ -29,7 +29,7 @@ const routes: Routes = [
           role: Role.Doctor,
         },
         loadChildren: () =>
-          import('./doctor/doctor.module').then((m) => m.DoctorModule),
+          import('./modules/medecin/doctor.module').then((m) => m.DoctorModule),
       },
       {
         path: 'reception',
@@ -38,7 +38,7 @@ const routes: Routes = [
           role: Role.Reception,
         },
         loadChildren: () =>
-          import('./reception/reception.module').then((m) => m.ReceptionModule),
+          import('./modules/reception/reception.module').then((m) => m.ReceptionModule),
       },
       {
         path: 'comptable',
@@ -47,7 +47,7 @@ const routes: Routes = [
           role:Role.Comptable
         },
         loadChildren: () =>
-          import('./comptable/comptable.module').then(
+          import('./modules/comptable/comptable.module').then(
             (m) => m.ComptableModule
           ),
       },
@@ -58,7 +58,7 @@ const routes: Routes = [
           role:Role.Infirmier
         },
         loadChildren: () =>
-          import('./infirmerie/infirmerie.module').then(
+          import('./modules/infirmerie/infirmerie.module').then(
             (m) => m.InfirmerieModule
           ),
       },
@@ -69,7 +69,7 @@ const routes: Routes = [
           role:Role.Pharmacien
         },
         loadChildren: () =>
-          import('./pharmacie/pharmacie.module').then(
+          import('./modules/pharmacie/pharmacie.module').then(
             (m) => m.PharmacieModule
           ),
       },
@@ -80,7 +80,7 @@ const routes: Routes = [
           role:Role.Assurance
         },
         loadChildren: () =>
-          import('./assurance/assurance.module').then(
+          import('./modules/assurance/assurance.module').then(
             (m) => m.AssuranceModule
           ),
       },
@@ -91,7 +91,7 @@ const routes: Routes = [
           role:Role.Informaticien
         },
         loadChildren: () =>
-          import('./informatique/informatique.module').then(
+          import('./modules/informatique/informatique.module').then(
             (m) => m.InformatiqueModule
           ),
       },
@@ -99,7 +99,7 @@ const routes: Routes = [
       canActivate: [AuthGuard],
       data:{
         role:Role.Informaticien
-      },loadChildren:()=>import('./logistique/logistique.module').then(
+      },loadChildren:()=>import('./modules/logistique/logistique.module').then(
         (m)=>m.LogistiqueModule
       )}
     ],
@@ -108,7 +108,7 @@ const routes: Routes = [
     path: 'authentication',
     component: AuthLayoutComponent,
     loadChildren: () =>
-      import('./authentication/authentication.module').then(
+      import('./modules/authentication/authentication.module').then(
         (m) => m.AuthenticationModule
       ),
   },
