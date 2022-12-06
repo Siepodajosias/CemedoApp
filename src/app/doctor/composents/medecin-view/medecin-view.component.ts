@@ -57,7 +57,7 @@ export class MedecinViewComponent implements OnInit {
 
   ngOnInit(): void {
     
-    this.medecinservice.getMedecin().subscribe({
+    this.medecinservice.recupererMedecin().subscribe({
       next: (value: any) => {
         this.posts = value.data ? value : []
         this.post = this.posts.data
@@ -112,7 +112,7 @@ export class MedecinViewComponent implements OnInit {
   }
   detail(a:any){
     this.route.navigate(['admin/medecin/detail',a]);
-    this.medecinservice.getMedecin().subscribe({
+    this.medecinservice.recupererMedecin().subscribe({
       next:(val) => {console.log(val)}
     })
   }
@@ -193,8 +193,7 @@ export class MedecinViewComponent implements OnInit {
     this.medecin2.heureDebut=this.MedecinForms.get('heureDebut')?.value
     this.medecin2.heureFin=this.MedecinForms.get('heureFin')?.value*/
     
-    console.log("medecin enregistrer2",this.medecin2)
-   this.medecinservice.sendMedecin(this.medecin2).subscribe({
+   this.medecinservice.enregistrerMedecin(this.medecin2).subscribe({
       next:(v)=>{
         this.messageService.add({severity: 'success', summary: 'Service Message', detail: 'Medecin enregistrée' });
     },

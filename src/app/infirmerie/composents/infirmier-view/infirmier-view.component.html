@@ -103,57 +103,48 @@
 
     <p-toast></p-toast>
     <p-dialog [(visible)]="personneDialog" 
-    [style]="{width: '750px'}" 
+    [style]="{width: '500px'}" 
     header="Création d'un nouveau infirmier" [modal]="true"
       styleClass="p-fluid">
       <form [formGroup]="infirmierForms" (ngSubmit)="SaveData()">
         <div class="grid">
-
-          <div class="col-12 md:col-7">
-            <div class="col-12">
+            <div class="col-6">
               <span class="p-float-label">
                 <input type="text" id="inputtext6" pInputText formControlName="nom">
                 <label for="inputtext6">Nom</label>
               </span>
             </div>
 
-            <div class="col-12">
+            <div class="col-6">
               <span class="p-float-label">
                 <input type="text" id="inputtext5" pInputText formControlName="prenoms">
                 <label for="inputtext5">Prénom</label>
               </span>
             </div>
 
-            <div class="col-12">
+            <div class="col-6">
               <span class="p-float-label">
                 <input type="text" id="inputtext5" pInputText formControlName="login">
                 <label for="inputtext5">Nom d'utilisateur</label>
               </span>
             </div>
-
-            <div class="col-12">
-
-              <p-dropdown [options]="genres" placeholder="Genre" optionLabel="name" [showClear]="true"
-                formControlName="genre">
-              </p-dropdown>
-            </div>
-
-            <div class="col-12">
-              <p-calendar [baseZIndex]="3000" appendTo="body" [showIcon]="true" inputId="icon"
-              formControlName="dateNaissance"
-              ></p-calendar>
-            </div>
-          </div>
-
-          <div class="col-5">
-            <div class="col-12">
+            <div class="col-6">
               <span class="p-float-label">
                 <input type="password" id="inputtext6" pInputText formControlName="password">
                 <label for="inputtext6">Mot de passe</label>
               </span>
             </div>
-          </div>
 
+            <div class="col-6">
+              <p-calendar [baseZIndex]="3000" appendTo="body" [showIcon]="true" inputId="icon"
+              formControlName="dateNaissance"
+              ></p-calendar>
+            </div>
+            <div class="col-6">
+              <p-dropdown [options]="genres" optionLabel="name" [showClear]="true"
+                formControlName="genre">
+              </p-dropdown>
+            </div>
           <div class="col-12">
 
             <p-divider align="center" type="dashed" layout="horizontal">
@@ -187,13 +178,14 @@
           </div>
 
           <div class="col-12 md:col-12">
-            <div class="flex justifier-content-end">
-
-              <button type="submit" pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-bouton-texte p-bouton-sm
-                      flex align-items-center justifier-content-end w-10rem h-2rem m-2
-                      
-                      " pTooltip="Click pour enregistrer"
-                      [disabled]="!infirmierForms.valid"></button>
+            <div class="col-12 md:col-12">
+              <div class="flex justify-content-end">
+                <button type="submit" pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-bouton-texte p-bouton-sm
+                         w-10rem h-2rem m-2"></button>
+                        <button type="button" pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-danger p-bouton-sm
+                        w-10rem h-2rem m-2
+                       "></button>
+              </div>
             </div>
 
           </div>

@@ -20,7 +20,7 @@
         </ng-template>
       </p-toolbar>
 
-      <p-table #dt [value]="medecins" [scrollable]="true" scrollHeight="400px"
+      <p-table #dt [value]="medecins" [scrollable]="true" scrollHeight="500px"
         [globalFilterFields]="['user.nom', 'user.prenoms', 'user.genre','user.specialite']" [loading]="loading"
         [filterDelay]="0"
         styleClass="p-datatable-gridlines"
@@ -99,53 +99,49 @@
     <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
 
     <p-toast></p-toast>
-    <p-dialog [(visible)]="personneDialog" [style]="{width: '750px'}" header="Formulaire de création d'un medecin" [modal]="true"
+    <p-dialog [(visible)]="personneDialog" [style]="{width:'500px'}" header="Création d'un medecin" [modal]="true"
       styleClass="p-fluid">
       <form [formGroup]="MedecinForms" (ngSubmit)="SaveData()">
         <div class="grid">
-  
-          <div class="col-12 md:col-7">
-            <div class="col-12">
-              <span class="p-float-label">
-                <input type="text" id="inputtext6" pInputText formControlName="nom">
-                <label for="inputtext6">Nom</label>
+            <div class="col-6">
+              <span>
+                <label>Nom</label>
+                <input type="text" pInputText formControlName="nom">
               </span>
             </div>
   
-            <div class="col-12">
-              <span class="p-float-label">
-                <input type="text" id="inputtext5" pInputText formControlName="prenoms">
-                <label for="inputtext5">Prénom</label>
+            <div class="col-6">
+              <span>
+                <label>Prénom</label>
+                <input type="text" pInputText formControlName="prenoms">
               </span>
             </div>
   
-            <div class="col-12">
-              <span class="p-float-label">
-                <input type="text" id="inputtext5" pInputText formControlName="login">
-                <label for="inputtext5">Nom d'utilisateur</label>
+            <div class="col-6">
+              <span>
+                <label>Nom d'utilisateur</label>
+                <input type="text" pInputText formControlName="login">
               </span>
             </div>
   
-            <div class="col-12">
-  
-              <p-dropdown [options]="genres" placeholder="Genre" optionLabel="name" [showClear]="true"
+            <div class="col-6">
+              <label>Genre</label>
+              <p-dropdown [options]="genres" optionLabel="name" [showClear]="true"
                 formControlName="genre">
                 </p-dropdown>
             </div>
   
-            <div class="col-12">
+            <div class="col-6">
+              <label>Date de naissance</label>
               <p-calendar [baseZIndex]="3000" appendTo="body" [showIcon]="true" inputId="icon"></p-calendar>
             </div>
-          </div>
   
-          <div class="col-5">
-            <div class="col-12">
-              <span class="p-float-label">
-                <input type="password" id="inputtext6" pInputText formControlName="password">
-                <label for="inputtext6">Mot de passe</label>
+            <div class="col-6">
+              <span>
+                <label>Mot de passe</label>
+                <input type="password" pInputText formControlName="password">
               </span>
             </div>
-          </div>
   
           <div class="col-12">
   
@@ -159,47 +155,37 @@
           </div>
   
           <div class="col-12">
-            <span class="p-float-label">
-              <input type="email" id="inputtext6" pInputText formControlName="email">
-              <label for="inputtext6">E-mail</label>
+            <span>
+              <label>E-mail</label>
+              <input type="email" pInputText formControlName="email">
             </span>
           </div>
   
           <div class="col-12">
-            <span class="p-float-label">
-              <input type="text" id="inputtext5" pInputText formControlName="tel">
-              <label for="inputtext5">Téléphone 1</label>
+            <span>
+              <label>Téléphone 1</label>
+              <input type="text" pInputText formControlName="tel">
             </span>
           </div>
   
           <div class="col-12">
-            <span class="p-float-label">
+            <span>
+              <label>Téléphone 2</label>
               <input type="text" id="inputtext5" pInputText formControlName="tel2">
-              <label for="inputtext5">Téléphone 2</label>
             </span>
           </div>
   
           <div class="col-12 md:col-12">
-            <div class="flex justifier-content-end">
-  
+            <div class="flex justify-content-end">
               <button type="submit" pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-bouton-texte p-bouton-sm
-                       w-10rem h-2rem m-2
-                      " pTooltip="Click pour enregistrer"
-                      [disabled]="!MedecinForms.valid"
-                      ></button>
-
+                       w-10rem h-2rem m-2"></button>
                       <button type="button" pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-danger p-bouton-sm
                       w-10rem h-2rem m-2
                      " (click)="hideOpen()"></button>
             </div>
-  
           </div>
-  
         </div>
       </form>
     </p-dialog>
-
-
-
   </div>
 </section>
