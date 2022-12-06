@@ -136,7 +136,7 @@ export const ROUTES: RouteInfo[] = [
     role: ["Admin"],
     submenu: [
         {
-          path: "/admin/Rdv",
+          path: "/admin//medecin/Rdv",
           title: "liste des rendez-vous",
           moduleName: "extra-pages",
           iconType: "material-icons-two-tone",

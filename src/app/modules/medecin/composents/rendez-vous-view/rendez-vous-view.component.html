@@ -11,7 +11,7 @@
                 <div class="shadow-4 p-3 border-round" [style]="{'background-color':'green'}">
                     <div class="flex justify-content-between mb-3">
                         <div>
-                            <span class="block text-500 font-medium mb-3  text-cyan-50">Rendez-vous éffectuer</span>
+                            <span class="block text-500 font-medium mb-3  text-cyan-50">Rendez-vous éffectué</span>
                             <div class="text-900 font-medium text-xl  text-cyan-50">152</div>
                         </div>
                         <div class="flex align-items-center justify-content-center  bg-white-100 border-round" style="width:2.5rem;height:2.5rem">
@@ -38,7 +38,7 @@
                 <div class="shadow-4 p-3 border-round" [style]="{'background-color':'red'}">
                     <div class="flex justify-content-between mb-3">
                         <div>
-                            <span class="block text-500 font-medium mb-3 text-cyan-50">Rendez-vous annuler</span>
+                            <span class="block text-500 font-medium mb-3 text-cyan-50">Rendez-vous annulé</span>
                             <div class="text-900 font-medium text-xl text-cyan-50">28441</div>
                         </div>
                         <div class="flex align-items-center justify-content-center bg-white-100 border-round" style="width:2.5rem;height:2.5rem">
@@ -50,11 +50,11 @@
         </div>
 
         <p-fieldset legend="Filtre" [toggleable]="true">
-    
             <p-table #dt  [value]="rdvs"  [scrollable]="true" scrollHeight="490px"
             [globalFilterFields]="['dateDPrdv','daterdv','medecin','patient']"
             [filterDelay]="0"
-                >
+            styleClass="p-datatable-gridlines"
+            selectionMode="multiple">
                 <ng-template pTemplate="caption">
                     <div class="flex align-items-center justify-content-between">
                         <!--la class ne change rien-->

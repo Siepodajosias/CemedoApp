@@ -138,8 +138,6 @@ getEventValue($event:any) :string {
 } 
 
 toggleLock(data:any, frozen:any, index:any) {
-
-  console.log(data);
     if (frozen) {
         this.lockedCustomers = this.lockedCustomers.filter((c, i) => i !== index);
         this.unlockedCustomers.push(data);
@@ -181,7 +179,9 @@ const excelBuffer: any = xlsx.write(workbook, {
 this.saveAsExcelFile(excelBuffer, "Infirmier");
 });
 }
-
+hideOpen(){
+  this.personneDialog=false
+}
 SaveData(){
   /*
       this.infirmier.id=null

@@ -8,34 +8,31 @@
 		<div class="card">
 			<p-toolbar styleClass="mb-4">
 				<ng-template pTemplate="left">
-					<button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom"></button>
-					<button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
+					<button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
+						class="p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom"></button>
+					<button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()"
+						class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
 				</ng-template>
 
 				<ng-template pTemplate="right">
-					<button pButton pRipple label="Créer un nouveau comptable" icon="pi pi-plus" class="p-button-help" (click)="openNew()"></button>
+					<button pButton pRipple label="Créer un nouveau comptable" icon="pi pi-plus" class="p-button-help"
+						(click)="openNew()"></button>
 				</ng-template>
 			</p-toolbar>
 
 			<p-table #dt [value]="comptables" [scrollable]="true" scrollHeight="400px"
-					 [globalFilterFields]="['nom','prenoms']"
-					 [loading]="loading"
-					 [filterDelay]="0"
-					 styleClass="p-datatable-gridlines"
-					 selectionMode="multiple"
-					 [resizableColumns]="true">
+				[globalFilterFields]="['nom','prenoms']" [loading]="loading" [filterDelay]="0"
+				styleClass="p-datatable-gridlines" selectionMode="multiple" [resizableColumns]="true">
 				<ng-template pTemplate="caption">
 					<div class="flex align-items-center justify-content-between">
 						<h5 class="m-0">Comptable</h5>
 						<span class="p-input-icon-left">
-                      <i class="pi pi-search"></i>
-  
-                      <input pInputText type="text"
-							 (input)="dt.filterGlobal(getEventValue($event), 'contains')"
-							 placeholder="Rechercher..."
-					  />
-  
-                  </span>
+							<i class="pi pi-search"></i>
+
+							<input pInputText type="text" (input)="dt.filterGlobal(getEventValue($event), 'contains')"
+								placeholder="Rechercher..." />
+
+						</span>
 					</div>
 				</ng-template>
 				<ng-template pTemplate="header" let-comptable>
@@ -74,12 +71,11 @@
 						<td>{{comptable.prenoms}}</td>
 						<td>{{comptable.age}}</td>
 						<td>{{comptable.email}}
-							<button pButton pRipple type="button" pTooltip="Modifier" icon="pi pi-pencil" (click)="detail(comptable)"
-									class="p-button-rounded p-button-text"
-							></button>
-							<button pButton pRipple type="button" pTooltip="Detail du comptable" icon="pi pi-angle-right" (click)="detail(comptable)"
-									class="p-button-rounded p-button-text"
-							></button>
+							<button pButton pRipple type="button" pTooltip="Modifier" icon="pi pi-pencil"
+								(click)="detail(comptable)" class="p-button-rounded p-button-text"></button>
+							<button pButton pRipple type="button" pTooltip="Detail du comptable"
+								icon="pi pi-angle-right" (click)="detail(comptable)"
+								class="p-button-rounded p-button-text"></button>
 						</td>
 					</tr>
 				</ng-template>
@@ -94,36 +90,36 @@
 		<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
 
 		<p-toast></p-toast>
-		<p-dialog [(visible)]="personneDialog" [style]="{width: '500px'}" header="Création d'un comptable" [modal]="true"
-				  styleClass="p-fluid">
+		<p-dialog [(visible)]="personneDialog" [style]="{width: '560px'}" header="Création d'un comptable"
+			[modal]="true" styleClass="p-fluid">
 			<form [formGroup]="comptableForms" (ngSubmit)="SaveData()">
 				<div class="grid">
 
 					<div class="col-6">
-            <span>
-              <label>Nom</label>
-              <input type="text" pInputText formControlName="nom">
-            </span>
+						<span>
+							<label>Nom</label>
+							<input type="text" pInputText formControlName="nom">
+						</span>
 					</div>
 
 					<div class="col-6">
-            <span>
-              <label>Prénom</label>
-              <input type="text" pInputText formControlName="prenoms">
-            </span>
+						<span>
+							<label>Prénom</label>
+							<input type="text" pInputText formControlName="prenoms">
+						</span>
 					</div>
 
 					<div class="col-6">
-            <span>
-              <label>Nom d'utilisateur</label>
-              <input type="text" pInputText formControlName="login">
-            </span>
+						<span>
+							<label>Nom d'utilisateur</label>
+							<input type="text" pInputText formControlName="login">
+						</span>
 					</div>
 					<div class="col-6">
-              <span>
-                <label>Mot de passe</label>
-                <input type="password" pInputText formControlName="password">
-              </span>
+						<span>
+							<label>Mot de passe</label>
+							<input type="password" pInputText formControlName="password">
+						</span>
 					</div>
 					<div class="col-6">
 						<label>Date de naissance</label>
@@ -131,8 +127,7 @@
 					</div>
 					<div class="col-6">
 						<label>Genre</label>
-						<p-dropdown [options]="genres" optionLabel="name" [showClear]="true"
-									formControlName="genre">
+						<p-dropdown [options]="genres" optionLabel="name" [showClear]="true" formControlName="genre">
 						</p-dropdown>
 					</div>
 					<div class="col-12">
@@ -146,25 +141,25 @@
 					</div>
 
 					<div class="col-12">
-          <span>
-            <label>E-mail</label>
-            <input type="email" pInputText formControlName="email">
-          </span>
+						<span>
+							<label>E-mail</label>
+							<input type="email" pInputText formControlName="email">
+						</span>
 					</div>
 
 					<div class="col-12">
-          <span>
-            <label>Téléphone 1</label>
-            <input type="text" id="inputtext5" pInputText formControlName="tel">
-          </span>
+						<span>
+							<label>Téléphone 1</label>
+							<input type="text" id="inputtext5" pInputText formControlName="tel">
+						</span>
 					</div>
 
 					<div class="col-12">
-				<span>
-					<label>Téléphone 2</label>
-					<input type="text" pInputText formControlName="tel2">
-				</span>
-				</div>
+						<span>
+							<label>Téléphone 2</label>
+							<input type="text" pInputText formControlName="tel2">
+						</span>
+					</div>
 					<div class="col-12 md:col-12">
 						<div class="flex justify-content-end">
 							<button type="submit" pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-bouton-texte p-bouton-sm
@@ -174,7 +169,7 @@
                               " (click)="hideOpen()"></button>
 						</div>
 					</div>
-				 </div>
+				</div>
 			</form>
 		</p-dialog>
 
