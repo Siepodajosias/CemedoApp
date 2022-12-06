@@ -7,8 +7,7 @@ import { PatientService } from 'src/app/services/servicePatient/patient.service'
 
 @Component({
   selector: 'app-patient-forms',
-  templateUrl: './patient-forms.component.html',
-  styleUrls: ['./patient-forms.component.scss']
+  templateUrl: './patient-forms.component.html'
 })
 export class PatientFormsComponent implements OnInit {
   PatientForms: FormGroup = new FormGroup({})

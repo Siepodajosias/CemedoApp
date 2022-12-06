@@ -1,176 +1,184 @@
 <section class="content">
-  <div class="content-block">
-    <div class="block-header">
-      <!-- breadcrumb -->
-      <app-breadcrumb [title]="'Comptable'" [items]="[]" [active_item]="'comptable'"></app-breadcrumb>
-    </div>
+	<div class="content-block">
+		<div class="block-header">
+			<!-- breadcrumb -->
+			<app-breadcrumb [title]="'Comptable'" [items]="[]" [active_item]="'comptable'"></app-breadcrumb>
+		</div>
 
-    <div class="card">
-      <p-toolbar styleClass="mb-4">
-          <ng-template pTemplate="left">
-              <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success mr-2"  pTooltip="XLS" tooltipPosition="bottom"></button>
-              <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
-          </ng-template>
-  
-          <ng-template pTemplate="right">
-              <button pButton pRipple label="Créer un nouveau comptable" icon="pi pi-plus" class="p-button-help" (click)="openNew()"></button>
-          </ng-template>
-      </p-toolbar>
-  
-      <p-table #dt  [value]="comptables"  [scrollable]="true" scrollHeight="400px"
-      [globalFilterFields]="['nom','prenoms']"
-      [loading]="loading"
-      [filterDelay]="0"
-      styleClass="p-datatable-gridlines"
-      selectionMode="multiple"
-      [resizableColumns]="true">
-          <ng-template pTemplate="caption">
-              <div class="flex align-items-center justify-content-between">
-                  <h5 class="m-0">Comptable</h5>
-                  <span class="p-input-icon-left">
+		<div class="card">
+			<p-toolbar styleClass="mb-4">
+				<ng-template pTemplate="left">
+					<button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom"></button>
+					<button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
+				</ng-template>
+
+				<ng-template pTemplate="right">
+					<button pButton pRipple label="Créer un nouveau comptable" icon="pi pi-plus" class="p-button-help" (click)="openNew()"></button>
+				</ng-template>
+			</p-toolbar>
+
+			<p-table #dt [value]="comptables" [scrollable]="true" scrollHeight="400px"
+					 [globalFilterFields]="['nom','prenoms']"
+					 [loading]="loading"
+					 [filterDelay]="0"
+					 styleClass="p-datatable-gridlines"
+					 selectionMode="multiple"
+					 [resizableColumns]="true">
+				<ng-template pTemplate="caption">
+					<div class="flex align-items-center justify-content-between">
+						<h5 class="m-0">Comptable</h5>
+						<span class="p-input-icon-left">
                       <i class="pi pi-search"></i>
   
                       <input pInputText type="text"
-                      (input)="dt.filterGlobal(getEventValue($event), 'contains')"
-                       placeholder="Rechercher..." 
-                      />
+							 (input)="dt.filterGlobal(getEventValue($event), 'contains')"
+							 placeholder="Rechercher..."
+					  />
   
                   </span>
-              </div>
-          </ng-template>
-          <ng-template pTemplate="header" let-comptable>
-              <tr>
-                  <th pSortableColumn="nom">Nom<p-sortIcon field="nom"></p-sortIcon></th>
-                  <th pSortableColumn="prenoms">Prenom <p-sortIcon field="prenoms"></p-sortIcon></th>
-                  <th pSortableColumn="genre">Genre <p-sortIcon field="genre"></p-sortIcon></th>
-                  <th pSortableColumn="email">E-mail<p-sortIcon field="email"></p-sortIcon></th>
-              </tr>
-              <tr>	
-                <th>
-                  <p-columnFilter type="text" field="nom"></p-columnFilter>
-                </th>
-                <th>
-                  <p-columnFilter type="text" field="prenoms"></p-columnFilter>
-                </th>
-                <th>
-                  <p-columnFilter type="text" field="genre"></p-columnFilter>
-                </th>
-                <th>
-                  <p-columnFilter type="text" field="email"></p-columnFilter>
-                </th>
-              </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-comptable let-index="rowIndex">
-              <tr>
-                  <td >{{comptable.nom}}</td>
-                  <td >{{comptable.prenoms}}</td>
-                  <td >{{comptable.age}}</td>
-                  <td >{{comptable.email}}
-                    <button pButton pRipple type="button" pTooltip="Modifier"  icon="pi pi-pencil"  (click)="detail(comptable)" 
-                    class="p-button-rounded p-button-text"
-                    ></button>
-                    <button pButton pRipple type="button" pTooltip="Detail du comptable"  icon="pi pi-angle-right"  (click)="detail(comptable)" 
-                    class="p-button-rounded p-button-text"
-                    ></button>
-                  </td>
-              </tr>
-          </ng-template>
-          <ng-template pTemplate="summary">
-              <div class="flex align-items-center justify-content-between">
-               Total: {{comptables ? comptables.length : 0 }}
-              </div>
-          </ng-template>
-      </p-table>
-  </div>
-  
-  <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
-  
-  <p-toast></p-toast>
-  <p-dialog [(visible)]="personneDialog" [style]="{width: '500px'}" header="Création d'un comptable" [modal]="true"
-    styleClass="p-fluid">
-    <form [formGroup]="comptableForms" (ngSubmit)="SaveData()">
-      <div class="grid">
+					</div>
+				</ng-template>
+				<ng-template pTemplate="header" let-comptable>
+					<tr>
+						<th pSortableColumn="nom">Nom
+							<p-sortIcon field="nom"></p-sortIcon>
+						</th>
+						<th pSortableColumn="prenoms">Prenom
+							<p-sortIcon field="prenoms"></p-sortIcon>
+						</th>
+						<th pSortableColumn="genre">Genre
+							<p-sortIcon field="genre"></p-sortIcon>
+						</th>
+						<th pSortableColumn="email">E-mail
+							<p-sortIcon field="email"></p-sortIcon>
+						</th>
+					</tr>
+					<tr>
+						<th>
+							<p-columnFilter type="text" field="nom"></p-columnFilter>
+						</th>
+						<th>
+							<p-columnFilter type="text" field="prenoms"></p-columnFilter>
+						</th>
+						<th>
+							<p-columnFilter type="text" field="genre"></p-columnFilter>
+						</th>
+						<th>
+							<p-columnFilter type="text" field="email"></p-columnFilter>
+						</th>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-comptable let-index="rowIndex">
+					<tr>
+						<td>{{comptable.nom}}</td>
+						<td>{{comptable.prenoms}}</td>
+						<td>{{comptable.age}}</td>
+						<td>{{comptable.email}}
+							<button pButton pRipple type="button" pTooltip="Modifier" icon="pi pi-pencil" (click)="detail(comptable)"
+									class="p-button-rounded p-button-text"
+							></button>
+							<button pButton pRipple type="button" pTooltip="Detail du comptable" icon="pi pi-angle-right" (click)="detail(comptable)"
+									class="p-button-rounded p-button-text"
+							></button>
+						</td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="summary">
+					<div class="flex align-items-center justify-content-between">
+						Total: {{comptables ? comptables.length : 0 }}
+					</div>
+				</ng-template>
+			</p-table>
+		</div>
 
-          <div class="col-6">
+		<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+
+		<p-toast></p-toast>
+		<p-dialog [(visible)]="personneDialog" [style]="{width: '500px'}" header="Création d'un comptable" [modal]="true"
+				  styleClass="p-fluid">
+			<form [formGroup]="comptableForms" (ngSubmit)="SaveData()">
+				<div class="grid">
+
+					<div class="col-6">
             <span>
               <label>Nom</label>
               <input type="text" pInputText formControlName="nom">
             </span>
-          </div>
+					</div>
 
-          <div class="col-6">
+					<div class="col-6">
             <span>
               <label>Prénom</label>
               <input type="text" pInputText formControlName="prenoms">
             </span>
-          </div>
+					</div>
 
-          <div class="col-6">
+					<div class="col-6">
             <span>
               <label>Nom d'utilisateur</label>
               <input type="text" pInputText formControlName="login">
             </span>
-          </div>
-            <div class="col-6">
+					</div>
+					<div class="col-6">
               <span>
                 <label>Mot de passe</label>
                 <input type="password" pInputText formControlName="password">
               </span>
-            </div>
-          <div class="col-6">
-            <label>Date de naissance</label>
-            <p-calendar [baseZIndex]="3000" appendTo="body" [showIcon]="true" inputId="icon"></p-calendar>
-          </div>
-          <div class="col-6">
-            <label>Genre</label>
-            <p-dropdown [options]="genres" optionLabel="name" [showClear]="true"
-              formControlName="genre">
-              </p-dropdown>
-          </div>
-        <div class="col-12">
-          <p-divider align="center" type="dashed" layout="horizontal">
-            <div class="inline-flex align-items-center">
-              <i class="pi pi-user mr-2"></i>
-              <b>Contacts</b>
-            </div>
-          </p-divider>
+					</div>
+					<div class="col-6">
+						<label>Date de naissance</label>
+						<p-calendar [baseZIndex]="3000" appendTo="body" [showIcon]="true" inputId="icon"></p-calendar>
+					</div>
+					<div class="col-6">
+						<label>Genre</label>
+						<p-dropdown [options]="genres" optionLabel="name" [showClear]="true"
+									formControlName="genre">
+						</p-dropdown>
+					</div>
+					<div class="col-12">
+						<p-divider align="center" type="dashed" layout="horizontal">
+							<div class="inline-flex align-items-center">
+								<i class="pi pi-user mr-2"></i>
+								<b>Contacts</b>
+							</div>
+						</p-divider>
 
-        </div>
+					</div>
 
-        <div class="col-12">
+					<div class="col-12">
           <span>
             <label>E-mail</label>
             <input type="email" pInputText formControlName="email">
           </span>
-        </div>
+					</div>
 
-        <div class="col-12">
+					<div class="col-12">
           <span>
             <label>Téléphone 1</label>
             <input type="text" id="inputtext5" pInputText formControlName="tel">
           </span>
-        </div>
+					</div>
 
-        <div class="col-12">
+					<div class="col-12">
           <span>
             <label>Téléphone 2</label>
             <input type="text" pInputText formControlName="tel2">
           </span>
-        </div>
+					</div>
 
-        <div class="col-12 md:col-12">
-          <div class="flex justify-content-end">
-                  <button type="submit" pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-bouton-texte p-bouton-sm
+					<div class="col-12 md:col-12">
+						<div class="flex justify-content-end">
+							<button type="submit" pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-bouton-texte p-bouton-sm
                    w-10rem h-2rem m-2"
-                    ></button>
-                    <button type="button" pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-danger p-bouton-sm
+							></button>
+							<button type="button" pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-danger p-bouton-sm
                     w-10rem h-2rem m-2
                    " (click)="hideOpen()"></button>
-          </div>
-        </div>
-      </div>
-    </form>
-  </p-dialog>
+						</div>
+					</div>
+				</div>
+			</form>
+		</p-dialog>
 
-  </div>
+	</div>
 </section>
