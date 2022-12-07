@@ -768,7 +768,7 @@ export const ROUTES: RouteInfo[] = [
     submenu: [],
   },
   {
-    path: "/comptable/assurance/liste2",
+    path: "/comptable/assurance/liste",
     title: "Assurance",
     moduleName: "assurance",
     iconType: "material-icons-two-tone",

@@ -126,8 +126,9 @@ toggleLock(data:any, frozen:any, index:any) {
     });
 }
 newAssurance() {
-  this.submitted=false;
-  this.assuranceDialog = !this.assuranceDialog;
+      this.assuranceForms.reset();
+      this.submitted=false;
+      this.assuranceDialog = !this.assuranceDialog;
 }
 
 exportPdf() {
@@ -141,12 +142,12 @@ exportPdf() {
 }
 
 exportExcel() {
-import("xlsx").then(xlsx => {
-const worksheet = xlsx.utils.json_to_sheet(this.assurances);
-const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
-const excelBuffer: any = xlsx.write(workbook, {
-  bookType: "xlsx",
-  type: "array"
+    import("xlsx").then(xlsx => {
+    const worksheet = xlsx.utils.json_to_sheet(this.assurances);
+    const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
+    const excelBuffer: any = xlsx.write(workbook, {
+      bookType: "xlsx",
+      type: "array"
 });
 this.saveAsExcelFile(excelBuffer, "assurance");
 });

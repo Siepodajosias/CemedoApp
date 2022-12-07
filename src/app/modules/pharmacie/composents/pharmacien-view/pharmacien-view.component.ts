@@ -161,11 +161,12 @@ toggleLock(data:any, frozen:any, index:any) {
     });
 }
  newPharmacien() {
-  this.pharmacienDialog = !this.pharmacienDialog;
-  this.genres = [
-    {name: 'homme'},
-    {name: 'femme'}
-];
+      this.pharmacienForms.reset();
+      this.pharmacienDialog = !this.pharmacienDialog;
+      this.genres = [
+        {name: 'homme'},
+        {name: 'femme'}
+      ];
 }
 
 exportPdf() {

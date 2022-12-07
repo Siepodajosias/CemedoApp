@@ -93,6 +93,7 @@ export class InformaticienViewComponent implements OnInit {
   } 
 
   newInformaticien() {
+    this.InformaticienForms.reset();
     this.informaticienDialog =!this.informaticienDialog;
     this.genres=[
       {name:'homme'},

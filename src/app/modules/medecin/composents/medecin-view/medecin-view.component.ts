@@ -44,7 +44,7 @@ export class MedecinViewComponent implements OnInit {
 
   medecinDialog:boolean=false;
 
-  medecinForms: FormGroup = new FormGroup({})
+  medecinForms: FormGroup;
   medecin:Medecin=new Medecin()
   genres:any
 
@@ -127,6 +127,7 @@ export class MedecinViewComponent implements OnInit {
   } 
 
   newMedecin() {
+    this.medecinForms.reset();
     this.medecinDialog = !this.medecinDialog
     this.genres=[
       {name:'homme'},

@@ -160,11 +160,12 @@ toggleLock(data:any, frozen:any, index:any) {
     });
 }
  newComptable() {
-  this.comptableDialog = !this.comptableDialog;
-  this.genres=[
-    {name:'homme'},
-    {name:'femme'}
-  ]
+    this.comptableForms.reset();
+    this.comptableDialog = !this.comptableDialog;
+    this.genres=[
+      {name:'homme'},
+      {name:'femme'}
+    ]
 }
 
 exportPdf() {

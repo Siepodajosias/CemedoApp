@@ -156,6 +156,7 @@ this.saveAsExcelFile(excelBuffer, "Rendez-Vous");
 
   }
     newRDV() {
+        this.rendezVousForms.reset();
         this.rendezVousDialog=!this.rendezVousDialog
     }
 
