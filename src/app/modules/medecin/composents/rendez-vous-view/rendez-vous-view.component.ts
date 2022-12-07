@@ -4,6 +4,10 @@ import * as saveAs from 'file-saver';
 import * as jspdf from 'jspdf'
 import 'jspdf-autotable'
 import { UserOptions } from 'jspdf-autotable';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MedecinService } from 'src/app/services/serviceMedecin/medecin.service';
+import { Router } from '@angular/router';
+import { PrimeNGConfig } from 'primeng/api';
 
 
 interface jsPDFWithPlugin extends jspdf.jsPDF{
@@ -25,13 +29,13 @@ export class RendezVousViewComponent implements OnInit {
 
   lockedCustomers: any[]=[];
 
-  balanceFrozen: boolean = false;
-
   rowGroupMetadata: any;
 
   loading: boolean = true;
-
   exportColumns: any[]=[];
+  rendezVousForms: FormGroup;
+  rendezVousDialog:boolean=false;
+
 rdvs:any=[
   {dateDPrdv:"10/10/2022",daterdv:"15/10/2022",medecin:"IBO",patient:"DIABY Kader"},
   {dateDPrdv:"10/10/2022",daterdv:"15/10/2022",medecin:"DOBE",patient:"NIKIEMA Idris"},
@@ -43,13 +47,54 @@ rdvs:any=[
   {dateDPrdv:"10/10/2022",daterdv:"15/10/2022",medecin:"IBRIAM",patient:"YOA Atta"},
   {dateDPrdv:"05/10/2022",daterdv:"20/10/2022",medecin:"DOBE",patient:"NANCY "}
 ]
-  constructor() { }
+
+  constructor(private rendezVousService:MedecinService,
+              private rendezVousForm:FormBuilder,
+              private  route:Router,
+              private primeNgConfig: PrimeNGConfig) { }
 
   ngOnInit(): void {
+    this.rendezVousForms=this.rendezVousForm.group({
+      datePriseRendezVous:['',[Validators.required]],
+      dateRendezVous:['',[Validators.required]],
+      patient:['',[Validators.required]],
+      medecin:[''],
+      reception:[''],
+      statut:['',[Validators.required]],
+      adresse:['',[Validators.required]],
+      commentaire:['']
+    })
+      this.primeNgConfig.setTranslation({
+          monthNames: ['Janvier',
+              'Fevrier',
+              'Mars',
+              'Avril',
+              'Mai',
+              'Juin',
+              'Juillet',
+              'Août',
+              'Septembre',
+              'Octobre',
+              'Novembre',
+              'Decembre'],
+          dayNamesShort: ['Dim.',
+              'Lun.',
+              'Mar.',
+              'Mer.',
+              'Jeu.',
+              'Ven.',
+              'Sam.'],
+          startsWith: 'Commence par',
+          contains : 'Contient',
+          notContains : 'Ne contient pas',
+          endsWith: 'Fini par',
+          equals : 'Egale à',
+          notEquals : 'différent de',
+          noFilter : 'Pas de filtre',
+      });
   }
 
   saveAsExcelFile(buffer: any, fileName: string): void {
-
     let EXCEL_TYPE =
       "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
     let EXCEL_EXTENSION = ".xlsx";
@@ -60,7 +105,6 @@ rdvs:any=[
       data,
       fileName + "_export_" + new Date() + EXCEL_EXTENSION
     );
-
 }
 
 applyFilterGlobal($event:any, stringVal:any) {
@@ -68,13 +112,10 @@ applyFilterGlobal($event:any, stringVal:any) {
 }
 
 getEventValue($event:any) :string {
-  console.log($event.target.value);
   return $event.target.value;
 } 
 
 toggleLock(data:any, frozen:any, index:any) {
-
-  console.log(data);
     if (frozen) {
         this.lockedCustomers = this.lockedCustomers.filter((c, i) => i !== index);
         this.unlockedCustomers.push(data);
@@ -91,7 +132,6 @@ toggleLock(data:any, frozen:any, index:any) {
 
 
 exportPdf() {
-
   const doc = new jspdf.jsPDF('portrait','px','a4') as jsPDFWithPlugin;
         doc.autoTable({
           head:this.exportColumns,
@@ -101,14 +141,33 @@ exportPdf() {
 }
 
 exportExcel() {
-import("xlsx").then(xlsx => {
-const worksheet = xlsx.utils.json_to_sheet(this.rdvs);
-const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
-const excelBuffer: any = xlsx.write(workbook, {
-  bookType: "xlsx",
-  type: "array"
+    import("xlsx").then(xlsx => {
+    const worksheet = xlsx.utils.json_to_sheet(this.rdvs);
+    const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
+    const excelBuffer: any = xlsx.write(workbook, {
+      bookType: "xlsx",
+      type: "array"
 });
 this.saveAsExcelFile(excelBuffer, "Rendez-Vous");
 });
 }
+
+  enregistrerRendezVous() {
+
+  }
+    newRDV() {
+        this.rendezVousDialog=!this.rendezVousDialog
+    }
+
+    urlActif():boolean{
+        return this.route.url.includes('/reception/medecin/Rdv') || this.route.url.includes('/doctor/Rdv')
+    }
+
+    medecinActif() {
+        return this.route.url.includes('/doctor/Rdv')
+    }
+
+    receptionActif() {
+        return this.route.url.includes('/reception/medecin/Rdv')
+    }
 }

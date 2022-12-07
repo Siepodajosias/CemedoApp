@@ -25,7 +25,7 @@ import { PharmacienService } from 'src/app/services/servicePharmacie/pharmacien.
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { PharmacienView2Component } from 'src/app/modules/pharmacie/composents/pharmacien-view2/pharmacien-view2.component';
+
 
 //primeng
 import { CardModule} from 'primeng/card'
@@ -65,7 +65,6 @@ import { CategorieMedicamentViewComponent } from 'src/app/modules/pharmacie/comp
     MedicamentDetailComponent,
     MedicamentFormsComponent,
     DashboardPharmacieComponent,
-    PharmacienView2Component,
     VenteViewComponent,
     DepenseViewComponent,
     CategorieMedicamentViewComponent

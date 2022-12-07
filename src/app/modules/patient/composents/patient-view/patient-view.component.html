@@ -10,8 +10,8 @@
             <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success mr-2"  pTooltip="XLS" tooltipPosition="bottom"></button>
             <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
         </ng-template>
-        <ng-template pTemplate="right" *ngIf="getActif()">
-            <button pButton pRipple label="Créer un nouveau patient" icon="pi pi-plus" class="p-button-help"
+        <ng-template pTemplate="right" *ngIf="urlActif()">
+            <button pButton pRipple label="Créer un patient" icon="pi pi-plus" class="p-button-help"
             ></button>
         </ng-template>
     </p-toolbar>
@@ -31,11 +31,10 @@
                       (input)="dt.filterGlobal(getEventValue($event), 'contains')"
                        placeholder="Rechercher..." 
                       />
-  
                   </span>
               </div>
           </ng-template>
-          <ng-template pTemplate="header" let-patient>
+          <ng-template pTemplate="header">
               <tr>
                   <th pSortableColumn="nom">Nom<p-sortIcon field="nom"></p-sortIcon></th>
                   <th pSortableColumn="prenoms">Prenom <p-sortIcon field="prenoms"></p-sortIcon></th>
@@ -46,8 +45,87 @@
                   <th pSortableColumn="tel2">Téléphone 2<p-sortIcon field="tel2"></p-sortIcon></th>
                   <th></th>
               </tr>
+              <tr>
+                  <th>
+                      <p-columnFilter [showClearButton]="false" type="text" field="nom" matchMode="contains" pTooltip="Options de filtrage">
+                          <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                              <input type="text" #valeur class="p-2 border" maxlength="20"
+                                     [value]="value"
+                                     pInputText
+                                     (input)="filter(valeur.value)"
+                              >
+                          </ng-template>
+                      </p-columnFilter>
+                  </th>
+                  <th>
+                      <p-columnFilter [showClearButton]="false" type="text" field="prenoms" matchMode="contains" pTooltip="Options de filtrage">
+                          <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                              <input type="text" #valeur class="p-2 border" maxlength="20"
+                                     [value]="value"
+                                     pInputText
+                                     (input)="filter(valeur.value)"
+                              >
+                          </ng-template>
+                      </p-columnFilter>
+                  </th>
+                  <th>
+                      <p-columnFilter [showClearButton]="false" type="text" field="genre" matchMode="contains" pTooltip="Options de filtrage">
+                          <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                              <input type="text" #valeur class="p-2 border" maxlength="20"
+                                     [value]="value"
+                                     pInputText
+                                     (input)="filter(valeur.value)"
+                              >
+                          </ng-template>
+                      </p-columnFilter>
+                  </th>
+                  <th>
+                      <p-columnFilter [showClearButton]="false" type="text" field="profession" matchMode="contains" pTooltip="Options de filtrage">
+                          <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                              <input type="text" #valeur class="p-2 border" maxlength="20"
+                                     [value]="value"
+                                     pInputText
+                                     (input)="filter(valeur.value)"
+                              >
+                          </ng-template>
+                      </p-columnFilter>
+                  </th>
+                  <th>
+                      <p-columnFilter [showClearButton]="false" type="text" field="lieuHabitation" matchMode="contains" pTooltip="Options de filtrage">
+                          <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                              <input type="text" #valeur class="p-2 border" maxlength="20"
+                                     [value]="value"
+                                     pInputText
+                                     (input)="filter(valeur.value)"
+                              >
+                          </ng-template>
+                      </p-columnFilter>
+                  </th>
+                  <th>
+                      <p-columnFilter [showClearButton]="false" type="text" field="tel" matchMode="contains" pTooltip="Options de filtrage">
+                          <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                              <input type="text" #valeur class="p-2 border" maxlength="20"
+                                     [value]="value"
+                                     pInputText
+                                     (input)="filter(valeur.value)"
+                              >
+                          </ng-template>
+                      </p-columnFilter>
+                  </th>
+                  <th>
+                      <p-columnFilter [showClearButton]="false" type="text" field="tel2" matchMode="contains" pTooltip="Options de filtrage">
+                          <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                              <input type="text" #valeur class="p-2 border" maxlength="20"
+                                     [value]="value"
+                                     pInputText
+                                     (input)="filter(valeur.value)"
+                              >
+                          </ng-template>
+                      </p-columnFilter>
+                  </th>
+              </tr>
           </ng-template>
-          <ng-template pTemplate="body" let-patient let-index="rowIndex">
+          <ng-template pTemplate="body" let-patient>
               <tr>
                   <td style="min-width:200px">{{patient.user.nom}}</td>
                   <td style="min-width:200px">{{patient.user.prenoms}}</td>

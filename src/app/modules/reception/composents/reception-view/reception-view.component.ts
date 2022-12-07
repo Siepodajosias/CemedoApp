@@ -3,7 +3,7 @@ import { ReceptionService } from 'src/app/services/serviceReception/reception.se
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Reception } from 'src/app/models/modelReception/reception';
-import { MessageService } from 'primeng/api';
+import { MessageService, PrimeNGConfig } from 'primeng/api';
 import * as saveAs from 'file-saver';
 import * as jspdf from 'jspdf'
 import 'jspdf-autotable'
@@ -21,9 +21,10 @@ interface jsPDFWithPlugin extends jspdf.jsPDF{
 })
 export class ReceptionViewComponent implements OnInit {
 
-  constructor(private receptService:ReceptionService,private route:Router,
+  constructor(private receptionService:ReceptionService,private route:Router,
     private messageService:MessageService,
-    private receptionForm:FormBuilder
+    private receptionForm:FormBuilder,
+    private primeNgConfig: PrimeNGConfig
  ) { }
 
   posts: any
@@ -41,14 +42,14 @@ export class ReceptionViewComponent implements OnInit {
 
   exportColumns: any[]=[];
 
-  personneDialog: any | boolean;
+  receptionDialog: any | boolean;
   receptionForms:FormGroup=new FormGroup({})
   reception:Reception=new Reception()
   genres:any
 
   ngOnInit(): void {
 
-    this.receptService.recupererReception().subscribe({
+    this.receptionService.recupererReception().subscribe({
       next: (value: any) => {
         this.posts = value.data ? value : []
         this.receptions=this.posts.data
@@ -93,11 +94,40 @@ export class ReceptionViewComponent implements OnInit {
       numeroCni:['', [Validators.required, Validators.maxLength(20)]]
       */
     })
+
+      this.primeNgConfig.setTranslation({
+          monthNames: ['Janvier',
+              'Fevrier',
+              'Mars',
+              'Avril',
+              'Mai',
+              'Juin',
+              'Juillet',
+              'Août',
+              'Septembre',
+              'Octobre',
+              'Novembre',
+              'Decembre'],
+          dayNamesShort: ['Dim.',
+              'Lun.',
+              'Mar.',
+              'Mer.',
+              'Jeu.',
+              'Ven.',
+              'Sam.'],
+          startsWith: 'Commence par',
+          contains : 'Contient',
+          notContains : 'Ne contient pas',
+          endsWith: 'Fini par',
+          equals : 'Egale à',
+          notEquals : 'différent de',
+          noFilter : 'Pas de filtre',
+      });
     
   }
   detail(a:any){
     //this.route.navigate(['administrateur/detailM',a]);
-    this.receptService.recupererReception().subscribe({
+    this.receptionService.recupererReception().subscribe({
       next:(e)=>console.log(e)
     })
   }
@@ -122,13 +152,11 @@ applyFilterGlobal($event:any, stringVal:any) {
 }
 
 getEventValue($event:any) :string {
-  console.log($event.target.value);
   return $event.target.value;
 } 
 
 toggleLock(data:any, frozen:any, index:any) {
 
-  console.log(data);
     if (frozen) {
         this.lockedCustomers = this.lockedCustomers.filter((c, i) => i !== index);
         this.unlockedCustomers.push(data);
@@ -143,7 +171,7 @@ toggleLock(data:any, frozen:any, index:any) {
     });
 }
  openNew() {
-  this.personneDialog = true;
+  this.receptionDialog = true;
   this.genres=[
     {name:'homme'},
     {name:'femme'}
@@ -157,7 +185,7 @@ exportPdf() {
           head:this.exportColumns,
           body:this.receptions
         })
-    doc.save("Pomptables.pdf")
+    doc.save("Reception-rapport.pdf")
 }
 
 exportExcel() {
@@ -168,11 +196,11 @@ const excelBuffer: any = xlsx.write(workbook, {
   bookType: "xlsx",
   type: "array"
 });
-this.saveAsExcelFile(excelBuffer, "personne");
+this.saveAsExcelFile(excelBuffer, "reception");
 });
 }
 
-SaveData(){
+enregistrerReception(){
   this.reception.id=null
   this.reception.email=this.receptionForms.get('email')?.value
   this.reception.password=this.receptionForms.get('password')?.value
@@ -188,7 +216,7 @@ SaveData(){
   this.reception.fcmToken=""
   this.reception.typeEmploye=null
 
-     this.receptService.enregistrerReception(this.reception).subscribe({
+     this.receptionService.enregistrerReception(this.reception).subscribe({
 
       next:(v)=>{
         this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'receptionniste enregistré' });

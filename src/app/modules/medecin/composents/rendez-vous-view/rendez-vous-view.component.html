@@ -1,109 +1,237 @@
 <section class="content">
-    <div class="content-block">
-      <div class="block-header">
-        <!-- breadcrumb -->
-        <app-breadcrumb [title]="'Tableau de bord'" [items]="[]" [active_item]="'Rendez-vous'"></app-breadcrumb>
-      </div>
-      <div class="surface-ground px-4 py-5 md:px-6 lg:px-8">
-        <div class="grid">
-    
-            <div class="col-12 md:col-6 lg:col-4">
-                <div class="shadow-4 p-3 border-round" [style]="{'background-color':'green'}">
-                    <div class="flex justify-content-between mb-3">
-                        <div>
-                            <span class="block text-500 font-medium mb-3  text-cyan-50">Rendez-vous éffectué</span>
-                            <div class="text-900 font-medium text-xl  text-cyan-50">152</div>
-                        </div>
-                        <div class="flex align-items-center justify-content-center  bg-white-100 border-round" style="width:2.5rem;height:2.5rem">
-                            <i class="pi pi-window-minimize text-cyan-50 text-xl"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-12 md:col-6 lg:col-4">
-                <div class="shadow-4 p-3 border-round" [style]="{'background-color':'blue'}">
-                    <div class="flex justify-content-between mb-3">
-                        <div>
-                            <span class="block text-500 font-medium mb-3 text-cyan-50">Rendez-vous en cour..</span>
-                            <div class="text-900 font-medium text-xl text-cyan-50">100</div>
-                        </div>
-                        <div class="flex align-items-center justify-content-center bg-white-100 border-round" style="width:2.5rem;height:2.5rem">
-                            <i class="pi pi-window-maximize text-cyan-50 text-xl"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 md:col-6 lg:col-4">
-                <div class="shadow-4 p-3 border-round" [style]="{'background-color':'red'}">
-                    <div class="flex justify-content-between mb-3">
-                        <div>
-                            <span class="block text-500 font-medium mb-3 text-cyan-50">Rendez-vous annulé</span>
-                            <div class="text-900 font-medium text-xl text-cyan-50">28441</div>
-                        </div>
-                        <div class="flex align-items-center justify-content-center bg-white-100 border-round" style="width:2.5rem;height:2.5rem">
-                            <i class="pi pi-sync text-cyan-50 text-xl"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+	<div class="content-block">
+		<div class="block-header">
+			<!-- breadcrumb -->
+			<app-breadcrumb [title]="'Tableau de bord'" [items]="[]" [active_item]="'Rendez-vous'"></app-breadcrumb>
+		</div>
+		<div class="surface-ground px-4 py-5 md:px-6 lg:px-8">
+			<div class="grid">
+				<div class="col-12 md:col-6 lg:col-4">
+					<div class="shadow-4 p-3 border-round" [style]="{'background-color':'green'}">
+						<div class="flex justify-content-between mb-3">
+							<div>
+								<span class="block text-500 font-medium mb-3  text-cyan-50">Rendez-vous éffectué</span>
+								<div class="text-900 font-medium text-xl  text-cyan-50">152</div>
+							</div>
+							<div class="flex align-items-center justify-content-center  bg-white-100 border-round" style="width:2.5rem;height:2.5rem">
+								<i class="pi pi-window-minimize text-cyan-50 text-xl"></i>
+							</div>
+						</div>
+					</div>
+				</div>
 
-        <p-fieldset legend="Filtre" [toggleable]="true">
-            <p-table #dt  [value]="rdvs"  [scrollable]="true" scrollHeight="490px"
-            [globalFilterFields]="['dateDPrdv','daterdv','medecin','patient']"
-            [filterDelay]="0"
-            styleClass="p-datatable-gridlines"
-            selectionMode="multiple">
-                <ng-template pTemplate="caption">
-                    <div class="flex align-items-center justify-content-between">
-                        <!--la class ne change rien-->
-                        <div class="left">
-                            <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success mr-2"  pTooltip="XLS" tooltipPosition="bottom"></button>
-                            <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
-                            <button pButton pRipple label="Créer un rendez-vous" icon="pi pi-plus" class="p-button-help"></button>
-                        </div>
-        
-                        <span class="p-input-icon-left">
+				<div class="col-12 md:col-6 lg:col-4">
+					<div class="shadow-4 p-3 border-round" [style]="{'background-color':'blue'}">
+						<div class="flex justify-content-between mb-3">
+							<div>
+								<span class="block text-500 font-medium mb-3 text-cyan-50">Rendez-vous en cour..</span>
+								<div class="text-900 font-medium text-xl text-cyan-50">100</div>
+							</div>
+							<div class="flex align-items-center justify-content-center bg-white-100 border-round" style="width:2.5rem;height:2.5rem">
+								<i class="pi pi-window-maximize text-cyan-50 text-xl"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 md:col-6 lg:col-4">
+					<div class="shadow-4 p-3 border-round" [style]="{'background-color':'red'}">
+						<div class="flex justify-content-between mb-3">
+							<div>
+								<span class="block text-500 font-medium mb-3 text-cyan-50">Rendez-vous annulé</span>
+								<div class="text-900 font-medium text-xl text-cyan-50">28441</div>
+							</div>
+							<div class="flex align-items-center justify-content-center bg-white-100 border-round" style="width:2.5rem;height:2.5rem">
+								<i class="pi pi-sync text-cyan-50 text-xl"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<p-fieldset legend="Filtre" [toggleable]="true">
+				<p-table #dt [value]="rdvs" [scrollable]="true" scrollHeight="490px"
+						 [globalFilterFields]="['dateDPrdv','daterdv','medecin','patient']"
+						 [filterDelay]="0"
+						 styleClass="p-datatable-gridlines"
+						 selectionMode="multiple">
+					<ng-template pTemplate="caption">
+						<div class="flex align-items-center justify-content-between">
+							<div class="left">
+								<button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom"></button>
+								<button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning mr-4" pTooltip="PDF" tooltipPosition="bottom"></button>
+								<button *ngIf="urlActif()" pButton pRipple label="Créer un rendez-vous" icon="pi pi-plus" class="p-button-help" (click)="newRDV()"></button>
+							</div>
+
+							<span class="p-input-icon-left">
                             <i class="pi pi-search"></i>
         
                             <input pInputText type="text"
-                            (input)="dt.filterGlobal(getEventValue($event), 'contains')"
-                             placeholder="Rechercher..." 
-                            />
+								   (input)="dt.filterGlobal(getEventValue($event), 'contains')"
+								   placeholder="Rechercher..."/>
                         </span>
-                    </div>
-                </ng-template>
-                <ng-template pTemplate="header" let-rdv>
-                    <tr>
-                        <th pSortableColumn="dateDPrdv">Date de prise de rendez-vous<p-sortIcon field="dateDPrdv"></p-sortIcon></th>
-                        <th pSortableColumn="daterdv">Date de rendez-vous <p-sortIcon field="daterdv"></p-sortIcon></th>
-                        <th pSortableColumn="medecin">Medecin <p-sortIcon field="medecin"></p-sortIcon></th>
-                        <th pSortableColumn="patient">Patient <p-sortIcon field="patient"></p-sortIcon></th>
-                        <th ></th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-rdv let-index="rowIndex">
-                    <tr>
-                        <td style="min-width:200px">{{rdv.dateDPrdv}}</td>
-                        <td style="min-width:200px">{{rdv.daterdv}}</td>
-                        <td style="min-width:200px">{{rdv.medecin}}</td>
-                        <td style="min-width:200px">{{rdv.patient}}</td>
-        
-                        <td style="flex: 0 0 4rem">
-                            <button pButton pRipple type="button"  icon="pi pi-angle-right"  (click)="toggleLock(rdv,false,index)" 
-                            class="p-button-rounded p-button-text"
-                            ></button>
-                        </td>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="summary">
-                    <div class="flex align-items-center justify-content-between">
-                     Total: {{rdvs ? rdvs.length : 0 }} Rendez-vous
-                    </div>
-                </ng-template>
-            </p-table>
-        </p-fieldset>
-    </div>
-    </div>
-  </section>
+						</div>
+					</ng-template>
+					<ng-template pTemplate="header">
+						<tr>
+							<th pSortableColumn="dateDPrdv">Date de prise de rendez-vous
+								<p-sortIcon field="dateDPrdv"></p-sortIcon>
+							</th>
+							<th pSortableColumn="daterdv">Date de rendez-vous
+								<p-sortIcon field="daterdv"></p-sortIcon>
+							</th>
+							<th pSortableColumn="medecin">Medecin
+								<p-sortIcon field="medecin"></p-sortIcon>
+							</th>
+							<th pSortableColumn="patient">Patient
+								<p-sortIcon field="patient"></p-sortIcon>
+							</th>
+							<th></th>
+						</tr>
+						<tr>
+							<th>
+								<p-columnFilter [showClearButton]="false" type="text" field="dateDPrdv" matchMode="contains" pTooltip="Options de filtrage">
+									<ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+										<input type="text" #valeur class="p-2 border" maxlength="20"
+											   [value]="value"
+											   pInputText
+											   (input)="filter(valeur.value)"
+										>
+									</ng-template>
+								</p-columnFilter>
+							</th>
+							<th>
+								<p-columnFilter [showClearButton]="false" type="text" field="daterdv" matchMode="contains" pTooltip="Options de filtrage">
+									<ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+										<input type="text" #valeur class="p-2 border" maxlength="20"
+											   [value]="value"
+											   pInputText
+											   (input)="filter(valeur.value)"
+										>
+									</ng-template>
+								</p-columnFilter>
+							</th>
+							<th>
+								<p-columnFilter [showClearButton]="false" type="text" field="medecin" matchMode="contains" pTooltip="Options de filtrage">
+									<ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+										<input type="text" #valeur class="p-2 border" maxlength="20"
+											   [value]="value"
+											   pInputText
+											   (input)="filter(valeur.value)"
+										>
+									</ng-template>
+								</p-columnFilter>
+							</th>
+							<th>
+								<p-columnFilter [showClearButton]="false" type="text" field="patient" matchMode="contains" pTooltip="Options de filtrage">
+									<ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+										<input type="text" #valeur class="p-2 border" maxlength="20"
+											   [value]="value"
+											   pInputText
+											   (input)="filter(valeur.value)"
+										>
+									</ng-template>
+								</p-columnFilter>
+							</th>
+						</tr>
+					</ng-template>
+					<ng-template pTemplate="body" let-rdv let-index="rowIndex">
+						<tr>
+							<td style="min-width:200px">{{rdv.dateDPrdv}}</td>
+							<td style="min-width:200px">{{rdv.daterdv}}</td>
+							<td style="min-width:200px">{{rdv.medecin}}</td>
+							<td style="min-width:200px">{{rdv.patient}}</td>
+
+							<td style="flex: 0 0 4rem">
+								<button pButton pRipple type="button" icon="pi pi-angle-right" (click)="toggleLock(rdv,false,index)"
+										class="p-button-rounded p-button-text"
+								></button>
+							</td>
+						</tr>
+					</ng-template>
+					<ng-template pTemplate="summary">
+						<div class="flex align-items-center justify-content-between">
+							Total: {{rdvs ? rdvs.length : 0 }} Rendez-vous
+						</div>
+					</ng-template>
+				</p-table>
+			</p-fieldset>
+			<p-toast></p-toast>
+			<p-dialog [(visible)]="rendezVousDialog" [style]="{width:'700px'}" header="Création d'un rendez-vous" [modal]="true"
+					  styleClass="p-fluid">
+				<form [formGroup]="rendezVousForms" (ngSubmit)="enregistrerRendezVous()">
+					<div class="grid">
+						<div class="col-12 md:col-6 lg:col-4">
+						  <span>
+							<label>Date de prise du rendez-vous</label>
+							<p-calendar [baseZIndex]="3000" appendTo="body" [showIcon]="true" inputId="icon"></p-calendar>
+						  </span>
+						</div>
+
+						<div class="col-12 md:col-6 lg:col-4">
+						  <span>
+							<label>Date du rendez-vous</label>
+							<p-calendar [baseZIndex]="3000" appendTo="body" [showIcon]="true" inputId="icon"></p-calendar>
+						  </span>
+						</div>
+
+						<div class="col-12 md:col-6 lg:col-4">
+						  <span>
+							<label>Patient</label>
+							<input type="text" pInputText formControlName="patient">
+						  </span>
+						</div>
+
+						<div class="col-12 md:col-6 lg:col-4" *ngIf="medecinActif()">
+							<label>Medecin</label>
+							<input type="text" pInputText formControlName="medecin">
+						</div>
+
+						<div class="col-12 md:col-6 lg:col-4" *ngIf="receptionActif()">
+							<label>Reception</label>
+							<input type="text" pInputText formControlName="reception">
+						</div>
+
+						<div class="col-12 md:col-6 lg:col-4">
+						  <span>
+							<label>Statut</label>
+							<input type="text" pInputText formControlName="statut">
+						  </span>
+						</div>
+
+						<div class="col-12">
+							<p-divider align="center" type="dashed" layout="horizontal">
+								<div class="inline-flex align-items-center">
+									<i class="pi pi-user mr-2"></i>
+									<b>Contacts</b>
+								</div>
+							</p-divider>
+
+						</div>
+
+						<div class="col-12">
+							<span>
+							  <label>Adresse</label>
+							  <input type="text" pInputText formControlName="adresse">
+							</span>
+						</div>
+						<div class="col-12">
+							<span>
+							  <label>Commentaire</label>
+							  <input type="text" pInputText formControlName="commentaire">
+							</span>
+						</div>
+
+						<div class="col-12 md:col-12">
+							<div class="flex justify-content-end">
+								<button type="submit" pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-bouton-texte p-bouton-sm
+                                  w-10rem h-2rem m-2"></button>
+								<button type="button" pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-danger p-bouton-sm
+                                  w-10rem h-2rem m-2"></button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</p-dialog>
+		</div>
+	</div>
+</section>

@@ -31,7 +31,7 @@ import { OWL_DATE_TIME_LOCALE, OwlDateTimeModule, OwlNativeDateTimeModule } from
 //import { OwlDateTimeModule, OWL_DATE_TIME_FORMATS} from 'ng-pick-datetime';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { DoctorRoutingModule } from "src/app/modules/medecin/doctor-routing.module";
+import { MedecinRoutingModule } from "src/app/modules/medecin/medecin-routing.module";
 import { ComponentsModule } from "src/app/shared/components/components.module";
 import { MedecinViewComponent } from 'src/app/modules/medecin/composents/medecin-view/medecin-view.component';
 import { MedecinDetailComponent } from 'src/app/modules/medecin/composents/medecin-detail/medecin-detail.component';
@@ -87,7 +87,7 @@ import { FieldsetModule} from 'primeng/fieldset';
   ],
   imports: [
     CommonModule,
-    DoctorRoutingModule,
+    MedecinRoutingModule,
     chartjsModule,
     NgxEchartsModule.forRoot({
       echarts: () => import("echarts"),
@@ -153,4 +153,4 @@ import { FieldsetModule} from 'primeng/fieldset';
 
   ]
 })
-export class DoctorModule { }
+export class MedecinModule { }

@@ -36,7 +36,7 @@
                   </span>
               </div>
           </ng-template>
-          <ng-template pTemplate="header" let-reception>
+          <ng-template pTemplate="header">
               <tr>
                   <th pSortableColumn="nom">Nom<p-sortIcon field="nom"></p-sortIcon></th>
                   <th pSortableColumn="prenoms">Prénom <p-sortIcon field="prenoms"></p-sortIcon></th>
@@ -45,10 +45,77 @@
                   <th pSortableColumn="tel">Téléphone 1<p-sortIcon field="tel"></p-sortIcon></th>
                   <th pSortableColumn="tel2">E-mail <p-sortIcon field="tel2"></p-sortIcon></th>
                   <th ></th>
-  
+              </tr>
+              <tr>
+                  <th>
+                      <p-columnFilter [showClearButton]="false" type="text" field="nom" matchMode="contains" pTooltip="Options de filtrage">
+                          <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                              <input type="text" #valeur class="p-2 border" maxlength="20"
+                                     [value]="value"
+                                     pInputText
+                                     (input)="filter(valeur.value)"
+                              >
+                          </ng-template>
+                      </p-columnFilter>
+                  </th>
+                  <th>
+                      <p-columnFilter [showClearButton]="false" type="text" field="prenoms" matchMode="contains" pTooltip="Options de filtrage">
+                          <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                              <input type="text" #valeur class="p-2 border" maxlength="20"
+                                     [value]="value"
+                                     pInputText
+                                     (input)="filter(valeur.value)"
+                              >
+                          </ng-template>
+                      </p-columnFilter>
+                  </th>
+                  <th>
+                      <p-columnFilter [showClearButton]="false" type="text" field="genre" matchMode="contains" pTooltip="Options de filtrage">
+                          <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                              <input type="text" #valeur class="p-2 border" maxlength="20"
+                                     [value]="value"
+                                     pInputText
+                                     (input)="filter(valeur.value)"
+                              >
+                          </ng-template>
+                      </p-columnFilter>
+                  </th>
+                  <th>
+                      <p-columnFilter [showClearButton]="false" type="text" field="email" matchMode="contains" pTooltip="Options de filtrage">
+                          <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                              <input type="text" #valeur class="p-2 border" maxlength="20"
+                                     [value]="value"
+                                     pInputText
+                                     (input)="filter(valeur.value)"
+                              >
+                          </ng-template>
+                      </p-columnFilter>
+                  </th>
+                  <th>
+                      <p-columnFilter [showClearButton]="false" type="text" field="tel" matchMode="contains" pTooltip="Options de filtrage">
+                          <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                              <input type="text" #valeur class="p-2 border" maxlength="20"
+                                     [value]="value"
+                                     pInputText
+                                     (input)="filter(valeur.value)"
+                              >
+                          </ng-template>
+                      </p-columnFilter>
+                  </th>
+                  <th>
+                      <p-columnFilter [showClearButton]="false" type="text" field="tel2" matchMode="contains" pTooltip="Options de filtrage">
+                          <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                              <input type="text" #valeur class="p-2 border" maxlength="20"
+                                     [value]="value"
+                                     pInputText
+                                     (input)="filter(valeur.value)"
+                              >
+                          </ng-template>
+                      </p-columnFilter>
+                  </th>
               </tr>
           </ng-template>
-          <ng-template pTemplate="body" let-reception let-index="rowIndex">
+          <ng-template pTemplate="body" let-reception>
               <tr>
                   <td style="min-width:200px">{{reception.user.nom}}</td>
                   <td style="min-width:200px">{{reception.user.prenoms}}</td>
@@ -79,9 +146,9 @@
   <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
   
   <p-toast></p-toast>
-  <p-dialog [(visible)]="personneDialog" [style]="{width: '560px'}" header="Création d'une nouvelle receptionniste" [modal]="true"
-    styleClass="p-fluid">
-    <form [formGroup]="receptionForms" (ngSubmit)="SaveData()">
+  <p-dialog [(visible)]="receptionDialog" [style]="{width: '560px'}" header="Création d'une nouvelle receptionniste" [modal]="true"
+            styleClass="p-fluid">
+    <form [formGroup]="receptionForms" (ngSubmit)="enregistrerReception()">
       <div class="grid">
 
           <div class="col-6">
@@ -144,7 +211,7 @@
         <div class="col-12">
           <span>
             <label>Téléphone 1</label>
-            <input type="text" id="inputtext5" pInputText formControlName="tel">
+            <input type="text" pInputText formControlName="tel">
           </span>
         </div>
 

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { FactureComponent } from "src/app/modules/administrateur/composents/facture/facture.component";
-import { RendezVousComponent } from 'src/app/modules/administrateur/composents/rendez-vous/rendez-vous.component';
 import { RendezVousCalendrierComponent } from 'src/app/modules/administrateur/composents/rendez-vous-calendrier/rendez-vous-calendrier.component';
 const routes: Routes = [
   {
@@ -30,7 +29,7 @@ const routes: Routes = [
   {
     path: 'medecin',
     loadChildren: () =>
-      import('src/app/modules/medecin/doctor.module').then((m) => m.DoctorModule),
+      import('src/app/modules/medecin/medecin.module').then((m) => m.MedecinModule),
   }, {
     path: 'infirmerie',
     loadChildren: () =>
@@ -44,8 +43,6 @@ const routes: Routes = [
   {
     path: 'assurance',
     loadChildren: () => import('src/app/modules/assurance/assurance.module').then((r) => r.AssuranceModule)
-  },{
-    path:'Rdv',component:RendezVousComponent
   },
   {path:'calendrier',component:RendezVousCalendrierComponent},
   {path:'informatique',loadChildren:()=>import('src/app/modules/informatique/informatique.module').then((m)=>m.InformatiqueModule)},
@@ -57,4 +54,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AdminRoutingModule { }
+export class AdministrateurRoutingModule { }

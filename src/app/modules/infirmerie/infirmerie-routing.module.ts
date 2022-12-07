@@ -17,7 +17,7 @@ const routes: Routes = [
   },{
     path:'medecin',
     loadChildren: () =>
-    import('src/app/modules/medecin/doctor.module').then((m) =>m.DoctorModule),
+    import('src/app/modules/medecin/medecin.module').then((m) =>m.MedecinModule),
   },
   {
     path: 'assurance',

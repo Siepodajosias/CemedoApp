@@ -36,16 +36,61 @@
                   </span>
               </div>
           </ng-template>
-          <ng-template pTemplate="header" let-medicament>
+          <ng-template pTemplate="header">
               <tr>
                   <th pSortableColumn="id">Identifiant<p-sortIcon field="libelle"></p-sortIcon></th>
                   <th pSortableColumn="libelle">Designation <p-sortIcon field="email"></p-sortIcon></th>
-                  <th pSortableColumn="posologie">Posologie <p-sortIcon field="tel"></p-sortIcon></th>
-                  <th pSortableColumn="quantite">Quantite<p-sortIcon field="ville"></p-sortIcon></th>
-  
+                  <th pSortableColumn="posologie">Posologie <p-sortIcon field="posologie"></p-sortIcon></th>
+                  <th pSortableColumn="quantite">Quantite<p-sortIcon field="quantite"></p-sortIcon></th>
+              </tr>
+              <tr>
+                  <th>
+                      <p-columnFilter [showClearButton]="false" type="text" field="libelle" matchMode="contains" pTooltip="Options de filtrage">
+                          <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                              <input type="text" #valeur class="p-2 border" maxlength="20"
+                                     [value]="value"
+                                     pInputText
+                                     (input)="filter(valeur.value)"
+                              >
+                          </ng-template>
+                      </p-columnFilter>
+                  </th>
+                  <th>
+                      <p-columnFilter [showClearButton]="false" type="text" field="email" matchMode="contains" pTooltip="Options de filtrage">
+                          <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                              <input type="text" #valeur class="p-2 border" maxlength="20"
+                                     [value]="value"
+                                     pInputText
+                                     (input)="filter(valeur.value)"
+                              >
+                          </ng-template>
+                      </p-columnFilter>
+                  </th>
+                  <th>
+                      <p-columnFilter [showClearButton]="false" type="text" field="posologie" matchMode="contains" pTooltip="Options de filtrage">
+                          <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                              <input type="text" #valeur class="p-2 border" maxlength="20"
+                                     [value]="value"
+                                     pInputText
+                                     (input)="filter(valeur.value)"
+                              >
+                          </ng-template>
+                      </p-columnFilter>
+                  </th>
+                  <th>
+                      <p-columnFilter [showClearButton]="false" type="text" field="quantite" matchMode="contains" pTooltip="Options de filtrage">
+                          <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                              <input type="text" #valeur class="p-2 border" maxlength="20"
+                                     [value]="value"
+                                     pInputText
+                                     (input)="filter(valeur.value)"
+                              >
+                          </ng-template>
+                      </p-columnFilter>
+                  </th>
               </tr>
           </ng-template>
-          <ng-template pTemplate="body" let-medicament let-index="rowIndex">
+          <ng-template pTemplate="body" let-medicament>
               <tr>
                   <td style="min-width:200px">{{medicament.id}}</td>
                   <td style="min-width:200px">{{medicament.libelle}}</td>

@@ -2,7 +2,7 @@ import { Component, OnInit,ViewChild} from '@angular/core';
 import { PharmacienService } from 'src/app/services/servicePharmacie/pharmacien.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MessageService } from 'primeng/api';
+import { MessageService, PrimeNGConfig } from 'primeng/api';
 import { Pharmacien } from 'src/app/models/modelPharmacie/pharmacien';
 import * as saveAs from 'file-saver';
 import * as jspdf from 'jspdf'
@@ -35,14 +35,15 @@ export class PharmacienViewComponent implements OnInit {
 
   exportColumns: any[]=[];
 
-  personneDialog: any | boolean;
+  pharmacienDialog: any | boolean;
   genres:any
   pharmacienForms: FormGroup = new FormGroup({})
   pharmacien:Pharmacien=new Pharmacien()
 
-  constructor(private pharService:PharmacienService,private route:Router,
+  constructor(private pharmacienService:PharmacienService,private route:Router,
     private messageService:MessageService,
-    private pharmacienForm: FormBuilder
+    private pharmacienForm: FormBuilder,
+    private primeNgConfig: PrimeNGConfig
 ) { }
 
   ngOnInit(): void {
@@ -80,7 +81,7 @@ export class PharmacienViewComponent implements OnInit {
       numeroCni:['', [Validators.required, Validators.maxLength(20)]]
       */
     })
-    this.pharService.recupererPharmacien().subscribe({
+    this.pharmacienService.recupererPharmacien().subscribe({
       next: (value: any) => {
         this.posts = value.data ? value : []
         this.pharmaciens=this.posts.data
@@ -90,16 +91,41 @@ export class PharmacienViewComponent implements OnInit {
       complete: () => {
       }
     })
+      this.primeNgConfig.setTranslation({
+          monthNames: ['Janvier',
+              'Fevrier',
+              'Mars',
+              'Avril',
+              'Mai',
+              'Juin',
+              'Juillet',
+              'Août',
+              'Septembre',
+              'Octobre',
+              'Novembre',
+              'Decembre'],
+          dayNamesShort: ['Dim.',
+              'Lun.',
+              'Mar.',
+              'Mer.',
+              'Jeu.',
+              'Ven.',
+              'Sam.'],
+          startsWith: 'Commence par',
+          contains : 'Contient',
+          notContains : 'Ne contient pas',
+          endsWith: 'Fini par',
+          equals : 'Egale à',
+          notEquals : 'différent de',
+          noFilter : 'Pas de filtre',
+      });
   }
   detail(a:any){
     //this.route.navigate(['administrateur/detailM',a]);
-    this.pharService.recupererPharmacien().subscribe({
-      next:(e)=>console.log(e)
-    })
+    this.pharmacienService.recupererPharmacien().subscribe({})
   }
 
   saveAsExcelFile(buffer: any, fileName: string): void {
-
     let EXCEL_TYPE =
       "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
     let EXCEL_EXTENSION = ".xlsx";
@@ -110,7 +136,6 @@ export class PharmacienViewComponent implements OnInit {
       data,
       fileName + "_export_" + new Date() + EXCEL_EXTENSION
     );
-
   }
 
 applyFilterGlobal($event:any, stringVal:any) {
@@ -118,13 +143,11 @@ applyFilterGlobal($event:any, stringVal:any) {
 }
 
 getEventValue($event:any) :string {
-  console.log($event.target.value);
   return $event.target.value;
 } 
 
 toggleLock(data:any, frozen:any, index:any) {
 
-  console.log(data);
     if (frozen) {
         this.lockedCustomers = this.lockedCustomers.filter((c, i) => i !== index);
         this.unlockedCustomers.push(data);
@@ -133,13 +156,12 @@ toggleLock(data:any, frozen:any, index:any) {
         this.unlockedCustomers = this.unlockedCustomers.filter((c, i) => i !== index);
         this.lockedCustomers.push(data);
     }
-
     this.unlockedCustomers.sort((val1, val2) => {
         return val1.id < val2.id ? -1 : 1;
     });
 }
  openNew() {
-  this.personneDialog = true;
+  this.pharmacienDialog = true;
   this.genres = [
     {name: 'homme'},
     {name: 'femme'}
@@ -147,7 +169,6 @@ toggleLock(data:any, frozen:any, index:any) {
 }
 
 exportPdf() {
-
   const doc = new jspdf.jsPDF('portrait','px','a4') as jsPDFWithPlugin;
         doc.autoTable({
           head:this.exportColumns,
@@ -168,7 +189,7 @@ this.saveAsExcelFile(excelBuffer, "pharmaciens");
 });
 }
 
-SaveData(){
+enregistrerPharmacien(){
 
   this.pharmacien.id=null
   this.pharmacien.email=this.pharmacienForms.get('email')?.value
@@ -185,7 +206,7 @@ SaveData(){
   this.pharmacien.fcmToken=""
   this.pharmacien.typeEmploye=null
 
-     this.pharService.enregistrerPharmacien(this.pharmacien).subscribe({
+     this.pharmacienService.enregistrerPharmacien(this.pharmacien).subscribe({
 
       next:(v)=>{
         this.messageService.add({severity: 'success', summary: 'Service Message', detail: 'Pharmacien enregistré' });

@@ -14,6 +14,7 @@ import 'jspdf-autotable'
 import { UserOptions } from 'jspdf-autotable';
 
 import { Table } from 'primeng/table'
+import { PrimeNGConfig } from 'primeng/api';
 
 interface jsPDFWithPlugin extends jspdf.jsPDF{
     autoTable: (options: UserOptions)=> jspdf.jsPDF;
@@ -47,20 +48,49 @@ export class PatientViewComponent implements OnInit {
    serie: ApexAxisChartSeries;
    chart:ApexChart;
    options: any;
-  constructor(private patientH: PatientService,private route:Router) {}
+  constructor(private patientH: PatientService,
+              private route:Router,
+              private primeNgConfig: PrimeNGConfig) {}
   ngOnInit(): void {
    this.patientH.recupererPatient().subscribe({
       next: (value: any) => {
         this.posts = value.data ? value : []
         this.patients = this.posts.data
-        console.log(this.patients)
         this.loading=false
       },
-      error: (e) => { console.log("erreur :" + e) },
+      error: (e) => {},
       complete: () => {
       }
     })
-    
+
+      this.primeNgConfig.setTranslation({
+          monthNames: ['Janvier',
+              'Fevrier',
+              'Mars',
+              'Avril',
+              'Mai',
+              'Juin',
+              'Juillet',
+              'Août',
+              'Septembre',
+              'Octobre',
+              'Novembre',
+              'Decembre'],
+          dayNamesShort: ['Dim.',
+              'Lun.',
+              'Mar.',
+              'Mer.',
+              'Jeu.',
+              'Ven.',
+              'Sam.'],
+          startsWith: 'Commence par',
+          contains : 'Contient',
+          notContains : 'Ne contient pas',
+          endsWith: 'Fini par',
+          equals : 'Egale à',
+          notEquals : 'différent de',
+          noFilter : 'Pas de filtre',
+      });
   }
   detail(a:any){
     this.route.navigate(['admin/patient/detail',a]);
@@ -110,8 +140,7 @@ export class PatientViewComponent implements OnInit {
   } 
   
   toggleLock(data:any, frozen:any, index:any) {
-  
-    console.log(data);
+
       if (frozen) {
           this.lockedCustomers = this.lockedCustomers.filter((c, i) => i !== index);
           this.unlockedCustomers.push(data);
@@ -127,7 +156,6 @@ export class PatientViewComponent implements OnInit {
   }
 
   exportPdf() {
-  
     const doc = new jspdf.jsPDF('portrait','px','a4') as jsPDFWithPlugin;
           doc.autoTable({
             head:this.exportColumns,
@@ -147,7 +175,7 @@ export class PatientViewComponent implements OnInit {
   this.saveAsExcelFile(excelBuffer, "rapport-patient");
   });
   }
-  getActif():boolean{
+  urlActif():boolean{
     return this.route.url.includes('/reception/patient/liste')
   }
 }

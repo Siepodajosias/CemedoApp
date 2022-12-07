@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild, ChangeDetectorRef  } from '@angular/core';
+import { Component, OnInit,ViewChild} from '@angular/core';
 import { ComptableService } from 'src/app/services/serviceComptable/comptable.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -38,12 +38,12 @@ export class ComptableViewComponent implements OnInit {
 
   exportColumns: any[]=[];
 
-  personneDialog: any | boolean;
+  comptableDialog: any | boolean;
  
   comptableForms: FormGroup = new FormGroup({})
   comptable:Comptable=new Comptable()
   genres:any
-  constructor(private cptservice:ComptableService,
+  constructor(private comptableService:ComptableService,
     private route:Router,private messageService:MessageService,
     private comptableForm: FormBuilder,
     private primeNgConfig: PrimeNGConfig
@@ -51,17 +51,15 @@ export class ComptableViewComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.cptservice.recupererComptable().subscribe({
+    this.comptableService.recupererComptable().subscribe({
       next: (value: any) => {
         this.posts = value.data ? value : []
-
       },
-      error: (e) => { console.log("erreur :" + e) },
+      error: (e) => {},
       complete: () => {
       }
     })
     this.comptableForms = this.comptableForm.group({
-
       id:null,
       nom: ['', [Validators.required, Validators.minLength(3)]],
       prenoms: ['', [Validators.required, Validators.maxLength(20)]],
@@ -91,6 +89,25 @@ export class ComptableViewComponent implements OnInit {
       */
     })
     this.primeNgConfig.setTranslation({
+      monthNames: ['Janvier',
+        'Fevrier',
+        'Mars',
+        'Avril',
+        'Mai',
+        'Juin',
+        'Juillet',
+        'Août',
+        'Septembre',
+        'Octobre',
+        'Novembre',
+        'Decembre'],
+      dayNamesShort: ['Dim.',
+        'Lun.',
+        'Mar.',
+        'Mer.',
+        'Jeu.',
+        'Ven.',
+        'Sam.'],
       startsWith: 'Commence par',
       contains : 'Contient',
       notContains : 'Ne contient pas',
@@ -124,13 +141,11 @@ applyFilterGlobal($event:any, stringVal:any) {
 }
 
 getEventValue($event:any) :string {
-  console.log($event.target.value);
   return $event.target.value;
 } 
 
 toggleLock(data:any, frozen:any, index:any) {
 
-  console.log(data);
     if (frozen) {
         this.lockedCustomers = this.lockedCustomers.filter((c, i) => i !== index);
         this.unlockedCustomers.push(data);
@@ -145,17 +160,16 @@ toggleLock(data:any, frozen:any, index:any) {
     });
 }
  openNew() {
-  this.personneDialog = true;
+  this.comptableDialog = true;
   this.genres=[
     {name:'homme'},
     {name:'femme'}
   ]
 }
 hideOpen(){
-  this.personneDialog=false
+  this.comptableDialog=false
 }
 exportPdf() {
-
   const doc = new jspdf.jsPDF('portrait','px','a4') as jsPDFWithPlugin;
         doc.autoTable({
           head:this.exportColumns,
@@ -176,7 +190,7 @@ this.saveAsExcelFile(excelBuffer, "personne");
 });
 }
 
-SaveData(){
+enregistrerComptable(){
   this.comptable.id=null
   this.comptable.email=this.comptableForms.get('email')?.value
   this.comptable.password=this.comptableForms.get('password')?.value
@@ -193,9 +207,7 @@ SaveData(){
   this.comptable.typeEmploye=null
   this.comptable.role=null
 
-  console.log(this.comptable)
-
- this.cptservice.enregistrerComptable(this.comptable).subscribe({
+ this.comptableService.enregistrerComptable(this.comptable).subscribe({
     next:(v)=>{
       this.messageService.add({severity: 'success', summary: 'Service Message', detail: 'Assurance enregistrée' });
   },

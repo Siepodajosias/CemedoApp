@@ -14,9 +14,9 @@
             class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
         </ng-template>
 
-        <ng-template pTemplate="right" *ngIf="getActif()">
+        <ng-template pTemplate="right" *ngIf="urlActif()">
           <button pButton pRipple label="Créer un nouveau medecin" icon="pi pi-plus" class="p-button-help"
-            (click)="openNew()"></button>
+            (click)="newMedecin()"></button>
         </ng-template>
       </p-toolbar>
 
@@ -38,7 +38,7 @@
             </span>
           </div>
         </ng-template>
-        <ng-template pTemplate="header" let-medecin>
+        <ng-template pTemplate="header">
           <tr>
             <th pSortableColumn="nom">Nom<p-sortIcon field="nom"></p-sortIcon>
             </th>
@@ -52,26 +52,75 @@
             </th>
             <th pSortableColumn="tel2">Téléphone<p-sortIcon field="tel2"></p-sortIcon>
             </th>
-            <tr>	
-              <th>
-                <p-columnFilter type="text" field="nom"></p-columnFilter>
-              </th>
-              <th>
-                <p-columnFilter type="text" field="prenoms"></p-columnFilter>
-              </th>
-              <th>
-                <p-columnFilter type="text" field="genre"></p-columnFilter>
-              </th>
-              <th>
-                <p-columnFilter type="text" field="email"></p-columnFilter>
-              </th>
-              <th>
-                <p-columnFilter type="text" field="tel"></p-columnFilter>
-              </th>
-              <th>
-                <p-columnFilter type="text" field="tel2"></p-columnFilter>
-              </th>
-            </tr>
+          </tr>
+          <tr>
+            <th>
+              <p-columnFilter [showClearButton]="false" type="text" field="nom" matchMode="contains" pTooltip="Options de filtrage">
+                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                  <input type="text" #valeur class="p-2 border" maxlength="20"
+                         [value]="value"
+                         pInputText
+                         (input)="filter(valeur.value)"
+                  >
+                </ng-template>
+              </p-columnFilter>
+            </th>
+            <th>
+              <p-columnFilter [showClearButton]="false" type="text" field="prenoms" matchMode="contains" pTooltip="Options de filtrage">
+                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                  <input type="text" #valeur class="p-2 border" maxlength="20"
+                         [value]="value"
+                         pInputText
+                         (input)="filter(valeur.value)"
+                  >
+                </ng-template>
+              </p-columnFilter>
+            </th>
+            <th>
+              <p-columnFilter [showClearButton]="false" type="text" field="genre" matchMode="contains" pTooltip="Options de filtrage">
+                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                  <input type="text" #valeur class="p-2 border" maxlength="20"
+                         [value]="value"
+                         pInputText
+                         (input)="filter(valeur.value)"
+                  >
+                </ng-template>
+              </p-columnFilter>
+            </th>
+            <th>
+              <p-columnFilter [showClearButton]="false" type="text" field="email" matchMode="contains" pTooltip="Options de filtrage">
+                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                  <input type="text" #valeur class="p-2 border" maxlength="20"
+                         [value]="value"
+                         pInputText
+                         (input)="filter(valeur.value)"
+                  >
+                </ng-template>
+              </p-columnFilter>
+            </th>
+            <th>
+              <p-columnFilter [showClearButton]="false" type="text" field="tel" matchMode="contains" pTooltip="Options de filtrage">
+                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                  <input type="text" #valeur class="p-2 border" maxlength="20"
+                         [value]="value"
+                         pInputText
+                         (input)="filter(valeur.value)"
+                  >
+                </ng-template>
+              </p-columnFilter>
+            </th>
+            <th>
+              <p-columnFilter [showClearButton]="false" type="text" field="tel2" matchMode="contains" pTooltip="Options de filtrage">
+                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                  <input type="text" #valeur class="p-2 border" maxlength="20"
+                         [value]="value"
+                         pInputText
+                         (input)="filter(valeur.value)"
+                  >
+                </ng-template>
+              </p-columnFilter>
+            </th>
+          </tr>
         </ng-template>
         <ng-template pTemplate="body" let-medecin let-index="rowIndex">
           <tr>
@@ -99,44 +148,44 @@
     <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
 
     <p-toast></p-toast>
-    <p-dialog [(visible)]="personneDialog" [style]="{width:'560px'}" header="Création d'un medecin" [modal]="true"
-      styleClass="p-fluid">
-      <form [formGroup]="MedecinForms" (ngSubmit)="SaveData()">
+    <p-dialog [(visible)]="medecinDialog" [style]="{width:'700px'}" header="Création d'un medecin" [modal]="true"
+              styleClass="p-fluid">
+      <form [formGroup]="medecinForms" (ngSubmit)="enregistrerMedecin()">
         <div class="grid">
-            <div class="col-6">
+            <div class="col-12 md:col-6 lg:col-4">
               <span>
                 <label>Nom</label>
                 <input type="text" pInputText formControlName="nom">
               </span>
             </div>
   
-            <div class="col-6">
+            <div class="col-12 md:col-6 lg:col-4">
               <span>
                 <label>Prénom</label>
                 <input type="text" pInputText formControlName="prenoms">
               </span>
             </div>
   
-            <div class="col-6">
+            <div class="col-12 md:col-6 lg:col-4">
               <span>
                 <label>Nom d'utilisateur</label>
                 <input type="text" pInputText formControlName="login">
               </span>
             </div>
   
-            <div class="col-6">
+            <div class="col-12 md:col-6 lg:col-4">
               <label>Genre</label>
               <p-dropdown [options]="genres" optionLabel="name" [showClear]="true"
                 formControlName="genre">
                 </p-dropdown>
             </div>
   
-            <div class="col-6">
+            <div class="col-12 md:col-6 lg:col-4">
               <label>Date de naissance</label>
-              <p-calendar [baseZIndex]="3000" appendTo="body" [showIcon]="true" inputId="icon"></p-calendar>
+              <p-calendar [baseZIndex]="3000" appendTo="body" [showIcon]="true" inputId="icon" formControlName="dateNaissance"></p-calendar>
             </div>
   
-            <div class="col-6">
+            <div class="col-12 md:col-6 lg:col-4">
               <span>
                 <label>Mot de passe</label>
                 <input type="password" pInputText formControlName="password">
@@ -144,7 +193,6 @@
             </div>
   
           <div class="col-12">
-  
             <p-divider align="center" type="dashed" layout="horizontal">
               <div class="inline-flex align-items-center">
                 <i class="pi pi-user mr-2"></i>
@@ -171,7 +219,7 @@
           <div class="col-12">
             <span>
               <label>Téléphone 2</label>
-              <input type="text" id="inputtext5" pInputText formControlName="tel2">
+              <input type="text" pInputText formControlName="tel2">
             </span>
           </div>
   
@@ -181,7 +229,7 @@
                        w-10rem h-2rem m-2"></button>
                       <button type="button" pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-danger p-bouton-sm
                       w-10rem h-2rem m-2
-                     " (click)="hideOpen()"></button>
+                     " (click)="newMedecin()"></button>
             </div>
           </div>
         </div>

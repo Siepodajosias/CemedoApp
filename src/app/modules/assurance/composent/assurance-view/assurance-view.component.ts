@@ -24,7 +24,7 @@ interface jsPDFWithPlugin extends jspdf.jsPDF{
 })
 export class AssuranceViewComponent implements OnInit {
 
-  assuranceForm:FormGroup=new FormGroup({})
+  assuranceForms:FormGroup=new FormGroup({})
   assurance1:Assurance=new Assurance()
 
   dragdrop:boolean=true
@@ -36,7 +36,6 @@ export class AssuranceViewComponent implements OnInit {
 
   lockedCustomers: any[]=[];
 
-  balanceFrozen: boolean = false;
 
   rowGroupMetadata: any;
 
@@ -52,9 +51,9 @@ export class AssuranceViewComponent implements OnInit {
 
   posts2: any
 
-  constructor(private assurService:AssuranceService,
+  constructor(private assuranceService:AssuranceService,
     private route:Router,
-    private assurForm:FormBuilder,
+    private assuranceForm:FormBuilder,
     private confirmationService: ConfirmationService, 
     private messageService: MessageService,
     private primeNgConfig: PrimeNGConfig,
@@ -63,7 +62,7 @@ export class AssuranceViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.recupererAssurance();
-    this.assuranceForm = this.assurForm.group({
+    this.assuranceForms = this.assuranceForm.group({
       id:null,
       email: ['', [Validators.required, Validators.maxLength(30), Validators.email]],
       libelle: ['', [Validators.required, Validators.maxLength(30)]],
@@ -108,13 +107,11 @@ applyFilterGlobal($event:any, stringVal:any) {
 }
 
 getEventValue($event:any) :string {
-  console.log($event.target.value);
   return $event.target.value;
 } 
 
 toggleLock(data:any, frozen:any, index:any) {
 
-  console.log(data);
     if (frozen) {
         this.lockedCustomers = this.lockedCustomers.filter((c, i) => i !== index);
         this.unlockedCustomers.push(data);
@@ -157,19 +154,19 @@ this.saveAsExcelFile(excelBuffer, "assurance");
 
 enregistrerAssurance():void{
     this.submitted=true;
-  if(this.assuranceForm.invalid){
+  if(this.assuranceForms.invalid){
     return;
   }else{
     this.assurance1.id=null
-    this.assurance1.email=this.assuranceForm.get('email')?.value
-    this.assurance1.libelle=this.assuranceForm.get('libelle')?.value
-    this.assurance1.ville=this.assuranceForm.get('ville')?.value
-    this.assurance1.tel=this.assuranceForm.get('tel')?.value
+    this.assurance1.email=this.assuranceForms.get('email')?.value
+    this.assurance1.libelle=this.assuranceForms.get('libelle')?.value
+    this.assurance1.ville=this.assuranceForms.get('ville')?.value
+    this.assurance1.tel=this.assuranceForms.get('tel')?.value
   
-    this.assurService.enregistrerAssurance(this.assurance1).subscribe({
+    this.assuranceService.enregistrerAssurance(this.assurance1).subscribe({
        next:(v)=>{
-        this.messageService.add({key:"myKey1", severity: 'success', summary: 'Service Message', detail: 'Assurance enregistrée' });
-        this.assuranceForm.reset();
+        this.messageService.add({key:"myKey1", severity: 'success', summary: 'Service Message', detail: 'L \'assurance a été enregistrée' });
+        this.assuranceForms.reset();
         this.submitted=false;
      },
        error:(e)=>{},
@@ -181,13 +178,13 @@ enregistrerAssurance():void{
   }
   }
   recupererAssurance():void{
-    this.assurService.recupererAssurance().subscribe({
+    this.assuranceService.recupererAssurance().subscribe({
       next: (value: any) => {
         this.posts = value.data ? value : []
         this.assurances = this.posts.data
         this.loading=false
       },
-      error: (e) => { console.log("erreur :" + e) },
+      error: (e) => {},
       complete: () => {
       }
     })

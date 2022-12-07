@@ -38,13 +38,13 @@ export class InfirmierViewComponent implements OnInit {
 
   exportColumns: any[]=[];
 
-  personneDialog: any | boolean;
+  infirmierDialog: any | boolean;
 
   genres:any
   infirmierForms: FormGroup = new FormGroup({})
   infirmier:Infirmier=new Infirmier()
 
-  constructor(private infirmierS:InfirmierService,private route:Router,
+  constructor(private infirmierService:InfirmierService,private route:Router,
     private messageService:MessageService,
     private infirmierForm: FormBuilder,
     private primeNgConfig: PrimeNGConfig
@@ -52,7 +52,7 @@ export class InfirmierViewComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.infirmierS.recupererInfirmier().subscribe({
+    this.infirmierService.recupererInfirmier().subscribe({
       next: (value: any) => {
         this.posts = value.data ? value : []
         this.infirmiers=this.posts.data
@@ -96,19 +96,38 @@ export class InfirmierViewComponent implements OnInit {
 
     })
 
-    this.primeNgConfig.setTranslation({
-      startsWith: 'Commence par',
-      contains : 'Contient',
-      notContains : 'Ne contient pas',
-      endsWith: 'Fini par',
-      equals : 'Egale à',
-      notEquals : 'différent de',
-      noFilter : 'Pas de filtre',
-    });
+      this.primeNgConfig.setTranslation({
+          monthNames: ['Janvier',
+              'Fevrier',
+              'Mars',
+              'Avril',
+              'Mai',
+              'Juin',
+              'Juillet',
+              'Août',
+              'Septembre',
+              'Octobre',
+              'Novembre',
+              'Decembre'],
+          dayNamesShort: ['Dim.',
+              'Lun.',
+              'Mar.',
+              'Mer.',
+              'Jeu.',
+              'Ven.',
+              'Sam.'],
+          startsWith: 'Commence par',
+          contains : 'Contient',
+          notContains : 'Ne contient pas',
+          endsWith: 'Fini par',
+          equals : 'Egale à',
+          notEquals : 'différent de',
+          noFilter : 'Pas de filtre',
+      });
   }
   detail(a:any){
     //this.route.navigate(['administrateur/detailM',a]);
-    this.infirmierS.recupererInfirmier().subscribe({
+    this.infirmierService.recupererInfirmier().subscribe({
       next:(e)=>console.log(e)
     })
   }
@@ -133,7 +152,6 @@ applyFilterGlobal($event:any, stringVal:any) {
 }
 
 getEventValue($event:any) :string {
-  console.log($event.target.value);
   return $event.target.value;
 } 
 
@@ -152,7 +170,7 @@ toggleLock(data:any, frozen:any, index:any) {
     });
 }
  openNew() {
-  this.personneDialog = true;
+  this.infirmierDialog = true;
   this.genres = [
     {name: 'homme'},
     {name: 'femme'}
@@ -180,9 +198,9 @@ this.saveAsExcelFile(excelBuffer, "Infirmier");
 });
 }
 hideOpen(){
-  this.personneDialog=false
+  this.infirmierDialog=false
 }
-SaveData(){
+enregistrerInfirmier(){
   /*
       this.infirmier.id=null
       this.infirmier.userIdentifier=""
@@ -211,7 +229,7 @@ SaveData(){
       this.infirmier.typeEmploye=null
    
 
-         this.infirmierS.enregistrerInfirmier(this.infirmier).subscribe({
+         this.infirmierService.enregistrerInfirmier(this.infirmier).subscribe({
   
           next:(v)=>{
             this.messageService.add({severity: 'success', summary: 'Service Message', detail: 'Infirmier enregistré' });

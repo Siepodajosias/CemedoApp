@@ -54,20 +54,51 @@
             </th>
             <th rowspan="2">Actions</th>
           </tr>
-          <tr>	
+          <tr>
             <th>
-              <p-columnFilter type="text" field="libelle"></p-columnFilter>
+              <p-columnFilter [showClearButton]="false" type="text" field="libelle" matchMode="contains" pTooltip="Options de filtrage">
+                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                  <input type="text" #valeur class="p-2 border" maxlength="20"
+                         [value]="value"
+                         pInputText
+                         (input)="filter(valeur.value)"
+                  >
+                </ng-template>
+              </p-columnFilter>
             </th>
             <th>
-              <p-columnFilter type="text" field="email"></p-columnFilter>
+              <p-columnFilter [showClearButton]="false" type="text" field="email" matchMode="contains" pTooltip="Options de filtrage">
+                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                  <input type="text" #valeur class="p-2 border" maxlength="20"
+                         [value]="value"
+                         pInputText
+                         (input)="filter(valeur.value)"
+                  >
+                </ng-template>
+              </p-columnFilter>
             </th>
             <th>
-              <p-columnFilter type="text" field="tel"></p-columnFilter>
+              <p-columnFilter [showClearButton]="false" type="text" field="tel" matchMode="contains" pTooltip="Options de filtrage">
+                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                  <input type="text" #valeur class="p-2 border" maxlength="20"
+                         [value]="value"
+                         pInputText
+                         (input)="filter(valeur.value)"
+                  >
+                </ng-template>
+              </p-columnFilter>
             </th>
             <th>
-              <p-columnFilter type="text" field="ville"></p-columnFilter>
+              <p-columnFilter [showClearButton]="false" type="text" field="ville" matchMode="contains" pTooltip="Options de filtrage">
+                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                  <input type="text" #valeur class="p-2 border" maxlength="20"
+                         [value]="value"
+                         pInputText
+                         (input)="filter(valeur.value)"
+                  >
+                </ng-template>
+              </p-columnFilter>
             </th>
-            <th></th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-assurance>
@@ -97,42 +128,42 @@
     <p-dialog [(visible)]="assuranceDialog" [style]="{width: '460px'}" header="Création d'une assurance" [modal]="true"
       styleClass="p-fluid">
 
-      <form [formGroup]="assuranceForm" (ngSubmit)="enregistrerAssurance()">
+      <form [formGroup]="assuranceForms" (ngSubmit)="enregistrerAssurance()">
         <div class="grid">
 
           <div class="col-12 md:col-6 lg:col-6">
             <span>
             <h4>Nom assurance</h4>
               <input type="text" pInputText formControlName="libelle"
-              [ngClass]="{'ng-invalid ng-dirty':submitted && assuranceForm.controls['libelle'].errors}">
+              [ngClass]="{'ng-invalid ng-dirty':submitted && assuranceForms.controls['libelle'].errors}">
             </span>
-            <small id="libelle-help" class="p-error" *ngIf="submitted && assuranceForm.controls['libelle'].errors">Nom de l'assurance obligatoire</small>
+            <small id="libelle-help" class="p-error" *ngIf="submitted && assuranceForms.controls['libelle'].errors">Nom de l'assurance obligatoire</small>
           </div>
 
           <div class="col-12 md:col-6 lg:col-6">
             <span>
             <h4>E-mail assurance</h4>
               <input type="email" pInputText formControlName="email"
-              [ngClass]="{'ng-invalid ng-dirty':submitted && assuranceForm.controls['email'].errors}">
+              [ngClass]="{'ng-invalid ng-dirty':submitted && assuranceForms.controls['email'].errors}">
             </span>
-            <small id="email-help" class="p-error" *ngIf="submitted && assuranceForm.controls['email'].errors">E-mail de l'assurance obligatoire</small>
+            <small id="email-help" class="p-error" *ngIf="submitted && assuranceForms.controls['email'].errors">E-mail de l'assurance obligatoire</small>
           </div>
 
           <div class="col-12">
             <span>
             <h4>Contact assurance</h4>
               <input type="text" pInputText formControlName="tel"
-              [ngClass]="{'ng-invalid ng-dirty':submitted && assuranceForm.controls['tel'].errors}">
+              [ngClass]="{'ng-invalid ng-dirty':submitted && assuranceForms.controls['tel'].errors}">
             </span>
-            <small id="contact-help" class="p-error" *ngIf="submitted && assuranceForm.controls['tel'].errors">Contact de l'assurance obligatoire</small>
+            <small id="contact-help" class="p-error" *ngIf="submitted && assuranceForms.controls['tel'].errors">Contact de l'assurance obligatoire</small>
           </div>
           <div class="col-12">
             <span>
             <h4>Ville</h4>
               <input type="text" pInputText formControlName="ville"
-              [ngClass]="{'ng-invalid ng-dirty':submitted && assuranceForm.controls['ville'].errors}">
+              [ngClass]="{'ng-invalid ng-dirty':submitted && assuranceForms.controls['ville'].errors}">
             </span>
-            <small id="ville-help" class="p-error" *ngIf="submitted && assuranceForm.controls['ville'].errors">Ville de l'assurance obligatoire</small>
+            <small id="ville-help" class="p-error" *ngIf="submitted && assuranceForms.controls['ville'].errors">Ville de l'assurance obligatoire</small>
           </div>
             <div class="col-12 md:col-12">
               <div class="flex justify-content-end">

@@ -36,18 +36,16 @@ export class MedecinViewComponent implements OnInit {
 
   lockedCustomers: any[]=[];
 
-  balanceFrozen: boolean = false;
-
   rowGroupMetadata: any;
 
   loading: boolean = true;
 
   exportColumns: any[]=[];
 
-  personneDialog: any | boolean;
+  medecinDialog:boolean=false;
 
-  MedecinForms: FormGroup = new FormGroup({})
-  medecin2:Medecin=new Medecin()
+  medecinForms: FormGroup = new FormGroup({})
+  medecin:Medecin=new Medecin()
   genres:any
 
   constructor(private medecinservice:MedecinService,private route:Router,
@@ -56,19 +54,8 @@ export class MedecinViewComponent implements OnInit {
     private primeNgConfig: PrimeNGConfig) { }
 
   ngOnInit(): void {
-    
-    this.medecinservice.recupererMedecin().subscribe({
-      next: (value: any) => {
-        this.posts = value.data ? value : []
-        this.post = this.posts.data
-        this.medecins = this.post
-        this.loading=false
-      },
-      error: (e) => { console.log("erreur :" + e) },
-      complete: () => {
-      }
-    })
-    this.MedecinForms = this.medecinForm.group({
+    this.recupererListeMedecin();
+    this.medecinForms = this.medecinForm.group({
       id:null,
       email: ['', [Validators.required, Validators.maxLength(30), Validators.email]],
       password:['', [Validators.required, Validators.maxLength(8)]],
@@ -101,6 +88,25 @@ export class MedecinViewComponent implements OnInit {
 
     })
     this.primeNgConfig.setTranslation({
+      monthNames: ['Janvier',
+        'Fevrier',
+        'Mars',
+        'Avril',
+        'Mai',
+        'Juin',
+        'Juillet',
+        'Août',
+        'Septembre',
+        'Octobre',
+        'Novembre',
+        'Decembre'],
+      dayNamesShort: ['Dim.',
+        'Lun.',
+        'Mar.',
+        'Mer.',
+        'Jeu.',
+        'Ven.',
+        'Sam.'],
       startsWith: 'Commence par',
       contains : 'Contient',
       notContains : 'Ne contient pas',
@@ -117,44 +123,38 @@ export class MedecinViewComponent implements OnInit {
     })
   }
   getEventValue($event:any) :string {
-    console.log($event.target.value);
     return $event.target.value;
   } 
 
-  openNew() {
-    this.personneDialog = true;
+  newMedecin() {
+    this.medecinDialog = !this.medecinDialog
     this.genres=[
       {name:'homme'},
       {name:'femme'}
     ]
   }
-  hideOpen(){
-    this.personneDialog = false;
-  }
-  
+
   exportPdf() {
-  
     const doc = new jspdf.jsPDF('portrait','px','a4') as jsPDFWithPlugin;
           doc.autoTable({
             head:this.exportColumns,
             body:this.medecins
           })
-      doc.save("Personne.pdf")
+      doc.save("Medecin-rapport.pdf")
   }
   
   exportExcel() {
-  import("xlsx").then(xlsx => {
-  const worksheet = xlsx.utils.json_to_sheet(this.medecins);
-  const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
-  const excelBuffer: any = xlsx.write(workbook, {
-    bookType: "xlsx",
-    type: "array"
+    import("xlsx").then(xlsx => {
+    const worksheet = xlsx.utils.json_to_sheet(this.medecins);
+    const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
+    const excelBuffer: any = xlsx.write(workbook, {
+      bookType: "xlsx",
+      type: "array"
   });
-  this.saveAsExcelFile(excelBuffer, "personne");
+  this.saveAsExcelFile(excelBuffer, "medecin");
   });
   }
   saveAsExcelFile(buffer: any, fileName: string): void {
-
     let EXCEL_TYPE =
       "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
     let EXCEL_EXTENSION = ".xlsx";
@@ -168,21 +168,21 @@ export class MedecinViewComponent implements OnInit {
 
   }
 
-  SaveData(){
-    this.medecin2.id=null
-    this.medecin2.email=this.MedecinForms.get('email')?.value
-    this.medecin2.password=this.MedecinForms.get('password')?.value
-    this.medecin2.nom=this.MedecinForms.get('nom')?.value
-    this.medecin2.prenoms=this.MedecinForms.get('prenoms')?.value
-    this.medecin2.dateNaissance=this.MedecinForms.get('dateNaissance')?.value
-    let val=this.MedecinForms.get('genre')?.value
-    this.medecin2.genre=val.name
-    this.medecin2.tel=this.MedecinForms.get('tel')?.value
-    this.medecin2.tel2=this.MedecinForms.get('tel2')?.value
-    this.medecin2.login=this.MedecinForms.get('login')?.value
-    this.medecin2.specialite=this.MedecinForms.get('sepecialiteMedecin')?.value
-    this.medecin2.typeEmploye=this.MedecinForms.get('typeEmploye')?.value
-    this.medecin2.typeMedecin=this.MedecinForms.get('typeMedecin')?.value
+  enregistrerMedecin(){
+    this.medecin.id=null
+    this.medecin.email=this.medecinForms.get('email')?.value
+    this.medecin.password=this.medecinForms.get('password')?.value
+    this.medecin.nom=this.medecinForms.get('nom')?.value
+    this.medecin.prenoms=this.medecinForms.get('prenoms')?.value
+    this.medecin.dateNaissance=this.medecinForms.get('dateNaissance')?.value
+    let val=this.medecinForms.get('genre')?.value
+    this.medecin.genre=val.name
+    this.medecin.tel=this.medecinForms.get('tel')?.value
+    this.medecin.tel2=this.medecinForms.get('tel2')?.value
+    this.medecin.login=this.medecinForms.get('login')?.value
+    this.medecin.specialite=this.medecinForms.get('sepecialiteMedecin')?.value
+    this.medecin.typeEmploye=this.medecinForms.get('typeEmploye')?.value
+    this.medecin.typeMedecin=this.medecinForms.get('typeMedecin')?.value
     /*
     this.medecin2.salaireMedecin=this.MedecinForms.get('salaireMedecin')?.value
     this.medecin2.primeMedecin=this.MedecinForms.get('primeMedecin')?.value
@@ -193,35 +193,31 @@ export class MedecinViewComponent implements OnInit {
     this.medecin2.heureDebut=this.MedecinForms.get('heureDebut')?.value
     this.medecin2.heureFin=this.MedecinForms.get('heureFin')?.value*/
     
-   this.medecinservice.enregistrerMedecin(this.medecin2).subscribe({
+   this.medecinservice.enregistrerMedecin(this.medecin).subscribe({
       next:(v)=>{
-        this.messageService.add({severity: 'success', summary: 'Service Message', detail: 'Medecin enregistrée' });
+        this.messageService.add({severity: 'success', summary: 'Service Message', detail: 'Le medecin a été enregistré' });
+        this.medecinForms.reset();
     },
-      error:(e)=>{
-
-      },
-      complete:()=>{
-        this.MedecinForms.setValue({
-          id:null,
-          email:"",
-          password:"",
-          nom:"",
-          prenoms:"",
-          tel:"",
-          tel2:"",
-          genre:"",
-          dateNaissance:"",
-          login:"",
-          fcmToken:'string',
-          sepecialiteMedecin:null,
-          typeEmploye:null,
-          typeMedecin:null,
-        })
-      }
+      error:(e)=>{},
+      complete:()=>{this.recupererListeMedecin();}
     })
     
    }
-   getActif():boolean{
+   urlActif():boolean{
     return this.route.url.includes('/admin/medecin/liste')
+   }
+
+   recupererListeMedecin():void{
+     this.medecinservice.recupererMedecin().subscribe({
+       next: (value: any) => {
+         this.posts = value.data ? value : []
+         this.post = this.posts.data
+         this.medecins = this.post
+         this.loading=false
+       },
+       error: (e) => {},
+       complete: () => {
+       }
+     })
    }
 }

@@ -34,15 +34,13 @@ export class InformaticienViewComponent implements OnInit {
 
   lockedCustomers: any[]=[];
 
-  balanceFrozen: boolean = false;
-
   rowGroupMetadata: any;
 
   loading: boolean = true;
 
   exportColumns: any[]=[];
 
-  personneDialog: any | boolean;
+  informaticienDialog: any | boolean;
 
   InformaticienForms: FormGroup = new FormGroup({})
   informaticien:Informaticien=new Informaticien()
@@ -91,12 +89,11 @@ export class InformaticienViewComponent implements OnInit {
   detail(a:any){}
 
   getEventValue($event:any) :string {
-    console.log($event.target.value);
     return $event.target.value;
   } 
 
   openNew() {
-    this.personneDialog = true;
+    this.informaticienDialog = true;
     this.genres=[
       {name:'homme'},
       {name:'femme'}
@@ -125,7 +122,6 @@ export class InformaticienViewComponent implements OnInit {
   });
   }
   saveAsExcelFile(buffer: any, fileName: string): void {
-
     let EXCEL_TYPE =
       "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
     let EXCEL_EXTENSION = ".xlsx";
@@ -136,10 +132,9 @@ export class InformaticienViewComponent implements OnInit {
       data,
       fileName + "_export_" + new Date() + EXCEL_EXTENSION
     );
-
   }
 
-  SaveData(){
+  enregistrerInformaticien(){
     this.informaticien.id=null
     this.informaticien.email=this.InformaticienForms.get('email')?.value
     this.informaticien.password=this.InformaticienForms.get('password')?.value

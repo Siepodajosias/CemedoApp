@@ -6,13 +6,12 @@ import { ChartsModule as chartjsModule } from "ng2-charts";
 import { NgxEchartsModule } from "ngx-echarts";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
-import { AdminRoutingModule } from "src/app/modules/administrateur/admin-routing.module";
+import { AdministrateurRoutingModule } from "src/app/modules/administrateur/administrateur-routing.module";
 import { ComponentsModule } from "src/app/shared/components/components.module";
 import { FactureComponent } from "src/app/modules/administrateur/composents/facture/facture.component";
 import { AdminService } from "src/app/services/serviceAdministrateur/admin.service";
 import { MatTabsModule } from "@angular/material/tabs";
 import { NgApexchartsModule } from "ng-apexcharts";
-import { RendezVousComponent } from 'src/app/modules/administrateur/composents/rendez-vous/rendez-vous.component';
 import { RendezVousCalendrierComponent } from 'src/app/modules/administrateur/composents/rendez-vous-calendrier/rendez-vous-calendrier.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 
@@ -46,13 +45,12 @@ import { FieldsetModule} from 'primeng/fieldset';
 @NgModule({
   declarations: [
     FactureComponent,
-    RendezVousComponent,
     RendezVousCalendrierComponent
   ],
   imports: [
     CommonModule,
     HttpClientModule,
-    AdminRoutingModule,
+    AdministrateurRoutingModule,
     chartjsModule,
     NgxEchartsModule.forRoot({
       echarts: () => import("echarts"),
@@ -91,4 +89,4 @@ import { FieldsetModule} from 'primeng/fieldset';
     FullCalendarModule
   ], providers: [AdminService,MessageService,ConfirmationService]
 })
-export class AdminModule { }
+export class AdministrateurModule { }
