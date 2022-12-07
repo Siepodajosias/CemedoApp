@@ -38,7 +38,7 @@ export class ComptableViewComponent implements OnInit {
 
   exportColumns: any[]=[];
 
-  comptableDialog: any | boolean;
+  comptableDialog:boolean=false;
  
   comptableForms: FormGroup = new FormGroup({})
   comptable:Comptable=new Comptable()
@@ -159,16 +159,14 @@ toggleLock(data:any, frozen:any, index:any) {
         return val1.id < val2.id ? -1 : 1;
     });
 }
- openNew() {
-  this.comptableDialog = true;
+ newComptable() {
+  this.comptableDialog = !this.comptableDialog;
   this.genres=[
     {name:'homme'},
     {name:'femme'}
   ]
 }
-hideOpen(){
-  this.comptableDialog=false
-}
+
 exportPdf() {
   const doc = new jspdf.jsPDF('portrait','px','a4') as jsPDFWithPlugin;
         doc.autoTable({

@@ -38,7 +38,7 @@ export class InfirmierViewComponent implements OnInit {
 
   exportColumns: any[]=[];
 
-  infirmierDialog: any | boolean;
+  infirmierDialog:boolean=false;
 
   genres:any
   infirmierForms: FormGroup = new FormGroup({})
@@ -169,8 +169,8 @@ toggleLock(data:any, frozen:any, index:any) {
         return val1.id < val2.id ? -1 : 1;
     });
 }
- openNew() {
-  this.infirmierDialog = true;
+ newInfirmier() {
+  this.infirmierDialog =!this.infirmierDialog;
   this.genres = [
     {name: 'homme'},
     {name: 'femme'}
@@ -197,9 +197,7 @@ const excelBuffer: any = xlsx.write(workbook, {
 this.saveAsExcelFile(excelBuffer, "Infirmier");
 });
 }
-hideOpen(){
-  this.infirmierDialog=false
-}
+
 enregistrerInfirmier(){
   /*
       this.infirmier.id=null

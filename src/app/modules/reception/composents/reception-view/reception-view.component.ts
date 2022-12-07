@@ -42,7 +42,7 @@ export class ReceptionViewComponent implements OnInit {
 
   exportColumns: any[]=[];
 
-  receptionDialog: any | boolean;
+  receptionDialog:boolean=false;
   receptionForms:FormGroup=new FormGroup({})
   reception:Reception=new Reception()
   genres:any
@@ -170,8 +170,8 @@ toggleLock(data:any, frozen:any, index:any) {
         return val1.id < val2.id ? -1 : 1;
     });
 }
- openNew() {
-  this.receptionDialog = true;
+ newReception() {
+  this.receptionDialog = !this.receptionDialog;
   this.genres=[
     {name:'homme'},
     {name:'femme'}

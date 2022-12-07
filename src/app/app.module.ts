@@ -36,7 +36,8 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
-import interactionPlugin from "@fullcalendar/interaction"; 
+import interactionPlugin from "@fullcalendar/interaction";
+import { ApiUrlInterceptor } from 'src/app/services/interceptorService/api-url-interceptor.service';
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
   interactionPlugin,
@@ -89,6 +90,7 @@ export function createTranslateLoader(http: HttpClient): any {
         },
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ApiUrlInterceptor, multi: true },
         fakeBackendProvider,
     ],
     bootstrap: [AppComponent]

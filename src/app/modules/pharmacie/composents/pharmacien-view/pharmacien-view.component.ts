@@ -35,7 +35,7 @@ export class PharmacienViewComponent implements OnInit {
 
   exportColumns: any[]=[];
 
-  pharmacienDialog: any | boolean;
+  pharmacienDialog:boolean=false;
   genres:any
   pharmacienForms: FormGroup = new FormGroup({})
   pharmacien:Pharmacien=new Pharmacien()
@@ -160,8 +160,8 @@ toggleLock(data:any, frozen:any, index:any) {
         return val1.id < val2.id ? -1 : 1;
     });
 }
- openNew() {
-  this.pharmacienDialog = true;
+ newPharmacien() {
+  this.pharmacienDialog = !this.pharmacienDialog;
   this.genres = [
     {name: 'homme'},
     {name: 'femme'}

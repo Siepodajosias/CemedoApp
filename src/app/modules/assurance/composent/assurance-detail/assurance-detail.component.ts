@@ -22,7 +22,6 @@ interface jsPDFWithPlugin extends jspdf.jsPDF{
     autoTable: (options: UserOptions)=> jspdf.jsPDF;
 }
 
-
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -64,20 +63,17 @@ export type ChartOptions = {
 export class AssuranceDetailComponent implements OnInit {
 
 
-  responsableForms:FormGroup=new FormGroup({})
-  responsable:Responsable=new Responsable()
-  assurance1:Assurance=new Assurance()
+  responsableForms:FormGroup;
+  responsable:Responsable=new Responsable();
+  responsables:any[];
 
   dragdrop:boolean=true
 
   @ViewChild('dt') dt: Table | undefined | any;
 
-
   unlockedCustomers: any[]=[];
 
   lockedCustomers: any[]=[];
-
-  balanceFrozen: boolean = false;
 
   rowGroupMetadata: any;
 
@@ -85,10 +81,8 @@ export class AssuranceDetailComponent implements OnInit {
 
   exportColumns: any[]=[];
 
-  personneDialog: any | boolean;
+  responsableDialog:boolean= false;
 
-
-  responsables:any[]=[]
   posts: any
 
   posts2: any
@@ -190,13 +184,10 @@ applyFilterGlobal($event:any, stringVal:any) {
 }
 
 getEventValue($event:any) :string {
-  console.log($event.target.value);
   return $event.target.value;
 } 
 
 toggleLock(data:any, frozen:any, index:any) {
-
-  console.log(data);
     if (frozen) {
         this.lockedCustomers = this.lockedCustomers.filter((c, i) => i !== index);
         this.unlockedCustomers.push(data);
@@ -210,8 +201,8 @@ toggleLock(data:any, frozen:any, index:any) {
         return val1.id < val2.id ? -1 : 1;
     });
 }
-openNew() {
-  this.personneDialog = true;
+newRespnsable() {
+  this.responsableDialog = !this.responsableDialog;
 }
 
 exportPdf() {
@@ -221,19 +212,19 @@ exportPdf() {
           head:this.exportColumns,
           body:this.responsables
         })
-    doc.save("Personne.pdf")
+    doc.save("Responsable-rapport.pdf")
 }
 
-exportExcel() {/*
-import("xlsx").then(xlsx => {
-const worksheet = xlsx.utils.json_to_sheet(this.personne);
-const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
-const excelBuffer: any = xlsx.write(workbook, {
-  bookType: "xlsx",
-  type: "array"
+exportExcel() {
+  import("xlsx").then(xlsx => {
+  const worksheet = xlsx.utils.json_to_sheet(this.responsables);
+  const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
+  const excelBuffer: any = xlsx.write(workbook, {
+    bookType: "xlsx",
+    type: "array"
 });
-this.saveAsExcelFile(excelBuffer, "personne");
-});*/
+  this.saveAsExcelFile(excelBuffer, "responsable");
+});
 }
 
 SaveData(){

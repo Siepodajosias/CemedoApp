@@ -40,7 +40,7 @@ export class InformaticienViewComponent implements OnInit {
 
   exportColumns: any[]=[];
 
-  informaticienDialog: any | boolean;
+  informaticienDialog:boolean=false;
 
   InformaticienForms: FormGroup = new FormGroup({})
   informaticien:Informaticien=new Informaticien()
@@ -92,8 +92,8 @@ export class InformaticienViewComponent implements OnInit {
     return $event.target.value;
   } 
 
-  openNew() {
-    this.informaticienDialog = true;
+  newInformaticien() {
+    this.informaticienDialog =!this.informaticienDialog;
     this.genres=[
       {name:'homme'},
       {name:'femme'}

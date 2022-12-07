@@ -125,7 +125,7 @@ toggleLock(data:any, frozen:any, index:any) {
         return val1.id < val2.id ? -1 : 1;
     });
 }
-openNew() {
+newAssurance() {
   this.submitted=false;
   this.assuranceDialog = !this.assuranceDialog;
 }
@@ -137,7 +137,7 @@ exportPdf() {
           head:this.exportColumns,
           body:this.assurances
         })
-    doc.save("Personne.pdf")
+    doc.save("Assurance-rapport.pdf")
 }
 
 exportExcel() {
