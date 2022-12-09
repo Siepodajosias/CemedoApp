@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComponentsModule } from "src/app/shared/components/components.module";
-import { HttpClientModule } from "@angular/common/http";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTabsModule } from "@angular/material/tabs";
 import { NgApexchartsModule } from "ng-apexcharts";
 
 import { ReactiveFormsModule, FormsModule} from '@angular/forms'
-import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { ToastrModule} from 'ngx-toastr';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatDatepickerModule } from "@angular/material/datepicker";
@@ -49,6 +48,7 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { CalendarModule } from 'primeng/calendar';
 import { SpeedDialModule } from 'primeng/speeddial';
 import { MenuModule } from 'primeng/menu';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -60,7 +60,6 @@ import { MenuModule } from 'primeng/menu';
   ],
   imports: [
     CommonModule,
-    HttpClientModule ,
     ReceptionRoutingModule,
     ComponentsModule,
     MatIconModule,
@@ -77,6 +76,7 @@ import { MenuModule } from 'primeng/menu';
     MatButtonModule,
     ReactiveFormsModule, 
     FormsModule,
+    HttpClientModule,
 
 
     CardModule,

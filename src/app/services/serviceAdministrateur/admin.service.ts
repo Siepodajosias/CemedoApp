@@ -8,8 +8,8 @@ import { Facture } from 'src/app/models/modelAdministrateur/facture';
   providedIn: 'root'
 })
 export class AdminService {
-  private config1:string="http://38.242.229.12:80/administrateurs"
-  private config2:string="http://38.242.229.12:80/factures"
+  private config1:string="http://38.242.229.12/administrateurs"
+  private config2:string="http://38.242.229.12/factures"
   constructor(private httpadmin:HttpClient) { }
 
   //administrateur ressources

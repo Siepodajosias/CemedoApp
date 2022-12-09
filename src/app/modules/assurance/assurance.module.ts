@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComponentsModule } from "src/app/shared/components/components.module";
-import { HttpClientModule } from "@angular/common/http"
 import { MatIconModule } from "@angular/material/icon";
 import { MatTabsModule } from "@angular/material/tabs";
 import { NgApexchartsModule } from "ng-apexcharts";
@@ -17,7 +16,6 @@ import { MatTableModule } from "@angular/material/table";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { AssuranceView2Component } from 'src/app/modules/assurance/composent/assurance-view2/assurance-view2.component';
 import { ResponsableDetailComponent } from 'src/app/modules/assurance/composent/responsable-detail/responsable-detail.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { ChartsModule as chartjsModule } from "ng2-charts";
@@ -44,18 +42,17 @@ import { DividerModule } from 'primeng/divider';
 import { MenubarModule } from 'primeng/menubar';
 import { ToolbarModule } from 'primeng/toolbar';
 import {CalendarModule} from 'primeng/calendar';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     DashboardAssuranceComponent,
     AssuranceViewComponent,
     AssuranceDetailComponent,
-    AssuranceView2Component,
     ResponsableDetailComponent
   ],
   imports: [
     CommonModule,
-    HttpClientModule,
     AssuranceRoutingModule,
     ComponentsModule,
     MatIconModule,
@@ -75,6 +72,7 @@ import {CalendarModule} from 'primeng/calendar';
     MatTableModule ,
     MatDialogModule,
     MatPaginatorModule,
+    HttpClientModule,
 
     CardModule,
     TableModule,

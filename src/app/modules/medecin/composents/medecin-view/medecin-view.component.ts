@@ -10,6 +10,9 @@ import 'jspdf-autotable'
 import { UserOptions } from 'jspdf-autotable';
 import { Table } from 'primeng/table'
 import {PrimeNGConfig} from 'primeng/api';
+import { MedecinSpecialiteService } from 'src/app/services/serviceMedecin/medecin-specialite.service';
+import { TypeMedecinService } from 'src/app/services/serviceMedecin/type-medecin.service';
+import { EmployeService } from 'src/app/shared-cemedo/employe/employe.service';
 
 interface jsPDFWithPlugin extends jspdf.jsPDF{
     autoTable: (options: UserOptions)=> jspdf.jsPDF;
@@ -48,10 +51,23 @@ export class MedecinViewComponent implements OnInit {
   medecin:Medecin=new Medecin()
   genres:any
 
-  constructor(private medecinservice:MedecinService,private route:Router,
+  typeMedecins: any[];
+  typeMedecinsForm: any[];
+
+  specialiteMedecins: any[];
+  specialiteMedecinsForm: any[];
+
+  employes: any[];
+  employeForm: any[];
+
+  constructor(private medecinservice:MedecinService,
+    private route:Router,
     private medecinForm: FormBuilder,
     private messageService:MessageService,
-    private primeNgConfig: PrimeNGConfig) { }
+    private primeNgConfig: PrimeNGConfig,
+    private medecinSpecialiteService:MedecinSpecialiteService,
+    private typeMedecinService: TypeMedecinService,
+    private employeService: EmployeService) { }
 
   ngOnInit(): void {
     this.recupererListeMedecin();
@@ -70,7 +86,6 @@ export class MedecinViewComponent implements OnInit {
       sepecialiteMedecin:null,
       typeEmploye:null,
       typeMedecin:null,
-
 
 
       //createdAt:['', [Validators.required, Validators.maxLength(10)]],
@@ -129,10 +144,6 @@ export class MedecinViewComponent implements OnInit {
   newMedecin() {
     this.medecinForms.reset();
     this.medecinDialog = !this.medecinDialog
-    this.genres=[
-      {name:'homme'},
-      {name:'femme'}
-    ]
   }
 
   exportPdf() {
@@ -170,20 +181,32 @@ export class MedecinViewComponent implements OnInit {
   }
 
   enregistrerMedecin(){
+
+  /*
+    fcmToken	string
+    genre	integer($int64)
+    role	integer($int64)
+    specialite	integer($int64)
+    typeEmploye	integer($int64)
+    typeMedecin	integer($int64)
+*/
     this.medecin.id=null
     this.medecin.email=this.medecinForms.get('email')?.value
     this.medecin.password=this.medecinForms.get('password')?.value
     this.medecin.nom=this.medecinForms.get('nom')?.value
     this.medecin.prenoms=this.medecinForms.get('prenoms')?.value
     this.medecin.dateNaissance=this.medecinForms.get('dateNaissance')?.value
-    let val=this.medecinForms.get('genre')?.value
-    this.medecin.genre=val.name
+    const valeurGenre=this.medecinForms.get('genre')?.value
+    const valeurSpecialite=this.medecinForms.get('sepecialiteMedecin')?.value
+    const valeurEmplye=this.medecinForms.get('typeEmploye')?.value
+    const valeurType=this.medecinForms.get('typeMedecin')?.value
+    this.medecin.genre=valeurGenre.id
+    this.medecin.specialite=valeurSpecialite.id
+    this.medecin.typeEmploye=valeurEmplye.id
+    this.medecin.typeMedecin=valeurType.id
     this.medecin.tel=this.medecinForms.get('tel')?.value
     this.medecin.tel2=this.medecinForms.get('tel2')?.value
     this.medecin.login=this.medecinForms.get('login')?.value
-    this.medecin.specialite=this.medecinForms.get('sepecialiteMedecin')?.value
-    this.medecin.typeEmploye=this.medecinForms.get('typeEmploye')?.value
-    this.medecin.typeMedecin=this.medecinForms.get('typeMedecin')?.value
     /*
     this.medecin2.salaireMedecin=this.MedecinForms.get('salaireMedecin')?.value
     this.medecin2.primeMedecin=this.MedecinForms.get('primeMedecin')?.value
@@ -193,16 +216,17 @@ export class MedecinViewComponent implements OnInit {
     this.medecin2.residence=this.MedecinForms.get('residence')?.value
     this.medecin2.heureDebut=this.MedecinForms.get('heureDebut')?.value
     this.medecin2.heureFin=this.MedecinForms.get('heureFin')?.value*/
-    
    this.medecinservice.enregistrerMedecin(this.medecin).subscribe({
       next:(v)=>{
         this.messageService.add({severity: 'success', summary: 'Service Message', detail: 'Le medecin a été enregistré' });
         this.medecinForms.reset();
     },
       error:(e)=>{},
-      complete:()=>{this.recupererListeMedecin();}
+      complete:()=>{
+        this.recupererListeMedecin();
+        this.medecinDialog=false;
+      }
     })
-    
    }
    urlActif():boolean{
     return this.route.url.includes('/admin/medecin/liste')
@@ -220,5 +244,65 @@ export class MedecinViewComponent implements OnInit {
        complete: () => {
        }
      })
+     this.medecinSpecialiteService.recupererSpecialite().subscribe({
+       next:(value)=>{
+         const data=value.data;
+         this.specialiteMedecins=data ? data : [];
+       }
+     })
+     this.typeMedecinService.recupererTypeMedecin().subscribe({
+       next:(value)=>{
+         const data=value.data
+         this.typeMedecins=data ? data : []
+       }
+     })
+     this.employeService.recupererTypeEmploye().subscribe({
+       next:(value)=>{
+         const data=value.data;
+         this.employes=data ? data : [];
+       }
+     })
+     this.employeService.recupererGenre().subscribe({
+       next:(value)=>{
+         const data=value.data;
+         this.genres=data ? data : [];
+       }
+     })
    }
+
+  typeMedecinItems(event: any) {
+    let filtered : any[] = [];
+    let query = event.query;
+
+    for(let i = 0; i < this.typeMedecins.length; i++) {
+      let item = this.typeMedecins[i];
+      if (item.libelle.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+        filtered.push(item);
+      }
+    }
+    this.typeMedecinsForm = filtered;
+  }
+
+  specialiteMedecinItems(event: any) {
+    let filtered : any[] = [];
+    let query = event.query;
+    for(let i = 0; i < this.specialiteMedecins.length; i++) {
+      let item = this.specialiteMedecins[i];
+      if (item.libelle.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+        filtered.push(item);
+      }
+    }
+    this.specialiteMedecinsForm = filtered;
+  }
+  employeItems(event: any) {
+    let filtered : any[] = [];
+    let query = event.query;
+    for(let i = 0; i < this.employes.length; i++) {
+      let item = this.employes[i];
+      if (item.libelle.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+        filtered.push(item);
+      }
+    }
+    this.employeForm = filtered;
+  }
 }

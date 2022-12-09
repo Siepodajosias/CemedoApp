@@ -1,7 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { PerfectScrollbarModule } from "ngx-perfect-scrollbar";
-import { HttpClientModule } from "@angular/common/http"
 import { ChartsModule as chartjsModule } from "ng2-charts";
 import { NgxEchartsModule } from "ngx-echarts";
 import { MatIconModule } from "@angular/material/icon";
@@ -40,6 +39,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { SpeedDialModule } from 'primeng/speeddial';
 import { MenuModule } from 'primeng/menu';
 import { FieldsetModule} from 'primeng/fieldset';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -49,7 +49,6 @@ import { FieldsetModule} from 'primeng/fieldset';
   ],
   imports: [
     CommonModule,
-    HttpClientModule,
     AdministrateurRoutingModule,
     chartjsModule,
     NgxEchartsModule.forRoot({
@@ -61,6 +60,7 @@ import { FieldsetModule} from 'primeng/fieldset';
     MatTabsModule,
     MatButtonModule,
     ComponentsModule,
+    HttpClientModule,
 
 
     FieldsetModule,

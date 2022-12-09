@@ -1,8 +1,6 @@
 import { NgModule } from "@angular/core";
-
 import { CoreModule } from "./core/core.module";
 import { SharedModule } from "./shared/shared.module";
-
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AppRoutingModule } from "./app-routing.module";
@@ -88,9 +86,9 @@ export function createTranslateLoader(http: HttpClient): any {
             provide: PERFECT_SCROLLBAR_CONFIG,
             useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
         },
-        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: ApiUrlInterceptor, multi: true },
+        //{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        //{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+        //{ provide: HTTP_INTERCEPTORS, useClass: ApiUrlInterceptor, multi: true },
         fakeBackendProvider,
     ],
     bootstrap: [AppComponent]

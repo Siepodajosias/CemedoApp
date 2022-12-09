@@ -21,12 +21,9 @@ import { MatInputModule } from "@angular/material/input";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatRadioModule } from "@angular/material/radio";
 import { DragDropModule } from "@angular/cdk/drag-drop";
-import { HttpClientModule } from "@angular/common/http";
 import { MatChipsModule } from '@angular/material/chips';
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { MatCardModule } from '@angular/material/card'
-
-import { OWL_DATE_TIME_LOCALE, OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 //import { OwlDateTimeModule, OWL_DATE_TIME_FORMATS} from 'ng-pick-datetime';
 
@@ -70,6 +67,10 @@ import { CalendarModule } from 'primeng/calendar';
 import { SpeedDialModule } from 'primeng/speeddial';
 import { MenuModule } from 'primeng/menu';
 import { FieldsetModule} from 'primeng/fieldset';
+import { HttpClientModule } from '@angular/common/http';
+import { EmployeModule } from 'src/app/shared-cemedo/employe/employe.module';
+import { TypeMedecinService } from 'src/app/services/serviceMedecin/type-medecin.service';
+import { MedecinSpecialiteService } from 'src/app/services/serviceMedecin/medecin-specialite.service';
 
 
 @NgModule({
@@ -92,7 +93,6 @@ import { FieldsetModule} from 'primeng/fieldset';
     NgxEchartsModule.forRoot({
       echarts: () => import("echarts"),
     }),
-    HttpClientModule,
     PerfectScrollbarModule,
     MatIconModule,
     FullCalendarModule,
@@ -122,7 +122,7 @@ import { FieldsetModule} from 'primeng/fieldset';
     /*OwlDateTimeModule,
     OwlNativeDateTimeModule*/
 
-
+    HttpClientModule,
     CardModule,
     TableModule,
     ButtonModule,
@@ -144,10 +144,11 @@ import { FieldsetModule} from 'primeng/fieldset';
     CalendarModule,
     SpeedDialModule,
     MenuModule,
-    FieldsetModule
+    FieldsetModule,
+    EmployeModule
 
   ], providers: [MedecinService,MessageService ,
-                ConfirmationService
+                ConfirmationService,TypeMedecinService,MedecinSpecialiteService
 
     //{provide: OWL_DATE_TIME_LOCALE, useValue: 'fr'},
 

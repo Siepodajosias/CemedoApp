@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Patient } from 'src/app/models/modelPatient/patient';
 import { Observable } from 'rxjs';
 import { Patient1 } from 'src/app/models/modelPatient/patient1';
 import { Ordonnance } from 'src/app/models/modelPatient/ordonnance';
@@ -9,10 +8,10 @@ import { PageCarnetSante } from 'src/app/models/modelPatient/page-carnet-sante';
   providedIn: 'root'
 })
 export class PatientService {
-  private config:string="http://38.242.229.12:80/assures/patient/"
-  private config4:string="http://38.242.229.12:80/assures/"
-  private config2:string="http://38.242.229.12:80/ordonnances"
-  private config3:string="http://38.242.229.12:80/page_carnet_santes"
+  private config:string="http://38.242.229.12/assures/patient/"
+  private config4:string="http://38.242.229.12/assures/"
+  private config2:string="http://38.242.229.12/ordonnances"
+  private config3:string="http://38.242.229.12/page_carnet_santes"
   constructor(private httpPat:HttpClient) { }
 
  //patients ressource
@@ -39,7 +38,6 @@ supprimerPatient(e:number):Observable<any>{
 }
 
 //Ordonnance ressource
-
 recupererOrdonnance():Observable<any>{
   return this.httpPat.get<any>(this.config2,{
     headers:new HttpHeaders({'Content-Type':'application/json'})

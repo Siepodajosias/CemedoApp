@@ -8,8 +8,8 @@ import { Rendezvous } from 'src/app/models/modelReception/rendezvous';
   providedIn: 'root'
 })
 export class ReceptionService {
-private config:string="http://38.242.229.12:80/employe/gerant/"
-private config2:string="http://38.242.229.12:80/rendez_vouses"
+private config:string="http://38.242.229.12/employe/gerant/"
+private config2:string="http://38.242.229.12/rendez_vouses"
   constructor(private httpRecep:HttpClient) { }
 
   //reception ressources

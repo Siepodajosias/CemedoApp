@@ -36,18 +36,18 @@
           </ng-template>
           <ng-template pTemplate="header">
               <tr>
-                  <th pSortableColumn="nom">Nom<p-sortIcon field="nom"></p-sortIcon></th>
-                  <th pSortableColumn="prenoms">Prenom <p-sortIcon field="prenoms"></p-sortIcon></th>
-                  <th pSortableColumn="genre">Genre <p-sortIcon field="genre"></p-sortIcon></th>
-                  <th pSortableColumn="profession">Profession<p-sortIcon field="profession"></p-sortIcon></th>
-                  <th pSortableColumn="lieuHabitation">Ville<p-sortIcon field="lieuHabitation"></p-sortIcon></th>
-                  <th pSortableColumn="tel">Téléphone 1<p-sortIcon field="tel"></p-sortIcon></th>
-                  <th pSortableColumn="tel2">Téléphone 2<p-sortIcon field="tel2"></p-sortIcon></th>
-                  <th></th>
+                  <th pSortableColumn="user.nom" [style]="{fontSize:'14px',color:'#2E5C2F',background:'rgb(46 92 47 / 10%)'}">Nom<p-sortIcon field="user.nom"></p-sortIcon></th>
+                  <th pSortableColumn="user.prenoms" [style]="{fontSize:'14px',color:'#2E5C2F',background:'rgb(46 92 47 / 10%)'}">Prenom <p-sortIcon field="user.prenoms"></p-sortIcon></th>
+                  <th pSortableColumn="user.genre" [style]="{fontSize:'14px',color:'#ff0000c4',background:'rgb(239 7 67 / 10%)'}">Genre <p-sortIcon field="user.genre"></p-sortIcon></th>
+                  <th pSortableColumn="user.profession" [style]="{fontSize:'14px',color:'#f1749e',background:'rgb(241 116 158 / 10%)'}">Profession<p-sortIcon field="profession"></p-sortIcon></th>
+                  <th pSortableColumn="user.lieuHabitation" [style]="{fontSize:'14px',color:'#f1749e',background:'rgb(241 116 158 / 10%)'}">Ville<p-sortIcon field="lieuHabitation"></p-sortIcon></th>
+                  <th pSortableColumn="user.tel" [style]="{fontSize:'14px',color:'#2196F3',background:'rgb(33 150 243 / 10%)'}">Téléphone 1<p-sortIcon field="user.tel"></p-sortIcon></th>
+                  <th pSortableColumn="user.tel2" [style]="{fontSize:'14px',color:'#2196F3',background:'rgb(33 150 243 / 10%)'}">Téléphone 2<p-sortIcon field="user.tel2"></p-sortIcon></th>
+                  <th>Actions</th>
               </tr>
               <tr>
                   <th>
-                      <p-columnFilter [showClearButton]="false" type="text" field="nom" matchMode="contains" pTooltip="Options de filtrage">
+                      <p-columnFilter [showClearButton]="false" type="text" field="user.nom" matchMode="contains" pTooltip="Options de filtrage">
                           <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
                               <input type="text" #valeur class="p-2 border" maxlength="20"
                                      [value]="value"
@@ -58,7 +58,7 @@
                       </p-columnFilter>
                   </th>
                   <th>
-                      <p-columnFilter [showClearButton]="false" type="text" field="prenoms" matchMode="contains" pTooltip="Options de filtrage">
+                      <p-columnFilter [showClearButton]="false" type="text" field="user.prenoms" matchMode="contains" pTooltip="Options de filtrage">
                           <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
                               <input type="text" #valeur class="p-2 border" maxlength="20"
                                      [value]="value"
@@ -69,7 +69,7 @@
                       </p-columnFilter>
                   </th>
                   <th>
-                      <p-columnFilter [showClearButton]="false" type="text" field="genre" matchMode="contains" pTooltip="Options de filtrage">
+                      <p-columnFilter [showClearButton]="false" type="text" field="uer.genre" matchMode="contains" pTooltip="Options de filtrage">
                           <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
                               <input type="text" #valeur class="p-2 border" maxlength="20"
                                      [value]="value"
@@ -102,7 +102,7 @@
                       </p-columnFilter>
                   </th>
                   <th>
-                      <p-columnFilter [showClearButton]="false" type="text" field="tel" matchMode="contains" pTooltip="Options de filtrage">
+                      <p-columnFilter [showClearButton]="false" type="text" field="user.tel" matchMode="contains" pTooltip="Options de filtrage">
                           <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
                               <input type="text" #valeur class="p-2 border" maxlength="20"
                                      [value]="value"
@@ -123,18 +123,19 @@
                           </ng-template>
                       </p-columnFilter>
                   </th>
+                  <th></th>
               </tr>
           </ng-template>
           <ng-template pTemplate="body" let-patient>
               <tr>
-                  <td style="min-width:200px">{{patient.user.nom}}</td>
-                  <td style="min-width:200px">{{patient.user.prenoms}}</td>
-                  <td style="min-width:200px">{{patient.user.genre}}</td>
-                  <td style="min-width:200px">{{patient.profession}}</td>
-                  <td style="min-width:200px">{{patient.lieuHabitation}}</td>
-                  <td style="min-width:200px">{{patient.user.tel}}</td>
-                  <td style="min-width:200px">{{patient.user.tel2}}</td>
-                  <td style="flex: 0 0 4rem">
+                  <td style="min-width:200px" [style]="{color:'#2E5C2F'}">{{patient.user.nom}}</td>
+                  <td style="min-width:200px" [style]="{color:'#2E5C2F'}">{{patient.user.prenoms}}</td>
+                  <td style="min-width:200px" [style]="{color:'red'}">{{patient.user.genre}}</td>
+                  <td style="min-width:200px" [style]="{color:'#f1749e'}">{{patient.profession}}</td>
+                  <td style="min-width:200px" [style]="{color:'#f1749e'}">{{patient.lieuHabitation}}</td>
+                  <td style="min-width:200px" [style]="{color:'#2196F3'}">{{patient.user.tel}}</td>
+                  <td style="min-width:200px" [style]="{color:'#2196F3'}">{{patient.user.tel2}}</td>
+                  <td style="min-width:200px">
                       <button pButton pRipple type="button"  icon="pi pi-angle-right"  (click)="detail(patient.id)" 
                       class="p-button-rounded p-button-text"
                       ></button>

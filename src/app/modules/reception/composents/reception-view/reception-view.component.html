@@ -38,17 +38,17 @@
           </ng-template>
           <ng-template pTemplate="header">
               <tr>
-                  <th pSortableColumn="nom">Nom<p-sortIcon field="nom"></p-sortIcon></th>
-                  <th pSortableColumn="prenoms">Prénom <p-sortIcon field="prenoms"></p-sortIcon></th>
-                  <th pSortableColumn="genre">Genre<p-sortIcon field="genre"></p-sortIcon></th>
-                  <th pSortableColumn="email">E-mail <p-sortIcon field="email"></p-sortIcon></th>
-                  <th pSortableColumn="tel">Téléphone 1<p-sortIcon field="tel"></p-sortIcon></th>
-                  <th pSortableColumn="tel2">E-mail <p-sortIcon field="tel2"></p-sortIcon></th>
-                  <th ></th>
+                  <th pSortableColumn="user.nom" [style]="{fontSize:'14px',color:'#2E5C2F',background:'rgb(46 92 47 / 10%)'}">Nom<p-sortIcon field="user.nom"></p-sortIcon></th>
+                  <th pSortableColumn="user.prenoms" [style]="{fontSize:'14px',color:'#2E5C2F',background:'rgb(46 92 47 / 10%)'}">Prénom <p-sortIcon field="user.prenoms"></p-sortIcon></th>
+                  <th pSortableColumn="user.genre" [style]="{fontSize:'14px',color:'#ff0000c4',background:'rgb(239 7 67 / 10%)'}">Genre<p-sortIcon field="user.genre"></p-sortIcon></th>
+                  <th pSortableColumn="user.email" [style]="{fontSize:'14px',color:'#2196F3',background:'rgb(33 150 243 / 10%)'}">E-mail <p-sortIcon field="user.email"></p-sortIcon></th>
+                  <th pSortableColumn="user.tel" [style]="{fontSize:'14px',color:'#2196F3',background:'rgb(33 150 243 / 10%)'}">Téléphone 1<p-sortIcon field="user.tel"></p-sortIcon></th>
+                  <th pSortableColumn="user.tel2" [style]="{fontSize:'14px',color:'#2196F3',background:'rgb(33 150 243 / 10%)'}">Téléphone 2 <p-sortIcon field="user.tel2"></p-sortIcon></th>
+                  <th >Actions</th>
               </tr>
               <tr>
                   <th>
-                      <p-columnFilter [showClearButton]="false" type="text" field="nom" matchMode="contains" pTooltip="Options de filtrage">
+                      <p-columnFilter [showClearButton]="false" type="text" field="user.nom" matchMode="contains" pTooltip="Options de filtrage">
                           <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
                               <input type="text" #valeur class="p-2 border" maxlength="20"
                                      [value]="value"
@@ -59,7 +59,7 @@
                       </p-columnFilter>
                   </th>
                   <th>
-                      <p-columnFilter [showClearButton]="false" type="text" field="prenoms" matchMode="contains" pTooltip="Options de filtrage">
+                      <p-columnFilter [showClearButton]="false" type="text" field="user.prenoms" matchMode="contains" pTooltip="Options de filtrage">
                           <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
                               <input type="text" #valeur class="p-2 border" maxlength="20"
                                      [value]="value"
@@ -70,7 +70,7 @@
                       </p-columnFilter>
                   </th>
                   <th>
-                      <p-columnFilter [showClearButton]="false" type="text" field="genre" matchMode="contains" pTooltip="Options de filtrage">
+                      <p-columnFilter [showClearButton]="false" type="text" field="user.genre" matchMode="contains" pTooltip="Options de filtrage">
                           <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
                               <input type="text" #valeur class="p-2 border" maxlength="20"
                                      [value]="value"
@@ -81,7 +81,7 @@
                       </p-columnFilter>
                   </th>
                   <th>
-                      <p-columnFilter [showClearButton]="false" type="text" field="email" matchMode="contains" pTooltip="Options de filtrage">
+                      <p-columnFilter [showClearButton]="false" type="text" field="user.email" matchMode="contains" pTooltip="Options de filtrage">
                           <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
                               <input type="text" #valeur class="p-2 border" maxlength="20"
                                      [value]="value"
@@ -92,7 +92,7 @@
                       </p-columnFilter>
                   </th>
                   <th>
-                      <p-columnFilter [showClearButton]="false" type="text" field="tel" matchMode="contains" pTooltip="Options de filtrage">
+                      <p-columnFilter [showClearButton]="false" type="text" field="user.tel" matchMode="contains" pTooltip="Options de filtrage">
                           <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
                               <input type="text" #valeur class="p-2 border" maxlength="20"
                                      [value]="value"
@@ -103,7 +103,7 @@
                       </p-columnFilter>
                   </th>
                   <th>
-                      <p-columnFilter [showClearButton]="false" type="text" field="tel2" matchMode="contains" pTooltip="Options de filtrage">
+                      <p-columnFilter [showClearButton]="false" type="text" field="user.tel2" matchMode="contains" pTooltip="Options de filtrage">
                           <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
                               <input type="text" #valeur class="p-2 border" maxlength="20"
                                      [value]="value"
@@ -113,24 +113,23 @@
                           </ng-template>
                       </p-columnFilter>
                   </th>
+                  <th></th>
               </tr>
           </ng-template>
           <ng-template pTemplate="body" let-reception>
               <tr>
-                  <td style="min-width:200px">{{reception.user.nom}}</td>
-                  <td style="min-width:200px">{{reception.user.prenoms}}</td>
-                  <td style="min-width:200px">{{reception.user.genre}}</td>
-                  <td style="min-width:200px">{{reception.user.email}}</td>
-                  <td style="min-width:200px">{{reception.user.tel}}</td>
-                  <td style="min-width:200px">{{reception.user.tel2}}</td>
-                  <td style="flex: 0 0 4rem">
-                      <button pButton pRipple type="button"  icon="pi pi-pencil"  (click)="detail(reception)" 
+                  <td [style]="{color:'#2E5C2F'}">{{reception.user.nom}}</td>
+                  <td [style]="{color:'#2E5C2F'}">{{reception.user.prenoms}}</td>
+                  <td [style]="{color:'red'}">{{reception.user.genre}}</td>
+                  <td [style]="{color:'#2196F3'}">{{reception.user.email}}</td>
+                  <td [style]="{color:'#2196F3'}">{{reception.user.tel}}</td>
+                  <td [style]="{color:'#2196F3'}">{{reception.user.tel2}}</td>
+                  <td>
+                      <button pButton pRipple type="button"  icon="pi pi-pencil"  (click)="recupererDetail(reception)"
                       class="p-button-rounded p-button-text"
                       ></button>
-                  </td>
-                  <td style="flex: 0 0 4rem">
-                      <button pButton pRipple type="button"  icon="pi pi-angle-right"  (click)="detail(reception)" 
-                      class="p-button-rounded p-button-text"
+                      <button pButton pRipple type="button"  icon="pi pi-angle-right"  (click)="recupererDetail(reception)"
+                              class="p-button-rounded p-button-text"
                       ></button>
                   </td>
               </tr>
@@ -186,11 +185,17 @@
 
           <div class="col-6">
             <label>Genre</label>
-            <p-dropdown [options]="genres" optionLabel="name" [showClear]="true"
+            <p-dropdown [options]="genres" optionLabel="libelle" [showClear]="true"
               formControlName="genre">
               </p-dropdown>
           </div>
-
+          <div class="col-12">
+                  <span>
+                    <label>Type d'employé</label>
+                    <p-autoComplete  formControlName="typeEmploye" [virtualScroll]="true" [suggestions]="employeForm"  (completeMethod)="employeItems($event)" field="libelle" [dropdown]="true">
+                   </p-autoComplete>
+                  </span>
+          </div>
         <div class="col-12">
           <p-divider align="center" type="dashed" layout="horizontal">
             <div class="inline-flex align-items-center">
