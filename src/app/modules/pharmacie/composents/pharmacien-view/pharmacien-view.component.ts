@@ -9,6 +9,7 @@ import * as jspdf from 'jspdf'
 import 'jspdf-autotable'
 import { UserOptions } from 'jspdf-autotable';
 import { Table } from 'primeng/table'
+import { EmployeService } from 'src/app/shared-cemedo/employe/employe.service';
 
 interface jsPDFWithPlugin extends jspdf.jsPDF{
     autoTable: (options: UserOptions)=> jspdf.jsPDF;
@@ -37,17 +38,20 @@ export class PharmacienViewComponent implements OnInit {
 
   pharmacienDialog:boolean=false;
   genres:any
+  employes: any[];
+  employeForm: any[];
   pharmacienForms: FormGroup = new FormGroup({})
-  pharmacien:Pharmacien=new Pharmacien()
 
   constructor(private pharmacienService:PharmacienService,private route:Router,
     private messageService:MessageService,
     private pharmacienForm: FormBuilder,
-    private primeNgConfig: PrimeNGConfig
+    private primeNgConfig: PrimeNGConfig,
+    private employeService: EmployeService
 ) { }
 
   ngOnInit(): void {
-    this.pharmacienForms = this.pharmacienForm.group({
+      this.recupererPharmacien();
+      this.pharmacienForms = this.pharmacienForm.group({
 
       id:null,
       nom: ['', [Validators.required, Validators.minLength(3)]],
@@ -80,17 +84,7 @@ export class PharmacienViewComponent implements OnInit {
       residence:['', [Validators.required, Validators.maxLength(30)]],
       numeroCni:['', [Validators.required, Validators.maxLength(20)]]
       */
-    })
-    this.pharmacienService.recupererPharmacien().subscribe({
-      next: (value: any) => {
-        this.posts = value.data ? value : []
-        this.pharmaciens=this.posts.data
-        this.loading=false
-      },
-      error: (e) => {},
-      complete: () => {
-      }
-    })
+    });
       this.primeNgConfig.setTranslation({
           monthNames: ['Janvier',
               'Fevrier',
@@ -120,7 +114,7 @@ export class PharmacienViewComponent implements OnInit {
           noFilter : 'Pas de filtre',
       });
   }
-  detail(a:any){
+  pharmacienDetail(a:any){
     //this.route.navigate(['administrateur/detailM',a]);
     this.pharmacienService.recupererPharmacien().subscribe({})
   }
@@ -163,10 +157,6 @@ toggleLock(data:any, frozen:any, index:any) {
  newPharmacien() {
       this.pharmacienForms.reset();
       this.pharmacienDialog = !this.pharmacienDialog;
-      this.genres = [
-        {name: 'homme'},
-        {name: 'femme'}
-      ];
 }
 
 exportPdf() {
@@ -191,46 +181,66 @@ this.saveAsExcelFile(excelBuffer, "pharmaciens");
 }
 
 enregistrerPharmacien(){
-
-  this.pharmacien.id=null
-  this.pharmacien.email=this.pharmacienForms.get('email')?.value
-  this.pharmacien.password=this.pharmacienForms.get('password')?.value
-  this.pharmacien.nom=this.pharmacienForms.get('nom')?.value
-  this.pharmacien.prenoms=this.pharmacienForms.get('prenoms')?.value
-  this.pharmacien.dateNaissance=this.pharmacienForms.get('dateNaissance')?.value
-  this.pharmacien.login=this.pharmacienForms.get('login')?.value
-  let val=this.pharmacienForms.get('genre')?.value
-  this.pharmacien.genre=val.name
-  this.pharmacien.tel=this.pharmacienForms.get('tel')?.value
-  this.pharmacien.tel2=this.pharmacienForms.get('tel2')?.value
-
-  this.pharmacien.fcmToken=""
-  this.pharmacien.typeEmploye=null
-
-     this.pharmacienService.enregistrerPharmacien(this.pharmacien).subscribe({
-
+    const pharmacien:Pharmacien=new Pharmacien()
+    pharmacien.id=null
+    pharmacien.email=this.pharmacienForms.get('email')?.value
+    pharmacien.password=this.pharmacienForms.get('password')?.value
+    pharmacien.nom=this.pharmacienForms.get('nom')?.value
+    pharmacien.prenoms=this.pharmacienForms.get('prenoms')?.value
+    pharmacien.dateNaissance=this.pharmacienForms.get('dateNaissance')?.value
+    pharmacien.tel=this.pharmacienForms.get('tel')?.value
+    pharmacien.tel2=this.pharmacienForms.get('tel2')?.value
+    pharmacien.login=this.pharmacienForms.get('login')?.value
+    let valuerGenre=this.pharmacienForms.get('genre')?.value
+    let valuerEmploye=this.pharmacienForms.get('typeEmploye')?.value
+    pharmacien.genre=valuerGenre.id
+    pharmacien.typeEmploye=valuerEmploye.id
+    pharmacien.fcmToken=""
+     this.pharmacienService.enregistrerPharmacien(pharmacien).subscribe({
       next:(v)=>{
-        this.messageService.add({severity: 'success', summary: 'Service Message', detail: 'Pharmacien enregistré' });
+        this.messageService.add({severity: 'success', summary: 'Service Message', detail: 'Le pharmacien à été enregistré' });
+        this.pharmacienForms.reset();
       },
-      error:(e)=>{
-
-      },
+      error:(e)=>{},
       complete:()=>{
-        this.pharmacienForms.setValue({
-          id:null,
-          email:"",
-          password:"",
-          nom:"",
-          prenoms:"",
-          tel:"",
-          tel2:"",
-          genre:"",
-          dateNaissance:"",
-          login:"",
-          fcmToken:'string',
-          typeEmploye:null,
-        })
+          this.recupererPharmacien();
+          this.pharmacienDialog=false
        }
      })
  }
+ recupererPharmacien(){
+     this.pharmacienService.recupererPharmacien().subscribe({
+         next: (value: any) => {
+             this.posts = value.data ? value : []
+             this.pharmaciens=this.posts.data
+             this.loading=false
+         },
+         error: (e) => {},
+         complete: () => {
+         }
+     })
+     this.employeService.recupererTypeEmploye().subscribe({
+         next:(value)=>{
+             const data=value.data;
+             this.employes=data ? data : [];
+         }
+     })
+     this.employeService.recupererGenre().subscribe({
+         next:(value)=>{
+             const data=value.data;
+             this.genres=data ? data : [];
+         }
+     })
+ }
+ employeItems(event: any) {
+        let filtered : any[] = [];
+        let query = event.query;
+        for(let i = 0; i < this.employes.length; i++) {
+            let item = this.employes[i];
+            if (item.libelle.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+                filtered.push(item);
+            }
+        }
+        this.employeForm = filtered;
+    }
 }

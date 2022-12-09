@@ -8,7 +8,7 @@ import { Comptable } from 'src/app/models/modelComptable/comptable';
 })
 export class ComptableService {
  
-  private config:string="http://38.242.229.12:80/employe/comptable/"
+  private config:string="http://38.242.229.12/employe/comptable/"
   constructor(private httpCompt:HttpClient) { }
 
   //Comptable ressource

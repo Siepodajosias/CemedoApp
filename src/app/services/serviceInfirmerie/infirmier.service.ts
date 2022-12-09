@@ -8,8 +8,8 @@ import { Rendezvous } from 'src/app/models/modelInfirmier/rendezvous';
   providedIn: 'root'
 })
 export class InfirmierService {
-  private config:string="http://38.242.229.12:80/employe/infirmier/"
-  private config2:string="http://38.242.229.12:80/rendez_vouses"
+  private config:string="http://38.242.229.12/employe/infirmier/"
+  private config2:string="http://38.242.229.12/rendez_vouses"
   constructor(private httpInfir:HttpClient) { }
 
   //infirmier ressource

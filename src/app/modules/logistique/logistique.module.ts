@@ -30,6 +30,7 @@ import { SpeedDialModule } from 'primeng/speeddial';
 import { MenuModule } from 'primeng/menu';
 import { FieldsetModule} from 'primeng/fieldset';
 import { MaterielViewComponent } from 'src/app/modules/logistique/composents/materiel-view/materiel-view.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import { MaterielViewComponent } from 'src/app/modules/logistique/composents/mat
     CalendarModule,
     SpeedDialModule,
     MenuModule,
-    FieldsetModule
+    FieldsetModule,
+    HttpClientModule,
   ],providers:[ConfirmationService,MessageService]
 })
 export class LogistiqueModule { }

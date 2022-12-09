@@ -9,6 +9,7 @@ import * as jspdf from 'jspdf';
 import 'jspdf-autotable';
 import { UserOptions } from 'jspdf-autotable';
 import { Table } from 'primeng/table';
+import { EmployeService } from 'src/app/shared-cemedo/employe/employe.service';
 
 interface jsPDFWithPlugin extends jspdf.jsPDF {
 	autoTable: (options: UserOptions) => jspdf.jsPDF;
@@ -24,12 +25,12 @@ export class ReceptionViewComponent implements OnInit {
 	constructor(private receptionService: ReceptionService, private route: Router,
 				private messageService: MessageService,
 				private receptionForm: FormBuilder,
-				private primeNgConfig: PrimeNGConfig
+				private primeNgConfig: PrimeNGConfig,
+				private employeService: EmployeService
 	) {
 	}
 
 	posts: any;
-
 	receptions: any[] = [];
 	dragdrop: boolean = true;
 
@@ -45,26 +46,13 @@ export class ReceptionViewComponent implements OnInit {
 
 	receptionDialog: boolean = false;
 	receptionForms: FormGroup = new FormGroup({});
-	reception: Reception = new Reception();
 	genres: any;
+	employes: any[];
+	employeForm: any[];
 
 	ngOnInit(): void {
-
-		this.receptionService.recupererReception().subscribe({
-			next: (value: any) => {
-				this.posts = value.data ? value : [];
-				this.receptions = this.posts.data;
-				this.loading = false;
-
-			},
-			error: (e) => {
-			},
-			complete: () => {
-			}
-		});
-
+       this.recupererReception();
 		this.receptionForms = this.receptionForm.group({
-
 			id: null,
 			nom: ['', [Validators.required, Validators.minLength(3)]],
 			prenoms: ['', [Validators.required, Validators.maxLength(20)]],
@@ -125,16 +113,14 @@ export class ReceptionViewComponent implements OnInit {
 			notEquals: 'différent de',
 			noFilter: 'Pas de filtre',
 		});
-
 	}
 
-	detail(a: any) {
+	recupererDetail(a: any) {
 		//this.route.navigate(['administrateur/detailM',a]);
 		this.receptionService.recupererReception().subscribe({
 			next: (e) => console.log(e)
 		});
 	}
-
 	saveAsExcelFile(buffer: any, fileName: string): void {
 
 		let EXCEL_TYPE =
@@ -147,19 +133,14 @@ export class ReceptionViewComponent implements OnInit {
 				data,
 				fileName + '_export_' + new Date() + EXCEL_EXTENSION
 		);
-
 	}
-
 	applyFilterGlobal($event: any, stringVal: any) {
 		this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
 	}
-
 	getEventValue($event: any): string {
 		return $event.target.value;
 	}
-
 	toggleLock(data: any, frozen: any, index: any) {
-
 		if (frozen) {
 			this.lockedCustomers = this.lockedCustomers.filter((c, i) => i !== index);
 			this.unlockedCustomers.push(data);
@@ -167,23 +148,15 @@ export class ReceptionViewComponent implements OnInit {
 			this.unlockedCustomers = this.unlockedCustomers.filter((c, i) => i !== index);
 			this.lockedCustomers.push(data);
 		}
-
 		this.unlockedCustomers.sort((val1, val2) => {
 			return val1.id < val2.id ? -1 : 1;
 		});
 	}
-
 	newReception() {
 		this.receptionForms.reset();
 		this.receptionDialog = !this.receptionDialog;
-		this.genres = [
-			{ name: 'homme' },
-			{ name: 'femme' }
-		];
 	}
-
 	exportPdf() {
-
 		const doc = new jspdf.jsPDF('portrait', 'px', 'a4') as jsPDFWithPlugin;
 		doc.autoTable({
 			head: this.exportColumns,
@@ -191,7 +164,6 @@ export class ReceptionViewComponent implements OnInit {
 		});
 		doc.save('Reception-rapport.pdf');
 	}
-
 	exportExcel() {
 		import('xlsx').then(xlsx => {
 			const worksheet = xlsx.utils.json_to_sheet(this.receptions);
@@ -203,47 +175,70 @@ export class ReceptionViewComponent implements OnInit {
 			this.saveAsExcelFile(excelBuffer, 'reception');
 		});
 	}
-
 	enregistrerReception() {
-		this.reception.id = null;
-		this.reception.email = this.receptionForms.get('email')?.value;
-		this.reception.password = this.receptionForms.get('password')?.value;
-		this.reception.nom = this.receptionForms.get('nom')?.value;
-		this.reception.prenoms = this.receptionForms.get('prenoms')?.value;
-		this.reception.dateNaissance = this.receptionForms.get('dateNaissance')?.value;
-		this.reception.login = this.receptionForms.get('login')?.value;
-		let val = this.receptionForms.get('genre')?.value;
-		this.reception.genre = val.name;
-		this.reception.tel = this.receptionForms.get('tel')?.value;
-		this.reception.tel2 = this.receptionForms.get('tel2')?.value;
+		const reception: Reception = new Reception();
+		      reception.id = null;
+		      reception.email = this.receptionForms.get('email')?.value;
+		      reception.password = this.receptionForms.get('password')?.value;
+		      reception.nom = this.receptionForms.get('nom')?.value;
+		      reception.prenoms = this.receptionForms.get('prenoms')?.value;
+		      reception.dateNaissance = this.receptionForms.get('dateNaissance')?.value;
+		      reception.login = this.receptionForms.get('login')?.value;
+		      let valeurGenre = this.receptionForms.get('genre')?.value;
+		      let valeurEmploye = this.receptionForms.get('typeEmploye')?.value;
+		      reception.genre = valeurGenre.id;
+		      reception.typeEmploye = valeurEmploye.id;
+		      reception.tel = this.receptionForms.get('tel')?.value;
+		      reception.tel2 = this.receptionForms.get('tel2')?.value;
+		      reception.fcmToken = '';
 
-		this.reception.fcmToken = '';
-		this.reception.typeEmploye = null;
-
-		this.receptionService.enregistrerReception(this.reception).subscribe({
-
+	   this.receptionService.enregistrerReception(reception).subscribe({
 			next: (v) => {
 				this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'receptionniste enregistré' });
+				this.receptionForms.reset();
 			},
 			error: (e) => {
 			},
 			complete: () => {
-				this.receptionForms.setValue({
-					id: null,
-					email: '',
-					password: '',
-					nom: '',
-					prenoms: '',
-					tel: '',
-					tel2: '',
-					genre: '',
-					dateNaissance: '',
-					login: '',
-					fcmToken: 'string',
-					typeEmploye: null,
-				});
+              this.recupererReception();
+              this.receptionDialog=false
 			}
 		});
 	}
-
+	recupererReception(){
+		this.receptionService.recupererReception().subscribe({
+			next: (value: any) => {
+				this.posts = value.data ? value : [];
+				this.receptions = this.posts.data;
+			},
+			error: (e) => {
+			},
+			complete: () => {
+				this.loading = false;
+			}
+		});
+		this.employeService.recupererTypeEmploye().subscribe({
+			next:(value)=>{
+				const data=value.data;
+				this.employes=data ? data : [];
+			}
+		})
+		this.employeService.recupererGenre().subscribe({
+			next:(value)=>{
+				const data=value.data;
+				this.genres=data ? data : [];
+			}
+		})
+	}
+	employeItems(event: any) {
+		let filtered : any[] = [];
+		let query = event.query;
+		for(let i = 0; i < this.employes.length; i++) {
+			let item = this.employes[i];
+			if (item.libelle.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+				filtered.push(item);
+			}
+		}
+		this.employeForm = filtered;
+	}
 }

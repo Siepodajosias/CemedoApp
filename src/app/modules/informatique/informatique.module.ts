@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComponentsModule } from "src/app/shared/components/components.module";
-import { HttpClientModule } from "@angular/common/http";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTabsModule } from "@angular/material/tabs";
 import { NgApexchartsModule } from "ng-apexcharts";
@@ -37,6 +36,7 @@ import { SpeedDialModule } from 'primeng/speeddial';
 import { MenuModule } from 'primeng/menu';
 import { FieldsetModule} from 'primeng/fieldset';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -46,7 +46,6 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
-    HttpClientModule ,
     InformatiqueRoutingModule,
     ComponentsModule ,
     MatIconModule,
@@ -75,7 +74,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CalendarModule,
     SpeedDialModule,
     MenuModule,
-    FieldsetModule
+    FieldsetModule,
+    HttpClientModule,
 
   ],
   providers:[InformaticienService,MessageService,ConfirmationService]

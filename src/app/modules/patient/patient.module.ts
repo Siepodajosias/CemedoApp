@@ -2,7 +2,6 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { PerfectScrollbarModule } from "ngx-perfect-scrollbar";
 import { ChartsModule as chartjsModule } from "ng2-charts";
-import { HttpClientModule } from "@angular/common/http";
 import { NgxEchartsModule } from "ngx-echarts";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
@@ -59,6 +58,7 @@ import { MenubarModule } from 'primeng/menubar';
 import { ToolbarModule } from 'primeng/toolbar';
 
 import { SharedModule } from "src/app/shared/shared.module";
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [ 
@@ -75,7 +75,6 @@ import { SharedModule } from "src/app/shared/shared.module";
     NgxEchartsModule.forRoot({
       echarts: () => import("echarts"),
     }),
-    HttpClientModule,
     SharedModule,
     PerfectScrollbarModule,
     MatIconModule,
@@ -97,6 +96,7 @@ import { SharedModule } from "src/app/shared/shared.module";
     MatRadioModule,
     ComponentsModule,
     MatDialogModule,
+    HttpClientModule,
   
     ToastrModule.forRoot({}),
     MatCardModule,

@@ -4,12 +4,8 @@ import { ComponentsModule } from "src/app/shared/components/components.module";
 import { ReactiveFormsModule, FormsModule} from '@angular/forms'
 import { MatIconModule } from "@angular/material/icon";
 import { NgApexchartsModule } from "ng-apexcharts";
-import { HttpClientModule } from "@angular/common/http";
-
 import { FullCalendarModule } from '@fullcalendar/angular'
-import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatButtonModule } from '@angular/material/button';
-
 import { InfirmerieRoutingModule } from 'src/app/modules/infirmerie/infirmerie-routing.module';
 import { InfirmierViewComponent } from 'src/app/modules/infirmerie/composents/infirmier-view/infirmier-view.component';
 import { InfirmierDetailComponent } from 'src/app/modules/infirmerie/composents/infirmier-detail/infirmier-detail.component';
@@ -41,6 +37,7 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { CalendarModule } from 'primeng/calendar';
 import { SpeedDialModule } from 'primeng/speeddial';
 import { MenuModule } from 'primeng/menu';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -52,7 +49,6 @@ import { MenuModule } from 'primeng/menu';
   imports: [
     CommonModule,
     InfirmerieRoutingModule,
-    HttpClientModule,
     ComponentsModule,
     MatIconModule,
     MatButtonModule,
@@ -82,7 +78,8 @@ import { MenuModule } from 'primeng/menu';
     ToolbarModule,
     CalendarModule,
     SpeedDialModule,
-    MenuModule
+    MenuModule,
+    HttpClientModule,
   ],providers:[InfirmierService,MessageService,ConfirmationService]
 })
 export class InfirmerieModule { }

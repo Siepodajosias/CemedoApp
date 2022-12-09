@@ -212,7 +212,7 @@ export class DashboardPatientComponent implements OnInit {
       xaxis: {
         categories: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jui', 'Juil','Aoû','Sep','Oct','Nov','Dec'],
         title: {
-          text: 'Weekday',
+          text: '2022',
         },
       },
       yaxis: {

@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComponentsModule } from "src/app/shared/components/components.module";
-import { HttpClientModule } from "@angular/common/http";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTabsModule } from "@angular/material/tabs";
 import { NgApexchartsModule } from "ng-apexcharts";
 
 import { ReactiveFormsModule, FormsModule} from '@angular/forms'
-import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { ToastrModule} from 'ngx-toastr';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatDatepickerModule } from "@angular/material/datepicker";
@@ -55,6 +54,7 @@ import { MenuModule } from 'primeng/menu';
 import { VenteViewComponent } from 'src/app/modules/pharmacie/composents/vente-view/vente-view.component';
 import { DepenseViewComponent } from 'src/app/modules/pharmacie/composents/depense-view/depense-view.component';
 import { CategorieMedicamentViewComponent } from 'src/app/modules/pharmacie/composents/categorie-medicament-view/categorie-medicament-view.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -71,7 +71,6 @@ import { CategorieMedicamentViewComponent } from 'src/app/modules/pharmacie/comp
   ],
   imports: [
     CommonModule,
-    HttpClientModule,
     PharmacieRoutingModule,
     ComponentsModule,
     MatIconModule,
@@ -88,6 +87,7 @@ import { CategorieMedicamentViewComponent } from 'src/app/modules/pharmacie/comp
     MatButtonModule,
     ReactiveFormsModule, 
     FormsModule,
+    HttpClientModule,
 
     CardModule,
     TableModule,

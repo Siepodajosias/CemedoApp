@@ -44,15 +44,15 @@
         </ng-template>
         <ng-template pTemplate="header">
           <tr>
-            <th colspan="1" pSortableColumn="libelle" class="text-center">Nom<p-sortIcon field="libelle"></p-sortIcon>
+            <th [style]="{textAlign: 'center'}" pSortableColumn="libelle">Nom<p-sortIcon field="libelle"></p-sortIcon>
             </th>
-            <th colspan="1" pSortableColumn="email" class="text-center">E-mail <p-sortIcon field="email"></p-sortIcon>
+            <th [style]="{textAlign: 'center'}" pSortableColumn="email" class="text-center">E-mail <p-sortIcon field="email"></p-sortIcon>
             </th>
-            <th colspan="1" pSortableColumn="tel" class="text-center">Contact <p-sortIcon field="tel"></p-sortIcon>
+            <th [style]="{textAlign: 'center'}" pSortableColumn="tel" class="text-center">Contact <p-sortIcon field="tel"></p-sortIcon>
             </th>
-            <th colspan="1" pSortableColumn="ville" class="text-center">Ville<p-sortIcon field="ville"></p-sortIcon>
+            <th [style]="{textAlign: 'center'}" pSortableColumn="ville" class="text-center">Ville<p-sortIcon field="ville"></p-sortIcon>
             </th>
-            <th rowspan="2">Actions</th>
+            <th [style]="{textAlign: 'center'}">Actions</th>
           </tr>
           <tr>
             <th>
@@ -99,11 +99,12 @@
                 </ng-template>
               </p-columnFilter>
             </th>
+            <th></th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-assurance>
           <tr>
-            <td>{{assurance.libelle}}</td>
+            <td [style]="{textAlign: 'center'}">{{assurance.libelle}}</td>
             <td>{{assurance.email}}</td>
             <td class="text-right">{{assurance.tel}}</td>
             <td>{{assurance.ville}}</td>
@@ -124,7 +125,6 @@
     </div>
 
     <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
-
     <p-dialog [(visible)]="assuranceDialog" [style]="{width: '460px'}" header="Création d'une assurance" [modal]="true"
       styleClass="p-fluid">
 
