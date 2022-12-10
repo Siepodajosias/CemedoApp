@@ -38,13 +38,15 @@ import { CalendarModule } from 'primeng/calendar';
 import { SpeedDialModule } from 'primeng/speeddial';
 import { MenuModule } from 'primeng/menu';
 import { HttpClientModule } from '@angular/common/http';
+import { ExamenViewComponent } from 'src/app/modules/infirmerie/composents/examen-view/examen-view.component';
 
 @NgModule({
   declarations: [
     InfirmierViewComponent,
     InfirmierDetailComponent,
     DashboardInfirmerieComponent,
-    InfirmierCalendrierComponent
+    InfirmierCalendrierComponent,
+          ExamenViewComponent
   ],
   imports: [
     CommonModule,

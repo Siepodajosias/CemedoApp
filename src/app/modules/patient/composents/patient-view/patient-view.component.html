@@ -10,12 +10,8 @@
             <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success mr-2"  pTooltip="XLS" tooltipPosition="bottom"></button>
             <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
         </ng-template>
-        <ng-template pTemplate="right" *ngIf="urlActif()">
-            <button pButton pRipple label="Créer un patient" icon="pi pi-plus" class="p-button-help"
-            ></button>
-        </ng-template>
     </p-toolbar>
-      <p-table #dt  [value]="patients"  [scrollable]="true" scrollHeight="400px"
+      <p-table #dt  [value]="patients"  [scrollable]="true" scrollHeight="600px"
       [globalFilterFields]="['user.nom','user.prenoms','lieuHabitation','profession']"
       [loading]="loading"
       [filterDelay]="0"
@@ -130,7 +126,7 @@
               <tr>
                   <td style="min-width:200px" [style]="{color:'#2E5C2F'}">{{patient.user.nom}}</td>
                   <td style="min-width:200px" [style]="{color:'#2E5C2F'}">{{patient.user.prenoms}}</td>
-                  <td style="min-width:200px" [style]="{color:'red'}">{{patient.user.genre}}</td>
+                  <td style="min-width:200px" [style]="{color:'red'}">{{patient.user.genre.libelle}}</td>
                   <td style="min-width:200px" [style]="{color:'#f1749e'}">{{patient.profession}}</td>
                   <td style="min-width:200px" [style]="{color:'#f1749e'}">{{patient.lieuHabitation}}</td>
                   <td style="min-width:200px" [style]="{color:'#2196F3'}">{{patient.user.tel}}</td>
@@ -145,8 +141,10 @@
           <ng-template pTemplate="summary">
               <div class="flex align-items-center justify-content-between">
                Total: {{patients ? patients.length : 0 }} patients
+                  <button pButton pRipple label="Créer un patient" icon="pi pi-plus" class="p-button-help"
+                          *ngIf="urlActif()"></button>
               </div>
-          </ng-template>
+              </ng-template>
       </p-table>
   </div>
   </div>

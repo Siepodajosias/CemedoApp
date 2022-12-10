@@ -19,8 +19,8 @@ export class InfirmierService {
     })
   }
 
-  enregistrerInfirmier(infir:Infirmier):Observable<Infirmier>{
-    return this.httpInfir.post<Infirmier>(this.config+"create",infir,{
+  enregistrerInfirmier(infirmier:Infirmier):Observable<Infirmier>{
+    return this.httpInfir.post<Infirmier>(this.config+"create",infirmier,{
       headers:new HttpHeaders({'Content-Type':'application/json'})
     })
   }

@@ -1,0 +1,133 @@
+<section class="content">
+	<div class="content-block">
+		<div class="block-header">
+			<!-- breadcrumb -->
+			<app-breadcrumb [title]="'Programme'" [items]="[]" [active_item]="'horaire'"></app-breadcrumb>
+		</div>
+		<div class="card">
+			<p-toolbar styleClass="mb-4">
+				<ng-template pTemplate="left">
+					<button type="button" pButton pRipple icon="pi pi-file-excel"  class="p-button-success mr-2"  pTooltip="XLS" tooltipPosition="bottom"></button>
+					<button type="button" pButton pRipple icon="pi pi-file-pdf"  class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
+				</ng-template>
+
+				<ng-template pTemplate="right">
+					<button pButton pRipple label="Ajouter un programme" icon="pi pi-plus" class="p-button-help" *ngIf="urlActif()"
+					></button>
+				</ng-template>
+			</p-toolbar>
+
+			<p-table #dt [scrollable]="true" scrollHeight="600px"
+					 [globalFilterFields]="['user.nom','user.prenoms']"
+
+					 styleClass="p-datatable-gridlines"
+					 selectionMode="multiple"
+					 [filterDelay]="0">
+				<ng-template pTemplate="caption">
+					<div class="flex align-items-center justify-content-between">
+						<h5 class="m-0">Horaire</h5>
+						<span class="p-input-icon-left">
+                      <i class="pi pi-search"></i>
+
+                      <input pInputText type="text"
+							 placeholder="Rechercher..."
+					  />
+
+                  </span>
+					</div>
+				</ng-template>
+				<ng-template pTemplate="header">
+					<tr>
+						<th pSortableColumn="user.nom" [style]="{fontSize:'14px',color:'#2E5C2F',background:'rgb(46 92 47 / 10%)'}">Médecin<p-sortIcon field="user.nom"></p-sortIcon></th>
+						<th pSortableColumn="user.prenoms" [style]="{fontSize:'14px',color:'#2196F3',background:'rgb(33 150 243 / 10%)'}">Jour de la semaine <p-sortIcon field="user.prenoms"></p-sortIcon></th>
+						<th pSortableColumn="user.genre" [style]="{fontSize:'14px',color:'#2196F3',background:'rgb(33 150 243 / 10%)'}">Heure de début<p-sortIcon field="user.genre"></p-sortIcon></th>
+						<th pSortableColumn="user.email" [style]="{fontSize:'14px',color:'#2196F3',background:'rgb(33 150 243 / 10%)'}">Heure de fin <p-sortIcon field="user.email"></p-sortIcon></th>
+						<th pSortableColumn="user.tel"   [style]="{fontSize:'14px',color:'#2196F3',background:'rgb(33 150 243 / 10%)'}">Durée<p-sortIcon field="user.tel"></p-sortIcon></th>
+						<th >Actions</th>
+					</tr>
+					<tr>
+						<th>
+							<p-columnFilter [showClearButton]="false" type="text" field="user.nom" matchMode="contains" pTooltip="Options de filtrage">
+								<ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+									<input type="text" #valeur class="p-2 border" maxlength="20"
+										   [value]="value"
+										   pInputText
+										   (input)="filter(valeur.value)"
+									>
+								</ng-template>
+							</p-columnFilter>
+						</th>
+						<th>
+							<p-columnFilter [showClearButton]="false" type="text" field="user.prenoms" matchMode="contains" pTooltip="Options de filtrage">
+								<ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+									<input type="text" #valeur class="p-2 border" maxlength="20"
+										   [value]="value"
+										   pInputText
+										   (input)="filter(valeur.value)"
+									>
+								</ng-template>
+							</p-columnFilter>
+						</th>
+						<th>
+							<p-columnFilter [showClearButton]="false" type="text" field="user.genre" matchMode="contains" pTooltip="Options de filtrage">
+								<ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+									<input type="text" #valeur class="p-2 border" maxlength="20"
+										   [value]="value"
+										   pInputText
+										   (input)="filter(valeur.value)"
+									>
+								</ng-template>
+							</p-columnFilter>
+						</th>
+						<th>
+							<p-columnFilter [showClearButton]="false" type="text" field="user.email" matchMode="contains" pTooltip="Options de filtrage">
+								<ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+									<input type="text" #valeur class="p-2 border" maxlength="20"
+										   [value]="value"
+										   pInputText
+										   (input)="filter(valeur.value)"
+									>
+								</ng-template>
+							</p-columnFilter>
+						</th>
+						<th>
+							<p-columnFilter [showClearButton]="false" type="text" field="user.tel" matchMode="contains" pTooltip="Options de filtrage">
+								<ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+									<input type="text" #valeur class="p-2 border" maxlength="20"
+										   [value]="value"
+										   pInputText
+										   (input)="filter(valeur.value)"
+									>
+								</ng-template>
+							</p-columnFilter>
+						</th>
+						<th></th>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-pharmacien>
+					<tr>
+						<td style="min-width:200px" [style]="{color:'#2E5C2F'}">{{pharmacien.user.nom}}</td>
+						<td style="min-width:200px" [style]="{color:'#2E5C2F'}">{{pharmacien.user.prenoms}}</td>
+						<td style="min-width:200px" [style]="{color:'red'}">{{pharmacien.user.genre.libelle}}</td>
+						<td style="min-width:200px" [style]="{color:'#2196F3'}">{{pharmacien.user.email}}</td>
+						<td style="min-width:200px" [style]="{color:'#2196F3'}">{{pharmacien.user.tel}}</td>
+						<td>
+							<button pButton pRipple type="button"  icon="pi pi-pencil"
+									class="p-button-rounded p-button-text"
+							></button>
+							<button pButton pRipple type="button"  icon="pi pi-angle-right"
+									class="p-button-rounded p-button-text"
+							></button>
+						</td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="summary">
+					<div class="flex align-items-center justify-content-between">
+					</div>
+				</ng-template>
+			</p-table>
+		</div>
+		<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+		<p-toast></p-toast>
+	</div>
+</section>

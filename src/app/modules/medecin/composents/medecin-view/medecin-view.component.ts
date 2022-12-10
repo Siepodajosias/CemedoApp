@@ -131,8 +131,14 @@ export class MedecinViewComponent implements OnInit {
       noFilter : 'Pas de filtre',
     });
   }
-  detail(a:any){
-    this.route.navigate(['admin/medecin/detail',a]);
+  medecinDetail(a:any){
+    if(this.route.url.includes('comptable/medecin/liste')){
+      this.route.navigate(['comptable/medecin/detail',a]);
+    }else if(this.route.url.includes('admin/medecin/liste')){
+      this.route.navigate(['admin/medecin/detail',a]);
+    }else{
+
+    }
     this.medecinservice.recupererMedecin().subscribe({
       next:(val) => {console.log(val)}
     })

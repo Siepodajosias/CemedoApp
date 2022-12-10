@@ -237,4 +237,8 @@ this.saveAsExcelFile(excelBuffer, "personne");
     }
     this.employeForm = filtered;
   }
+
+  urlActif():boolean {
+    return this.route.url.includes('admin/comptable/liste')
+  }
 }

@@ -13,7 +13,7 @@
     
             <ng-template pTemplate="right">
                 
-                <button pButton pRipple label="Ajouter une depense" icon="pi pi-send" class="p-button-help" (click)="openNew()"></button>
+                <button pButton pRipple label="Ajouter une depense" icon="pi pi-plus" class="p-button-help" (click)="openNew()"></button>
             </ng-template>
         </p-toolbar>
     
@@ -36,7 +36,7 @@
                     </span>
                 </div>
             </ng-template>
-            <ng-template pTemplate="header" let-depense>
+            <ng-template pTemplate="header">
                 <tr>
                     <th pSortableColumn="id">Identifiant<p-sortIcon field="libelle"></p-sortIcon></th>
                     <th pSortableColumn="libelle">Designation <p-sortIcon field="email"></p-sortIcon></th>
@@ -46,7 +46,7 @@
     
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-depense let-index="rowIndex">
+            <ng-template pTemplate="body" let-depense>
                 <tr>
                     <td style="min-width:200px">{{depense.id}}</td>
                     <td style="min-width:200px">{{depense.libelle}}</td>

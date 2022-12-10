@@ -40,6 +40,8 @@ import { MedecinService } from "src/app/services/serviceMedecin/medecin.service"
 import { FactureComponent } from "src/app/modules/medecin/composents/facture/facture.component";
 import { RendezVousCalendrierComponent } from 'src/app/modules/medecin/composents/rendez-vous-calendrier/rendez-vous-calendrier.component';
 import { RendezVousViewComponent } from 'src/app/modules/medecin/composents/rendez-vous-view/rendez-vous-view.component';
+import {ProgrammeComponent} from 'src/app/modules/medecin/composents/programme/programme.component';
+import {VacanceComponent} from 'src/app/modules/medecin/composents/vacance/vacance.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 
 //primeng
@@ -83,7 +85,9 @@ import { MedecinSpecialiteService } from 'src/app/services/serviceMedecin/medeci
     MedecinCalendrierComponent,
     FactureComponent,
     RendezVousCalendrierComponent,
-    RendezVousViewComponent
+    RendezVousViewComponent,
+    ProgrammeComponent,
+    VacanceComponent
 
   ],
   imports: [

@@ -12,12 +12,12 @@
           </ng-template>
   
           <ng-template pTemplate="right">
-              
-              <button pButton pRipple label="Créer un nouveau pharmacien" icon="pi pi-plus" class="p-button-help" (click)="newPharmacien()"></button>
+              <button pButton pRipple label="Créer un nouveau pharmacien" icon="pi pi-plus" class="p-button-help" *ngIf="urlActif()"
+                      (click)="newPharmacien()"></button>
           </ng-template>
       </p-toolbar>
   
-      <p-table #dt  [value]="pharmaciens"  [scrollable]="true" scrollHeight="400px"
+      <p-table #dt  [value]="pharmaciens"  [scrollable]="true" scrollHeight="600px"
       [globalFilterFields]="['user.nom','user.prenoms']"
       [loading]="loading"
       styleClass="p-datatable-gridlines"
@@ -121,7 +121,7 @@
               <tr>
                   <td style="min-width:200px" [style]="{color:'#2E5C2F'}">{{pharmacien.user.nom}}</td>
                   <td style="min-width:200px" [style]="{color:'#2E5C2F'}">{{pharmacien.user.prenoms}}</td>
-                  <td style="min-width:200px" [style]="{color:'red'}">{{pharmacien.user.genre}}</td>
+                  <td style="min-width:200px" [style]="{color:'red'}">{{pharmacien.user.genre.libelle}}</td>
                   <td style="min-width:200px" [style]="{color:'#2196F3'}">{{pharmacien.user.email}}</td>
                   <td style="min-width:200px" [style]="{color:'#2196F3'}">{{pharmacien.user.tel}}</td>
                   <td style="min-width:200px" [style]="{color:'#2196F3'}">{{pharmacien.user.tel2}}</td>

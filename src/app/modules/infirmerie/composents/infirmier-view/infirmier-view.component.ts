@@ -213,6 +213,7 @@ export class InfirmierViewComponent implements OnInit {
 			 next: (value: any) => {
 				 this.posts = value.data ? value : [];
 				 this.infirmiers = this.posts.data;
+				 console.log(this.infirmiers)
 			 },
 			 error: (e) => {},
 			 complete: () => {
@@ -242,5 +243,9 @@ export class InfirmierViewComponent implements OnInit {
 			}
 		}
 		this.employeForm = filtered;
+	}
+
+	urlActif():boolean {
+		return this.route.url.includes('admin/infirmerie/liste')
 	}
 }

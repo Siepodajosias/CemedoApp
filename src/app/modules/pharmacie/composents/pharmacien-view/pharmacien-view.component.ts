@@ -115,11 +115,10 @@ export class PharmacienViewComponent implements OnInit {
       });
   }
   pharmacienDetail(a:any){
-    //this.route.navigate(['administrateur/detailM',a]);
     this.pharmacienService.recupererPharmacien().subscribe({})
   }
 
-  saveAsExcelFile(buffer: any, fileName: string): void {
+   saveAsExcelFile(buffer: any, fileName: string): void {
     let EXCEL_TYPE =
       "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
     let EXCEL_EXTENSION = ".xlsx";
@@ -131,16 +130,14 @@ export class PharmacienViewComponent implements OnInit {
       fileName + "_export_" + new Date() + EXCEL_EXTENSION
     );
   }
+   applyFilterGlobal($event:any, stringVal:any) {
+     this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
+    }
 
-applyFilterGlobal($event:any, stringVal:any) {
-  this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
-}
-
-getEventValue($event:any) :string {
+   getEventValue($event:any) :string {
   return $event.target.value;
-} 
-
-toggleLock(data:any, frozen:any, index:any) {
+}
+    toggleLock(data:any, frozen:any, index:any) {
 
     if (frozen) {
         this.lockedCustomers = this.lockedCustomers.filter((c, i) => i !== index);
@@ -154,12 +151,11 @@ toggleLock(data:any, frozen:any, index:any) {
         return val1.id < val2.id ? -1 : 1;
     });
 }
- newPharmacien() {
+    newPharmacien() {
       this.pharmacienForms.reset();
       this.pharmacienDialog = !this.pharmacienDialog;
 }
-
-exportPdf() {
+    exportPdf() {
   const doc = new jspdf.jsPDF('portrait','px','a4') as jsPDFWithPlugin;
         doc.autoTable({
           head:this.exportColumns,
@@ -167,8 +163,7 @@ exportPdf() {
         })
     doc.save("Pomptables.pdf")
 }
-
-exportExcel() {
+    exportExcel() {
 import("xlsx").then(xlsx => {
 const worksheet = xlsx.utils.json_to_sheet(this.pharmaciens);
 const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
@@ -179,8 +174,7 @@ const excelBuffer: any = xlsx.write(workbook, {
 this.saveAsExcelFile(excelBuffer, "pharmaciens");
 });
 }
-
-enregistrerPharmacien(){
+    enregistrerPharmacien(){
     const pharmacien:Pharmacien=new Pharmacien()
     pharmacien.id=null
     pharmacien.email=this.pharmacienForms.get('email')?.value
@@ -208,7 +202,7 @@ enregistrerPharmacien(){
        }
      })
  }
- recupererPharmacien(){
+    recupererPharmacien(){
      this.pharmacienService.recupererPharmacien().subscribe({
          next: (value: any) => {
              this.posts = value.data ? value : []
@@ -232,7 +226,7 @@ enregistrerPharmacien(){
          }
      })
  }
- employeItems(event: any) {
+    employeItems(event: any) {
         let filtered : any[] = [];
         let query = event.query;
         for(let i = 0; i < this.employes.length; i++) {
@@ -242,5 +236,8 @@ enregistrerPharmacien(){
             }
         }
         this.employeForm = filtered;
+    }
+    urlActif():boolean{
+        return this.route.url.includes('/admin/pharmacie/liste')
     }
 }

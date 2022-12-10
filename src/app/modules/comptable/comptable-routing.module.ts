@@ -27,6 +27,22 @@ const routes: Routes = [
     path:'pharmacie',
     loadChildren:()=> import('src/app/modules/pharmacie/pharmacie.module').then((e)=> e.PharmacieModule)
   },
+  {
+    path:'reception',
+    loadChildren:()=> import('src/app/modules/reception/reception.module').then((r)=>r.ReceptionModule)
+  },
+  {
+    path:'logistique',
+    loadChildren:()=>import('src/app/modules/logistique/logistique.module').then((l)=>l.LogistiqueModule)
+  },
+  {
+    path:'informatique',
+    loadChildren:()=>import('src/app/modules/informatique/informatique.module').then((i)=>i.InformatiqueModule)
+  },
+  {
+    path:'infirmerie',
+    loadChildren:()=>import('src/app/modules/infirmerie/infirmerie.module').then((i)=>i.InfirmerieModule)
+  },
   {path:'liste',component:ComptableViewComponent},
   {path:'detail',component:ComptableDetailComponent},
   {path:'**',component:ComptableViewComponent},
