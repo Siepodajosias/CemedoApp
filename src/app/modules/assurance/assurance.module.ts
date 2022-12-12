@@ -17,7 +17,6 @@ import { MatTableModule } from "@angular/material/table";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { AssuranceView2Component } from 'src/app/modules/assurance/composent/assurance-view2/assurance-view2.component';
 import { ResponsableDetailComponent } from 'src/app/modules/assurance/composent/responsable-detail/responsable-detail.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { ChartsModule as chartjsModule } from "ng2-charts";
@@ -50,7 +49,6 @@ import {CalendarModule} from 'primeng/calendar';
     DashboardAssuranceComponent,
     AssuranceViewComponent,
     AssuranceDetailComponent,
-    AssuranceView2Component,
     ResponsableDetailComponent
   ],
   imports: [
