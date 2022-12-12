@@ -10,6 +10,7 @@ import 'jspdf-autotable'
 import { UserOptions } from 'jspdf-autotable';
 import { Table } from 'primeng/table'
 import {PrimeNGConfig} from 'primeng/api';
+import { EmployeService } from 'src/app/shared-cemedo/employe/employe.service';
 
 interface jsPDFWithPlugin extends jspdf.jsPDF{
     autoTable: (options: UserOptions)=> jspdf.jsPDF;
@@ -41,24 +42,19 @@ export class ComptableViewComponent implements OnInit {
   comptableDialog:boolean=false;
  
   comptableForms: FormGroup = new FormGroup({})
-  comptable:Comptable=new Comptable()
   genres:any
+  employes: any[];
+  employeForm: any[];
+
   constructor(private comptableService:ComptableService,
     private route:Router,private messageService:MessageService,
     private comptableForm: FormBuilder,
-    private primeNgConfig: PrimeNGConfig
-) { }
+    private primeNgConfig: PrimeNGConfig,
+    private employeService: EmployeService) { }
 
   ngOnInit(): void {
 
-    this.comptableService.recupererComptable().subscribe({
-      next: (value: any) => {
-        this.posts = value.data ? value : []
-      },
-      error: (e) => {},
-      complete: () => {
-      }
-    })
+    this.recupererComptable();
     this.comptableForms = this.comptableForm.group({
       id:null,
       nom: ['', [Validators.required, Validators.minLength(3)]],
@@ -117,10 +113,9 @@ export class ComptableViewComponent implements OnInit {
       noFilter : 'Pas de filtre',
     });
    }
-  detail(a:any){
+  comptableDetail(a:any){
     this.route.navigate(['administrateur/detailM',a]);
    }
-
   saveAsExcelFile(buffer: any, fileName: string): void {
 
     let EXCEL_TYPE =
@@ -135,16 +130,13 @@ export class ComptableViewComponent implements OnInit {
     );
 
   }
-
-applyFilterGlobal($event:any, stringVal:any) {
+  applyFilterGlobal($event:any, stringVal:any) {
   this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
 }
-
-getEventValue($event:any) :string {
+  getEventValue($event:any) :string {
   return $event.target.value;
-} 
-
-toggleLock(data:any, frozen:any, index:any) {
+}
+  toggleLock(data:any, frozen:any, index:any) {
 
     if (frozen) {
         this.lockedCustomers = this.lockedCustomers.filter((c, i) => i !== index);
@@ -159,16 +151,11 @@ toggleLock(data:any, frozen:any, index:any) {
         return val1.id < val2.id ? -1 : 1;
     });
 }
- newComptable() {
+  newComptable() {
     this.comptableForms.reset();
     this.comptableDialog = !this.comptableDialog;
-    this.genres=[
-      {name:'homme'},
-      {name:'femme'}
-    ]
 }
-
-exportPdf() {
+  exportPdf() {
   const doc = new jspdf.jsPDF('portrait','px','a4') as jsPDFWithPlugin;
         doc.autoTable({
           head:this.exportColumns,
@@ -176,8 +163,7 @@ exportPdf() {
         })
     doc.save("Pomptables.pdf")
 }
-
-exportExcel() {
+  exportExcel() {
 import("xlsx").then(xlsx => {
 const worksheet = xlsx.utils.json_to_sheet(this.comptables);
 const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
@@ -188,48 +174,71 @@ const excelBuffer: any = xlsx.write(workbook, {
 this.saveAsExcelFile(excelBuffer, "personne");
 });
 }
+  enregistrerComptable(){
+  const comptable:Comptable=new Comptable()
+  comptable.id=null
+  comptable.email=this.comptableForms.get('email')?.value
+  comptable.password=this.comptableForms.get('password')?.value
+  comptable.nom=this.comptableForms.get('nom')?.value
+  comptable.prenoms=this.comptableForms.get('prenoms')?.value
+  comptable.login=this.comptableForms.get('login')?.value
+  comptable.dateNaissance=this.comptableForms.get('dateNaissance')?.value
+  const valeurGenre=this.comptableForms.get('genre')?.value
+  const valeurEmploye=this.comptableForms.get('typeEmploye')?.value
+  comptable.genre=valeurGenre.id
+  comptable.typeEmploye=valeurEmploye.id
+  comptable.tel=this.comptableForms.get('tel')?.value
+  comptable.tel2=this.comptableForms.get('tel')?.value
+  comptable.fcmToken=""
+  comptable.role=null
 
-enregistrerComptable(){
-  this.comptable.id=null
-  this.comptable.email=this.comptableForms.get('email')?.value
-  this.comptable.password=this.comptableForms.get('password')?.value
-  this.comptable.nom=this.comptableForms.get('nom')?.value
-  this.comptable.prenoms=this.comptableForms.get('prenoms')?.value
-  this.comptable.login=this.comptableForms.get('login')?.value
-  this.comptable.dateNaissance=this.comptableForms.get('dateNaissance')?.value
-  let val=this.comptableForms.get('genre')?.value
-  this.comptable.genre=val.name
-  this.comptable.tel=this.comptableForms.get('tel')?.value
-  this.comptable.tel2=this.comptableForms.get('tel')?.value
-
-  this.comptable.fcmToken=""
-  this.comptable.typeEmploye=null
-  this.comptable.role=null
-
- this.comptableService.enregistrerComptable(this.comptable).subscribe({
+ this.comptableService.enregistrerComptable(comptable).subscribe({
     next:(v)=>{
-      this.messageService.add({severity: 'success', summary: 'Service Message', detail: 'Assurance enregistrée' });
+      this.messageService.add({severity: 'success', summary: 'Service Message', detail: 'Le comptable a été enregistré' });
+      this.comptableForms.reset();
   },
-    error:(e)=>{
-
-    },
+    error:(e)=>{},
     complete:()=>{
-      this.comptableForms.setValue({
-        id:null,
-        email:"",
-        password:"",
-        nom:"",
-        prenoms:"",
-        tel:"",
-        tel2:"",
-        genre:"",
-        dateNaissance:"",
-        login:"",
-        role:"",
-        fcmToken:"",
-        typeEmploye:null,
-      })
+      this.recupererComptable();
+      this.comptableDialog=false;
     }
   })
  }
+  recupererComptable(){
+    this.comptableService.recupererComptable().subscribe({
+      next:(value)=>{
+        const data=value.data;
+        this.comptables=data ? data : [];
+      },complete:()=>{
+        this.loading=false
+      }
+    })
+    this.employeService.recupererTypeEmploye().subscribe({
+     next:(value)=>{
+       const data=value.data;
+       this.employes=data ? data : [];
+     }
+   })
+    this.employeService.recupererGenre().subscribe({
+     next:(value)=>{
+       const data=value.data;
+       this.genres=data ? data : [];
+     }
+   })
+ }
+  employeItems(event: any) {
+    let filtered : any[] = [];
+    let query = event.query;
+    for(let i = 0; i < this.employes.length; i++) {
+      let item = this.employes[i];
+      if (item.libelle.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+        filtered.push(item);
+      }
+    }
+    this.employeForm = filtered;
+  }
+
+  urlActif():boolean {
+    return this.route.url.includes('admin/comptable/liste')
+  }
 }

@@ -59,7 +59,6 @@
 							<div class="left">
 								<button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom"></button>
 								<button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning mr-4" pTooltip="PDF" tooltipPosition="bottom"></button>
-								<button *ngIf="urlActif()" pButton pRipple label="Créer un rendez-vous" icon="pi pi-plus" class="p-button-help" (click)="newRDV()"></button>
 							</div>
 
 							<span class="p-input-icon-left">
@@ -85,7 +84,7 @@
 							<th pSortableColumn="patient">Patient
 								<p-sortIcon field="patient"></p-sortIcon>
 							</th>
-							<th></th>
+							<th>Actions</th>
 						</tr>
 						<tr>
 							<th>
@@ -132,6 +131,7 @@
 									</ng-template>
 								</p-columnFilter>
 							</th>
+							<th></th>
 						</tr>
 					</ng-template>
 					<ng-template pTemplate="body" let-rdv let-index="rowIndex">
@@ -140,8 +140,7 @@
 							<td style="min-width:200px">{{rdv.daterdv}}</td>
 							<td style="min-width:200px">{{rdv.medecin}}</td>
 							<td style="min-width:200px">{{rdv.patient}}</td>
-
-							<td style="flex: 0 0 4rem">
+							<td>
 								<button pButton pRipple type="button" icon="pi pi-angle-right" (click)="toggleLock(rdv,false,index)"
 										class="p-button-rounded p-button-text"
 								></button>
@@ -151,6 +150,7 @@
 					<ng-template pTemplate="summary">
 						<div class="flex align-items-center justify-content-between">
 							Total: {{rdvs ? rdvs.length : 0 }} Rendez-vous
+							<button *ngIf="urlActif()" pButton pRipple label="Créer un rendez-vous" icon="pi pi-plus" class="p-button-help" (click)="newRDV()"></button>
 						</div>
 					</ng-template>
 				</p-table>

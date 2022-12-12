@@ -12,7 +12,7 @@
                   <div class="flex justify-content-between mb-3">
                       <div>
                           <span class="block text-500 font-medium mb-3">Facture</span>
-                          <div class="text-900 font-medium text-xl">300</div>
+                          <div class="text-900 font-medium text-xl">7200</div>
                       </div>
                       <div class="flex align-items-center justify-content-center bg-blue-100 border-round" style="width:2.5rem;height:2.5rem">
                           <i class="pi pi-users text-blue-500 text-xl"></i>
@@ -56,7 +56,7 @@
               <div class="surface-card shadow-2 p-3 border-round">
                   <div class="flex justify-content-between mb-3">
                       <div>
-                          <span class="block text-500 font-medium mb-3">Achats</span>
+                          <span class="block text-500 font-medium mb-3">Dépenses</span>
                           <div class="text-900 font-medium text-xl">10</div>
                       </div>
                       <div class="flex align-items-center justify-content-center bg-purple-100 border-round" style="width:2.5rem;height:2.5rem">
@@ -104,7 +104,7 @@
               <div class="surface-card shadow-2 p-3 border-round">
                   <div class="flex justify-content-between mb-3">
                       <div>
-                          <span class="block text-500 font-medium mb-3">Categories</span>
+                          <span class="block text-500 font-medium mb-3">Categories de medicament</span>
                           <div class="text-900 font-medium text-xl">50</div>
                       </div>
                       <div class="flex align-items-center justify-content-center bg-cyan-100 border-round" style="width:2.5rem;height:2.5rem">
@@ -130,102 +130,53 @@
           </div>
       </div>
     </div>
-    <div class="surface-ground px-4 py-5 md:px-6 lg:px-8">
-      <div class="grid">
-          <div class="col-12 md:col-6 lg:col-4">
-              <div class="surface-card shadow-2 p-3 border-round">
+      <div class="surface-ground px-4 py-5 md:px-6 lg:px-8">
+          <div class="grid">
+              <div class="col-12 md:col-12 lg:col-12">
+                  <div class="surface-card shadow-4 p-3 border-round">
+                      <div class="flex justify-content-between mb-3">
+                          <div class="col-12 md:col-6 lg:col-7">
 
-                <div class="float-start">
-                  <h6 class="text-muted">Resting Heart Rate</h6>
-                  <h5>72 bmp <span class="text-muted font-12">(Average)</span></h5>
-                </div>
-                <div class="mb-5">
-                  <apx-chart [series]="restRateChartOptions.series" [chart]="restRateChartOptions.chart"
-                    [xaxis]="restRateChartOptions.xaxis" [stroke]="restRateChartOptions.stroke"
-                    [colors]="restRateChartOptions.colors" [dataLabels]="restRateChartOptions.dataLabels"
-                    [legend]="restRateChartOptions.legend" [markers]="restRateChartOptions.markers"
-                    [grid]="restRateChartOptions.grid" [yaxis]="restRateChartOptions.yaxis"
-                    [tooltip]="restRateChartOptions.tooltip" [title]="restRateChartOptions.title"></apx-chart>
-                </div>
+                              <div class="header">
+                                  <h2>Sondage</h2>
+                              </div>
+                              <div class="body">
+                                  <apx-chart [series]="areaChartOptions.series" [chart]="areaChartOptions.chart"
+                                             [xaxis]="areaChartOptions.xaxis" [yaxis]="areaChartOptions.yaxis" [colors]="areaChartOptions.colors"
+                                             [stroke]="areaChartOptions.stroke" [legend]="areaChartOptions.legend" [tooltip]="areaChartOptions.tooltip"
+                                             [dataLabels]="areaChartOptions.dataLabels"></apx-chart>
+                              </div>
 
-              </div>
-          </div>
-          <div class="col-12 md:col-6 lg:col-4">
-              <div class="surface-card shadow-2 p-3 border-round">
-                <div class="float-start">
-                  <h6 class="text-muted">Performance Heart Rate</h6>
-                  <h5>129 bmp <span class="text-muted font-12">(Average)</span></h5>
-                </div>
-                <div class="mb-5">
-                  <apx-chart [series]="performanceRateChartOptions.series" [chart]="performanceRateChartOptions.chart"
-                    [xaxis]="performanceRateChartOptions.xaxis" [stroke]="performanceRateChartOptions.stroke"
-                    [colors]="performanceRateChartOptions.colors" [dataLabels]="performanceRateChartOptions.dataLabels"
-                    [legend]="performanceRateChartOptions.legend" [markers]="performanceRateChartOptions.markers"
-                    [grid]="performanceRateChartOptions.grid" [yaxis]="performanceRateChartOptions.yaxis"
-                    [tooltip]="performanceRateChartOptions.tooltip" [title]="performanceRateChartOptions.title"></apx-chart>
-                </div>
-              </div>
-          </div>
-          <div class="col-12 md:col-6 lg:col-4">
-              <div class="surface-card shadow-2 p-3 border-round">
-                <div class="header">
-                  <h2>Medications</h2>
-                </div>
-                <div class="body">
-                  <div class="table-responsive">
-                    <table class="table table-borderless medicine-list">
-                      <tr>
-                        <td><i class="fas fa-tablets pill-style"></i> Econochlor (chloramphenicol-oral)</td>
-                        <td class="text-end w-25">
-                          <span class="badge-outline">1 - 0 - 1</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><i class="fas fa-capsules pill-style"></i> Desmopressin tabs</td>
-                        <td class="text-end w-25">
-                          <span class="badge-outline">1 - 1 - 1</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><i class="fas fa-syringe pill-style"></i> Abciximab-injection</td>
-                        <td class="text-end w-25">
-                          <span class="badge-outline">1 Daily</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><i class="fas fa-pills pill-style"></i> Kevzara sarilumab</td>
-                        <td class="text-end w-25">
-                          <span class="badge-outline">0 - 0 - 1</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><i class="fas fa-capsules pill-style"></i> Gentamicin-topical</td>
-                        <td class="text-end w-25">
-                          <span class="badge-outline">1 - 0 - 1</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><i class="fas fa-tablets pill-style"></i> Paliperidone palmitate</td>
-                        <td class="text-end w-25">
-                          <span class="badge-outline">1 - 1 - 1</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><i class="fas fa-syringe pill-style"></i> Sermorelin-injectable</td>
-                        <td class="text-end w-25">
-                          <span class="badge-outline">1 Daily</span>
-                        </td>
-                      </tr>
-                    </table>
+                          </div>
+                          <div class="col-12 md:col-6 lg:col-5">
+
+                              <div class="header">
+                                  <h2>Rapport sur les services</h2>
+                              </div>
+                              <div class="body">
+                                  <apx-chart [series]="radialChartOptions.series" [chart]="radialChartOptions.chart"
+                                             [plotOptions]="radialChartOptions.plotOptions" [labels]="radialChartOptions.labels"></apx-chart>
+                                  <div class="text-center p-t-20">
+                                      <div class="chart-note">
+                                          <span class="dot bg-indigo"></span>
+                                          <span>Vente</span>
+                                      </div>
+                                      <div class="chart-note msr-0">
+                                          <span class="dot bg-green"></span>
+                                          <span>Dépense</span>
+                                      </div>
+                                  </div>
+                                  <div class="text-center p-t-20">
+                                      <button mat-stroked-button color="primary">Modify Availability</button>
+                                  </div>
+                              </div>
+
+                          </div>
+                      </div>
                   </div>
-                  <div class="text-center p-t-20">
-                    <button mat-stroked-button color="primary">Report Adverse Effect</button>
-                  </div>
-                </div>
               </div>
           </div>
       </div>
-    </div>
+
   </div>
   </section>
-  

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComponentsModule } from "src/app/shared/components/components.module";
-import { HttpClientModule } from "@angular/common/http";
 import { ComptableRoutingModule } from 'src/app/modules/comptable/comptable-routing.module';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
@@ -42,6 +41,8 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { CalendarModule } from 'primeng/calendar';
 import { SpeedDialModule } from 'primeng/speeddial';
 import { MenuModule } from 'primeng/menu';
+import { HttpClientModule } from '@angular/common/http';
+import { EmployeModule } from 'src/app/shared-cemedo/employe/employe.module';
 
 
 @NgModule({
@@ -51,7 +52,6 @@ import { MenuModule } from 'primeng/menu';
   ],
   imports: [
     CommonModule,
-    HttpClientModule,
     MatCardModule,
     MatTableModule ,
     MatDialogModule,
@@ -88,9 +88,9 @@ import { MenuModule } from 'primeng/menu';
     ToolbarModule,
     CalendarModule,
     SpeedDialModule,
-    MenuModule
-    
-
+    MenuModule,
+    HttpClientModule,
+    EmployeModule
   ], providers: [ComptableService,MessageService,ConfirmationService]
 })
 export class ComptableModule { }

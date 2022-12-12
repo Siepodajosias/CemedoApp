@@ -10,6 +10,8 @@ import { MedecinCalendrierComponent } from 'src/app/modules/medecin/composents/m
 import { FactureComponent } from 'src/app/modules/medecin/composents/facture/facture.component';
 import { RendezVousCalendrierComponent } from 'src/app/modules/medecin/composents/rendez-vous-calendrier/rendez-vous-calendrier.component';
 import { RendezVousViewComponent } from 'src/app/modules/medecin/composents/rendez-vous-view/rendez-vous-view.component';
+import { ProgrammeComponent } from 'src/app/modules/medecin/composents/programme/programme.component';
+import { VacanceComponent } from 'src/app/modules/medecin/composents/vacance/vacance.component';
 
 const routes: Routes = [
   {path: 'dashboard',component:DashboardMedecinComponent},
@@ -21,6 +23,8 @@ const routes: Routes = [
   {path:'facture',component:FactureComponent},
   {path:'Rdv',component:RendezVousViewComponent},
   {path:'RdvCalendrier',component:RendezVousCalendrierComponent},
+  {path:'programme',component:ProgrammeComponent},
+  {path:'vacance',component:VacanceComponent},
   {path:'patient',loadChildren:()=>import('src/app/modules/patient/patient.module').then((e)=>e.PatientModule)},
   {
     path: 'assurance',

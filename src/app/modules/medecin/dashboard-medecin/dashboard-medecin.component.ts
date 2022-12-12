@@ -60,78 +60,11 @@ export class DashboardMedecinComponent implements OnInit {
   public  sidenav;
   constructor() {}
 
-  // TODO start
-  tasks = [
-    {
-      id: '1',
-      title: 'Check patient report',
-      done: true,
-      priority: 'High',
-    },
-    {
-      id: '2',
-      title: 'Request for festivle holiday',
-      done: false,
-      priority: 'High',
-    },
-    {
-      id: '3',
-      title: 'Order new medicine stock',
-      done: false,
-      priority: 'Low',
-    },
-    {
-      id: '4',
-      title: 'Remind for lunch in hotel',
-      done: true,
-      priority: 'Normal',
-    },
-    {
-      id: '5',
-      title: 'Conference in london',
-      done: false,
-      priority: 'High',
-    },
-    {
-      id: '6',
-      title: 'Announcement for',
-      done: false,
-      priority: 'Normal',
-    },
-    {
-      id: '7',
-      title: 'call bus driver',
-      done: true,
-      priority: 'High',
-    },
-    {
-      id: '8',
-      title: 'Web service data load issue',
-      done: false,
-      priority: 'High',
-    },
-    {
-      id: '9',
-      title: 'Java compile error',
-      done: false,
-      priority: 'Low',
-    },
-    {
-      id: '10',
-      title: 'Integrate project with spring boot',
-      done: true,
-      priority: 'High',
-    },
-  ];
 
-  drop(event: CdkDragDrop<string[]> | any) {
-    moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
-  }
 
-  toggle(task, nav: any) {
-    task.done = !task.done;
-  }
-  // TODO end
+
+
+
 
   ngOnInit() {
     this.chart1();

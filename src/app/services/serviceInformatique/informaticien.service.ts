@@ -5,6 +5,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class InformaticienService {
-  private config:string="https://cemedo-api-java.herokuapp.com/"
+  private config:string="http://38.242.229.12"
   constructor(private httpInfor:HttpClient) { }
 }

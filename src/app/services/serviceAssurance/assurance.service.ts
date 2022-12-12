@@ -8,32 +8,23 @@ import { Responsable } from 'src/app/models/modelAssurance/responsable';
   providedIn: 'root'
 })
 export class AssuranceService {
-  private config:string="http://38.242.229.12:80/assurances/"
-  private config2:string="http://38.242.229.12:80/employe/responsableAssurance/"
+  private config:string="http://38.242.229.12/assurances/"
+  private config2:string="http://38.242.229.12/employe/responsableAssurance/"
   constructor(private httpAssu:HttpClient) { }
   
   //ressource assurance
   recupererAssurance():Observable<any>{
-    return this.httpAssu.get<any>(this.config,{
-      headers:new HttpHeaders({'Content-Type':'application/json'})
-    })
+    return this.httpAssu.get<any>(this.config)
   }
   enregistrerAssurance(assu:any):Observable<Assurance>{
-    return this.httpAssu.post<Assurance>(this.config+"create",assu,{
-      headers:new HttpHeaders({'Content-Type':'application/json'})
-    })
+    return this.httpAssu.post<Assurance>(this.config+"create",assu)
   }
   recupererAssuranceById(a:number):Observable<any>{
-    return this.httpAssu.get<any>(this.config+"getOne/"+a,
-    {
-      headers:new HttpHeaders({'Content-Type':'application/json'})
-    }
-    )
+    return this.httpAssu.get<any>(this.config+"getOne/"+a)
   }
   supprimerAssurance(e:number):Observable<any>{
   return this.httpAssu.delete(this.config+"/"+e)
   }
-
 
     //ressource responsable
     recupererResponsable():Observable<any>{

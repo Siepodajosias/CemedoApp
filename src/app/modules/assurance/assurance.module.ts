@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComponentsModule } from "src/app/shared/components/components.module";
-import { HttpClientModule } from "@angular/common/http"
 import { MatIconModule } from "@angular/material/icon";
 import { MatTabsModule } from "@angular/material/tabs";
 import { NgApexchartsModule } from "ng-apexcharts";
@@ -43,6 +42,7 @@ import { DividerModule } from 'primeng/divider';
 import { MenubarModule } from 'primeng/menubar';
 import { ToolbarModule } from 'primeng/toolbar';
 import {CalendarModule} from 'primeng/calendar';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -53,7 +53,6 @@ import {CalendarModule} from 'primeng/calendar';
   ],
   imports: [
     CommonModule,
-    HttpClientModule,
     AssuranceRoutingModule,
     ComponentsModule,
     MatIconModule,
@@ -73,6 +72,7 @@ import {CalendarModule} from 'primeng/calendar';
     MatTableModule ,
     MatDialogModule,
     MatPaginatorModule,
+    HttpClientModule,
 
     CardModule,
     TableModule,

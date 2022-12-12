@@ -8,8 +8,8 @@ import { Pharmacien } from 'src/app/models/modelPharmacie/pharmacien';
   providedIn: 'root'
 })
 export class PharmacienService {
-  private config:string="http://38.242.229.12:80/employe/pharmacien"
-  private config2:string="http://38.242.229.12:80/medicaments"
+  private config:string="http://38.242.229.12/employe/pharmacien"
+  private config2:string="http://38.242.229.12/medicaments"
   constructor(private httpPhar:HttpClient) { }
 
   //pharmacien ressource
