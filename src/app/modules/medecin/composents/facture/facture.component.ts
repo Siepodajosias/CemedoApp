@@ -11,5 +11,7 @@ export class FactureComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  salu(){
+    alert('salut')
+  }
 }

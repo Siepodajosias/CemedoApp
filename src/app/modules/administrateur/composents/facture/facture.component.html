@@ -56,13 +56,11 @@
               <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="card card-statistic-2">
                   <div class="clearfix">
-
                     <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
                       [dataLabels]="chartOptions.dataLabels" [plotOptions]="chartOptions.plotOptions"
                       [responsive]="chartOptions.responsive" [xaxis]="chartOptions.xaxis"
                       [tooltip]="chartOptions.tooltip" [legend]="chartOptions.legend" [fill]="chartOptions.fill">
                     </apx-chart>
-
                   </div>
                 </div>
               </div>
@@ -89,112 +87,6 @@
                       FCFA
                     </p>
                     <p class="font-weight-bold float-end mb-0">Prix unitaire : 7 407 fcfa</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <div class="card">
-                  <div class="body">
-                    <div class="row">
-                      <div class="col-md-12 col-xl-12">
-                        <div class="row">
-                          <div class="col-md-4">
-                            <h5 class="tx-primary m-b-30">Services</h5>
-                            <div class="progress-list m-b-10">
-                              <div class="details">
-                                <div class="title">Consultation à domicile</div>
-                              </div>
-                              <div class="status">
-                                <span>6.3</span>%
-                              </div>
-                              <div class="progress-xs not-rounded progress">
-                                <div class="progress-bar progress-bar-warning width-per-40" role="progressbar"
-                                  aria-valuenow="6.3" aria-valuemax="100">
-                                  <span class="sr-only">6.3%</span>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="progress-list m-b-10">
-                              <div class="details">
-                                <div class="title">Appels Téléphonique</div>
-                              </div>
-                              <div class="status">
-                                <span>9</span>%
-                              </div>
-                              <div class="progress-xs not-rounded progress">
-                                <div class="progress-bar progress-bar-danger width-per-49" role="progressbar"
-                                  aria-valuenow="9" aria-valuemax="100">
-                                  <span class="sr-only">9%</span>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="progress-list m-b-10">
-                              <div class="details">
-                                <div class="title">Chats</div>
-                              </div>
-                              <div class="status">
-                                <span>84.7</span>%
-                              </div>
-                              <div class="progress-xs not-rounded progress">
-                                <div class="progress-bar progress-bar-blue width-per-65" role="progressbar"
-                                  aria-valuenow="84.7" aria-valuemax="100">
-                                  <span class="sr-only">84.7%</span>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="progress-list m-b-10">
-                              <div class="details">
-                                <div class="title">Examen</div>
-                              </div>
-                              <div class="status">
-                                <span>25</span>%
-                              </div>
-                              <div class="progress-xs not-rounded progress">
-                                <div class="progress-bar progress-bar-success width-per-28" role="progressbar"
-                                  aria-valuenow="28" aria-valuemin="0" aria-valuemax="100">
-                                  <span class="sr-only">25%</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-4 mt-3">
-                            <!-- chart [chartType]="doughnutChartType"-->
-                            <div class="recent-report__chart">
-                              <canvas baseChart class="chart" [data]="doughnutChartData" [labels]="doughnutChartLabels"
-                                [options]="doughnutChartOptions" [legend]="doughnutChartLegend" chartType="doughnut"
-                                [colors]="doughnutChartColors"></canvas>
-                            </div>
-                          </div>
-                          <div class="col-md-4 mt-3">
-                            <div class="country-chart">
-                              <div class="d-flex justify-content-between mx-xl-5 mt-3">
-                                <div class="chart-note">
-                                  <span class="dot dot-product bg-green"></span>
-                                  <span>Chat</span>
-                                </div>
-                                <p class="mb-0">10 000 000 FCFA</p>
-                              </div>
-                              <div class="d-flex justify-content-between mx-xl-5 mt-3">
-                                <div class="chart-note">
-                                  <span class="dot dot-product bg-orange"></span>
-                                  <span>Appel Téléphonique</span>
-                                </div>
-                                <p class="mb-0">7 000 000 FCFA</p>
-                              </div>
-                              <div class="d-flex justify-content-between mx-xl-5 mt-3">
-                                <div class="chart-note">
-                                  <span class="dot dot-product bg-purple"></span>
-                                  <span>Consultation</span>
-                                </div>
-                                <p class="mb-0">20 000 000 FCFA</p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -682,6 +574,199 @@
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="surface-ground px-4 py-5 md:px-6 lg:px-8">
+      <div class="grid">
+        <div class="col-12 md:col-6 lg:col-6">
+          <div class="grid">
+            <div class="col-12 md:col-6 lg:col-6">
+              <div class="shadow-4 p-3 border-round" [style]="{'background-color':'green'}">
+                <div class="flex justify-content-between mb-3">
+                  <div>
+                    <span class="block text-500 font-medium mb-3  text-cyan-50">Revenu Total:</span>
+                    <div class="text-900 font-medium text-xl  text-cyan-50">37 000 000 FCFA</div>
+                  </div>
+                  <div class="flex align-items-center justify-content-center  bg-white-100 border-round" style="width:2.5rem;height:2.5rem">
+                    <i class="pi pi-window-minimize text-cyan-50 text-xl"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 md:col-6 lg:col-6">
+              <div class="shadow-4 p-3 border-round" [style]="{'background-color':'green'}">
+                <div class="flex justify-content-between mb-3">
+                  <div>
+                    <span class="block text-500 font-medium mb-3  text-cyan-50">Consultation à domicile</span>
+                  </div>
+                  <div class="flex align-items-center justify-content-center  bg-white-100 border-round" style="width:2.5rem;height:2.5rem">
+                    <i class="pi pi-window-minimize text-cyan-50 text-xl"></i>
+                  </div>
+                </div>
+                <div class="flex justify-content-between mb-3">
+                  <div>
+                    <span class="text-green-50 font-medium mr-7">152</span>
+                    <span class="text-green-50 font-medium">Montant: 20 00 000 FCFA</span>
+                  </div>
+                </div>
+                <span class="text-cyan-50">Prix unitaire: 30 772 fcfa</span>
+              </div>
+            </div>
+            <div class="col-12 md:col-6 lg:col-6">
+              <div class="shadow-4 p-3 border-round" [style]="{'background-color':'green'}">
+                <div class="flex justify-content-between mb-3">
+                  <div>
+                    <span class="block text-500 font-medium mb-3  text-cyan-50">Appels vidéo</span>
+                    <div class="text-900 font-medium text-xl  text-cyan-50">152</div>
+                  </div>
+                  <div class="flex align-items-center justify-content-center  bg-white-100 border-round" style="width:2.5rem;height:2.5rem">
+                    <i class="pi pi-window-minimize text-cyan-50 text-xl"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 md:col-6 lg:col-6">
+              <div class="shadow-4 p-3 border-round" [style]="{'background-color':'green'}">
+                <div class="flex justify-content-between mb-3">
+                  <div>
+                    <span class="block text-500 font-medium mb-3  text-cyan-50">Appels téléphonique</span>
+                    <div class="text-900 font-medium text-xl  text-cyan-50">152</div>
+                  </div>
+                  <div class="flex align-items-center justify-content-center  bg-white-100 border-round" style="width:2.5rem;height:2.5rem">
+                    <i class="pi pi-window-minimize text-cyan-50 text-xl"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 md:col-6 lg:col-6">
+              <div class="shadow-4 p-3 border-round" [style]="{'background-color':'green'}">
+                <div class="flex justify-content-between mb-3">
+                  <div>
+                    <span class="block text-500 font-medium mb-3  text-cyan-50">Chats</span>
+                    <div class="text-900 font-medium text-xl  text-cyan-50">152</div>
+                  </div>
+                  <div class="flex align-items-center justify-content-center  bg-white-100 border-round" style="width:2.5rem;height:2.5rem">
+                    <i class="pi pi-window-minimize text-cyan-50 text-xl"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 md:col-6 lg:col-6">
+              <div class="shadow-4 p-3 border-round" [style]="{'background-color':'green'}">
+                <div class="flex justify-content-between mb-3">
+                  <div>
+                    <span class="block text-500 font-medium mb-3  text-cyan-50">Rendez-vous</span>
+                    <div class="text-900 font-medium text-xl  text-cyan-50">152</div>
+                  </div>
+                  <div class="flex align-items-center justify-content-center  bg-white-100 border-round" style="width:2.5rem;height:2.5rem">
+                    <i class="pi pi-window-minimize text-cyan-50 text-xl"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 md:col-6 lg:col-6">
+          <div class="clearfix">
+            <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
+              [dataLabels]="chartOptions.dataLabels" [plotOptions]="chartOptions.plotOptions"
+              [responsive]="chartOptions.responsive" [xaxis]="chartOptions.xaxis"
+              [tooltip]="chartOptions.tooltip" [legend]="chartOptions.legend" [fill]="chartOptions.fill">
+            </apx-chart>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <h5 class="tx-primary m-b-30">Services</h5>
+          <div class="progress-list m-b-10">
+            <div class="details">
+              <div class="title">Consultation à domicile</div>
+            </div>
+            <div class="status">
+              <span>6.3</span>%
+            </div>
+            <div class="progress-xs not-rounded progress">
+              <div class="progress-bar progress-bar-warning width-per-40" role="progressbar"
+                aria-valuenow="6.3" aria-valuemax="100">
+                <span class="sr-only">6.3%</span>
+              </div>
+            </div>
+          </div>
+          <div class="progress-list m-b-10">
+            <div class="details">
+              <div class="title">Appels Téléphonique</div>
+            </div>
+            <div class="status">
+              <span>9</span>%
+            </div>
+            <div class="progress-xs not-rounded progress">
+              <div class="progress-bar progress-bar-danger width-per-49" role="progressbar"
+                aria-valuenow="9" aria-valuemax="100">
+                <span class="sr-only">9%</span>
+              </div>
+            </div>
+          </div>
+          <div class="progress-list m-b-10">
+            <div class="details">
+              <div class="title">Chats</div>
+            </div>
+            <div class="status">
+              <span>84.7</span>%
+            </div>
+            <div class="progress-xs not-rounded progress">
+              <div class="progress-bar progress-bar-blue width-per-65" role="progressbar"
+                aria-valuenow="84.7" aria-valuemax="100">
+                <span class="sr-only">84.7%</span>
+              </div>
+            </div>
+          </div>
+          <div class="progress-list m-b-10">
+            <div class="details">
+              <div class="title">Examen</div>
+            </div>
+            <div class="status">
+              <span>25</span>%
+            </div>
+            <div class="progress-xs not-rounded progress">
+              <div class="progress-bar progress-bar-success width-per-28" role="progressbar"
+                aria-valuenow="28" aria-valuemin="0" aria-valuemax="100">
+                <span class="sr-only">25%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mt-3">
+          <!-- chart [chartType]="doughnutChartType"-->
+          <div class="recent-report__chart">
+            <canvas baseChart class="chart" [data]="doughnutChartData" [labels]="doughnutChartLabels"
+              [options]="doughnutChartOptions" [legend]="doughnutChartLegend" chartType="doughnut"
+              [colors]="doughnutChartColors"></canvas>
+          </div>
+        </div>
+        <div class="col-md-4 mt-3">
+          <div class="country-chart">
+            <div class="d-flex justify-content-between mx-xl-5 mt-3">
+              <div class="chart-note">
+                <span class="dot dot-product bg-green"></span>
+                <span>Chat</span>
+              </div>
+              <p class="mb-0">10 000 000 FCFA</p>
+            </div>
+            <div class="d-flex justify-content-between mx-xl-5 mt-3">
+              <div class="chart-note">
+                <span class="dot dot-product bg-orange"></span>
+                <span>Appel Téléphonique</span>
+              </div>
+              <p class="mb-0">7 000 000 FCFA</p>
+            </div>
+            <div class="d-flex justify-content-between mx-xl-5 mt-3">
+              <div class="chart-note">
+                <span class="dot dot-product bg-purple"></span>
+                <span>Consultation</span>
+              </div>
+              <p class="mb-0">20 000 000 FCFA</p>
             </div>
           </div>
         </div>

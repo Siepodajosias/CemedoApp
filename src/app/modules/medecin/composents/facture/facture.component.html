@@ -1,1 +1,115 @@
-<p>facture works!</p>
+<section class="content">
+    <div class="content-block">
+      <div class="block-header">
+        <!-- breadcrumb -->
+        <app-breadcrumb [title]="'Facture'" [items]="[]" [active_item]="'Créer une facture'"></app-breadcrumb>
+      </div>
+  
+      <div class="surface-ground px-4 py-5 md:px-6 lg:px-8">
+        <div class="grid">
+            <div class="col-12 md:col-6 lg:col-3">
+                <div class="surface-card shadow-2 p-3 border-round hover:surface-300" (click)="salu()">
+                    <div class="flex justify-content-between mb-3">
+                        <div>
+                            <span class="block text-500 font-medium mb-3">Rendez-vous</span>
+                        </div>
+                        <div class="flex align-items-center justify-content-center bg-blue-100 border-round" style="width:2.5rem;height:2.5rem">
+                            <i class="pi pi-users text-blue-500 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 md:col-6 lg:col-3">
+                <div class="surface-card shadow-4 p-3 border-round hover:surface-300" (click)="salu()">
+                    <div class="flex justify-content-between mb-3">
+                        <div>
+                            <span class="block text-500 font-medium mb-3">Appels vidéos</span>
+                        </div>
+                        <div class="flex align-items-center justify-content-center bg-orange-100 border-round" style="width:2.5rem;height:2.5rem">
+                            <i class="pi pi-video text-orange-500 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 md:col-6 lg:col-3">
+                <div class="surface-card shadow-4 p-3 border-round hover:surface-300" (click)="salu()">
+                    <div class="flex justify-content-between mb-3">
+                        <div>
+                            <span class="block text-500 font-medium mb-3">Appels téléphonique</span>
+                        </div>
+                        <div class="flex align-items-center justify-content-center bg-cyan-100 border-round" style="width:2.5rem;height:2.5rem">
+                            <i class="pi pi-phone text-cyan-500 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 md:col-6 lg:col-3">
+                <div class="surface-card shadow-4 p-3 border-round hover:surface-300" (click)="salu()">
+                    <div class="flex justify-content-between mb-3">
+                        <div>
+                            <span class="block text-500 font-medium mb-3">Consultations à domicile</span>
+                        </div>
+                        <div class="flex align-items-center justify-content-center bg-purple-100 border-round" style="width:2.5rem;height:2.5rem">
+                            <i class="pi pi-sync text-purple-500 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="surface-ground px-4 py-5 md:px-6 lg:px-8">
+        <div class="grid">
+            <div class="col-12 md:col-6 lg:col-3">
+                <div class="surface-card shadow-4 p-3 border-round hover:surface-300" (click)="salu()">
+                    <div class="flex justify-content-between mb-3">
+                        <div>
+                            <span class="block text-500 font-medium mb-3">Chat</span>
+                        </div>
+                        <div class="flex align-items-center justify-content-center bg-blue-100 border-round" style="width:2.5rem;height:2.5rem">
+                            <i class="pi pi-credit-card text-blue-500 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 md:col-6 lg:col-3">
+                <div class="surface-card shadow-4 p-3 border-round hover:surface-300" (click)="salu()">
+                    <div class="flex justify-content-between mb-3">
+                        <div>
+                            <span class="block text-500 font-medium mb-3">Examen</span>
+                        </div>
+                        <div class="flex align-items-center justify-content-center bg-orange-100 border-round" style="width:2.5rem;height:2.5rem">
+                            <i class="pi pi-map-marker text-orange-500 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 md:col-6 lg:col-3">
+                <div class="surface-card shadow-4 p-3 border-round hover:surface-300" (click)="salu()">
+                    <div class="flex justify-content-between mb-3">
+                        <div>
+                            <span class="block text-500 font-medium mb-3">Hospitalisation à domicile</span>
+                        </div>
+                        <div class="flex align-items-center justify-content-center bg-cyan-100 border-round" style="width:2.5rem;height:2.5rem">
+                            <i class="pi pi-inbox text-cyan-500 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 md:col-6 lg:col-3">
+                <div class="surface-card shadow-4 p-3 border-round hover:surface-300" (click)="salu()"> 
+                    <div class="flex justify-content-between mb-3">
+                        <div>
+                            <span class="block text-500 font-medium mb-3">Tests de laboratoire</span>
+                        </div>
+                        <div class="flex align-items-center justify-content-center bg-purple-100 border-round" style="width:2.5rem;height:2.5rem">
+                            <i class="pi pi-comment text-purple-500 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+  </section>
+  

@@ -380,11 +380,11 @@ export const ROUTES: RouteInfo[] = [
   },
   // Common Modules medécin
   {
-    path: "",
+    path: "/doctor/facture",
     title: "Facture",
     moduleName: "",
     iconType: "material-icons-two-tone",
-    icon: "event",
+    icon: "receipt_long",
     class: "",
     groupTitle: false,
     badge: "",
@@ -396,7 +396,7 @@ export const ROUTES: RouteInfo[] = [
   {
     path: "",
     title: "Programme",
-    moduleName: "",
+    moduleName: "programme",
     iconType: "material-icons-two-tone",
     icon: "punch_clock",
     class: "menu-toggle",
