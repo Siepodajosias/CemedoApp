@@ -136,7 +136,11 @@
               <button pButton pRipple type="button" pTooltip="Modifier" icon="pi pi-pencil" (click)="medecinDetail(medecin)"
                                       class="p-button-rounded p-button-text"></button>
               <button pButton pRipple type="button" pTooltip="Detail du medecin" icon="pi pi-angle-right" (click)="medecinDetail(medecin.id)"
-                      class="p-button-rounded p-button-text"></button></td>
+                      class="p-button-rounded p-button-text p-button-success"></button>
+              <button pButton pRipple type="button" pTooltip="Supprimer le medecin"  icon="pi pi-trash" (click)="medecinDetail(medecin.id)"
+                      class="p-button-rounded p-button-text p-button-danger"></button>
+
+            </td>
           </tr>
         </ng-template>
         <ng-template pTemplate="summary">

@@ -11,7 +11,7 @@ export class FactureComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  salu(){
-    alert('salut')
+  formulaire(){
+    alert('Formulaire de facturation indisponible pour l\'instant')
   }
 }

@@ -129,9 +129,11 @@
                       <button pButton pRipple type="button"  icon="pi pi-pencil"  (click)="pharmacienDetail(pharmacien)"
                       class="p-button-rounded p-button-text"
                       ></button>
-                      <button pButton pRipple type="button"  icon="pi pi-angle-right"  (click)="pharmacienDetail(pharmacien)"
-                              class="p-button-rounded p-button-text"
+                      <button pButton pRipple type="button" pTooltip="Detail du pharmacien"  icon="pi pi-angle-right"  (click)="pharmacienDetail(pharmacien)"
+                              class="p-button-rounded p-button-text  p-button-success"
                       ></button>
+                      <button pButton pRipple type="button" pTooltip="Supprimer le pharmacien"  icon="pi pi-trash" (click)="pharmacienDetail(pharmacien)"
+                              class="p-button-rounded p-button-text p-button-danger"></button>
                   </td>
               </tr>
           </ng-template>

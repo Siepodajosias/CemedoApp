@@ -141,9 +141,11 @@
 							<td style="min-width:200px">{{rdv.medecin}}</td>
 							<td style="min-width:200px">{{rdv.patient}}</td>
 							<td>
-								<button pButton pRipple type="button" icon="pi pi-angle-right" (click)="toggleLock(rdv,false,index)"
+								<button pButton pRipple type="button" pTooltip="Detail rendze-vous" icon="pi pi-angle-right" (click)="toggleLock(rdv,false,index)"
 										class="p-button-rounded p-button-text"
 								></button>
+								<button pButton pRipple type="button" pTooltip="Supprimer le rendez-vous" icon="pi pi-trash"
+										class="p-button-rounded p-button-text p-button-danger"></button>
 							</td>
 						</tr>
 					</ng-template>

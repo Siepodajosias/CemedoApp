@@ -125,12 +125,14 @@
                   <td [style]="{color:'#2196F3'}">{{reception.user.tel}}</td>
                   <td [style]="{color:'#2196F3'}">{{reception.user.tel2}}</td>
                   <td>
-                      <button pButton pRipple type="button"  icon="pi pi-pencil"  (click)="recupererDetail(reception)"
+                      <button pButton pRipple type="button" pTooltip="Modifier"  icon="pi pi-pencil"  (click)="recupererDetail(reception)"
                       class="p-button-rounded p-button-text"
                       ></button>
-                      <button pButton pRipple type="button"  icon="pi pi-angle-right"  (click)="recupererDetail(reception)"
-                              class="p-button-rounded p-button-text"
+                      <button pButton pRipple pTooltip="Detail du receptionniste" type="button"  icon="pi pi-angle-right"  (click)="recupererDetail(reception)"
+                              class="p-button-rounded p-button-text p-button-success"
                       ></button>
+                      <button pButton pRipple type="button" pTooltip="Supprimer le receptionniste"  icon="pi pi-trash" (click)="recupererDetail(reception)"
+                              class="p-button-rounded p-button-text p-button-danger"></button>
                   </td>
               </tr>
           </ng-template>

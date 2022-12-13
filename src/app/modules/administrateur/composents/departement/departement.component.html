@@ -22,7 +22,7 @@
 
 			<p-table #dt [value]="departements"
 					 [scrollable]="true"
-					 scrollHeight="500px"
+					 scrollHeight="600px"
 					 [loading]="loading"
 					 [filterDelay]="0"
 					 styleClass="p-datatable-gridlines"
@@ -72,7 +72,10 @@
 							<button pButton pRipple type="button" pTooltip="Modifier" icon="pi pi-pencil" (click)="departementDetail(departement)" *ngIf="urlActif()"
 									class="p-button-rounded p-button-text"></button>
 							<button pButton pRipple type="button" pTooltip="Detail du departement" icon="pi pi-angle-right" (click)="departementDetail(departement)"
-									class="p-button-rounded p-button-text text-center"></button>
+									class="p-button-rounded p-button-text p-button-success"></button>
+
+							<button pButton pRipple type="button" pTooltip="Supprimer le departement" icon="pi pi-trash"
+									class="p-button-rounded p-button-text p-button-danger"></button>
 						</td>
 					</tr>
 				</ng-template>

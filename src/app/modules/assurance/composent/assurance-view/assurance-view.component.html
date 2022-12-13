@@ -112,7 +112,10 @@
               <button pButton pRipple type="button" pTooltip="Modifier" icon="pi pi-pencil" (click)="assuranceDetail(assurance)" *ngIf="urlActif()"
               class="p-button-rounded p-button-text"></button>
               <button pButton pRipple type="button" pTooltip="Detail de l'assurance" icon="pi pi-angle-right" (click)="assuranceDetail(assurance)"
-              class="p-button-rounded p-button-text text-center"></button>
+              class="p-button-rounded p-button-text p-button-success"></button>
+              <button pButton pRipple type="button" pTooltip="Supprimer l'assurance"  icon="pi pi-trash" (click)="assuranceDetail(assurance)"
+                      class="p-button-rounded p-button-text p-button-danger"></button>
+
             </td>
           </tr>
         </ng-template>
