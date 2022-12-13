@@ -12,6 +12,7 @@ import { AdminService } from "src/app/services/serviceAdministrateur/admin.servi
 import { MatTabsModule } from "@angular/material/tabs";
 import { NgApexchartsModule } from "ng-apexcharts";
 import { RendezVousCalendrierComponent } from 'src/app/modules/administrateur/composents/rendez-vous-calendrier/rendez-vous-calendrier.component';
+import { DepartementComponent} from 'src/app/modules/administrateur/composents/departement/departement.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 
 //primeng
@@ -40,12 +41,15 @@ import { SpeedDialModule } from 'primeng/speeddial';
 import { MenuModule } from 'primeng/menu';
 import { FieldsetModule} from 'primeng/fieldset';
 import { HttpClientModule } from '@angular/common/http';
+import { MedecinSpecialiteService } from 'src/app/services/serviceMedecin/medecin-specialite.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     FactureComponent,
-    RendezVousCalendrierComponent
+    RendezVousCalendrierComponent,
+    DepartementComponent
   ],
   imports: [
     CommonModule,
@@ -85,8 +89,9 @@ import { HttpClientModule } from '@angular/common/http';
     ToolbarModule,
     CalendarModule,
     SpeedDialModule,
+    ReactiveFormsModule,
     MenuModule,
     FullCalendarModule
-  ], providers: [AdminService,MessageService,ConfirmationService]
+  ], providers: [AdminService,MessageService,ConfirmationService,MedecinSpecialiteService]
 })
 export class AdministrateurModule { }

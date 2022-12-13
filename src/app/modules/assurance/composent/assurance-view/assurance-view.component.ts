@@ -83,9 +83,19 @@ export class AssuranceViewComponent implements OnInit {
       noFilter : 'Pas de filtre',
     });
   }
-  detail(a:any){
-    this.route.navigate(['admin/assurance/detail',a.id]);
+  assuranceDetail(a:any){
+      if(this.route.url.includes('comptable/assurance/liste')){
+          this.route.navigate(['comptable/assurance/detail',a.id]);
+      }else if(this.route.url.includes('admin/assurance/liste')){
+          this.route.navigate(['admin/assurance/detail',a.id]);
+      }else{
+
+      }
   }
+
+    urlActif():boolean{
+        return this.route.url.includes('admin/assurance/liste')
+    }
 
   saveAsExcelFile(buffer: any, fileName: string): void {
 
@@ -102,16 +112,15 @@ export class AssuranceViewComponent implements OnInit {
 
 }
 
-applyFilterGlobal($event:any, stringVal:any) {
+  applyFilterGlobal($event:any, stringVal:any) {
   this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
 }
 
-getEventValue($event:any) :string {
+  getEventValue($event:any) :string {
   return $event.target.value;
 } 
 
-toggleLock(data:any, frozen:any, index:any) {
-
+   toggleLock(data:any, frozen:any, index:any) {
     if (frozen) {
         this.lockedCustomers = this.lockedCustomers.filter((c, i) => i !== index);
         this.unlockedCustomers.push(data);
@@ -120,26 +129,24 @@ toggleLock(data:any, frozen:any, index:any) {
         this.unlockedCustomers = this.unlockedCustomers.filter((c, i) => i !== index);
         this.lockedCustomers.push(data);
     }
-
     this.unlockedCustomers.sort((val1, val2) => {
         return val1.id < val2.id ? -1 : 1;
     });
 }
-newAssurance() {
+   newAssurance() {
       this.assuranceForms.reset();
       this.submitted=false;
       this.assuranceDialog = !this.assuranceDialog;
 }
 
-exportPdf() {
-
-  const doc = new jspdf.jsPDF('portrait','px','a4') as jsPDFWithPlugin;
+   exportPdf() {
+     const doc = new jspdf.jsPDF('portrait','px','a4') as jsPDFWithPlugin;
         doc.autoTable({
           head:this.exportColumns,
           body:this.assurances
         })
-    doc.save("Assurance-rapport.pdf")
-}
+     doc.save("Assurance-rapport.pdf")
+   }
 
 exportExcel() {
     import("xlsx").then(xlsx => {

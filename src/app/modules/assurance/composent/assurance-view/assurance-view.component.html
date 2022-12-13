@@ -17,7 +17,7 @@
         <ng-template pTemplate="right">
 
           <button pButton pRipple label="Créer une nouvel assurance" icon="pi pi-plus" class="p-button-help"
-            (click)="newAssurance()"></button>
+            (click)="newAssurance()" *ngIf="urlActif()"></button>
         </ng-template>
       </p-toolbar>
 
@@ -109,9 +109,9 @@
             <td class="text-right">{{assurance.tel}}</td>
             <td>{{assurance.ville}}</td>
             <td >
-              <button pButton pRipple type="button" pTooltip="Modifier" icon="pi pi-pencil" (click)="detail(assurance)"
-              class="p-button-rounded p-button-text right"></button>
-              <button pButton pRipple type="button" pTooltip="Detail de l'assurance" icon="pi pi-angle-right" (click)="detail(assurance)"
+              <button pButton pRipple type="button" pTooltip="Modifier" icon="pi pi-pencil" (click)="assuranceDetail(assurance)" *ngIf="urlActif()"
+              class="p-button-rounded p-button-text"></button>
+              <button pButton pRipple type="button" pTooltip="Detail de l'assurance" icon="pi pi-angle-right" (click)="assuranceDetail(assurance)"
               class="p-button-rounded p-button-text text-center"></button>
             </td>
           </tr>

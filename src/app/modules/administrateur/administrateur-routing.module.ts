@@ -2,11 +2,15 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { FactureComponent } from "src/app/modules/administrateur/composents/facture/facture.component";
 import { RendezVousCalendrierComponent } from 'src/app/modules/administrateur/composents/rendez-vous-calendrier/rendez-vous-calendrier.component';
+import { DepartementComponent } from 'src/app/modules/administrateur/composents/departement/departement.component';
 const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: () =>
       import('src/app/modules/administrateur/dashboard/dashboard.module').then((m) => m.DashboardModule),
+  },
+  {
+    path:'departement',component:DepartementComponent
   },
   {
     path:'facture',component:FactureComponent
@@ -46,7 +50,8 @@ const routes: Routes = [
   },
   {path:'calendrier',component:RendezVousCalendrierComponent},
   {path:'informatique',loadChildren:()=>import('src/app/modules/informatique/informatique.module').then((m)=>m.InformatiqueModule)},
-  {path:'logistique',loadChildren:()=>import('src/app/modules/logistique/logistique.module').then((m)=>m.LogistiqueModule)}
+  {path:'logistique',loadChildren:()=>import('src/app/modules/logistique/logistique.module').then((m)=>m.LogistiqueModule)},
+
 
 ];
 

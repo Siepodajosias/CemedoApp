@@ -151,7 +151,7 @@
             <ng-template pTemplate="right">
     
               <button pButton pRipple label="Créer un nouveau responsable" icon="pi pi-plus" class="p-button-help"
-                (click)="newRespnsable()"></button>
+                (click)="newRespnsable()" *ngIf="urlActif()"></button>
             </ng-template>
           </p-toolbar>
     

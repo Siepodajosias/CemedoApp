@@ -43,6 +43,10 @@ const routes: Routes = [
     path:'infirmerie',
     loadChildren:()=>import('src/app/modules/infirmerie/infirmerie.module').then((i)=>i.InfirmerieModule)
   },
+  {
+    path:'admin',
+    loadChildren:()=>import('src/app/modules/administrateur/administrateur.module').then((a)=>a.AdministrateurModule)
+  },
   {path:'liste',component:ComptableViewComponent},
   {path:'detail',component:ComptableDetailComponent},
   {path:'**',component:ComptableViewComponent},

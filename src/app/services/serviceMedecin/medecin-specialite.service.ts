@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+export class Specialite {
+  libelle:string
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -13,5 +16,10 @@ export class MedecinSpecialiteService {
     return this.http.get(this.config,{
             headers:new HttpHeaders({'Content-Type':'application/json'})
   })
+  }
+  enregistrerSpecialite(libelle:Specialite):Observable<any>{
+       return this.http.post(this.config+'create',libelle,{
+         headers:new HttpHeaders({'Content-Type':'application/json'})
+       })
   }
 }

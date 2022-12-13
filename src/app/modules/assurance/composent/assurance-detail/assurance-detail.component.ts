@@ -1,5 +1,5 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Assurance } from 'src/app/models/modelAssurance/assurance';
 import { AssuranceService } from 'src/app/services/serviceAssurance/assurance.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -95,6 +95,7 @@ export class AssuranceDetailComponent implements OnInit {
     private confirmationService: ConfirmationService, 
     private messageService: MessageService,
     private primeNgConfig: PrimeNGConfig,
+    private route:Router
     
     ) { }
 
@@ -274,5 +275,8 @@ SaveData(){
   })
  }
 
+  urlActif():boolean{
+    return this.route.url.includes('/admin/assurance/detail')
+  }
 
 }
