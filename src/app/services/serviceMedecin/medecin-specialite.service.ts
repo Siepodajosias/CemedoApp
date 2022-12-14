@@ -3,7 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export class Specialite {
-  libelle:string
+    id:number
+    libelle:string
 }
 @Injectable({
   providedIn: 'root'
@@ -22,4 +23,14 @@ export class MedecinSpecialiteService {
          headers:new HttpHeaders({'Content-Type':'application/json'})
        })
   }
+    supprimerSpecialite(idDepartement:number):Observable<any>{
+        return this.http.get(this.config+'delete/'+idDepartement,{
+            headers:new HttpHeaders({'Content-Type':'application/json'})
+        })
+    }
+    modifierSpecialite(specialite:any):Observable<any>{
+        return this.http.post<any>(this.config+"update/"+specialite.id,specialite,{
+            headers:new HttpHeaders({'Content-Type':'application/json'})
+        });
+    }
 }

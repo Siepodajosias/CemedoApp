@@ -20,7 +20,7 @@
 				</ng-template>
 			</p-toolbar>
 
-			<p-table #dt [value]="comptables" [scrollable]="true" scrollHeight="600px"
+			<p-table #dt [value]="comptables" [scrollable]="true" scrollHeight="300px"
 				[globalFilterFields]="['nom','prenoms']" [loading]="loading" [filterDelay]="0"
 				styleClass="p-datatable-gridlines" selectionMode="multiple" [resizableColumns]="true">
 				<ng-template pTemplate="caption">
@@ -31,7 +31,6 @@
 
 							<input pInputText type="text" (input)="dt.filterGlobal(getEventValue($event), 'contains')"
 								placeholder="Rechercher..." />
-
 						</span>
 					</div>
 				</ng-template>
@@ -137,12 +136,12 @@
 						<td [style]="{color:'#2196F3'}">{{comptable.user.tel2}}</td>
 						<td>
 							<button pButton pRipple type="button" pTooltip="Modifier" icon="pi pi-pencil"
-									(click)="comptableDetail(comptable)" class="p-button-rounded p-button-text"></button>
+									(click)="updateComptable(comptable)" class="p-button-rounded p-button-text"></button>
 							<button pButton pRipple type="button" pTooltip="Detail du comptable"
 									icon="pi pi-angle-right" (click)="comptableDetail(comptable)"
 									class="p-button-rounded p-button-text p-button-success"></button>
 
-							<button pButton pRipple type="button" pTooltip="Supprimer le comptable"  icon="pi pi-trash" (click)="comptableDetail(comptable)"
+							<button pButton pRipple type="button" pTooltip="Supprimer le comptable"  icon="pi pi-trash" (click)="supprimerComptable(comptable)"
 									class="p-button-rounded p-button-text p-button-danger"></button>
 						</td>
 					</tr>
@@ -247,6 +246,99 @@
 				</div>
 			</form>
 		</p-dialog>
+		<p-dialog [(visible)]="comptableDialogUpdate" [style]="{width: '650px'}" header="mise à jour d'un comptable"
+				  [modal]="true" styleClass="p-fluid">
+			<form [formGroup]="comptableFormsUpdate" (ngSubmit)="modifierComptable()">
+				<div class="grid">
+					<div class="col-12 md:col-6 lg:col-4">
+						<span>
+							<label>Nom</label>
+							<input type="text" pInputText formControlName="nomUpdate">
+						</span>
+					</div>
 
+					<div class="col-12 md:col-6 lg:col-4">
+						<span>
+							<label>Prénom</label>
+							<input type="text" pInputText formControlName="prenomsUpdate">
+						</span>
+					</div>
+
+					<div class="col-12 md:col-6 lg:col-4">
+						<span>
+							<label>Nom d'utilisateur</label>
+							<input type="text" pInputText formControlName="loginUpdate">
+						</span>
+					</div>
+					<div class="col-12 md:col-6 lg:col-4">
+						<span>
+							<label>Mot de passe</label>
+							<input type="password" pInputText formControlName="passwordUpdate">
+						</span>
+					</div>
+					<div class="col-12 md:col-6 lg:col-4">
+						<span>
+							<label>Date de naissance</label>
+						<p-calendar [baseZIndex]="3000" appendTo="body" [showIcon]="true" inputId="icon" formControlName="dateNaissanceUpdate"></p-calendar>
+						</span>
+					</div>
+					<div class="col-12 md:col-6 lg:col-4">
+						<label>Genre</label>
+						<p-dropdown [options]="genres" optionLabel="libelle" [showClear]="true" formControlName="genreUpdate">
+						</p-dropdown>
+					</div>
+					<div class="col-12">
+					  <span>
+						<label>Type d'employé</label>
+						  					<p-dropdown
+													[autoDisplayFirst]="false"
+													[options]="employes"
+													dataKey="typeEmployeUpdate"
+													formControlName="typeEmployeUpdate"
+													optionLabel="libelle">
+					</p-dropdown>
+					  </span>
+					</div>
+					<div class="col-12">
+						<p-divider align="center" type="dashed" layout="horizontal">
+							<div class="inline-flex align-items-center">
+								<i class="pi pi-user mr-2"></i>
+								<b>Contacts</b>
+							</div>
+						</p-divider>
+					</div>
+
+					<div class="col-12">
+						<span>
+							<label>E-mail</label>
+							<input type="email" pInputText formControlName="emailUpdate">
+						</span>
+					</div>
+
+					<div class="col-12">
+						<span>
+							<label>Téléphone 1</label>
+							<input type="text" id="inputtext5" pInputText formControlName="telUpdate">
+						</span>
+					</div>
+
+					<div class="col-12">
+						<span>
+							<label>Téléphone 2</label>
+							<input type="text" pInputText formControlName="tel2Update">
+						</span>
+					</div>
+					<div class="col-12 md:col-12">
+						<div class="flex justify-content-end">
+							<button type="submit" pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-bouton-texte p-bouton-sm
+                             w-10rem h-2rem m-2"></button>
+							<button type="button" pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-danger p-bouton-sm
+                             w-10rem h-2rem m-2
+                              " (click)="helpComptable()"></button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</p-dialog>
 	</div>
 </section>

@@ -10,52 +10,59 @@ import { Pharmacien } from 'src/app/models/modelPharmacie/pharmacien';
 export class PharmacienService {
   private config:string="http://38.242.229.12/employe/pharmacien"
   private config2:string="http://38.242.229.12/medicaments"
-  constructor(private httpPhar:HttpClient) { }
+  constructor(private http:HttpClient) { }
 
   //pharmacien ressource
   recupererPharmacien():Observable<any>{
-    return this.httpPhar.get<any>(this.config+"/getAll",{
+    return this.http.get<any>(this.config+"/getAll",{
       headers:new HttpHeaders({'Content-Type':'application/json'})
     })
   }
 
   enregistrerPharmacien(phar:Pharmacien):Observable<Pharmacien>{
-    return this.httpPhar.post<Pharmacien>(this.config+"/create",phar,{
+    return this.http.post<Pharmacien>(this.config+"/create",phar,{
       headers:new HttpHeaders({'Content-Type':'application/json'})
     })
   }
   recupererPharmacienById(a:number):Observable<any>{
-    return this.httpPhar.get<any>(this.config+"/"+a,
+    return this.http.get<any>(this.config+"/"+a,
     {
       headers:new HttpHeaders({'Content-Type':'application/json'})
     }
     )
   }
-  supprimerPharmacien(e:number):void{
-    this.httpPhar.delete(this.config+"/"+e)
+  supprimerPharmacien(e:number):Observable<any>{
+   return  this.http.get(this.config+"/active/"+e)
+  }
+
+  modificationPharmacien(pharmacien: any): Observable<any> {
+    return this.http.post<any>(this.config + '/update/' + pharmacien.matricule,pharmacien,
+            {
+              headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+            });
   }
 
   //medicaments ressource
 
   recupererMedicament():Observable<any>{
-    return this.httpPhar.get<any>(this.config2,{
+    return this.http.get<any>(this.config2,{
       headers:new HttpHeaders({'Content-Type':'application/json'})
     })
   }
   enregistrerMedicament(medica:Medicament):Observable<Medicament>{
-    return this.httpPhar.post<Medicament>(this.config2,medica,{
+    return this.http.post<Medicament>(this.config2,medica,{
       headers:new HttpHeaders({'Content-Type':'application/json'})
     })
   }
   recupererMedicamentById(a:number):Observable<any>{
-    return this.httpPhar.get<any>(this.config2+"/"+a,
+    return this.http.get<any>(this.config2+"/"+a,
     {
       headers:new HttpHeaders({'Content-Type':'application/json'})
     }
     )
   }
   supprimerMedicament(e:number):Observable<any>{
-   return this.httpPhar.delete(this.config2+"/"+e,
+   return this.http.delete(this.config2+"/"+e,
    {
     headers:new HttpHeaders({'Content-Type':'application/json'})
   }

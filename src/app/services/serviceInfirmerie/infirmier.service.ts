@@ -10,51 +10,58 @@ import { Rendezvous } from 'src/app/models/modelInfirmier/rendezvous';
 export class InfirmierService {
   private config:string="http://38.242.229.12/employe/infirmier/"
   private config2:string="http://38.242.229.12/rendez_vouses"
-  constructor(private httpInfir:HttpClient) { }
+  constructor(private http:HttpClient) { }
 
   //infirmier ressource
   recupererInfirmier():Observable<any>{
-    return this.httpInfir.get<any>(this.config+"getAll",{
+    return this.http.get<any>(this.config+"getAll",{
       headers:new HttpHeaders({'Content-Type':'application/json'})
     })
   }
 
   enregistrerInfirmier(infirmier:Infirmier):Observable<Infirmier>{
-    return this.httpInfir.post<Infirmier>(this.config+"create",infirmier,{
+    return this.http.post<Infirmier>(this.config+"create",infirmier,{
       headers:new HttpHeaders({'Content-Type':'application/json'})
     })
   }
   recupererInfirmierById(a:number):Observable<any>{
-    return this.httpInfir.get<any>(this.config+"getOne/"+a,
+    return this.http.get<any>(this.config+"getOne/"+a,
     {
       headers:new HttpHeaders({'Content-Type':'application/json'})
     }
     )
   }
-  supprimerInfirmier(e:number):void{
-    this.httpInfir.delete(this.config+"/"+e)
+  supprimerInfirmier(e:number):Observable<any>{
+    return this.http.get(this.config+"active/"+e)
+  }
+
+  modificationInfirmier(infirmier: any): Observable<any> {
+    return this.http.post<any>(this.config + 'update/' + infirmier.matricule,infirmier,
+            {
+              headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+            });
   }
 
     //rendezvous ressource
     recupererRDV():Observable<any>{
-      return this.httpInfir.get<any>(this.config2,{
+      return this.http.get<any>(this.config2,{
         headers:new HttpHeaders({'Content-Type':'application/json'})
       })
     }
   
     sendRdv(rdv:Rendezvous):Observable<Rendezvous>{
-      return this.httpInfir.post<Rendezvous>(this.config2,rdv,{
+      return this.http.post<Rendezvous>(this.config2,rdv,{
         headers:new HttpHeaders({'Content-Type':'application/json'})
       })
     }
     recupererRdvById(a:number):Observable<any>{
-      return this.httpInfir.get<any>(this.config2+"/"+a,
+      return this.http.get<any>(this.config2+"/"+a,
       {
         headers:new HttpHeaders({'Content-Type':'application/json'})
       }
       )
     }
     supprimerRdv(e:number):void{
-      this.httpInfir.delete(this.config2+"/"+e)
+      this.http.delete(this.config2+"/"+e)
     }
 }

@@ -1,6 +1,5 @@
 export class Infirmier {
-
-    id:number
+    matricule:number
     dateNaissance: string
     email:string
     fcmToken:string

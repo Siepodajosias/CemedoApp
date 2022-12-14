@@ -30,8 +30,14 @@ export class MedecinService {
     }
     )
   }
-  supprimerMedecin(e:number):void{
-    this.http.delete(this.config+"/"+e)
+  supprimerMedecin(e:number):Observable<any>{
+   return this.http.get(this.config+"/active/"+e)
+  }
+  modifierMedecin(medecin:any){
+    return this.http.post<any>(this.config + '/update/' + medecin.matricule,medecin,
+            {
+              headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+            });
   }
 
   //rendezvous ressource

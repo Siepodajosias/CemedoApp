@@ -1,5 +1,5 @@
 export class Comptable {
-    id:number
+    matricule:number
     dateNaissance: string
     email:string
     fcmToken:string
@@ -12,5 +12,4 @@ export class Comptable {
     tel:string
     tel2:string
     typeEmploye:number
-
 }

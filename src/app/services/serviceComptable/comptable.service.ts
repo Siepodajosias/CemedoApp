@@ -4,34 +4,43 @@ import { Observable } from 'rxjs';
 import { Comptable } from 'src/app/models/modelComptable/comptable';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class ComptableService {
- 
-  private config:string="http://38.242.229.12/employe/comptable/"
-  constructor(private httpCompt:HttpClient) { }
 
-  //Comptable ressource
-  recupererComptable():Observable<any>{
-    return this.httpCompt.get<any>(this.config+"getAll",{
-      headers:new HttpHeaders({'Content-Type':'application/json'})
-    })
-  }
+	private config: string = 'http://38.242.229.12/employe/comptable/';
+	constructor(private http: HttpClient) {
+	}
 
-  enregistrerComptable(compt:Comptable):Observable<Comptable>{
-    return this.httpCompt.post<Comptable>(this.config+"create",compt,{
-      headers:new HttpHeaders({'Content-Type':'application/json'})
-    })
-  }
-  recupererComptableById(a:number):Observable<any>{
-    return this.httpCompt.get<any>(this.config+"getOne/"+a,
-    {
-      headers:new HttpHeaders({'Content-Type':'application/json'})
-    }
-    )
-  }
-  supprimerComptable(e:number):void{
-    this.httpCompt.delete(this.config+"/"+e)
-  }
+	recupererComptable(): Observable<any> {
+		return this.http.get<any>(this.config + 'getAll', {
+			headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+		});
+	}
+
+	enregistrerComptable(comptable: Comptable): Observable<Comptable> {
+		return this.http.post<Comptable>(this.config + 'create', comptable, {
+			headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+		});
+	}
+
+	recupererComptableById(idComptable: number): Observable<any> {
+		return this.http.get<any>(this.config + 'getOne/' + idComptable,
+				{
+					headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+				}
+		);
+	}
+
+	supprimerComptable(idComptable: number): Observable<any> {
+		return this.http.get(this.config + 'active/' + idComptable);
+	}
+
+	modificationComptable(comptable: any): Observable<any> {
+		return this.http.post<any>(this.config + 'update/' + comptable.matricule,comptable,
+				{
+					headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+				});
+	}
 
 }

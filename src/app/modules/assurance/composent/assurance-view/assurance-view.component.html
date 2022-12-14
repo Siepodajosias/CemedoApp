@@ -109,13 +109,12 @@
             <td class="text-right">{{assurance.tel}}</td>
             <td>{{assurance.ville}}</td>
             <td >
-              <button pButton pRipple type="button" pTooltip="Modifier" icon="pi pi-pencil" (click)="assuranceDetail(assurance)" *ngIf="urlActif()"
+              <button pButton pRipple type="button" pTooltip="Modifier" icon="pi pi-pencil" (click)="updateAssurance(assurance)" *ngIf="urlActif()"
               class="p-button-rounded p-button-text"></button>
               <button pButton pRipple type="button" pTooltip="Detail de l'assurance" icon="pi pi-angle-right" (click)="assuranceDetail(assurance)"
               class="p-button-rounded p-button-text p-button-success"></button>
-              <button pButton pRipple type="button" pTooltip="Supprimer l'assurance"  icon="pi pi-trash" (click)="assuranceDetail(assurance)"
+              <button pButton pRipple type="button" pTooltip="Supprimer l'assurance"  icon="pi pi-trash" (click)="supprimerAssurance(assurance)"
                       class="p-button-rounded p-button-text p-button-danger"></button>
-
             </td>
           </tr>
         </ng-template>
@@ -179,6 +178,50 @@
         </div>
       </form>
     </p-dialog>
+    <p-dialog [(visible)]="assuranceDialogUpdate" [style]="{width: '460px'}" header="Modifier l' assurance" [modal]="true"
+              styleClass="p-fluid">
+      <form [formGroup]="assuranceFormsUpdate" (ngSubmit)="modifierAssurance()">
+        <div class="grid">
+
+          <div class="col-12 md:col-6 lg:col-6">
+            <span>
+            <h4>Nom assurance</h4>
+              <input type="text" pInputText formControlName="libelleUpdate">
+            </span>
+          </div>
+
+          <div class="col-12 md:col-6 lg:col-6">
+            <span>
+            <h4>E-mail assurance</h4>
+              <input type="email" pInputText formControlName="emailUpdate">
+            </span>
+          </div>
+
+          <div class="col-12">
+            <span>
+            <h4>Contact assurance</h4>
+              <input type="text" pInputText formControlName="telUpdate">
+            </span>
+          </div>
+          <div class="col-12">
+            <span>
+            <h4>Ville</h4>
+              <input type="text" pInputText formControlName="villeUpdate">
+            </span>
+          </div>
+          <div class="col-12 md:col-12">
+            <div class="flex justify-content-end">
+              <p-button label="Enregistrer" icon="pi pi-check" type="submit">
+              </p-button>
+              <p-button label="Annuler" (click)="helpAssurance()" icon="pi pi-times" styleClass="p-button-sm p-button-danger ml-2">
+              </p-button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </p-dialog>
     <p-toast key="myKey1"></p-toast>
+    <p-toast key="myKey2"></p-toast>
+    <p-toast key="myKey3"></p-toast>
   </div>
 </section>

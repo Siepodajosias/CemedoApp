@@ -2,7 +2,7 @@
     <div class="content-block">
       <div class="block-header">
         <!-- breadcrumb -->
-        <app-breadcrumb [title]="'Assurance'" [items]="[]" [active_item]="assurance.libelle"></app-breadcrumb>
+        <app-breadcrumb [title]="'Assurance'" [items]="[]" [active_item]="assurance.libelle" *ngIf="assurance"></app-breadcrumb>
       </div>
       <div class="surface-ground px-4 py-5 md:px-6 lg:px-8">  
         <div class="grid">
@@ -67,7 +67,7 @@
                 </div>
             </div>
 
-            <div class="col-12 md:col-12 lg:col-12">
+            <div class="col-12 md:col-12 lg:col-12" *ngIf="assurance">
               
               <div class="surface-card shadow-2 p-3 border-round">
                 <div class="flex justify-content-between mb-3">
