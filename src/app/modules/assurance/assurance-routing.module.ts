@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AssuranceDetailComponent } from 'src/app/modules/assurance/composent/assurance-detail/assurance-detail.component';
 import { AssuranceViewComponent } from 'src/app/modules/assurance/composent/assurance-view/assurance-view.component';
-import { ResponsableDetailComponent } from 'src/app/modules/assurance/composent/responsable-detail/responsable-detail.component';
 import { DashboardAssuranceComponent } from 'src/app/modules/assurance/dashboard-assurance/dashboard-assurance.component';
 
 const routes: Routes = [
@@ -13,8 +12,7 @@ const routes: Routes = [
     import('src/app/modules/patient/patient.module').then((m) =>m.PatientModule),
   },
   {path:'liste',component:AssuranceViewComponent},
-  {path:'detail/:id',component:AssuranceDetailComponent},
-  {path:'detailresponsable/:id',component:ResponsableDetailComponent}
+  {path:'detail/:id',component:AssuranceDetailComponent}
 ];
 
 @NgModule({

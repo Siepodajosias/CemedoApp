@@ -339,4 +339,8 @@ export class PharmacienViewComponent implements OnInit {
 			typeEmployeUpdate: pharmacien.typeEmploye
 		});
 	}
+
+	helpPharmacien() {
+		this.pharmacienDialogUpdate=false
+	}
 }

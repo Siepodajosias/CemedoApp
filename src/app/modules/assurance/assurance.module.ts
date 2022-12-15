@@ -16,7 +16,6 @@ import { MatTableModule } from "@angular/material/table";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { ResponsableDetailComponent } from 'src/app/modules/assurance/composent/responsable-detail/responsable-detail.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { ChartsModule as chartjsModule } from "ng2-charts";
 
@@ -49,7 +48,6 @@ import { HttpClientModule } from '@angular/common/http';
     DashboardAssuranceComponent,
     AssuranceViewComponent,
     AssuranceDetailComponent,
-    ResponsableDetailComponent
   ],
   imports: [
     CommonModule,

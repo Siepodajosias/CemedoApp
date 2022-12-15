@@ -2,13 +2,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Assurance } from 'src/app/models/modelAssurance/assurance';
-import { Responsable } from 'src/app/models/modelAssurance/responsable';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class AssuranceService {
-	private config: string = 'http://38.242.229.12/assurances/';
+	private config1: string = 'http://38.242.229.12/assurances/';
 	private config2: string = 'http://38.242.229.12/employe/responsableAssurance/';
 
 	constructor(private http: HttpClient) {
@@ -16,32 +15,32 @@ export class AssuranceService {
 
 	//ressource assurance
 	recupererAssurance(): Observable<any> {
-		return this.http.get<any>(this.config,
+		return this.http.get<any>(this.config1,
 				{
 					headers:new HttpHeaders({'Content-Type':'application/json'})
 				});
 	}
 
 	enregistrerAssurance(assurance: any): Observable<Assurance> {
-		return this.http.post<Assurance>(this.config + 'create', assurance,
+		return this.http.post<Assurance>(this.config1 + 'create', assurance,
 				{
 					headers:new HttpHeaders({'Content-Type':'application/json'})
 				});
 	}
 
 	recupererAssuranceById(a: number): Observable<any> {
-		return this.http.get<any>(this.config + 'getOne/' + a,
+		return this.http.get<any>(this.config1 + 'getOne/' + a,
 				{
 					headers:new HttpHeaders({'Content-Type':'application/json'})
 				});
 	}
 
 	supprimerAssurance(e: number): Observable<any> {
-		return this.http.get(this.config + 'active/' + e);
+		return this.http.get(this.config1 + 'active/' + e);
 	}
 
 	modificationAssurance(assurance: any): Observable<any> {
-		return this.http.post<any>(this.config + 'update/' + assurance.id, assurance,
+		return this.http.post<any>(this.config1 + 'update/' + assurance.id, assurance,
 				{
 					headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 				});
@@ -55,8 +54,8 @@ export class AssuranceService {
 		});
 	}
 
-	enregistrerResponsable(assu: any): Observable<Responsable> {
-		return this.http.post<Responsable>(this.config2 + 'create', assu, {
+	enregistrerResponsable(responsable: any): Observable<any> {
+		return this.http.post<any>(this.config2 + 'create', responsable, {
 			headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 		});
 	}
@@ -69,7 +68,7 @@ export class AssuranceService {
 		);
 	}
 
-	supprimerteResponsable(e: number): Observable<any> {
-		return this.http.delete(this.config2 + '/' + e);
+	supprimerteResponsable(idesponsable: number): Observable<any> {
+		return this.http.get(this.config2 + 'active/' + idesponsable);
 	}
 }

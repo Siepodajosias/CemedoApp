@@ -341,4 +341,8 @@ export class InfirmierViewComponent implements OnInit {
 			typeEmployeUpdate: infirmier.typeEmploye
 		});
 	}
+
+	helpInfirmier() {
+		this.infirmierDialogUpdate=false;
+	}
 }

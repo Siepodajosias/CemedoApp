@@ -157,7 +157,7 @@
     
           <p-table #dt [value]="responsables" [scrollable]="true" scrollHeight="200px"
             [globalFilterFields]="['nom','prenoms','ville']"
-             [loading]="loading" 
+             [loading]="loading"
              [filterDelay]="0"
              styleClass="p-datatable-gridlines"
              selectionMode="multiple"
@@ -177,19 +177,22 @@
             </ng-template>
             <ng-template pTemplate="header">
               <tr>
-                <th pSortableColumn="nom">Nom<p-sortIcon field="nom"></p-sortIcon>
+                <th pSortableColumn="user.nom">Nom<p-sortIcon field="user.nom"></p-sortIcon>
                 </th>
-                <th pSortableColumn="prenoms">E-mail <p-sortIcon field="prenoms"></p-sortIcon>
+                <th pSortableColumn="user.prenoms">Prénom <p-sortIcon field="user.prenoms"></p-sortIcon>
                 </th>
-                <th pSortableColumn="genre">Contact <p-sortIcon field="genre"></p-sortIcon>
+                <th pSortableColumn="user.genre">Genre <p-sortIcon field="user.genre"></p-sortIcon>
                 </th>
-                <th pSortableColumn="ville">Ville<p-sortIcon field="ville"></p-sortIcon>
+                <th pSortableColumn="user.tel">Téléphone 1<p-sortIcon field="user.tel"></p-sortIcon>
                 </th>
+                  <th pSortableColumn="user.tel2">Téléphone 2<p-sortIcon field="user.tel2"></p-sortIcon>
+                  </th>
+                  <th>Actions</th>
               </tr>
 
                 <tr>
                     <th>
-                        <p-columnFilter [showClearButton]="false" type="text" field="nom" matchMode="contains" pTooltip="Options de filtrage">
+                        <p-columnFilter [showClearButton]="false" type="text" field="user.nom" matchMode="contains" pTooltip="Options de filtrage">
                             <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
                                 <input type="text" #valeur class="p-2 border" maxlength="20"
                                        [value]="value"
@@ -200,7 +203,7 @@
                         </p-columnFilter>
                     </th>
                     <th>
-                        <p-columnFilter [showClearButton]="false" type="text" field="prenoms" matchMode="contains" pTooltip="Options de filtrage">
+                        <p-columnFilter [showClearButton]="false" type="text" field="user.prenoms" matchMode="contains" pTooltip="Options de filtrage">
                             <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
                                 <input type="text" #valeur class="p-2 border" maxlength="20"
                                        [value]="value"
@@ -211,7 +214,7 @@
                         </p-columnFilter>
                     </th>
                     <th>
-                        <p-columnFilter [showClearButton]="false" type="text" field="genre" matchMode="contains" pTooltip="Options de filtrage">
+                        <p-columnFilter [showClearButton]="false" type="text" field="user.genre.libelle" matchMode="contains" pTooltip="Options de filtrage">
                             <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
                                 <input type="text" #valeur class="p-2 border" maxlength="20"
                                        [value]="value"
@@ -222,7 +225,7 @@
                         </p-columnFilter>
                     </th>
                     <th>
-                        <p-columnFilter [showClearButton]="false" type="text" field="ville" matchMode="contains" pTooltip="Options de filtrage">
+                        <p-columnFilter [showClearButton]="false" type="text" field="user.tel" matchMode="contains" pTooltip="Options de filtrage">
                             <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
                                 <input type="text" #valeur class="p-2 border" maxlength="20"
                                        [value]="value"
@@ -232,19 +235,36 @@
                             </ng-template>
                         </p-columnFilter>
                     </th>
+                    <th>
+                        <p-columnFilter [showClearButton]="false" type="text" field="user.tel2" matchMode="contains" pTooltip="Options de filtrage">
+                            <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                                <input type="text" #valeur class="p-2 border" maxlength="20"
+                                       [value]="value"
+                                       pInputText
+                                       (input)="filter(valeur.value)"
+                                >
+                            </ng-template>
+                        </p-columnFilter>
+                    </th>
+                    <th></th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-responsable>
               <tr>
-                <td >{{responsable.nom}}</td>
-                <td >{{responsable.prenoms}}</td>
-                <td >{{responsable.genre}}</td>
-                <td >{{assurance.ville}}</td>
+                <td >{{responsable.user.nom}}</td>
+                <td >{{responsable.user.prenoms}}</td>
+                <td >{{responsable.user.genre.libelle}}</td>
+                <td >{{responsable.user.tel}}</td>
+                <td >{{responsable.user.tel2}}</td>
+                  <td>
+                      <button pButton pRipple type="button" pTooltip="Supprimer le responsable"  icon="pi pi-trash" (click)="supprimerResponsable(responsable)"
+                              class="p-button-rounded p-button-text p-button-danger"></button>
+                  </td>
               </tr>
             </ng-template>
             <ng-template pTemplate="summary">
               <div class="flex align-items-center justify-content-between">
-                Total: {{responsables ? responsables.length : 0 }}responsable
+                Total: {{responsables ? responsables.length : 0 }} responsables
               </div>
             </ng-template>
           </p-table>
@@ -252,7 +272,7 @@
     
         <p-dialog [(visible)]="responsableDialog" [style]="{width: '650px'}" header="Créer un responsable" [modal]="true"
                   styleClass="p-fluid">
-          <form [formGroup]="responsableForms">
+          <form [formGroup]="responsableForms" (ngSubmit)="enregistrerResponsable()">
             <div class="p-fluid grid">
               <div class="col-12 md:col-6 lg:col-4">
                 <span>
@@ -275,7 +295,8 @@
               <div class="col-12 md:col-6 lg:col-4">
                 <span>
                     <label>Genre</label>
-                  <input type="text" pInputText  formControlName="genre">
+                    <p-dropdown [options]="genres" optionLabel="libelle" [showClear]="true" formControlName="genre">
+                    </p-dropdown>
                 </span>
               </div>
               <div class="col-12 md:col-6 lg:col-4">
@@ -290,6 +311,13 @@
                   <input type="email" pInputText  formControlName="email">
                 </span>
               </div>
+                <div class="col-12">
+					  <span>
+						<label>assurance</label>
+                          <p-dropdown [options]="assurances" optionLabel="libelle" [showClear]="true" formControlName="assurance">
+						</p-dropdown>
+					  </span>
+                </div>
 
               <div class="col-12">
                 <p-divider align="left">
@@ -325,11 +353,11 @@
                         </p-button>
                     </div>
                 </div>
-    
             </div>
           </form>
         </p-dialog>
         <p-toast key="myKey1"></p-toast>
+        <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
     </div>
     </div>
   </section>
