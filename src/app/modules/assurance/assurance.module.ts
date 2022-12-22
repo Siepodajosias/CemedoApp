@@ -10,7 +10,7 @@ import { AssuranceRoutingModule } from 'src/app/modules/assurance/assurance-rout
 import { DashboardAssuranceComponent } from 'src/app/modules/assurance/dashboard-assurance/dashboard-assurance.component';
 import { AssuranceViewComponent } from 'src/app/modules/assurance/composent/assurance-view/assurance-view.component';
 import { AssuranceDetailComponent } from 'src/app/modules/assurance/composent/assurance-detail/assurance-detail.component';
-import { AssuranceService } from 'src/app/services/serviceAssurance/assurance.service';
+import { AssuranceService } from 'src/app/services/ServiceAssurance/assurance.service';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from "@angular/material/table";
 import { MatPaginatorModule } from "@angular/material/paginator";
@@ -40,7 +40,7 @@ import { OrderListModule } from 'primeng/orderlist';
 import { DividerModule } from 'primeng/divider';
 import { MenubarModule } from 'primeng/menubar';
 import { ToolbarModule } from 'primeng/toolbar';
-import {CalendarModule} from 'primeng/calendar';
+import { CalendarModule} from 'primeng/calendar';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({

@@ -11,7 +11,7 @@
 						<div class="flex justify-content-between mb-3">
 							<div>
 								<span class="block text-500 font-medium mb-3  text-cyan-50">Rendez-vous éffectué</span>
-								<div class="text-900 font-medium text-xl  text-cyan-50">152</div>
+								<div class="text-900 font-medium text-xl  text-cyan-50">15 485 758</div>
 							</div>
 							<div class="flex align-items-center justify-content-center  bg-white-100 border-round" style="width:2.5rem;height:2.5rem">
 								<i class="pi pi-window-minimize text-cyan-50 text-xl"></i>
@@ -25,7 +25,7 @@
 						<div class="flex justify-content-between mb-3">
 							<div>
 								<span class="block text-500 font-medium mb-3 text-cyan-50">Rendez-vous en cour..</span>
-								<div class="text-900 font-medium text-xl text-cyan-50">100</div>
+								<div class="text-900 font-medium text-xl text-cyan-50">100 892</div>
 							</div>
 							<div class="flex align-items-center justify-content-center bg-white-100 border-round" style="width:2.5rem;height:2.5rem">
 								<i class="pi pi-window-maximize text-cyan-50 text-xl"></i>
@@ -38,7 +38,7 @@
 						<div class="flex justify-content-between mb-3">
 							<div>
 								<span class="block text-500 font-medium mb-3 text-cyan-50">Rendez-vous annulé</span>
-								<div class="text-900 font-medium text-xl text-cyan-50">28441</div>
+								<div class="text-900 font-medium text-xl text-cyan-50">0</div>
 							</div>
 							<div class="flex align-items-center justify-content-center bg-white-100 border-round" style="width:2.5rem;height:2.5rem">
 								<i class="pi pi-sync text-cyan-50 text-xl"></i>
@@ -49,7 +49,7 @@
 			</div>
 
 			<p-fieldset legend="Filtre" [toggleable]="true">
-				<p-table #dt [value]="rdvs" [scrollable]="true" scrollHeight="490px"
+				<p-table #dt [value]="rendezVous" [scrollable]="true" scrollHeight="490px"
 						 [globalFilterFields]="['dateDPrdv','daterdv','medecin','patient']"
 						 [filterDelay]="0"
 						 styleClass="p-datatable-gridlines"
@@ -59,6 +59,7 @@
 							<div class="left">
 								<button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom"></button>
 								<button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning mr-4" pTooltip="PDF" tooltipPosition="bottom"></button>
+								<button *ngIf="urlActif()" pButton pRipple label="Créer un rendez-vous" icon="pi pi-plus" class="p-button-help" (click)="newRendezVous()"></button>
 							</div>
 
 							<span class="p-input-icon-left">
@@ -72,23 +73,26 @@
 					</ng-template>
 					<ng-template pTemplate="header">
 						<tr>
-							<th pSortableColumn="dateDPrdv">Date de prise de rendez-vous
-								<p-sortIcon field="dateDPrdv"></p-sortIcon>
+							<th pSortableColumn="assure.user.nom">Patient
+								<p-sortIcon field="assure.user.nom"></p-sortIcon>
 							</th>
-							<th pSortableColumn="daterdv">Date de rendez-vous
-								<p-sortIcon field="daterdv"></p-sortIcon>
+							<th pSortableColumn="updatedAt">Date de prise de rendez-vous
+								<p-sortIcon field="updatedAt"></p-sortIcon>
 							</th>
-							<th pSortableColumn="medecin">Medecin
+							<th pSortableColumn="dateHeure">Date du rendez-vous
+								<p-sortIcon field="dateHeure"></p-sortIcon>
+							</th>
+							<th pSortableColumn="lieu">Lieu du rendez-vous
+								<p-sortIcon field="lieu"></p-sortIcon>
+							</th>
+							<th pSortableColumn="medecin">Statut
 								<p-sortIcon field="medecin"></p-sortIcon>
-							</th>
-							<th pSortableColumn="patient">Patient
-								<p-sortIcon field="patient"></p-sortIcon>
 							</th>
 							<th>Actions</th>
 						</tr>
 						<tr>
 							<th>
-								<p-columnFilter [showClearButton]="false" type="text" field="dateDPrdv" matchMode="contains" pTooltip="Options de filtrage">
+								<p-columnFilter [showClearButton]="false" type="text" field="assure.user.nom" matchMode="contains" pTooltip="Options de filtrage">
 									<ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
 										<input type="text" #valeur class="p-2 border" maxlength="20"
 											   [value]="value"
@@ -99,7 +103,7 @@
 								</p-columnFilter>
 							</th>
 							<th>
-								<p-columnFilter [showClearButton]="false" type="text" field="daterdv" matchMode="contains" pTooltip="Options de filtrage">
+								<p-columnFilter [showClearButton]="false" type="text" field="updatedAt" matchMode="contains" pTooltip="Options de filtrage">
 									<ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
 										<input type="text" #valeur class="p-2 border" maxlength="20"
 											   [value]="value"
@@ -110,7 +114,7 @@
 								</p-columnFilter>
 							</th>
 							<th>
-								<p-columnFilter [showClearButton]="false" type="text" field="medecin" matchMode="contains" pTooltip="Options de filtrage">
+								<p-columnFilter [showClearButton]="false" type="text" field="dateHeure" matchMode="contains" pTooltip="Options de filtrage">
 									<ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
 										<input type="text" #valeur class="p-2 border" maxlength="20"
 											   [value]="value"
@@ -120,55 +124,72 @@
 									</ng-template>
 								</p-columnFilter>
 							</th>
+
 							<th>
-								<p-columnFilter [showClearButton]="false" type="text" field="patient" matchMode="contains" pTooltip="Options de filtrage">
+								<p-columnFilter [showClearButton]="false" type="text" field="lieu" matchMode="contains" pTooltip="Options de filtrage">
 									<ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
 										<input type="text" #valeur class="p-2 border" maxlength="20"
 											   [value]="value"
 											   pInputText
 											   (input)="filter(valeur.value)"
 										>
+									</ng-template>
+								</p-columnFilter>
+							</th>
+
+							<th>
+								<p-columnFilter [showClearButton]="false" field="statut" matchMode="contains" [showMenu]="false" [style]="{width:'200px'}">
+									<ng-template pTemplate="filter" let-value let-filter="filterCallback">
+										<p-dropdown appendTo="body" [baseZIndex]="3000" [ngModel]="value" [options]="statut" (onChange)="filter($event.value)" placeholder="Pas de filtre" [showClear]="false">
+											<ng-template let-option pTemplate="item">
+												<span [class]="'customer-badge status-' + option.value">{{option.label}}</span>
+											</ng-template>
+										</p-dropdown>
 									</ng-template>
 								</p-columnFilter>
 							</th>
 							<th></th>
 						</tr>
 					</ng-template>
-					<ng-template pTemplate="body" let-rdv let-index="rowIndex">
+					<ng-template pTemplate="body" let-rendezVous>
 						<tr>
-							<td style="min-width:200px">{{rdv.dateDPrdv}}</td>
-							<td style="min-width:200px">{{rdv.daterdv}}</td>
-							<td style="min-width:200px">{{rdv.medecin}}</td>
-							<td style="min-width:200px">{{rdv.patient}}</td>
 							<td>
-								<button pButton pRipple type="button" pTooltip="Detail rendze-vous" icon="pi pi-angle-right" (click)="toggleLock(rdv,false,index)"
+								<span *ngIf="rendezVous.assure">{{rendezVous.assure.user.nom}}</span>
+								<span *ngIf="rendezVous.assure==null">  </span>
+							</td>
+							<td>{{rendezVous.updatedAt}}</td>
+							<td>{{rendezVous.dateHeure}}</td>
+
+							<td>
+								<span *ngIf="rendezVous.lieu">{{rendezVous.lieu}}</span>
+								<span *ngIf="rendezVous.lieu==null">  </span>
+							</td>
+							<td>
+								<p-tag *ngIf="rendezVous.statut" severity="success" value="Effectué"></p-tag>
+								<p-tag *ngIf="!rendezVous.statut" severity="danger" value="Non éffectué"></p-tag>
+							</td>
+							<td>
+								<button pButton pRipple type="button" pTooltip="Detail rendez-vous" icon="pi pi-angle-right"
 										class="p-button-rounded p-button-text"
 								></button>
-								<button pButton pRipple type="button" pTooltip="Supprimer le rendez-vous" icon="pi pi-trash"
+								<button pButton pRipple type="button" pTooltip="Supprimer le rendez-vous" icon="pi pi-trash" (click)="supprimerRendezVous(rendezVous)"
 										class="p-button-rounded p-button-text p-button-danger"></button>
 							</td>
 						</tr>
 					</ng-template>
 					<ng-template pTemplate="summary">
 						<div class="flex align-items-center justify-content-between">
-							Total: {{rdvs ? rdvs.length : 0 }} Rendez-vous
-							<button *ngIf="urlActif()" pButton pRipple label="Créer un rendez-vous" icon="pi pi-plus" class="p-button-help" (click)="newRDV()"></button>
+							Total: {{rendezVous ? rendezVous.length : 0 }} Rendez-vous
 						</div>
 					</ng-template>
 				</p-table>
 			</p-fieldset>
+			<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
 			<p-toast></p-toast>
 			<p-dialog [(visible)]="rendezVousDialog" [style]="{width:'700px'}" header="Création d'un rendez-vous" [modal]="true"
 					  styleClass="p-fluid">
 				<form [formGroup]="rendezVousForms" (ngSubmit)="enregistrerRendezVous()">
 					<div class="grid">
-						<div class="col-12 md:col-6 lg:col-4">
-						  <span>
-							<label>Date de prise du rendez-vous</label>
-							<p-calendar [baseZIndex]="3000" appendTo="body" [showIcon]="true" inputId="icon"></p-calendar>
-						  </span>
-						</div>
-
 						<div class="col-12 md:col-6 lg:col-4">
 						  <span>
 							<label>Date du rendez-vous</label>
@@ -179,13 +200,15 @@
 						<div class="col-12 md:col-6 lg:col-4">
 						  <span>
 							<label>Patient</label>
-							<input type="text" pInputText formControlName="patient">
+							<p-autoComplete  formControlName="patient" [virtualScroll]="true" [suggestions]="patientsForm"  (completeMethod)="patientsItems($event)" field="user.nom" [dropdown]="true">
+							</p-autoComplete>
 						  </span>
 						</div>
 
 						<div class="col-12 md:col-6 lg:col-4" *ngIf="medecinActif()">
 							<label>Medecin</label>
-							<input type="text" pInputText formControlName="medecin">
+							<p-autoComplete  formControlName="medecin" [virtualScroll]="true" [suggestions]="medecinsForm"  (completeMethod)="medecinItems($event)" field="user.nom" [dropdown]="true">
+							</p-autoComplete>
 						</div>
 
 						<div class="col-12 md:col-6 lg:col-4" *ngIf="receptionActif()">
@@ -219,7 +242,7 @@
 						<div class="col-12">
 							<span>
 							  <label>Commentaire</label>
-							  <input type="text" pInputText formControlName="commentaire">
+								<textarea pInputTextarea [style]="{'height':'160px'}" formControlName="commentaire"></textarea>
 							</span>
 						</div>
 
@@ -228,7 +251,7 @@
 								<button type="submit" pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-bouton-texte p-bouton-sm
                                   w-10rem h-2rem m-2"></button>
 								<button type="button" pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-danger p-bouton-sm
-                                  w-10rem h-2rem m-2" (click)="newRDV()"></button>
+                                  w-10rem h-2rem m-2" (click)="newRendezVous()"></button>
 							</div>
 						</div>
 					</div>

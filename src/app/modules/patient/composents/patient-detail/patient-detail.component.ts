@@ -31,7 +31,7 @@ export type ChartOptions = {
 };
 
 import { ActivatedRoute } from '@angular/router';
-import { PatientService } from 'src/app/services/servicePatient/patient.service';
+import { PatientService } from 'src/app/services/ServicePatient/patient.service';
 import { Users } from "src/app/users";
 
 
@@ -41,7 +41,7 @@ import { Users } from "src/app/users";
   styleUrls: ['./patient-detail.component.scss']
 })
 export class PatientDetailComponent implements OnInit {
-  InfoPat:any
+  InfoPatient:any
   md1:any
   md2:any
   ant:any
@@ -59,8 +59,7 @@ export class PatientDetailComponent implements OnInit {
         this.md2=this.md1.data
         this.users=this.md2.user
         this.ant=this.md2.antecedents
-        this.InfoPat="Mr" +"."+ this.users.nom +" "+ this.users.prenoms
-        console.log(this.md2)
+        this.InfoPatient="Mr" +"."+ this.users.nom +" "+ this.users.prenoms
         },
         error:()=>{},
         complete:()=>{}

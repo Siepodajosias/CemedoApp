@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Medecin } from 'src/app/models/modelMedecin/medecin';
-import { MedecinService } from 'src/app/services/serviceMedecin/medecin.service';
+import { MedecinService } from 'src/app/services/ServiceMedecin/medecin.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import * as saveAs from 'file-saver';
@@ -10,10 +10,9 @@ import 'jspdf-autotable';
 import { UserOptions } from 'jspdf-autotable';
 import { Table } from 'primeng/table';
 import { PrimeNGConfig } from 'primeng/api';
-import { MedecinSpecialiteService } from 'src/app/services/serviceMedecin/medecin-specialite.service';
-import { TypeMedecinService } from 'src/app/services/serviceMedecin/type-medecin.service';
+import { MedecinSpecialiteService } from 'src/app/services/ServiceMedecin/medecin-specialite.service';
+import { TypeMedecinService } from 'src/app/services/ServiceMedecin/type-medecin.service';
 import { EmployeService } from 'src/app/shared-cemedo/employe/employe.service';
-import { Comptable } from 'src/app/models/modelComptable/comptable';
 
 interface jsPDFWithPlugin extends jspdf.jsPDF {
 	autoTable: (options: UserOptions) => jspdf.jsPDF;
@@ -26,7 +25,7 @@ interface jsPDFWithPlugin extends jspdf.jsPDF {
 	styleUrls: ['./medecin-view.component.scss']
 })
 export class MedecinViewComponent implements OnInit {
-	medecins: any[] = [];
+	medecins: any[];
 	posts: any;
 	post: any;
 
@@ -216,14 +215,7 @@ export class MedecinViewComponent implements OnInit {
 
 	enregistrerMedecin() {
 		const medecin: Medecin = new Medecin();
-		/*
-		  fcmToken	string
-		  genre	integer($int64)
-		  role	integer($int64)
-		  specialite	integer($int64)
-		  typeEmploye	integer($int64)
-		  typeMedecin	integer($int64)
-	  */
+
 		medecin.matricule = null;
 		medecin.email = this.medecinForms.get('email')?.value;
 		medecin.password = this.medecinForms.get('password')?.value;

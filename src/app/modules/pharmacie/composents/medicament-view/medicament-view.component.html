@@ -17,11 +17,12 @@
           </ng-template>
       </p-toolbar>
   
-      <p-table #dt  [value]="medicaments"  [scrollable]="true" scrollHeight="400px"
+      <p-table #dt  [value]="medicaments"  [scrollable]="true" scrollHeight="600px"
       [globalFilterFields]="['id','libelle','quantite']"
       [loading]="loading"
       [filterDelay]="0"
-          >
+       styleClass="p-datatable-gridlines"
+       selectionMode="multiple">
           <ng-template pTemplate="caption">
               <div class="flex align-items-center justify-content-between">
                   <h5 class="m-0">Medicaments</h5>
@@ -38,14 +39,15 @@
           </ng-template>
           <ng-template pTemplate="header">
               <tr>
-                  <th pSortableColumn="id">Identifiant<p-sortIcon field="libelle"></p-sortIcon></th>
-                  <th pSortableColumn="libelle">Designation <p-sortIcon field="email"></p-sortIcon></th>
+                  <th pSortableColumn="id">Identifiant<p-sortIcon field="id"></p-sortIcon></th>
+                  <th pSortableColumn="libelle">Designation <p-sortIcon field="libelle"></p-sortIcon></th>
                   <th pSortableColumn="posologie">Posologie <p-sortIcon field="posologie"></p-sortIcon></th>
                   <th pSortableColumn="quantite">Quantite<p-sortIcon field="quantite"></p-sortIcon></th>
+                  <th>Actions</th>
               </tr>
               <tr>
                   <th>
-                      <p-columnFilter [showClearButton]="false" type="text" field="libelle" matchMode="contains" pTooltip="Options de filtrage">
+                      <p-columnFilter [showClearButton]="false" type="text" field="id" matchMode="contains" pTooltip="Options de filtrage">
                           <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
                               <input type="text" #valeur class="p-2 border" maxlength="20"
                                      [value]="value"
@@ -56,7 +58,7 @@
                       </p-columnFilter>
                   </th>
                   <th>
-                      <p-columnFilter [showClearButton]="false" type="text" field="email" matchMode="contains" pTooltip="Options de filtrage">
+                      <p-columnFilter [showClearButton]="false" type="text" field="libelle" matchMode="contains" pTooltip="Options de filtrage">
                           <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
                               <input type="text" #valeur class="p-2 border" maxlength="20"
                                      [value]="value"
@@ -88,6 +90,7 @@
                           </ng-template>
                       </p-columnFilter>
                   </th>
+                  <th></th>
               </tr>
           </ng-template>
           <ng-template pTemplate="body" let-medicament>
@@ -96,21 +99,22 @@
                   <td style="min-width:200px">{{medicament.libelle}}</td>
                   <td style="min-width:200px">{{medicament.posologie}}</td>
                   <td style="min-width:200px">{{medicament.quantite}}</td>
-                  <td style="flex: 0 0 4rem">
-                      <button pButton pRipple type="button"  icon="pi pi-pencil"  (click)="detail(medicament)" 
+                  <td>
+                      <button pButton pRipple type="button" pTooltip="Modifier le medicament"  icon="pi pi-pencil"  (click)="detail(medicament)"
                       class="p-button-rounded p-button-text"
                       ></button>
-                  </td>
-                  <td style="flex: 0 0 4rem">
-                      <button pButton pRipple type="button"  icon="pi pi-angle-right"  (click)="detail(medicament)" 
-                      class="p-button-rounded p-button-text"
+                      <button pButton pRipple type="button" pTooltip="Détail du medicament"  icon="pi pi-angle-right"  (click)="detail(medicament)"
+                              class="p-button-rounded p-button-text p-button-success"
                       ></button>
+
+                      <button pButton pRipple type="button" pTooltip="Supprimer le medicament"  icon="pi pi-trash"
+                              class="p-button-rounded p-button-text p-button-danger"></button>
                   </td>
               </tr>
           </ng-template>
           <ng-template pTemplate="summary">
               <div class="flex align-items-center justify-content-between">
-               Total: {{medicaments ? medicaments.length : 0 }}
+               Total: {{medicaments ? medicaments.length : 0 }} medicaments
               </div>
           </ng-template>
       </p-table>

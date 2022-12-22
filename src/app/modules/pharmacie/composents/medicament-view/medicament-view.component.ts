@@ -1,9 +1,8 @@
 import { Component, OnInit,ViewChild} from '@angular/core';
-import { PharmacienService } from 'src/app/services/servicePharmacie/pharmacien.service';
 import { Router } from '@angular/router';
 
 
-import { MessageService } from 'primeng/api';
+import { MessageService, PrimeNGConfig } from 'primeng/api';
 
 import * as saveAs from 'file-saver';
 
@@ -12,6 +11,7 @@ import 'jspdf-autotable'
 import { UserOptions } from 'jspdf-autotable';
 
 import { Table } from 'primeng/table'
+import { MedicamentService } from 'src/app/services/ServicePharmacie/medicament.service';
 
 interface jsPDFWithPlugin extends jspdf.jsPDF{
     autoTable: (options: UserOptions)=> jspdf.jsPDF;
@@ -41,30 +41,41 @@ export class MedicamentViewComponent implements OnInit {
   personneDialog: any | boolean;
 
 
-  constructor(private pharService:PharmacienService,private route:Router,
-    private masseService:MessageService) { }
+  constructor(private medicamentService: MedicamentService,private route:Router,
+    private masseService:MessageService,private primeNgConfig: PrimeNGConfig,) { }
 
   ngOnInit(): void {
 
-    this.pharService.recupererMedicament().subscribe({
+    this.medicamentService.recupererListeMedicament().subscribe({
       next: (value: any) => {
-        this.posts = value ? value : []
-
+        this.posts = value.data ? value : []
+        this.medicaments= this.posts.data
+        this.loading=false
       },
-      error: (e) => { console.log("erreur :" + e) },
+      error: (e) => {},
       complete: () => {
       }
     })
+      this.primeNgConfig.setTranslation({
+          startsWith: 'Commence par',
+          contains: 'Contient',
+          notContains: 'Ne contient pas',
+          endsWith: 'Fini par',
+          equals: 'Egale à',
+          notEquals: 'différent de',
+          noFilter: 'Pas de filtre',
+          reject: 'Non',
+          accept: 'Oui'
+      });
   }
 
   detail(a:any){
     this.route.navigate(['pharmacie/detailMed',a]);
   }
   supprimer(a:any){
-    console.log(a)
     const conf:boolean=confirm("Voullez-vous Vraiment retirer ce Medicament de la base de donnée?");
     if(conf==true){
-      this.pharService.supprimerMedicament(a).subscribe({
+      this.medicamentService.supprimerMedicament(a).subscribe({
         next:(v)=>{
 
       },
@@ -90,18 +101,17 @@ export class MedicamentViewComponent implements OnInit {
 
 }
 
-applyFilterGlobal($event:any, stringVal:any) {
+  applyFilterGlobal($event:any, stringVal:any) {
   this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
 }
 
-getEventValue($event:any) :string {
-  console.log($event.target.value);
+  getEventValue($event:any) :string {
+
   return $event.target.value;
 } 
 
-toggleLock(data:any, frozen:any, index:any) {
+ toggleLock(data:any, frozen:any, index:any) {
 
-  console.log(data);
     if (frozen) {
         this.lockedCustomers = this.lockedCustomers.filter((c, i) => i !== index);
         this.unlockedCustomers.push(data);
@@ -115,9 +125,9 @@ toggleLock(data:any, frozen:any, index:any) {
         return val1.id < val2.id ? -1 : 1;
     });
 }
- openNew() {
-  this.personneDialog = true;
-}
+    openNew() {
+    this.personneDialog = true;
+    }
 
 exportPdf() {
 

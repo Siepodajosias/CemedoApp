@@ -32,7 +32,7 @@ import { PatientViewComponent } from 'src/app/modules/patient/composents/patient
 import { PatientDetailComponent } from 'src/app/modules/patient/composents/patient-detail/patient-detail.component';
 import { PatientFormsComponent } from 'src/app/modules/patient/composents/patient-view2/patient-forms.component';
 import { PatientDossierComponent } from 'src/app/modules/patient/composents/patient-dossier/patient-dossier.component';
-import { PatientService } from "src/app/services/servicePatient/patient.service";
+import { PatientService } from "src/app/services/ServicePatient/patient.service";
 import { OrdonnanceComponent } from 'src/app/modules/patient/composents/ordonnance/ordonnance.component';
 
 //primeng
@@ -59,6 +59,9 @@ import { ToolbarModule } from 'primeng/toolbar';
 
 import { SharedModule } from "src/app/shared/shared.module";
 import { HttpClientModule } from '@angular/common/http';
+import { TagModule } from 'primeng/tag';
+import { CalendarModule } from 'primeng/calendar';
+import { MedecinService } from 'src/app/services/ServiceMedecin/medecin.service';
 
 @NgModule({
   declarations: [ 
@@ -69,60 +72,62 @@ import { HttpClientModule } from '@angular/common/http';
     OrdonnanceComponent,
 
   ],
-  imports: [
-    CommonModule,
-    chartjsModule,
-    NgxEchartsModule.forRoot({
-      echarts: () => import("echarts"),
-    }),
-    SharedModule,
-    PerfectScrollbarModule,
-    MatIconModule,
-    MatTableModule,
-    MatMenuModule,
-    MatPaginatorModule,
-    MatButtonModule,
-    MatChipsModule,
-    PatientRoutingModule,
-    NgApexchartsModule,
-    MatSnackBarModule,
-    MatFormFieldModule,
-    MatTabsModule,
-    MatDatepickerModule,
-    MatSelectModule,
-    MatCheckboxModule,
-    MatInputModule,
-    MatTooltipModule,
-    MatRadioModule,
-    ComponentsModule,
-    MatDialogModule,
-    HttpClientModule,
-  
-    ToastrModule.forRoot({}),
-    MatCardModule,
-    ReactiveFormsModule, 
-    FormsModule,
+	imports: [
+		CommonModule,
+		chartjsModule,
+		NgxEchartsModule.forRoot({
+			echarts: () => import('echarts'),
+		}),
+		SharedModule,
+		PerfectScrollbarModule,
+		MatIconModule,
+		MatTableModule,
+		MatMenuModule,
+		MatPaginatorModule,
+		MatButtonModule,
+		MatChipsModule,
+		PatientRoutingModule,
+		NgApexchartsModule,
+		MatSnackBarModule,
+		MatFormFieldModule,
+		MatTabsModule,
+		MatDatepickerModule,
+		MatSelectModule,
+		MatCheckboxModule,
+		MatInputModule,
+		MatTooltipModule,
+		MatRadioModule,
+		ComponentsModule,
+		MatDialogModule,
+		HttpClientModule,
 
-    CardModule,
-    TableModule,
-    ButtonModule,
-    ToastModule,
-    DialogModule,
-    ConfirmDialogModule,
-    MultiSelectModule,
-    DropdownModule,
-    AutoCompleteModule,
+		ToastrModule.forRoot({}),
+		MatCardModule,
+		ReactiveFormsModule,
+		FormsModule,
 
-    ChipsModule,
-    ContextMenuModule,
-    ProgressBarModule,
-    SliderModule,
-    RippleModule,
-    OrderListModule,
-    DividerModule ,
-    MenubarModule, 
-    ToolbarModule
+		CardModule,
+		TableModule,
+		ButtonModule,
+		ToastModule,
+		DialogModule,
+		ConfirmDialogModule,
+		MultiSelectModule,
+		DropdownModule,
+		AutoCompleteModule,
 
-  ],providers:[PatientService,MessageService,ConfirmationService]
+		ChipsModule,
+		ContextMenuModule,
+		ProgressBarModule,
+		SliderModule,
+		RippleModule,
+		OrderListModule,
+		DividerModule,
+		MenubarModule,
+		ToolbarModule,
+		TagModule,
+		CalendarModule
+
+	],providers:[PatientService,MedecinService,MessageService,ConfirmationService]
 })
 export class PatientModule {}

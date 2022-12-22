@@ -2,7 +2,7 @@
   <div class="content-block">
     <div class="block-header">
       <!-- breadcrumb -->
-      <app-breadcrumb [title]="'Patient'" [items]="[]" [active_item]="InfoPat"></app-breadcrumb>
+      <app-breadcrumb [title]="'Patient'" [items]="[]" [active_item]="InfoPatient" *ngIf="users"></app-breadcrumb>
     </div>
     <div class="surface-ground px-4 py-5 md:px-6 lg:px-8">
       <div class="grid">
@@ -132,7 +132,7 @@
                 <div class="row">
                   <div class="col-md-12 col-xl-12">
                     <div class="row">
-                      <div class="col-md-4">
+                      <div class="col-md-4" *ngIf="users">
                         
                         <div class="progress-list m-b-10">
                           <div class="details">
@@ -146,7 +146,7 @@
                         </div>
                         <div class="progress-list m-b-10">
                           <div class="details">
-                            <div class="title">Genre :{{users.genre}} </div>
+                            <div class="title" *ngIf="users.genre">Genre :{{users.genre.libelle}} </div>
                           </div>
                         </div>
                         <div class="progress-list m-b-10">
@@ -156,7 +156,7 @@
                         </div>
                         <div class="progress-list m-b-10">
                           <div class="details">
-                            <div class="title">Residence :{{md2.lieuHabitation}}</div>
+                            <div class="title" *ngIf="md2">Residence :{{md2.lieuHabitation}}</div>
                           </div>
                         </div>
                         <div class="progress-list m-b-10">
@@ -171,22 +171,22 @@
                         </div>
                         <div class="progress-list m-b-10">
                           <div class="details">
-                            <div class="title">Assurance : {{md2.assurance.libelle}}</div>
+                            <div class="title" *ngIf="md2">Assurance : {{md2.assurance.libelle}}</div>
                           </div>
                         </div>
                         <div class="progress-list m-b-10">
                           <div class="details">
-                            <div class="title">Taux d'assurance :{{md2.tauxCouverture}}</div>
+                            <div class="title" *ngIf="md2">Taux d'assurance :{{md2.tauxCouverture}} %</div>
                           </div>
                         </div>
                         <div class="progress-list m-b-10">
                           <div class="details">
-                            <div class="title">Numéro d'assurance : {{md2.numeroAssure}} </div>
+                            <div class="title" *ngIf="md2">Numéro d'assurance : {{md2.numeroAssure}} </div>
                           </div>
                         </div>
                         <div class="progress-list m-b-10">
                           <div class="details">
-                            <div class="title">Profession: {{md2.profession}}</div>
+                            <div class="title" *ngIf="md2">Profession: {{md2.profession}}</div>
                           </div>
                         </div>
                       </div>

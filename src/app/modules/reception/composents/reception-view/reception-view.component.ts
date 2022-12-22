@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ReceptionService } from 'src/app/services/serviceReception/reception.service';
+import { ReceptionService } from 'src/app/services/ServiceReception/reception.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Reception } from 'src/app/models/modelReception/reception';

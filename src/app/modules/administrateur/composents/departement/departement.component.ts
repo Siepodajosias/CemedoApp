@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MedecinSpecialiteService, Specialite } from 'src/app/services/serviceMedecin/medecin-specialite.service';
+import { MedecinSpecialiteService, Specialite } from 'src/app/services/ServiceMedecin/medecin-specialite.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfirmationService, MessageService, PrimeNGConfig } from 'primeng/api';

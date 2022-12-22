@@ -18,9 +18,8 @@ import { MedicamentViewComponent } from 'src/app/modules/pharmacie/composents/me
 import { PharmacienViewComponent } from 'src/app/modules/pharmacie/composents/pharmacien-view/pharmacien-view.component';
 import { PharmacienDetailComponent } from 'src/app/modules/pharmacie/composents/pharmacien-detail/pharmacien-detail.component';
 import { MedicamentDetailComponent } from 'src/app/modules/pharmacie/composents/medicament-detail/medicament-detail.component';
-import { MedicamentFormsComponent } from 'src/app/modules/pharmacie/composents/medicament-view/medicament-forms.component';
 import { DashboardPharmacieComponent } from 'src/app/modules/pharmacie/dashboard-pharmacie/dashboard-pharmacie.component';
-import { PharmacienService } from 'src/app/services/servicePharmacie/pharmacien.service';
+import { PharmacienService } from 'src/app/services/ServicePharmacie/pharmacien.service';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -55,6 +54,7 @@ import { VenteViewComponent } from 'src/app/modules/pharmacie/composents/vente-v
 import { DepenseViewComponent } from 'src/app/modules/pharmacie/composents/depense-view/depense-view.component';
 import { CategorieMedicamentViewComponent } from 'src/app/modules/pharmacie/composents/categorie-medicament-view/categorie-medicament-view.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MedicamentService } from 'src/app/services/ServicePharmacie/medicament.service';
 
 
 @NgModule({
@@ -63,7 +63,6 @@ import { HttpClientModule } from '@angular/common/http';
     PharmacienViewComponent,
     PharmacienDetailComponent,
     MedicamentDetailComponent,
-    MedicamentFormsComponent,
     DashboardPharmacieComponent,
     VenteViewComponent,
     DepenseViewComponent,
@@ -113,6 +112,6 @@ import { HttpClientModule } from '@angular/common/http';
     MenuModule
 
     
-  ],providers:[PharmacienService,ConfirmationService,MessageService]
+  ],providers:[PharmacienService,ConfirmationService,MessageService,MedicamentService]
 })
 export class PharmacieModule { }

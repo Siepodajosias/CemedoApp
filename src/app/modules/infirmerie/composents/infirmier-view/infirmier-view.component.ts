@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { InfirmierService } from 'src/app/services/serviceInfirmerie/infirmier.service';
+import { InfirmierService } from 'src/app/services/ServiceInfirmerie/infirmier.service';
 import { Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';

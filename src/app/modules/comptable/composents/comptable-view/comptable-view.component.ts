@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ComptableService } from 'src/app/services/serviceComptable/comptable.service';
+import { ComptableService } from 'src/app/services/ServiceComptable/comptable.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Comptable } from 'src/app/models/modelComptable/comptable';
@@ -11,7 +11,6 @@ import { UserOptions } from 'jspdf-autotable';
 import { Table } from 'primeng/table';
 import { PrimeNGConfig } from 'primeng/api';
 import { EmployeService } from 'src/app/shared-cemedo/employe/employe.service';
-import { Assurance } from 'src/app/models/modelAssurance/assurance';
 
 interface jsPDFWithPlugin extends jspdf.jsPDF {
 	autoTable: (options: UserOptions) => jspdf.jsPDF;

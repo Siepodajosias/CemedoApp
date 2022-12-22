@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { ComptableViewComponent } from 'src/app/modules/comptable/composents/comptable-view/comptable-view.component';
 import { ComptableDetailComponent } from 'src/app/modules/comptable/composents/comptable-detail/comptable-detail.component';
-import { ComptableService } from 'src/app/services/serviceComptable/comptable.service';
+import { ComptableService } from 'src/app/services/ServiceComptable/comptable.service';
 import { MatTableModule } from "@angular/material/table";
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatPaginatorModule } from "@angular/material/paginator";

@@ -36,7 +36,7 @@ import { ProfileMedecinComponent } from 'src/app/modules/medecin/composents/prof
 import { DashboardMedecinComponent } from "src/app/modules/medecin/dashboard-medecin/dashboard-medecin.component";
 import { RapportComponent } from 'src/app/modules/medecin/composents/rapport/rapport.component';
 import { MedecinCalendrierComponent } from 'src/app/modules/medecin/composents/medecin-calendrier/medecin-calendrier.component';
-import { MedecinService } from "src/app/services/serviceMedecin/medecin.service";
+import { MedecinService } from "src/app/services/ServiceMedecin/medecin.service";
 import { FactureComponent } from "src/app/modules/medecin/composents/facture/facture.component";
 import { RendezVousCalendrierComponent } from 'src/app/modules/medecin/composents/rendez-vous-calendrier/rendez-vous-calendrier.component';
 import { RendezVousViewComponent } from 'src/app/modules/medecin/composents/rendez-vous-view/rendez-vous-view.component';
@@ -71,8 +71,15 @@ import { MenuModule } from 'primeng/menu';
 import { FieldsetModule} from 'primeng/fieldset';
 import { HttpClientModule } from '@angular/common/http';
 import { EmployeModule } from 'src/app/shared-cemedo/employe/employe.module';
-import { TypeMedecinService } from 'src/app/services/serviceMedecin/type-medecin.service';
-import { MedecinSpecialiteService } from 'src/app/services/serviceMedecin/medecin-specialite.service';
+import { TypeMedecinService } from 'src/app/services/ServiceMedecin/type-medecin.service';
+import { MedecinSpecialiteService } from 'src/app/services/ServiceMedecin/medecin-specialite.service';
+import { VideoComponent } from 'src/app/modules/medecin/composents/video/video.component';
+import { AppelComponent } from 'src/app/modules/medecin/composents/appel/appel.component';
+import { NgxAgoraService } from 'ngx-agora';
+import { RendezVousService } from 'src/app/services/ServiceMedecin/rendez-vous.service';
+import { TagModule } from 'primeng/tag';
+
+import {InputTextareaModule} from 'primeng/inputtextarea';
 
 
 @NgModule({
@@ -87,7 +94,9 @@ import { MedecinSpecialiteService } from 'src/app/services/serviceMedecin/medeci
     RendezVousCalendrierComponent,
     RendezVousViewComponent,
     ProgrammeComponent,
-    VacanceComponent
+    VacanceComponent,
+    VideoComponent,
+    AppelComponent
 
   ],
   imports: [
@@ -95,7 +104,7 @@ import { MedecinSpecialiteService } from 'src/app/services/serviceMedecin/medeci
     MedecinRoutingModule,
     chartjsModule,
     NgxEchartsModule.forRoot({
-      echarts: () => import("echarts"),
+      echarts: () => import('echarts'),
     }),
     PerfectScrollbarModule,
     MatIconModule,
@@ -142,17 +151,19 @@ import { MedecinSpecialiteService } from 'src/app/services/serviceMedecin/medeci
     SliderModule,
     RippleModule,
     OrderListModule,
-    DividerModule ,
-    MenubarModule, 
+    DividerModule,
+    MenubarModule,
     ToolbarModule,
     CalendarModule,
     SpeedDialModule,
     MenuModule,
     FieldsetModule,
-    EmployeModule
+    EmployeModule,
+    TagModule,
+    InputTextareaModule
 
-  ], providers: [MedecinService,MessageService ,
-                ConfirmationService,TypeMedecinService,MedecinSpecialiteService
+  ], providers: [MedecinService,MessageService ,NgxAgoraService,
+                ConfirmationService,TypeMedecinService,MedecinSpecialiteService,RendezVousService,
 
     //{provide: OWL_DATE_TIME_LOCALE, useValue: 'fr'},
 

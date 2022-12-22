@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Assurance } from 'src/app/models/modelAssurance/assurance';
-import { AssuranceService } from 'src/app/services/serviceAssurance/assurance.service';
+import { AssuranceService } from 'src/app/services/ServiceAssurance/assurance.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Table } from 'primeng/table';

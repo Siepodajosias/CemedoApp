@@ -35,7 +35,9 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
 import interactionPlugin from "@fullcalendar/interaction";
-import { ApiUrlInterceptor } from 'src/app/services/interceptorService/api-url-interceptor.service';
+import { ApiUrlInterceptor } from 'src/app/services/ServiceInterceptor/api-url-interceptor.service';
+import { NgxAgoraModule } from 'ngx-agora';
+import { agora } from 'src/app/models/modelMedecin/agora';
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
   interactionPlugin,
@@ -59,7 +61,7 @@ export function createTranslateLoader(http: HttpClient): any {
         SidebarComponent,
         RightSidebarComponent,
         AuthLayoutComponent,
-        MainLayoutComponent,
+        MainLayoutComponent
     ],
     imports: [
         BrowserModule,
@@ -79,6 +81,7 @@ export function createTranslateLoader(http: HttpClient): any {
         // core & shared
         CoreModule,
         SharedModule,
+        NgxAgoraModule.forRoot({AppID: agora.agora.appId}),
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

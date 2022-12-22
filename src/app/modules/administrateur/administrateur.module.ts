@@ -8,7 +8,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { AdministrateurRoutingModule } from "src/app/modules/administrateur/administrateur-routing.module";
 import { ComponentsModule } from "src/app/shared/components/components.module";
 import { FactureComponent } from "src/app/modules/administrateur/composents/facture/facture.component";
-import { AdminService } from "src/app/services/serviceAdministrateur/admin.service";
+import { AdminService } from "src/app/services/ServiceAdministrateur/admin.service";
 import { MatTabsModule } from "@angular/material/tabs";
 import { NgApexchartsModule } from "ng-apexcharts";
 import { RendezVousCalendrierComponent } from 'src/app/modules/administrateur/composents/rendez-vous-calendrier/rendez-vous-calendrier.component';
@@ -41,7 +41,7 @@ import { SpeedDialModule } from 'primeng/speeddial';
 import { MenuModule } from 'primeng/menu';
 import { FieldsetModule} from 'primeng/fieldset';
 import { HttpClientModule } from '@angular/common/http';
-import { MedecinSpecialiteService } from 'src/app/services/serviceMedecin/medecin-specialite.service';
+import { MedecinSpecialiteService } from 'src/app/services/ServiceMedecin/medecin-specialite.service';
 import { ReactiveFormsModule } from '@angular/forms';
 
 

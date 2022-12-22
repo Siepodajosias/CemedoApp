@@ -8,7 +8,7 @@ import 'jspdf-autotable'
 import { UserOptions } from 'jspdf-autotable';
 import { Table } from 'primeng/table'
 
-import { InformaticienService } from 'src/app/services/serviceInformatique/informaticien.service';
+import { InformaticienService } from 'src/app/services/ServiceInformatique/informaticien.service';
 import { Informaticien} from 'src/app/models/modelInformatique/informaticien';
 
 

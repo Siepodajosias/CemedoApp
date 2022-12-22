@@ -19,7 +19,7 @@ import { ReceptionViewComponent } from 'src/app/modules/reception/composents/rec
 
 import { ReceptionRoutingModule } from 'src/app/modules/reception/reception-routing.module';
 import { DashboardReceptionComponent } from 'src/app/modules/reception/dashboard-reception/dashboard-reception.component';
-import { ReceptionService } from 'src/app/services/serviceReception/reception.service';
+import { ReceptionService } from 'src/app/services/ServiceReception/reception.service';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';

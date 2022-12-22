@@ -1,0 +1,53 @@
+<p-table #dt
+
+		 currentPageReportTemplate="Affichage de {first} à {last} sur  {totalRecords} entrées"
+>
+
+	<ng-template pTemplate="header">
+		<tr>
+			<th style="width: 3rem">
+				<p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+			</th>
+			<!--<th pResizableColumn pSortableColumn="id">id <p-sortIcon field="id"></p-sortIcon></th>-->
+			<th pResizableColumn pSortableColumn="dateDebut">Date debut <p-sortIcon field="dateDebut"></p-sortIcon></th>
+
+			<th pResizableColumn pSortableColumn="assure.user.fullName">Assure<p-sortIcon field="assure.user.fullName"></p-sortIcon></th>
+
+			<th pResizableColumn>Actions</th>
+		</tr>
+		<tr>
+			<th style="width: 3rem">
+				<p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+			</th>
+			<!-- <th>
+				 <p-columnFilter type="text" field="id"></p-columnFilter>
+			 </th>-->
+
+			<th>
+				<p-columnFilter type="text" field="dateDebut"></p-columnFilter>
+			</th>
+
+			<th>
+				<p-columnFilter type="text" field="assure.user.fullName"></p-columnFilter>
+			</th>
+			<th></th>
+		</tr>
+	</ng-template>
+	<ng-template pTemplate="body" let-element>
+		<tr [pSelectableRow]="element">
+			<td>
+				<p-tableCheckbox [value]="element"></p-tableCheckbox>
+			</td>
+			<!--<td>{{element.id}}</td>-->
+			<td>{{element.dateDebut | date: "dd/mm/yyyy" }}</td>
+			<td>{{element.assure.user.fullName}}</td>
+			<td width="300px">
+				<button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success  btn-sm btn-edit" label="Assigner traitant" ></button> &nbsp;
+				<button pButton pRipple icon="pi pi-check"  label="Participer" class="p-button p-button-help btn-sm btn-view"  ></button>&nbsp;
+			</td>
+		</tr>
+	</ng-template>
+	<ng-template pTemplate="summary">
+
+	</ng-template>
+</p-table>

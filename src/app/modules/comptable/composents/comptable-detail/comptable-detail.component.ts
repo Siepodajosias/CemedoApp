@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ComptableService } from 'src/app/services/serviceComptable/comptable.service';
+import { ComptableService } from 'src/app/services/ServiceComptable/comptable.service';
 
 @Component({
   selector: 'app-comptable-detail',

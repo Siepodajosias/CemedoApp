@@ -31,7 +31,7 @@ export type ChartOptions = {
 };
 
 import { ActivatedRoute} from '@angular/router';
-import { MedecinService } from 'src/app/services/serviceMedecin/medecin.service';
+import { MedecinService } from 'src/app/services/ServiceMedecin/medecin.service';
 import { Medecin } from 'src/app/models/modelMedecin/medecin';
 
 @Component({

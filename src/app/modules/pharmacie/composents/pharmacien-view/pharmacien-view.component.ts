@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { PharmacienService } from 'src/app/services/servicePharmacie/pharmacien.service';
+import { PharmacienService } from 'src/app/services/ServicePharmacie/pharmacien.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfirmationService, MessageService, PrimeNGConfig } from 'primeng/api';
@@ -10,7 +10,6 @@ import 'jspdf-autotable';
 import { UserOptions } from 'jspdf-autotable';
 import { Table } from 'primeng/table';
 import { EmployeService } from 'src/app/shared-cemedo/employe/employe.service';
-import { Infirmier } from 'src/app/models/modelInfirmier/infirmier';
 
 interface jsPDFWithPlugin extends jspdf.jsPDF {
 	autoTable: (options: UserOptions) => jspdf.jsPDF;

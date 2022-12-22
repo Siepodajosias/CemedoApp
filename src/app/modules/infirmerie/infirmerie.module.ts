@@ -11,7 +11,7 @@ import { InfirmierViewComponent } from 'src/app/modules/infirmerie/composents/in
 import { InfirmierDetailComponent } from 'src/app/modules/infirmerie/composents/infirmier-detail/infirmier-detail.component';
 import { DashboardInfirmerieComponent } from 'src/app/modules/infirmerie/dashboard-infirmerie/dashboard-infirmerie.component';
 import { InfirmierCalendrierComponent } from 'src/app/modules/infirmerie/composents/infirmier-calendrier/infirmier-calendrier.component';
-import { InfirmierService } from 'src/app/services/serviceInfirmerie/infirmier.service';
+import { InfirmierService } from 'src/app/services/ServiceInfirmerie/infirmier.service';
 
 //primeng
 import { CardModule} from 'primeng/card'

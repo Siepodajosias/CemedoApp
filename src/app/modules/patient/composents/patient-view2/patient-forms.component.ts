@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Patient } from 'src/app/models/modelPatient/patient';
-import { PatientService } from 'src/app/services/servicePatient/patient.service';
+import { PatientService } from 'src/app/services/ServicePatient/patient.service';
 
 
 @Component({

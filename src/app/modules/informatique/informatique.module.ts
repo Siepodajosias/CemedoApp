@@ -7,7 +7,7 @@ import { NgApexchartsModule } from "ng-apexcharts";
 //components
 import { InformatiqueRoutingModule } from 'src/app/modules/informatique/informatique-routing.module';
 import { DashboardInformatiqueComponent } from 'src/app/modules/informatique/dashboard-informatique/dashboard-informatique.component';
-import { InformaticienService } from 'src/app/services/serviceInformatique/informaticien.service';
+import { InformaticienService } from 'src/app/services/ServiceInformatique/informaticien.service';
 import { InformaticienViewComponent } from 'src/app/modules/informatique/composents/informaticien-view/informaticien-view.component';
 
 //primeng

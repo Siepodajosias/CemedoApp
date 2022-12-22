@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Patient1} from 'src/app/models/modelPatient/patient1';
-import { PatientService } from 'src/app/services/servicePatient/patient.service';
+import { PatientService } from 'src/app/services/ServicePatient/patient.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { doctor } from 'src/app/modules/patient/composents/data/multi';
