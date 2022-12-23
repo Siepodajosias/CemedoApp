@@ -55,6 +55,7 @@ import { DepenseViewComponent } from 'src/app/modules/pharmacie/composents/depen
 import { CategorieMedicamentViewComponent } from 'src/app/modules/pharmacie/composents/categorie-medicament-view/categorie-medicament-view.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MedicamentService } from 'src/app/services/ServicePharmacie/medicament.service';
+import { PartagerModule } from 'src/app/shared-cemedo/partager/partager.module';
 
 
 @NgModule({
@@ -89,11 +90,6 @@ import { MedicamentService } from 'src/app/services/ServicePharmacie/medicament.
     HttpClientModule,
 
     CardModule,
-    TableModule,
-    ButtonModule,
-    ToastModule,
-    DialogModule,
-    ConfirmDialogModule,
     MultiSelectModule,
     DropdownModule,
     AutoCompleteModule,
@@ -107,9 +103,9 @@ import { MedicamentService } from 'src/app/services/ServicePharmacie/medicament.
     DividerModule ,
     MenubarModule, 
     ToolbarModule,
-    CalendarModule,
     SpeedDialModule,
-    MenuModule
+    MenuModule,
+    PartagerModule
 
     
   ],providers:[PharmacienService,ConfirmationService,MessageService,MedicamentService]

@@ -42,6 +42,7 @@ import { MenubarModule } from 'primeng/menubar';
 import { ToolbarModule } from 'primeng/toolbar';
 import { CalendarModule} from 'primeng/calendar';
 import { HttpClientModule } from '@angular/common/http';
+import { PartagerModule } from 'src/app/shared-cemedo/partager/partager.module';
 
 @NgModule({
   declarations: [
@@ -73,15 +74,9 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
 
     CardModule,
-    TableModule,
-    ButtonModule,
-    ToastModule,
-    DialogModule,
-    ConfirmDialogModule,
     MultiSelectModule,
     DropdownModule,
     AutoCompleteModule,
-
     ChipsModule,
     ContextMenuModule,
     ProgressBarModule,
@@ -91,7 +86,7 @@ import { HttpClientModule } from '@angular/common/http';
     DividerModule ,
     MenubarModule, 
     ToolbarModule,
-    CalendarModule
+    PartagerModule
 
   ],providers:[MessageService,ConfirmationService,AssuranceService]
 })

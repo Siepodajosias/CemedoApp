@@ -46,12 +46,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 
 //primeng
 import { CardModule} from 'primeng/card'
-import { ToastModule} from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-import { TableModule} from 'primeng/table';
-import { ButtonModule} from 'primeng/button';
-import { DialogModule} from 'primeng/dialog';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { MultiSelectModule} from 'primeng/multiselect';
 import { DropdownModule} from 'primeng/dropdown';
@@ -65,12 +60,10 @@ import { OrderListModule } from 'primeng/orderlist';
 import { DividerModule } from 'primeng/divider';
 import { MenubarModule } from 'primeng/menubar';
 import { ToolbarModule } from 'primeng/toolbar';
-import { CalendarModule } from 'primeng/calendar';
 import { SpeedDialModule } from 'primeng/speeddial';
 import { MenuModule } from 'primeng/menu';
 import { FieldsetModule} from 'primeng/fieldset';
 import { HttpClientModule } from '@angular/common/http';
-import { EmployeModule } from 'src/app/shared-cemedo/employe/employe.module';
 import { TypeMedecinService } from 'src/app/services/ServiceMedecin/type-medecin.service';
 import { MedecinSpecialiteService } from 'src/app/services/ServiceMedecin/medecin-specialite.service';
 import { VideoComponent } from 'src/app/modules/medecin/composents/video/video.component';
@@ -78,9 +71,10 @@ import { AppelComponent } from 'src/app/modules/medecin/composents/appel/appel.c
 import { NgxAgoraService } from 'ngx-agora';
 import { RendezVousService } from 'src/app/services/ServiceMedecin/rendez-vous.service';
 import { TagModule } from 'primeng/tag';
+import {TabViewModule} from 'primeng/tabview';
 
 import {InputTextareaModule} from 'primeng/inputtextarea';
-
+import { PartagerModule } from 'src/app/shared-cemedo/partager/partager.module';
 
 @NgModule({
   declarations: [
@@ -137,11 +131,6 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 
     HttpClientModule,
     CardModule,
-    TableModule,
-    ButtonModule,
-    ToastModule,
-    DialogModule,
-    ConfirmDialogModule,
     MultiSelectModule,
     DropdownModule,
     AutoCompleteModule,
@@ -154,13 +143,13 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
     DividerModule,
     MenubarModule,
     ToolbarModule,
-    CalendarModule,
     SpeedDialModule,
     MenuModule,
     FieldsetModule,
-    EmployeModule,
     TagModule,
-    InputTextareaModule
+    InputTextareaModule,
+    TabViewModule,
+    PartagerModule
 
   ], providers: [MedecinService,MessageService ,NgxAgoraService,
                 ConfirmationService,TypeMedecinService,MedecinSpecialiteService,RendezVousService,

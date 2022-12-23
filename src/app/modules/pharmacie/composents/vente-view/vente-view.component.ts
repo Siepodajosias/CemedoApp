@@ -49,7 +49,7 @@ export class VenteViewComponent implements OnInit {
 
     this.pharService.recupererMedicament().subscribe({
       next: (value: any) => {
-        this.posts = value ? value : []
+        this.posts = value;
 
       },
       error: (e) => { console.log("erreur :" + e) },

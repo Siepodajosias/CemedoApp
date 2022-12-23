@@ -36,7 +36,7 @@ import {
 	ApexLegend,
 	ApexFill,
 } from 'ng-apexcharts';
-import { EmployeService } from 'src/app/shared-cemedo/employe/employe.service';
+import { EmployeService } from 'src/app/services/ServiceEmploye/employe.service';
 
 export type ChartOptions = {
 	series: ApexAxisChartSeries;

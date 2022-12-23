@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { FactureComponent } from "src/app/modules/administrateur/composents/facture/facture.component";
 import { RendezVousCalendrierComponent } from 'src/app/modules/administrateur/composents/rendez-vous-calendrier/rendez-vous-calendrier.component';
 import { DepartementComponent } from 'src/app/modules/administrateur/composents/departement/departement.component';
+import { ParametrageComponent } from 'src/app/modules/administrateur/composents/parametrage/parametrage.component';
 const routes: Routes = [
   {
     path: 'dashboard',
@@ -51,7 +52,7 @@ const routes: Routes = [
   {path:'calendrier',component:RendezVousCalendrierComponent},
   {path:'informatique',loadChildren:()=>import('src/app/modules/informatique/informatique.module').then((m)=>m.InformatiqueModule)},
   {path:'logistique',loadChildren:()=>import('src/app/modules/logistique/logistique.module').then((m)=>m.LogistiqueModule)},
-
+  {path:'parametrage',component:ParametrageComponent}
 
 ];
 

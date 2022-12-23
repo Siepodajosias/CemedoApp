@@ -157,8 +157,8 @@
 								<span *ngIf="rendezVous.assure">{{rendezVous.assure.user.nom}}</span>
 								<span *ngIf="rendezVous.assure==null">  </span>
 							</td>
-							<td>{{rendezVous.updatedAt}}</td>
-							<td>{{rendezVous.dateHeure}}</td>
+							<td>{{rendezVous.updatedAt |date:'dd-MM-yyyy'}}</td>
+							<td>{{rendezVous.dateHeure |date:'dd-MM-yyyy'}}</td>
 
 							<td>
 								<span *ngIf="rendezVous.lieu">{{rendezVous.lieu}}</span>
@@ -205,7 +205,7 @@
 						  </span>
 						</div>
 
-						<div class="col-12 md:col-6 lg:col-4" *ngIf="medecinActif()">
+						<div class="col-12 md:col-6 lg:col-4">
 							<label>Medecin</label>
 							<p-autoComplete  formControlName="medecin" [virtualScroll]="true" [suggestions]="medecinsForm"  (completeMethod)="medecinItems($event)" field="user.nom" [dropdown]="true">
 							</p-autoComplete>
@@ -224,19 +224,30 @@
 						</div>
 
 						<div class="col-12">
-							<p-divider align="center" type="dashed" layout="horizontal">
+							<p-divider align="left" type="dashed" layout="horizontal">
 								<div class="inline-flex align-items-center">
-									<i class="pi pi-user mr-2"></i>
-									<b>Contacts</b>
+									<i class="pi pi-home mr-2"></i>
+									<b>Adresses</b>
 								</div>
 							</p-divider>
 
 						</div>
 
+						<div class="col-12 md:col-12 lg:col-12">
+							<label>Ville</label>
+							<p-autoComplete  formControlName="ville" [virtualScroll]="true" [suggestions]="villeForm"  (completeMethod)="villesItems($event)" field="libelle" [dropdown]="true">
+							</p-autoComplete>
+						</div>
+
+						<div class="col-12 md:col-12 lg:col-12">
+							<label>Lieu</label>
+							<input type="text" pInputText formControlName="lieu">
+						</div>
 						<div class="col-12">
 							<span>
 							  <label>Adresse</label>
-							  <input type="text" pInputText formControlName="adresse">
+							<p-autoComplete  formControlName="adresse" [virtualScroll]="true" [suggestions]="adresseForm"  (completeMethod)="adressesItems($event)" field="libelle" [dropdown]="true">
+							</p-autoComplete>
 							</span>
 						</div>
 						<div class="col-12">

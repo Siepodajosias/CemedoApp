@@ -10,7 +10,7 @@ import 'jspdf-autotable';
 import { UserOptions } from 'jspdf-autotable';
 import { Table } from 'primeng/table';
 import { PrimeNGConfig } from 'primeng/api';
-import { EmployeService } from 'src/app/shared-cemedo/employe/employe.service';
+import { EmployeService } from 'src/app/services/ServiceEmploye/employe.service';
 
 interface jsPDFWithPlugin extends jspdf.jsPDF {
 	autoTable: (options: UserOptions) => jspdf.jsPDF;
@@ -59,6 +59,7 @@ export class ComptableViewComponent implements OnInit {
 	ngOnInit(): void {
 
 		this.recupererComptable();
+		this.recupererConfig();
 		this.comptableForms = this.comptableForm.group({
 			id: null,
 			nom: ['', [Validators.required, Validators.minLength(3)]],
@@ -103,41 +104,10 @@ export class ComptableViewComponent implements OnInit {
 			fcmTokenUpdate: '',
 			typeEmployeUpdate: null
 		});
-		this.primeNgConfig.setTranslation({
-			monthNames: ['Janvier',
-				'Fevrier',
-				'Mars',
-				'Avril',
-				'Mai',
-				'Juin',
-				'Juillet',
-				'Août',
-				'Septembre',
-				'Octobre',
-				'Novembre',
-				'Decembre'],
-			dayNamesShort: ['Dim.',
-				'Lun.',
-				'Mar.',
-				'Mer.',
-				'Jeu.',
-				'Ven.',
-				'Sam.'],
-			startsWith: 'Commence par',
-			contains: 'Contient',
-			notContains: 'Ne contient pas',
-			endsWith: 'Fini par',
-			equals: 'Egale à',
-			notEquals: 'différent de',
-			noFilter: 'Pas de filtre',
-			reject: 'Non',
-			accept: 'Oui'
-		});
+
 	}
 
-	comptableDetail(a: any) {
-		//this.route.navigate(['administrateur/detailM', a]);
-	}
+	comptableDetail(a: any) {}
 
 	saveAsExcelFile(buffer: any, fileName: string): void {
 
@@ -221,6 +191,10 @@ export class ComptableViewComponent implements OnInit {
 		comptable.fcmToken = '';
 		comptable.role = null;
 
+	   this.enregistrement(comptable);
+	}
+
+	enregistrement(comptable: Comptable):void{
 		this.comptableService.enregistrerComptable(comptable).subscribe({
 			next: (v) => {
 				this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'Le comptable a été enregistré' });
@@ -239,7 +213,7 @@ export class ComptableViewComponent implements OnInit {
 		this.comptableService.recupererComptable().subscribe({
 			next: (value) => {
 				const data = value.data;
-				this.comptables = data ? data : [];
+				this.comptables = data;
 			}, complete: () => {
 				this.loading = false;
 			}
@@ -247,13 +221,13 @@ export class ComptableViewComponent implements OnInit {
 		this.employeService.recupererTypeEmploye().subscribe({
 			next: (value) => {
 				const data = value.data;
-				this.employes = data ? data : [];
+				this.employes = data;
 			}
 		});
 		this.employeService.recupererGenre().subscribe({
 			next: (value) => {
 				const data = value.data;
-				this.genres = data ? data : [];
+				this.genres = data;
 			}
 		});
 	}
@@ -276,6 +250,10 @@ export class ComptableViewComponent implements OnInit {
 		comptable.fcmToken = '';
 		comptable.role =0;
 
+		this.modification(comptable);
+	}
+
+	modification(comptable:Comptable):void{
 		this.comptableService.modificationComptable(comptable).subscribe({
 			next: () => {
 				this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'Le comptable a été modifié' });
@@ -343,6 +321,38 @@ export class ComptableViewComponent implements OnInit {
 			genreUpdate: comptable.user.genre,
 			dateNaissanceUpdate:comptable.user.dateNaissance,
 			typeEmployeUpdate: comptable.typeEmploye
+		});
+	}
+	recupererConfig():void{
+		this.primeNgConfig.setTranslation({
+			monthNames: ['Janvier',
+				'Fevrier',
+				'Mars',
+				'Avril',
+				'Mai',
+				'Juin',
+				'Juillet',
+				'Août',
+				'Septembre',
+				'Octobre',
+				'Novembre',
+				'Decembre'],
+			dayNamesShort: ['Dim.',
+				'Lun.',
+				'Mar.',
+				'Mer.',
+				'Jeu.',
+				'Ven.',
+				'Sam.'],
+			startsWith: 'Commence par',
+			contains: 'Contient',
+			notContains: 'Ne contient pas',
+			endsWith: 'Fini par',
+			equals: 'Egale à',
+			notEquals: 'différent de',
+			noFilter: 'Pas de filtre',
+			reject: 'Non',
+			accept: 'Oui'
 		});
 	}
 }

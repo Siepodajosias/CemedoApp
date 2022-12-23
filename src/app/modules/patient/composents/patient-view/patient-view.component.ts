@@ -48,59 +48,22 @@ export class PatientViewComponent implements OnInit {
    serie: ApexAxisChartSeries;
    chart:ApexChart;
    options: any;
-  constructor(private patientH: PatientService,
+   patientDialog: boolean=false;
+  constructor(private patientService: PatientService,
               private route:Router,
               private primeNgConfig: PrimeNGConfig) {}
   ngOnInit(): void {
-   this.patientH.recupererPatient().subscribe({
-      next: (value: any) => {
-        this.posts = value.data ? value : []
-        this.patients = this.posts.data
-        this.loading=false
-      },
-      error: (e) => {},
-      complete: () => {
-      }
-    })
-
-      this.primeNgConfig.setTranslation({
-          monthNames: ['Janvier',
-              'Fevrier',
-              'Mars',
-              'Avril',
-              'Mai',
-              'Juin',
-              'Juillet',
-              'Août',
-              'Septembre',
-              'Octobre',
-              'Novembre',
-              'Decembre'],
-          dayNamesShort: ['Dim.',
-              'Lun.',
-              'Mar.',
-              'Mer.',
-              'Jeu.',
-              'Ven.',
-              'Sam.'],
-          startsWith: 'Commence par',
-          contains : 'Contient',
-          notContains : 'Ne contient pas',
-          endsWith: 'Fini par',
-          equals : 'Egale à',
-          notEquals : 'différent de',
-          noFilter : 'Pas de filtre',
-      });
+      this.recupererConfig();
+      this.recupererPatient();
   }
-  detail(a:any){
+  patientDetail(a:any){
     this.route.navigate(['admin/patient/detail',a]);
   }
   supprimer(a:any){
-    console.log(a)
     const conf:boolean=confirm("Voullez-vous Vraiment Supprimer ce Patient?");
     if(conf==true){
-      this.patientH.supprimerPatient(a).subscribe({
-        next:(v)=>{
+      this.patientService.supprimerPatient(a).subscribe({
+        next:()=>{
 
       },
         error:(e)=>{
@@ -178,4 +141,52 @@ export class PatientViewComponent implements OnInit {
   urlActif():boolean{
     return this.route.url.includes('/reception/patient/liste')
   }
+
+	newPatient():void{
+		this.patientDialog=!this.patientDialog
+	}
+
+	recupererPatient():void{
+        this.patientService.recupererPatient().subscribe({
+            next: (value: any) => {
+                this.posts = value.data ? value : []
+                this.patients = this.posts.data
+                this.loading=false
+            },
+            error: (e) => {},
+            complete: () => {
+            }
+        })
+    }
+
+	recupererConfig():void{
+        this.primeNgConfig.setTranslation({
+            monthNames: ['Janvier',
+                'Fevrier',
+                'Mars',
+                'Avril',
+                'Mai',
+                'Juin',
+                'Juillet',
+                'Août',
+                'Septembre',
+                'Octobre',
+                'Novembre',
+                'Decembre'],
+            dayNamesShort: ['Dim.',
+                'Lun.',
+                'Mar.',
+                'Mer.',
+                'Jeu.',
+                'Ven.',
+                'Sam.'],
+            startsWith: 'Commence par',
+            contains : 'Contient',
+            notContains : 'Ne contient pas',
+            endsWith: 'Fini par',
+            equals : 'Egale à',
+            notEquals : 'différent de',
+            noFilter : 'Pas de filtre',
+        });
+    }
 }

@@ -8,7 +8,6 @@ import { Reception } from 'src/app/models/modelReception/reception';
 })
 export class ReceptionService {
 private config:string="http://38.242.229.12/employe/gerant/"
-private config2:string="http://38.242.229.12/rendez_vouses"
   constructor(private http:HttpClient) { }
 
   //reception ressources

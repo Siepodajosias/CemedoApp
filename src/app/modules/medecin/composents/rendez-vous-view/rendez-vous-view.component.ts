@@ -11,7 +11,8 @@ import { RendezVousService } from 'src/app/services/ServiceMedecin/rendez-vous.s
 import { MedecinService } from 'src/app/services/ServiceMedecin/medecin.service';
 import { PatientService } from 'src/app/services/ServicePatient/patient.service';
 import { Rendezvous } from 'src/app/models/modelMedecin/rendezvous';
-
+import { VilleService } from 'src/app/services/ServicePartager/ville.service';
+import { AdresseService } from 'src/app/services/ServicePartager/adresse.service';
 
 interface jsPDFWithPlugin extends jspdf.jsPDF {
 	autoTable: (options: UserOptions) => jspdf.jsPDF;
@@ -39,6 +40,8 @@ export class RendezVousViewComponent implements OnInit {
 	rendezVousForms: FormGroup;
 	rendezVous: any[];
 	posts: any;
+	postsVille: any;
+	postsAdresse: any;
 	rendezVousDialog: boolean = false;
 
 	statut: any;
@@ -46,6 +49,11 @@ export class RendezVousViewComponent implements OnInit {
 	medecins: any[];
 	patientsForm: any[];
 	patients: any[];
+	villeForm: any[];
+	villes: any[];
+
+	adresseForm: any[];
+	adresses: any[];
 
 	constructor(private rendezVousService: RendezVousService,
 				private rendezVousForm: FormBuilder,
@@ -54,21 +62,26 @@ export class RendezVousViewComponent implements OnInit {
 				private medecinservice: MedecinService,
 				private patientService: PatientService,
 				private confirmationService: ConfirmationService,
-				private messageService: MessageService,) {
-	}
+				private messageService: MessageService,
+				private villeService: VilleService,
+				private adresseService: AdresseService) {}
 
 	ngOnInit(): void {
 		this.recupererRendezVous();
 		this.recupererCinfig();
 		this.rendezVousForms = this.rendezVousForm.group({
-			datePriseRendezVous: ['', [Validators.required]],
 			dateRendezVous: ['', [Validators.required]],
 			patient: ['', [Validators.required]],
 			medecin: [''],
+			infirmier: [''],
 			reception: [''],
 			statut: ['', [Validators.required]],
 			adresse: ['', [Validators.required]],
-			commentaire: ['']
+			service: ['', [Validators.required]],
+			ville: ['', [Validators.required]],
+			lieu:[''],
+			commentaire: [''],
+			description: ['']
 		});
 
 		this.statut = [
@@ -135,8 +148,27 @@ export class RendezVousViewComponent implements OnInit {
 	}
 
 	enregistrerRendezVous() {
-		const Rdv: Rendezvous = new Rendezvous();
+		const rdv: Rendezvous = new Rendezvous();
+        rdv.dateHeure=this.rendezVousForms.get('dateRendezVous')?.value;
+		rdv.commentaire= this.rendezVousForms.get('commentaire')?.value;
+		rdv.description= this.rendezVousForms.get('description')?.value;
+		rdv.ville= this.rendezVousForms.get('ville')?.value;
+		rdv.lieu= this.rendezVousForms.get('lieu')?.value;
+		rdv.statut= this.rendezVousForms.get('statut')?.value;
+		const valeurPatient = this.rendezVousForms.get('patient')?.value;
+		const valeurMedecin = this.rendezVousForms.get('medecin')?.value;
+		const valeurInfirmier = this.rendezVousForms.get('infirmier')?.value;
+		const valeurReception = this.rendezVousForms.get('reception')?.value;
+		const valeurAdresse = this.rendezVousForms.get('adresse')?.value;
+		const valeurService = this.rendezVousForms.get('service')?.value;
+		rdv.assure=valeurPatient.id;
+		rdv.medecin=valeurMedecin.id;
+		rdv.adresse=valeurAdresse.id;
+		rdv.service=valeurService.id;
+		rdv.gerant=valeurReception.id;
+		rdv.infirmier=valeurInfirmier.id;
 
+		this.enregitrement(rdv);
 	}
 
 	newRendezVous() {
@@ -148,12 +180,21 @@ export class RendezVousViewComponent implements OnInit {
 		return this.route.url.includes('/reception/medecin/Rdv') || this.route.url.includes('/doctor/Rdv');
 	}
 
-	medecinActif() {
-		return this.route.url.includes('/doctor/Rdv');
-	}
-
 	receptionActif() {
 		return this.route.url.includes('/reception/medecin/Rdv');
+	}
+
+	enregitrement(rdv: Rendezvous):void{
+		this.rendezVousService.enregistrerRendezVous(rdv).subscribe({
+			next:()=>{
+				this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'Le rendez-vous a été enregistré' });
+				this.rendezVousForms.reset();
+			},
+			complete: () => {
+				this.recupererRendezVous();
+				this.rendezVousDialog = false;
+			}
+		})
 	}
 
 	recupererRendezVous() {
@@ -161,7 +202,6 @@ export class RendezVousViewComponent implements OnInit {
 			next: (value) => {
 				this.posts = value.data;
 				this.rendezVous = this.posts;
-				console.log(this.rendezVous);
 			}
 		});
 		this.medecinservice.recupererMedecin().subscribe({
@@ -169,7 +209,7 @@ export class RendezVousViewComponent implements OnInit {
 				const post = value.data ? value : [];
 				this.medecins = post.data;
 			},
-			error: (e) => {
+			error: () => {
 			},
 			complete: () => {
 			}
@@ -180,11 +220,23 @@ export class RendezVousViewComponent implements OnInit {
 				const post = value.data;
 				this.patients = post;
 			},
-			error: (e) => {
+			error: () => {
 			},
 			complete: () => {
 			}
 		});
+		this.villeService.recupererVille().subscribe({
+			next:(value)=>{
+				this.postsVille = value.data;
+				this.villes = this.postsVille;
+			}
+		})
+		this.adresseService.recupererAdresse().subscribe({
+			next:(value)=>{
+				this.postsAdresse = value.data;
+				this.adresses = this.postsAdresse;
+			}
+		})
 	}
 
 	supprimerRendezVous(Rdv: any) {
@@ -196,7 +248,7 @@ export class RendezVousViewComponent implements OnInit {
 				this.rendezVousService.supprimerRendezVous(Rdv.id).subscribe({
 					next: () => {
 						this.messageService.add({ severity: 'info', summary: 'Suppression', detail: 'Le rendez-vous a été annulé', icon: 'pi-file' });
-						this.rendezVous = this.rendezVous.filter(val => val.Rdv.id !== Rdv.id);
+						this.rendezVous = this.rendezVous.filter(val => val.id !== Rdv.id);
 					},
 					error: () => {
 						this.messageService.add({ severity: 'error', summary: 'Erreur', detail: 'Impossible d\'annulé le rendez-vous', icon: 'pi-file' });
@@ -230,6 +282,30 @@ export class RendezVousViewComponent implements OnInit {
 		this.patientsForm = filtered;
 	}
 
+	villesItems(event: any) {
+		let filtered: any[] = [];
+		let query = event.query;
+		for (let i = 0; i < this.villes.length; i++) {
+			let item = this.villes[i];
+			if (item.libelle.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+				filtered.push(item);
+			}
+		}
+		this.villeForm = filtered;
+	}
+
+	adressesItems(event: any) {
+		let filtered: any[] = [];
+		let query = event.query;
+		for (let i = 0; i < this.adresses.length; i++) {
+			let item = this.adresses[i];
+			if (item.libelle.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+				filtered.push(item);
+			}
+		}
+		this.adresseForm = filtered;
+	}
+
 	recupererCinfig(): void {
 		this.primeNgConfig.setTranslation({
 			monthNames: ['Janvier',
@@ -258,6 +334,8 @@ export class RendezVousViewComponent implements OnInit {
 			equals: 'Egale à',
 			notEquals: 'différent de',
 			noFilter: 'Pas de filtre',
+			reject: 'Non',
+			accept: 'Oui'
 		});
 	}
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Medecin } from 'src/app/models/modelMedecin/medecin';
+import { Rendezvous } from 'src/app/models/modelMedecin/rendezvous';
 
 @Injectable({
   providedIn: 'root'
@@ -14,20 +14,20 @@ export class RendezVousService {
     return this.http.get<any>(this.configUrl+"/getAll")
   }
 
-  enregistrerRendezVous(rendez_vous:Medecin):Observable<Medecin>{
-    return this.http.post<Medecin>(this.configUrl+"/create",rendez_vous,{
+  enregistrerRendezVous(rendez_vous:Rendezvous):Observable<any>{
+    return this.http.post<any>(this.configUrl+"/create",rendez_vous,{
       headers:new HttpHeaders({'Content-Type':'application/json'})
     })
   }
-  recupererRendezVousById(a:number):Observable<any>{
-    return this.http.get<any>(this.configUrl+"/getOne/"+a,
+  recupererRendezVousById(idRendezVous:number):Observable<any>{
+    return this.http.get<any>(this.configUrl+"/getOne/"+idRendezVous,
             {
               headers:new HttpHeaders({'Content-Type':'application/json'})
             }
     )
   }
-  supprimerRendezVous(e:number):Observable<any>{
-    return this.http.get(this.configUrl+"/active/"+e)
+  supprimerRendezVous(idRendezVous:number):Observable<any>{
+    return this.http.get(this.configUrl+"/active/"+idRendezVous)
   }
   modifierRendezVous(rendez_vous:any){
     return this.http.post<any>(this.configUrl + '/update' + rendez_vous.id,rendez_vous,

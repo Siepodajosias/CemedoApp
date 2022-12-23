@@ -10,6 +10,12 @@
             <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success mr-2"  pTooltip="XLS" tooltipPosition="bottom"></button>
             <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
         </ng-template>
+
+          <ng-template pTemplate="right">
+              <button pButton pRipple label="Créer un patient" icon="pi pi-plus" class="p-button-help" (click)="newPatient()"
+                      *ngIf="urlActif()"></button>
+          </ng-template>
+
     </p-toolbar>
       <p-table #dt  [value]="patients"  [scrollable]="true" scrollHeight="600px"
       [globalFilterFields]="['user.nom','user.prenoms','lieuHabitation','profession']"
@@ -132,7 +138,7 @@
                   <td style="min-width:200px" [style]="{color:'#2196F3'}">{{patient.user.tel}}</td>
                   <td style="min-width:200px" [style]="{color:'#2196F3'}">{{patient.user.tel2}}</td>
                   <td style="min-width:200px">
-                      <button pButton pRipple type="button"  icon="pi pi-angle-right"  (click)="detail(patient.id)" 
+                      <button pButton pRipple type="button"  icon="pi pi-angle-right"  (click)="patientDetail(patient.id)"
                       class="p-button-rounded p-button-text"
                       ></button>
                   </td>
@@ -141,11 +147,121 @@
           <ng-template pTemplate="summary">
               <div class="flex align-items-center justify-content-between">
                Total: {{patients ? patients.length : 0 }} patients
-                  <button pButton pRipple label="Créer un patient" icon="pi pi-plus" class="p-button-help"
-                          *ngIf="urlActif()"></button>
               </div>
               </ng-template>
       </p-table>
   </div>
+      <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+      <p-toast></p-toast>
+      <p-dialog [(visible)]="patientDialog" [style]="{width:'700px'}" header="Créer un patient" [modal]="true"
+                styleClass="p-fluid">
+          <form>
+              <div class="grid">
+                  <div class="col-12 md:col-6 lg:col-4">
+              <span>
+                <label>Nom</label>
+                <input type="text" pInputText >
+              </span>
+                  </div>
+
+                  <div class="col-12 md:col-6 lg:col-4">
+              <span>
+                <label>Prénom</label>
+                <input type="text" pInputText>
+              </span>
+                  </div>
+
+                  <div class="col-12 md:col-6 lg:col-4">
+              <span>
+                <label>Nom d'utilisateur</label>
+                <input type="text" pInputText>
+              </span>
+                  </div>
+
+                  <div class="col-12 md:col-6 lg:col-4">
+                      <label>Genre</label>
+                      <p-dropdown optionLabel="libelle" [showClear]="true">
+                      </p-dropdown>
+                  </div>
+
+                  <div class="col-12 md:col-6 lg:col-4">
+                      <label>Date de naissance</label>
+                      <p-calendar [baseZIndex]="3000" appendTo="body" [showIcon]="true" inputId="icon"></p-calendar>
+                  </div>
+
+                  <div class="col-12 md:col-6 lg:col-4">
+              <span>
+                <label>Mot de passe</label>
+                <input type="password" pInputText>
+              </span>
+                  </div>
+
+                  <div class="col-12 md:col-6 lg:col-4">
+              <span>
+                <label>Type de medecin</label>
+                <p-autoComplete [virtualScroll]="true" field="libelle" [dropdown]="true">
+               </p-autoComplete>
+              </span>
+                  </div>
+
+                  <div class="col-12 md:col-6 lg:col-4">
+              <span>
+                <label>Spécialité</label>
+                <p-autoComplete [virtualScroll]="true"  field="libelle" [dropdown]="true">
+               </p-autoComplete>
+              </span>
+                  </div>
+
+                  <div class="col-12 md:col-6 lg:col-4">
+              <span>
+                <label>Type d'employé</label>
+                <p-autoComplete  [virtualScroll]="true" field="libelle" [dropdown]="true">
+               </p-autoComplete>
+              </span>
+                  </div>
+
+                  <div class="col-12">
+                      <p-divider align="center" type="dashed" layout="horizontal">
+                          <div class="inline-flex align-items-center">
+                              <i class="pi pi-user mr-2"></i>
+                              <b>Contacts</b>
+                          </div>
+                      </p-divider>
+
+                  </div>
+
+                  <div class="col-12">
+            <span>
+              <label>E-mail</label>
+              <input type="email" pInputText >
+            </span>
+                  </div>
+
+                  <div class="col-12">
+            <span>
+              <label>Téléphone 1</label>
+              <input type="text" pInputText >
+            </span>
+                  </div>
+
+                  <div class="col-12">
+            <span>
+              <label>Téléphone 2</label>
+              <input type="text" pInputText>
+            </span>
+                  </div>
+
+                  <div class="col-12 md:col-12">
+                      <div class="flex justify-content-end">
+                          <button type="submit" pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-bouton-texte p-bouton-sm
+                       w-10rem h-2rem m-2"></button>
+                          <button type="button" pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-danger p-bouton-sm
+                      w-10rem h-2rem m-2
+                     " (click)="newPatient()"></button>
+                      </div>
+                  </div>
+              </div>
+          </form>
+      </p-dialog>
   </div>
 </section>

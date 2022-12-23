@@ -9,7 +9,7 @@ import * as jspdf from 'jspdf';
 import 'jspdf-autotable';
 import { UserOptions } from 'jspdf-autotable';
 import { Table } from 'primeng/table';
-import { EmployeService } from 'src/app/shared-cemedo/employe/employe.service';
+import { EmployeService } from 'src/app/services/ServiceEmploye/employe.service';
 
 interface jsPDFWithPlugin extends jspdf.jsPDF {
 	autoTable: (options: UserOptions) => jspdf.jsPDF;
@@ -55,6 +55,7 @@ export class PharmacienViewComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.recupererPharmacien();
+		this.recupererConfig();
 		this.pharmacienForms = this.pharmacienForm.group({
 
 			matricule: null,
@@ -104,36 +105,7 @@ export class PharmacienViewComponent implements OnInit {
 			fcmTokenUpdate: '',
 			typeEmployeUpdate: null
 		});
-		this.primeNgConfig.setTranslation({
-			monthNames: ['Janvier',
-				'Fevrier',
-				'Mars',
-				'Avril',
-				'Mai',
-				'Juin',
-				'Juillet',
-				'Août',
-				'Septembre',
-				'Octobre',
-				'Novembre',
-				'Decembre'],
-			dayNamesShort: ['Dim.',
-				'Lun.',
-				'Mar.',
-				'Mer.',
-				'Jeu.',
-				'Ven.',
-				'Sam.'],
-			startsWith: 'Commence par',
-			contains: 'Contient',
-			notContains: 'Ne contient pas',
-			endsWith: 'Fini par',
-			equals: 'Egale à',
-			notEquals: 'différent de',
-			noFilter: 'Pas de filtre',
-			reject: 'Non',
-			accept: 'Oui'
-		});
+
 	}
 
 	pharmacienDetail(a: any) {
@@ -217,6 +189,11 @@ export class PharmacienViewComponent implements OnInit {
 		pharmacien.genre = valuerGenre.id;
 		pharmacien.typeEmploye = valuerEmploye.id;
 		pharmacien.fcmToken = '';
+
+		this.enregistrement(pharmacien);
+	}
+
+	enregistrement(pharmacien: Pharmacien): void {
 		this.pharmacienService.enregistrerPharmacien(pharmacien).subscribe({
 			next: (v) => {
 				this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'Le pharmacien à été enregistré' });
@@ -234,7 +211,7 @@ export class PharmacienViewComponent implements OnInit {
 	recupererPharmacien() {
 		this.pharmacienService.recupererPharmacien().subscribe({
 			next: (value: any) => {
-				this.posts = value.data ? value : [];
+				this.posts = value.data;
 				this.pharmaciens = this.posts.data;
 				this.loading = false;
 			},
@@ -246,13 +223,13 @@ export class PharmacienViewComponent implements OnInit {
 		this.employeService.recupererTypeEmploye().subscribe({
 			next: (value) => {
 				const data = value.data;
-				this.employes = data ? data : [];
+				this.employes = data;
 			}
 		});
 		this.employeService.recupererGenre().subscribe({
 			next: (value) => {
 				const data = value.data;
-				this.genres = data ? data : [];
+				this.genres = data;
 			}
 		});
 	}
@@ -274,9 +251,14 @@ export class PharmacienViewComponent implements OnInit {
 		pharmacien.genre = valuerGenre.id;
 		pharmacien.typeEmploye = valuerEmploye.id;
 		pharmacien.fcmToken = '';
+
+		this.modification(pharmacien);
+	}
+
+	modification(pharmacien: Pharmacien): void {
 		this.pharmacienService.modificationPharmacien(pharmacien).subscribe({
-			next: (v) => {
-				this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'Le pharmacien à été modifié'});
+			next: () => {
+				this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'Le pharmacien à été modifié' });
 				this.pharmacienFormsUpdate.reset();
 			},
 			error: (e) => {
@@ -322,6 +304,7 @@ export class PharmacienViewComponent implements OnInit {
 	urlActif(): boolean {
 		return this.route.url.includes('/admin/pharmacie/liste');
 	}
+
 	updatePharmacien(pharmacien: any) {
 		this.pharmacienDialogUpdate = !this.pharmacienDialogUpdate;
 		this.pharmacienFormsUpdate.patchValue({
@@ -340,6 +323,39 @@ export class PharmacienViewComponent implements OnInit {
 	}
 
 	helpPharmacien() {
-		this.pharmacienDialogUpdate=false
+		this.pharmacienDialogUpdate = false;
+	}
+
+	recupererConfig(): void {
+		this.primeNgConfig.setTranslation({
+			monthNames: ['Janvier',
+				'Fevrier',
+				'Mars',
+				'Avril',
+				'Mai',
+				'Juin',
+				'Juillet',
+				'Août',
+				'Septembre',
+				'Octobre',
+				'Novembre',
+				'Decembre'],
+			dayNamesShort: ['Dim.',
+				'Lun.',
+				'Mar.',
+				'Mer.',
+				'Jeu.',
+				'Ven.',
+				'Sam.'],
+			startsWith: 'Commence par',
+			contains: 'Contient',
+			notContains: 'Ne contient pas',
+			endsWith: 'Fini par',
+			equals: 'Egale à',
+			notEquals: 'différent de',
+			noFilter: 'Pas de filtre',
+			reject: 'Non',
+			accept: 'Oui'
+		});
 	}
 }

@@ -9,7 +9,7 @@ import * as jspdf from 'jspdf';
 import 'jspdf-autotable';
 import { UserOptions } from 'jspdf-autotable';
 import { Table } from 'primeng/table';
-import { EmployeService } from 'src/app/shared-cemedo/employe/employe.service';
+import { EmployeService } from 'src/app/services/ServiceEmploye/employe.service';
 
 interface jsPDFWithPlugin extends jspdf.jsPDF {
 	autoTable: (options: UserOptions) => jspdf.jsPDF;
@@ -55,6 +55,7 @@ export class ReceptionViewComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.recupererReception();
+		this.recupererConfig();
 		this.receptionForms = this.receptionForm.group({
 			matricule: null,
 			nom: ['', [Validators.required, Validators.minLength(3)]],
@@ -101,40 +102,9 @@ export class ReceptionViewComponent implements OnInit {
 			fcmTokenUpdate: '',
 			typeEmployeUpdate: null
 		});
-		this.primeNgConfig.setTranslation({
-			monthNames: ['Janvier',
-				'Fevrier',
-				'Mars',
-				'Avril',
-				'Mai',
-				'Juin',
-				'Juillet',
-				'Août',
-				'Septembre',
-				'Octobre',
-				'Novembre',
-				'Decembre'],
-			dayNamesShort: ['Dim.',
-				'Lun.',
-				'Mar.',
-				'Mer.',
-				'Jeu.',
-				'Ven.',
-				'Sam.'],
-			startsWith: 'Commence par',
-			contains: 'Contient',
-			notContains: 'Ne contient pas',
-			endsWith: 'Fini par',
-			equals: 'Egale à',
-			notEquals: 'différent de',
-			noFilter: 'Pas de filtre',
-			reject: 'Non',
-			accept: 'Oui'
-		});
 	}
 
 	recupererDetail(a: any) {
-		//this.route.navigate(['administrateur/detailM',a]);
 	}
 
 	saveAsExcelFile(buffer: any, fileName: string): void {
@@ -215,12 +185,17 @@ export class ReceptionViewComponent implements OnInit {
 		reception.tel2 = this.receptionForms.get('tel2')?.value;
 		reception.fcmToken = '';
 
+		this.enregistrement(reception);
+
+	}
+
+	enregistrement(reception: Reception){
 		this.receptionService.enregistrerReception(reception).subscribe({
 			next: (v) => {
 				this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'receptionniste enregistré' });
 				this.receptionForms.reset();
 			},
-			error: (e) => {
+			error: () => {
 			},
 			complete: () => {
 				this.recupererReception();
@@ -232,10 +207,10 @@ export class ReceptionViewComponent implements OnInit {
 	recupererReception() {
 		this.receptionService.recupererReception().subscribe({
 			next: (value: any) => {
-				this.posts = value.data ? value : [];
+				this.posts = value.data;
 				this.receptions = this.posts.data;
 			},
-			error: (e) => {
+			error: () => {
 			},
 			complete: () => {
 				this.loading = false;
@@ -244,13 +219,13 @@ export class ReceptionViewComponent implements OnInit {
 		this.employeService.recupererTypeEmploye().subscribe({
 			next: (value) => {
 				const data = value.data;
-				this.employes = data ? data : [];
+				this.employes = data;
 			}
 		});
 		this.employeService.recupererGenre().subscribe({
 			next: (value) => {
 				const data = value.data;
-				this.genres = data ? data : [];
+				this.genres = data;
 			}
 		});
 	}
@@ -272,6 +247,10 @@ export class ReceptionViewComponent implements OnInit {
 		reception.tel2 = this.receptionFormsUpdate.get('tel2Update')?.value;
 		reception.fcmToken = '';
 
+		this.modification(reception);
+	}
+
+	modification(reception: Reception):void{
 		this.receptionService.modificationReception(reception).subscribe({
 			next: () => {
 				this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'La receptionniste a été modifié' });
@@ -337,5 +316,37 @@ export class ReceptionViewComponent implements OnInit {
 
 	helpReception() {
 		this.receptionDialogUpdate = false;
+	}
+	recupererConfig():void{
+		this.primeNgConfig.setTranslation({
+			monthNames: ['Janvier',
+				'Fevrier',
+				'Mars',
+				'Avril',
+				'Mai',
+				'Juin',
+				'Juillet',
+				'Août',
+				'Septembre',
+				'Octobre',
+				'Novembre',
+				'Decembre'],
+			dayNamesShort: ['Dim.',
+				'Lun.',
+				'Mar.',
+				'Mer.',
+				'Jeu.',
+				'Ven.',
+				'Sam.'],
+			startsWith: 'Commence par',
+			contains: 'Contient',
+			notContains: 'Ne contient pas',
+			endsWith: 'Fini par',
+			equals: 'Egale à',
+			notEquals: 'différent de',
+			noFilter: 'Pas de filtre',
+			reject: 'Non',
+			accept: 'Oui'
+		});
 	}
 }

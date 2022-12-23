@@ -38,6 +38,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import { ApiUrlInterceptor } from 'src/app/services/ServiceInterceptor/api-url-interceptor.service';
 import { NgxAgoraModule } from 'ngx-agora';
 import { agora } from 'src/app/models/modelMedecin/agora';
+
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
   interactionPlugin,

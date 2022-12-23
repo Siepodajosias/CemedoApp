@@ -12,7 +12,7 @@ import { Table } from 'primeng/table';
 import { PrimeNGConfig } from 'primeng/api';
 import { MedecinSpecialiteService } from 'src/app/services/ServiceMedecin/medecin-specialite.service';
 import { TypeMedecinService } from 'src/app/services/ServiceMedecin/type-medecin.service';
-import { EmployeService } from 'src/app/shared-cemedo/employe/employe.service';
+import { EmployeService } from 'src/app/services/ServiceEmploye/employe.service';
 
 interface jsPDFWithPlugin extends jspdf.jsPDF {
 	autoTable: (options: UserOptions) => jspdf.jsPDF;
@@ -75,6 +75,7 @@ export class MedecinViewComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.recupererListeMedecin();
+		this.recupererCinfig();
 		this.medecinForms = this.medecinForm.group({
 			matricule: null,
 			email: ['', [Validators.required, Validators.maxLength(30), Validators.email]],
@@ -121,36 +122,6 @@ export class MedecinViewComponent implements OnInit {
 			sepecialiteMedecinUpdate: null,
 			typeEmployeUpdate: null,
 			typeMedecinUpdate: null,
-		});
-		this.primeNgConfig.setTranslation({
-			monthNames: ['Janvier',
-				'Fevrier',
-				'Mars',
-				'Avril',
-				'Mai',
-				'Juin',
-				'Juillet',
-				'Août',
-				'Septembre',
-				'Octobre',
-				'Novembre',
-				'Decembre'],
-			dayNamesShort: ['Dim.',
-				'Lun.',
-				'Mar.',
-				'Mer.',
-				'Jeu.',
-				'Ven.',
-				'Sam.'],
-			startsWith: 'Commence par',
-			contains: 'Contient',
-			notContains: 'Ne contient pas',
-			endsWith: 'Fini par',
-			equals: 'Egale à',
-			notEquals: 'différent de',
-			noFilter: 'Pas de filtre',
-			reject: 'Non',
-			accept: 'Oui'
 		});
 	}
 
@@ -233,6 +204,8 @@ export class MedecinViewComponent implements OnInit {
 		medecin.tel = this.medecinForms.get('tel')?.value;
 		medecin.tel2 = this.medecinForms.get('tel2')?.value;
 		medecin.login = this.medecinForms.get('login')?.value;
+
+		this.enregistrement(medecin);
 		/*
 		this.medecin2.salaireMedecin=this.MedecinForms.get('salaireMedecin')?.value
 		this.medecin2.primeMedecin=this.MedecinForms.get('primeMedecin')?.value
@@ -242,6 +215,9 @@ export class MedecinViewComponent implements OnInit {
 		this.medecin2.residence=this.MedecinForms.get('residence')?.value
 		this.medecin2.heureDebut=this.MedecinForms.get('heureDebut')?.value
 		this.medecin2.heureFin=this.MedecinForms.get('heureFin')?.value*/
+
+	}
+	enregistrement(medecin: Medecin):void{
 		this.medecinservice.enregistrerMedecin(medecin).subscribe({
 			next: (v) => {
 				this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'Le medecin a été enregistré' });
@@ -338,6 +314,10 @@ export class MedecinViewComponent implements OnInit {
 		medecin.tel2 = this.medecinFormsUpdate.get('tel2Update')?.value;
 		medecin.login = this.medecinFormsUpdate.get('loginUpdate')?.value;
 
+		this.modification(medecin);
+	}
+
+	modification(medecin: Medecin):void{
 		this.medecinservice.modifierMedecin(medecin).subscribe({
 			next: (v) => {
 				this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'Le medecin a été modifié' });
@@ -410,5 +390,37 @@ export class MedecinViewComponent implements OnInit {
 
 	helpMedecin() {
 		this.medecinDialogUpdate = false;
+	}
+	recupererCinfig(): void {
+		this.primeNgConfig.setTranslation({
+			monthNames: ['Janvier',
+				'Fevrier',
+				'Mars',
+				'Avril',
+				'Mai',
+				'Juin',
+				'Juillet',
+				'Août',
+				'Septembre',
+				'Octobre',
+				'Novembre',
+				'Decembre'],
+			dayNamesShort: ['Dim.',
+				'Lun.',
+				'Mar.',
+				'Mer.',
+				'Jeu.',
+				'Ven.',
+				'Sam.'],
+			startsWith: 'Commence par',
+			contains: 'Contient',
+			notContains: 'Ne contient pas',
+			endsWith: 'Fini par',
+			equals: 'Egale à',
+			notEquals: 'différent de',
+			noFilter: 'Pas de filtre',
+			reject: 'Non',
+			accept: 'Oui'
+		});
 	}
 }

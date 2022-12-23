@@ -47,6 +47,7 @@ export class OrdonnanceComponent implements OnInit {
 
   ngOnInit(): void {
     this.recupererOrdonnance();
+    this.recupereConfig();
     this.ordonnanceForms = this.ordonnanceForm.group({
       id: null,
       dateEmission: ['', [Validators.required, Validators.maxLength(30)]],
@@ -62,17 +63,7 @@ export class OrdonnanceComponent implements OnInit {
       assureUpdate: ['', [Validators.required, Validators.maxLength(30)]],
       livreUpdate: ['', [Validators.required, Validators.maxLength(30)]],
     });
-    this.primeNgConfig.setTranslation({
-      startsWith: 'Commence par',
-      contains: 'Contient',
-      notContains: 'Ne contient pas',
-      endsWith: 'Fini par',
-      equals: 'Egale à',
-      notEquals: 'différent de',
-      noFilter: 'Pas de filtre',
-      reject: 'Non',
-      accept: 'Oui'
-    });
+
     this.statut = [
       { label: 'Pas de filtre', value: '' },
       { label: 'Livrer', value: true },
@@ -180,10 +171,6 @@ export class OrdonnanceComponent implements OnInit {
 
   }
 
-  helpOrdonnance() {
-    this.ordonnanceDialogUpdate = false;
-  }
-
   enregistrerOrdonnance(): void {
     const ordonnance: Ordonnance= new Ordonnance();
     ordonnance.id = null;
@@ -247,5 +234,18 @@ export class OrdonnanceComponent implements OnInit {
       }
     }
     this.patientForm = filtered;
+  }
+  recupereConfig():void{
+    this.primeNgConfig.setTranslation({
+      startsWith: 'Commence par',
+      contains: 'Contient',
+      notContains: 'Ne contient pas',
+      endsWith: 'Fini par',
+      equals: 'Egale à',
+      notEquals: 'différent de',
+      noFilter: 'Pas de filtre',
+      reject: 'Non',
+      accept: 'Oui'
+    });
   }
 }

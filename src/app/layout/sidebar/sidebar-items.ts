@@ -377,6 +377,20 @@ export const ROUTES: RouteInfo[] = [
     ]
   },
 
+  {
+    path: "/admin/parametrage",
+    title: "Parametrage",
+    moduleName: "parametrage",
+    iconType: "material-icons-two-tone",
+    icon: "settings",
+    class: "",
+    groupTitle: false,
+    badge: "",
+    badgeClass: "",
+    role: ["Admin"],
+    submenu: []
+  },
+
   //Modules medécin
   {
     path: "/doctor/dashboard",

@@ -42,7 +42,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { SpeedDialModule } from 'primeng/speeddial';
 import { MenuModule } from 'primeng/menu';
 import { HttpClientModule } from '@angular/common/http';
-import { EmployeModule } from 'src/app/shared-cemedo/employe/employe.module';
+import { PartagerModule } from 'src/app/shared-cemedo/partager/partager.module';
 
 
 @NgModule({
@@ -68,11 +68,6 @@ import { EmployeModule } from 'src/app/shared-cemedo/employe/employe.module';
     ComponentsModule,
 
     CardModule,
-    TableModule,
-    ButtonModule,
-    ToastModule,
-    DialogModule,
-    ConfirmDialogModule,
     MultiSelectModule,
     DropdownModule,
     AutoCompleteModule,
@@ -86,11 +81,10 @@ import { EmployeModule } from 'src/app/shared-cemedo/employe/employe.module';
     DividerModule ,
     MenubarModule, 
     ToolbarModule,
-    CalendarModule,
     SpeedDialModule,
     MenuModule,
     HttpClientModule,
-    EmployeModule
+    PartagerModule
   ], providers: [ComptableService,MessageService,ConfirmationService]
 })
 export class ComptableModule { }

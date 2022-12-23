@@ -39,6 +39,7 @@ import { SpeedDialModule } from 'primeng/speeddial';
 import { MenuModule } from 'primeng/menu';
 import { HttpClientModule } from '@angular/common/http';
 import { ExamenViewComponent } from 'src/app/modules/infirmerie/composents/examen-view/examen-view.component';
+import { PartagerModule } from 'src/app/shared-cemedo/partager/partager.module';
 
 @NgModule({
   declarations: [
@@ -60,11 +61,6 @@ import { ExamenViewComponent } from 'src/app/modules/infirmerie/composents/exame
     FormsModule,
 
     CardModule,
-    TableModule,
-    ButtonModule,
-    ToastModule,
-    DialogModule,
-    ConfirmDialogModule,
     MultiSelectModule,
     DropdownModule,
     AutoCompleteModule,
@@ -78,10 +74,10 @@ import { ExamenViewComponent } from 'src/app/modules/infirmerie/composents/exame
     DividerModule ,
     MenubarModule, 
     ToolbarModule,
-    CalendarModule,
     SpeedDialModule,
     MenuModule,
     HttpClientModule,
+    PartagerModule
   ],providers:[InfirmierService,MessageService,ConfirmationService]
 })
 export class InfirmerieModule { }

@@ -62,6 +62,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TagModule } from 'primeng/tag';
 import { CalendarModule } from 'primeng/calendar';
 import { MedecinService } from 'src/app/services/ServiceMedecin/medecin.service';
+import { PartagerModule } from 'src/app/shared-cemedo/partager/partager.module';
 
 @NgModule({
   declarations: [ 
@@ -107,10 +108,6 @@ import { MedecinService } from 'src/app/services/ServiceMedecin/medecin.service'
 		FormsModule,
 
 		CardModule,
-		TableModule,
-		ButtonModule,
-		ToastModule,
-		DialogModule,
 		ConfirmDialogModule,
 		MultiSelectModule,
 		DropdownModule,
@@ -126,7 +123,7 @@ import { MedecinService } from 'src/app/services/ServiceMedecin/medecin.service'
 		MenubarModule,
 		ToolbarModule,
 		TagModule,
-		CalendarModule
+		PartagerModule
 
 	],providers:[PatientService,MedecinService,MessageService,ConfirmationService]
 })

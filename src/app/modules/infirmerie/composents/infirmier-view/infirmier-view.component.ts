@@ -10,7 +10,7 @@ import 'jspdf-autotable';
 import { UserOptions } from 'jspdf-autotable';
 import { Table } from 'primeng/table';
 import { PrimeNGConfig } from 'primeng/api';
-import { EmployeService } from 'src/app/shared-cemedo/employe/employe.service';
+import { EmployeService } from 'src/app/services/ServiceEmploye/employe.service';
 
 interface jsPDFWithPlugin extends jspdf.jsPDF {
 	autoTable: (options: UserOptions) => jspdf.jsPDF;
@@ -58,6 +58,7 @@ export class InfirmierViewComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.recupererInfirmier();
+		this.recupererConfig();
 		this.infirmierForms = this.infirmierForm.group({
 			matricule: null,
 			nom: ['', [Validators.required, Validators.minLength(3)]],
@@ -104,41 +105,10 @@ export class InfirmierViewComponent implements OnInit {
 			fcmTokenUpdate: '',
 			typeEmployeUpdate: null
 		});
-		this.primeNgConfig.setTranslation({
-			monthNames: ['Janvier',
-				'Fevrier',
-				'Mars',
-				'Avril',
-				'Mai',
-				'Juin',
-				'Juillet',
-				'Août',
-				'Septembre',
-				'Octobre',
-				'Novembre',
-				'Decembre'],
-			dayNamesShort: ['Dim.',
-				'Lun.',
-				'Mar.',
-				'Mer.',
-				'Jeu.',
-				'Ven.',
-				'Sam.'],
-			startsWith: 'Commence par',
-			contains: 'Contient',
-			notContains: 'Ne contient pas',
-			endsWith: 'Fini par',
-			equals: 'Egale à',
-			notEquals: 'différent de',
-			noFilter: 'Pas de filtre',
-			reject: 'Non',
-			accept: 'Oui'
-		});
+
 	}
 
-	infirmierDetail(a: any) {
-		//this.route.navigate(['administrateur/detailM',a]);
-	}
+	infirmierDetail(a: any) {}
 
 	saveAsExcelFile(buffer: any, fileName: string): void {
 
@@ -220,6 +190,11 @@ export class InfirmierViewComponent implements OnInit {
 		infirmier.tel = this.infirmierForms.get('tel')?.value;
 		infirmier.tel2 = this.infirmierForms.get('tel2')?.value;
 		infirmier.fcmToken = '';
+
+		this.enregistrement(infirmier);
+	}
+
+	enregistrement(infirmier: Infirmier):void{
 		this.infirmierService.enregistrerInfirmier(infirmier).subscribe({
 			next: (v) => {
 				this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'L\'infirmier a été enregistré' });
@@ -276,6 +251,11 @@ export class InfirmierViewComponent implements OnInit {
 		infirmier.tel = this.infirmierFormsUpdate.get('telUpdate')?.value;
 		infirmier.tel2 = this.infirmierFormsUpdate.get('tel2Update')?.value;
 		infirmier.fcmToken = '';
+
+		this.modification(infirmier);
+	}
+
+	modification(infirmier: Infirmier):void{
 		this.infirmierService.modificationInfirmier(infirmier).subscribe({
 			next: (v) => {
 				this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'L\'infirmier a été modifié' });
@@ -289,7 +269,6 @@ export class InfirmierViewComponent implements OnInit {
 			}
 		});
 	}
-
 	supprimerInfirmier(infirmier: any) {
 		this.confirmationService.confirm({
 			message: 'Supprimer l\'infirmier ' + infirmier.user.nom + ' ' + infirmier.user.prenoms + '?',
@@ -344,5 +323,37 @@ export class InfirmierViewComponent implements OnInit {
 
 	helpInfirmier() {
 		this.infirmierDialogUpdate=false;
+	}
+	recupererConfig():void{
+		this.primeNgConfig.setTranslation({
+			monthNames: ['Janvier',
+				'Fevrier',
+				'Mars',
+				'Avril',
+				'Mai',
+				'Juin',
+				'Juillet',
+				'Août',
+				'Septembre',
+				'Octobre',
+				'Novembre',
+				'Decembre'],
+			dayNamesShort: ['Dim.',
+				'Lun.',
+				'Mar.',
+				'Mer.',
+				'Jeu.',
+				'Ven.',
+				'Sam.'],
+			startsWith: 'Commence par',
+			contains: 'Contient',
+			notContains: 'Ne contient pas',
+			endsWith: 'Fini par',
+			equals: 'Egale à',
+			notEquals: 'différent de',
+			noFilter: 'Pas de filtre',
+			reject: 'Non',
+			accept: 'Oui'
+		});
 	}
 }

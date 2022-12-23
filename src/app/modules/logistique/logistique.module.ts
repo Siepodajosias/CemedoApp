@@ -31,6 +31,7 @@ import { MenuModule } from 'primeng/menu';
 import { FieldsetModule} from 'primeng/fieldset';
 import { MaterielViewComponent } from 'src/app/modules/logistique/composents/materiel-view/materiel-view.component';
 import { HttpClientModule } from '@angular/common/http';
+import { PartagerModule } from 'src/app/shared-cemedo/partager/partager.module';
 
 
 @NgModule({
@@ -42,11 +43,6 @@ import { HttpClientModule } from '@angular/common/http';
     LogistiqueRoutingModule,
     ComponentsModule,
     CardModule,
-    TableModule,
-    ButtonModule,
-    ToastModule,
-    DialogModule,
-    ConfirmDialogModule,
     MultiSelectModule,
     DropdownModule,
     AutoCompleteModule,
@@ -59,11 +55,11 @@ import { HttpClientModule } from '@angular/common/http';
     DividerModule ,
     MenubarModule, 
     ToolbarModule,
-    CalendarModule,
     SpeedDialModule,
     MenuModule,
     FieldsetModule,
     HttpClientModule,
+    PartagerModule
   ],providers:[ConfirmationService,MessageService]
 })
 export class LogistiqueModule { }

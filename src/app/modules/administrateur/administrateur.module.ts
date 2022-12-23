@@ -17,12 +17,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 
 //primeng
 import { CardModule} from 'primeng/card'
-import { ToastModule} from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-import { TableModule} from 'primeng/table';
-import { ButtonModule} from 'primeng/button';
-import { DialogModule} from 'primeng/dialog';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { MultiSelectModule} from 'primeng/multiselect';
 import { DropdownModule} from 'primeng/dropdown';
@@ -36,27 +31,30 @@ import { OrderListModule } from 'primeng/orderlist';
 import { DividerModule } from 'primeng/divider';
 import { MenubarModule } from 'primeng/menubar';
 import { ToolbarModule } from 'primeng/toolbar';
-import { CalendarModule } from 'primeng/calendar';
 import { SpeedDialModule } from 'primeng/speeddial';
 import { MenuModule } from 'primeng/menu';
 import { FieldsetModule} from 'primeng/fieldset';
 import { HttpClientModule } from '@angular/common/http';
 import { MedecinSpecialiteService } from 'src/app/services/ServiceMedecin/medecin-specialite.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ParametrageComponent } from 'src/app/modules/administrateur/composents/parametrage/parametrage.component';
+import { PartagerModule } from 'src/app/shared-cemedo/partager/partager.module';
+import { TabViewModule } from 'primeng/tabview';
 
 
 @NgModule({
   declarations: [
     FactureComponent,
     RendezVousCalendrierComponent,
-    DepartementComponent
+    DepartementComponent,
+    ParametrageComponent
   ],
   imports: [
     CommonModule,
     AdministrateurRoutingModule,
     chartjsModule,
     NgxEchartsModule.forRoot({
-      echarts: () => import("echarts"),
+      echarts: () => import('echarts'),
     }),
     PerfectScrollbarModule,
     MatIconModule,
@@ -69,11 +67,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 
     FieldsetModule,
     CardModule,
-    TableModule,
-    ButtonModule,
-    ToastModule,
-    DialogModule,
-    ConfirmDialogModule,
     MultiSelectModule,
     DropdownModule,
     AutoCompleteModule,
@@ -84,14 +77,15 @@ import { ReactiveFormsModule } from '@angular/forms';
     SliderModule,
     RippleModule,
     OrderListModule,
-    DividerModule ,
-    MenubarModule, 
+    DividerModule,
+    MenubarModule,
     ToolbarModule,
-    CalendarModule,
     SpeedDialModule,
     ReactiveFormsModule,
     MenuModule,
-    FullCalendarModule
+    FullCalendarModule,
+    PartagerModule,
+    TabViewModule
   ], providers: [AdminService,MessageService,ConfirmationService,MedecinSpecialiteService]
 })
 export class AdministrateurModule { }
