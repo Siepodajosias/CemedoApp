@@ -44,7 +44,7 @@
 					</div>
 				</div>
 				<div class="col-12 md:col-6 lg:col-3">
-					<div #d4 id="consultationDomicile" class="surface-card shadow-2 p-3 border-round hover:surface-300" (click)="formulaire(d4)">
+					<div #d4 id="modePaiement" class="surface-card shadow-2 p-3 border-round hover:surface-300" (click)="formulaire(d4)">
 						<div class="flex justify-content-between mb-3">
 							<div>
 								<span class="block text-500 font-medium mb-3">Ajouter un mode de paiement</span>
@@ -378,6 +378,77 @@
 									</ng-template>
 								</p-table>
 							</p-tabPanel>
+							<p-tabPanel header="Liste des modes de paiement">
+								<p-table #dt
+										 [value]="modePaiements"
+										 [scrollable]="true"
+										 scrollHeight="500px"
+										 [globalFilterFields]="['libelle','email','ville']"
+										 [filterDelay]="0"
+										 styleClass="p-datatable-gridlines"
+										 selectionMode="multiple"
+										 [resizableColumns]="true">
+									<ng-template pTemplate="caption">
+										<div class="flex align-items-center justify-content-between">
+											<span class="p-input-icon-left">
+                                          <i class="pi pi-search"></i>
+                                          <input pInputText type="text" placeholder="Rechercher..." />
+                                     </span>
+										</div>
+									</ng-template>
+									<ng-template pTemplate="header">
+										<tr>
+											<th  pSortableColumn="libelle">Date de création<p-sortIcon field="libelle"></p-sortIcon>
+											</th>
+											<th  pSortableColumn="libelle" class="text-center">Désigntion<p-sortIcon field="libelle"></p-sortIcon>
+											</th>
+											<th>Actions</th>
+										</tr>
+										<tr>
+											<th>
+												<p-columnFilter [showClearButton]="false" type="text" field="createdAt" matchMode="contains" pTooltip="Options de filtrage">
+													<ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+														<input type="text" #valeur class="p-2 border" maxlength="20"
+															   [value]="value"
+															   pInputText
+															   (input)="filter(valeur.value)"
+														>
+													</ng-template>
+												</p-columnFilter>
+											</th>
+
+											<th>
+												<p-columnFilter [showClearButton]="false" type="text" field="libelle" matchMode="contains" pTooltip="Options de filtrage">
+													<ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+														<input type="text" #valeur class="p-2 border" maxlength="20"
+															   [value]="value"
+															   pInputText
+															   (input)="filter(valeur.value)"
+														>
+													</ng-template>
+												</p-columnFilter>
+											</th>
+
+											<th></th>
+										</tr>
+									</ng-template>
+									<ng-template pTemplate="body" let-modePaiement>
+										<tr>
+											<td >{{modePaiement.createdAt |date:'dd-MM-yyyy'}}</td>
+											<td >{{modePaiement.libelle}}</td>
+											<td width="200px">
+												<button pButton pRipple type="button" pTooltip="Supprimer le mode de paiement"  icon="pi pi-trash"
+														class="p-button-rounded p-button-text p-button-danger" (click)="supprimerModePaiement(modePaiement)"></button>
+											</td>
+										</tr>
+									</ng-template>
+									<ng-template pTemplate="summary">
+										<div class="flex align-items-center justify-content-between">
+											Total: {{modePaiements ? modePaiements.length : 0 }} modes de paiements
+										</div>
+									</ng-template>
+								</p-table>
+							</p-tabPanel>
 						</p-tabView>
 					</div>
 				</div>
@@ -389,8 +460,8 @@
 				<div class="grid">
 					<div class="col-12 md:col-12 lg:col-12">
 						  <span>
-							<label *ngIf="champsActif !='service'">Lieu</label>
-							  <label *ngIf="champsActif ==='service'">Désignation</label>
+							<label *ngIf="champsActif ==='adresse'">Lieu</label>
+							  <label *ngIf="champsActif ==='service' || champsActif ==='modePaiement' || champsActif ==='ville'">Désignation</label>
 					        <input type="text" pInputText formControlName="libelle">
 						  </span>
 					</div>
