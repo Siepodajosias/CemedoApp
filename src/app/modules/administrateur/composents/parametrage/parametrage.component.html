@@ -14,7 +14,7 @@
 								<span class="block text-500 font-medium mb-3">Ajouter une ville</span>
 							</div>
 							<div class="flex align-items-center justify-content-center bg-blue-100 border-round" style="width:2.5rem;height:2.5rem">
-								<i class="pi pi-users text-blue-500 text-xl"></i>
+								<i class="pi pi-home text-blue-500 text-xl"></i>
 							</div>
 						</div>
 					</div>
@@ -25,8 +25,8 @@
 							<div>
 								<span class="block text-500 font-medium mb-3">Ajouter une adresse</span>
 							</div>
-							<div class="flex align-items-center justify-content-center bg-orange-100 border-round" style="width:2.5rem;height:2.5rem">
-								<i class="pi pi-video text-orange-500 text-xl"></i>
+							<div class="flex align-items-center justify-content-center bg-blue-100 border-round" style="width:2.5rem;height:2.5rem">
+								<i class="pi pi-home text-blue-500 text-xl"></i>
 							</div>
 						</div>
 					</div>
@@ -38,7 +38,7 @@
 								<span class="block text-500 font-medium mb-3">Ajouter un service</span>
 							</div>
 							<div class="flex align-items-center justify-content-center bg-cyan-100 border-round" style="width:2.5rem;height:2.5rem">
-								<i class="pi pi-phone text-cyan-500 text-xl"></i>
+								<i class="pi pi-truck text-cyan-500 text-xl"></i>
 							</div>
 						</div>
 					</div>
@@ -47,10 +47,10 @@
 					<div #d4 id="consultationDomicile" class="surface-card shadow-2 p-3 border-round hover:surface-300" (click)="formulaire(d4)">
 						<div class="flex justify-content-between mb-3">
 							<div>
-								<span class="block text-500 font-medium mb-3">Consultations à domicile</span>
+								<span class="block text-500 font-medium mb-3">Ajouter un mode de paiement</span>
 							</div>
 							<div class="flex align-items-center justify-content-center bg-purple-100 border-round" style="width:2.5rem;height:2.5rem">
-								<i class="pi pi-sync text-purple-500 text-xl"></i>
+								<i class="pi pi-id-card text-purple-500 text-xl"></i>
 							</div>
 						</div>
 					</div>
@@ -87,7 +87,7 @@
 											</th>
 											<th [style]="{textAlign: 'center'}" pSortableColumn="libelle">Date de création<p-sortIcon field="libelle"></p-sortIcon>
 											</th>
-											<th [style]="{textAlign: 'center'}" pSortableColumn="tel" class="text-center">Désignation <p-sortIcon field="tel"></p-sortIcon>
+											<th [style]="{textAlign: 'center'}" pSortableColumn="tel" class="text-center">Lieu <p-sortIcon field="tel"></p-sortIcon>
 											</th>
 											<th>Active</th>
 											<th [style]="{textAlign: 'center'}">Actions</th>
@@ -137,9 +137,7 @@
 											<td>{{ville.libelle}}</td>
 											<td class="text-right">{{ville.active}}</td>
 											<td >
-												<button pButton pRipple type="button" pTooltip="Modifier" icon="pi pi-pencil"
-														class="p-button-rounded p-button-text"></button>
-												<button pButton pRipple type="button" pTooltip="Supprimer l'assurance"  icon="pi pi-trash"
+												<button pButton pRipple type="button" pTooltip="Supprimer la ville"  icon="pi pi-trash" (click)="supprimerVille(ville)"
 														class="p-button-rounded p-button-text p-button-danger"></button>
 											</td>
 										</tr>
@@ -175,7 +173,7 @@
 											</th>
 											<th [style]="{textAlign: 'center'}" pSortableColumn="libelle">Date de création<p-sortIcon field="libelle"></p-sortIcon>
 											</th>
-											<th [style]="{textAlign: 'center'}" pSortableColumn="tel" class="text-center">Désignation<p-sortIcon field="tel"></p-sortIcon>
+											<th [style]="{textAlign: 'center'}" pSortableColumn="tel" class="text-center">Lieu<p-sortIcon field="tel"></p-sortIcon>
 											</th>
 											<th [style]="{textAlign: 'center'}" pSortableColumn="ville" class="text-center">Longitude<p-sortIcon field="ville"></p-sortIcon>
 											</th>
@@ -252,7 +250,7 @@
 											<td >
 												<button pButton pRipple type="button" pTooltip="Modifier" icon="pi pi-pencil"
 														class="p-button-rounded p-button-text"></button>
-												<button pButton pRipple type="button" pTooltip="Supprimer l'assurance"  icon="pi pi-trash"
+												<button pButton pRipple type="button" pTooltip="Supprimer l'adresse" (click)="supprimerAdresse(adresse)"  icon="pi pi-trash"
 														class="p-button-rounded p-button-text p-button-danger"></button>
 											</td>
 										</tr>
@@ -266,6 +264,7 @@
 							</p-tabPanel>
 							<p-tabPanel header="Liste des services">
 								<p-table #dt
+										 [value]="services"
 										 [scrollable]="true"
 										 scrollHeight="500px"
 										 [globalFilterFields]="['libelle','email','ville']"
@@ -283,21 +282,52 @@
 									</ng-template>
 									<ng-template pTemplate="header">
 										<tr>
-											<th [style]="{textAlign: 'center'}" pSortableColumn="libelle">Date de création<p-sortIcon field="libelle"></p-sortIcon>
+											<th  pSortableColumn="libelle">Date de création<p-sortIcon field="libelle"></p-sortIcon>
 											</th>
-											<th [style]="{textAlign: 'center'}" pSortableColumn="email" class="text-center">Identifiant de l'ordonnance <p-sortIcon field="email"></p-sortIcon>
+											<th pSortableColumn="email" class="text-center">Identifiant du service <p-sortIcon field="email"></p-sortIcon>
 											</th>
-											<th [style]="{textAlign: 'center'}" pSortableColumn="tel" class="text-center">Patient <p-sortIcon field="tel"></p-sortIcon>
+											<th pSortableColumn="tel" class="text-center">Description <p-sortIcon field="tel"></p-sortIcon>
 											</th>
-											<th [style]="{textAlign: 'center'}" pSortableColumn="ville" class="text-center">Médecin<p-sortIcon field="ville"></p-sortIcon>
+											<th  pSortableColumn="libelle" class="text-center">Désigntion<p-sortIcon field="libelle"></p-sortIcon>
 											</th>
-											<th [style]="{textAlign: 'center'}" pSortableColumn="ville" class="text-center">Montant<p-sortIcon field="ville"></p-sortIcon>
+											<th pSortableColumn="ville" class="text-center">Prix unitaire<p-sortIcon field="ville"></p-sortIcon>
 											</th>
-											<th [style]="{textAlign: 'center'}" pSortableColumn="ville" class="text-center">Statut<p-sortIcon field="ville"></p-sortIcon>
-											</th>
-											<th [style]="{textAlign: 'center'}">Actions</th>
+											<th>Actions</th>
 										</tr>
 										<tr>
+											<th>
+												<p-columnFilter [showClearButton]="false" type="text" field="createdAt" matchMode="contains" pTooltip="Options de filtrage">
+													<ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+														<input type="text" #valeur class="p-2 border" maxlength="20"
+															   [value]="value"
+															   pInputText
+															   (input)="filter(valeur.value)"
+														>
+													</ng-template>
+												</p-columnFilter>
+											</th>
+											<th>
+												<p-columnFilter [showClearButton]="false" type="text" field="id" matchMode="contains" pTooltip="Options de filtrage">
+													<ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+														<input type="text" #valeur class="p-2 border" maxlength="20"
+															   [value]="value"
+															   pInputText
+															   (input)="filter(valeur.value)"
+														>
+													</ng-template>
+												</p-columnFilter>
+											</th>
+											<th>
+												<p-columnFilter [showClearButton]="false" type="text" field="description" matchMode="contains" pTooltip="Options de filtrage">
+													<ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+														<input type="text" #valeur class="p-2 border" maxlength="20"
+															   [value]="value"
+															   pInputText
+															   (input)="filter(valeur.value)"
+														>
+													</ng-template>
+												</p-columnFilter>
+											</th>
 											<th>
 												<p-columnFilter [showClearButton]="false" type="text" field="libelle" matchMode="contains" pTooltip="Options de filtrage">
 													<ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
@@ -310,51 +340,7 @@
 												</p-columnFilter>
 											</th>
 											<th>
-												<p-columnFilter [showClearButton]="false" type="text" field="email" matchMode="contains" pTooltip="Options de filtrage">
-													<ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
-														<input type="text" #valeur class="p-2 border" maxlength="20"
-															   [value]="value"
-															   pInputText
-															   (input)="filter(valeur.value)"
-														>
-													</ng-template>
-												</p-columnFilter>
-											</th>
-											<th>
-												<p-columnFilter [showClearButton]="false" type="text" field="tel" matchMode="contains" pTooltip="Options de filtrage">
-													<ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
-														<input type="text" #valeur class="p-2 border" maxlength="20"
-															   [value]="value"
-															   pInputText
-															   (input)="filter(valeur.value)"
-														>
-													</ng-template>
-												</p-columnFilter>
-											</th>
-											<th>
-												<p-columnFilter [showClearButton]="false" type="text" field="ville" matchMode="contains" pTooltip="Options de filtrage">
-													<ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
-														<input type="text" #valeur class="p-2 border" maxlength="20"
-															   [value]="value"
-															   pInputText
-															   (input)="filter(valeur.value)"
-														>
-													</ng-template>
-												</p-columnFilter>
-											</th>
-											<th>
-												<p-columnFilter [showClearButton]="false" type="text" field="ville" matchMode="contains" pTooltip="Options de filtrage">
-													<ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
-														<input type="text" #valeur class="p-2 border" maxlength="20"
-															   [value]="value"
-															   pInputText
-															   (input)="filter(valeur.value)"
-														>
-													</ng-template>
-												</p-columnFilter>
-											</th>
-											<th>
-												<p-columnFilter [showClearButton]="false" type="text" field="ville" matchMode="contains" pTooltip="Options de filtrage">
+												<p-columnFilter [showClearButton]="false" type="text" field="typeService.prixUnitaire" matchMode="contains" pTooltip="Options de filtrage">
 													<ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
 														<input type="text" #valeur class="p-2 border" maxlength="20"
 															   [value]="value"
@@ -367,25 +353,27 @@
 											<th></th>
 										</tr>
 									</ng-template>
-									<ng-template pTemplate="body" let-assurance>
+									<ng-template pTemplate="body" let-service>
 										<tr>
-											<td [style]="{textAlign: 'center'}">{{assurance.libelle}}</td>
-											<td>{{assurance.email}}</td>
-											<td class="text-right">{{assurance.tel}}</td>
-											<td>{{assurance.ville}}</td>
+											<td >{{service.createdAt |date:'dd-MM-yyyy'}}</td>
+											<td >{{service.id}}</td>
+											<td>{{service.description}}</td>
+											<td >{{service.libelle}}</td>
+											<td *ngIf="service.typeService">{{service.typeService.prixUnitaire}}</td>
+											<td *ngIf="!service.typeService"></td>
 											<td >
 												<button pButton pRipple type="button" pTooltip="Modifier" icon="pi pi-pencil"
 														class="p-button-rounded p-button-text"></button>
-												<button pButton pRipple type="button" pTooltip="Detail de l'assurance" icon="pi pi-angle-right"
+												<button pButton pRipple type="button" pTooltip="Detail du service" icon="pi pi-angle-right"
 														class="p-button-rounded p-button-text p-button-success"></button>
-												<button pButton pRipple type="button" pTooltip="Supprimer l'assurance"  icon="pi pi-trash"
-														class="p-button-rounded p-button-text p-button-danger"></button>
+												<button pButton pRipple type="button" pTooltip="Supprimer le service"  icon="pi pi-trash"
+														class="p-button-rounded p-button-text p-button-danger" (click)="supprimerService(service)"></button>
 											</td>
 										</tr>
 									</ng-template>
 									<ng-template pTemplate="summary">
 										<div class="flex align-items-center justify-content-between">
-											Total:  factures pour les ordonnances
+											Total: {{services ? services.length : 0 }} Services
 										</div>
 									</ng-template>
 								</p-table>
@@ -401,7 +389,8 @@
 				<div class="grid">
 					<div class="col-12 md:col-12 lg:col-12">
 						  <span>
-							<label>Désignation</label>
+							<label *ngIf="champsActif !='service'">Lieu</label>
+							  <label *ngIf="champsActif ==='service'">Désignation</label>
 					        <input type="text" pInputText formControlName="libelle">
 						  </span>
 					</div>
@@ -409,14 +398,16 @@
 					<div class="col-12 md:col-12 lg:col-12" *ngIf="champsActif ==='adresse'">
 						  <span>
 							<label>Patient</label>
-							<p-autoComplete   field="user.nom" formControlName="assure" [dropdown]="true">
+							<p-autoComplete   field="user.nom" formControlName="assure"
+											  [suggestions]="patientsForm"  (completeMethod)="patientsItems($event)" field="user.nom" [dropdown]="true">
 							</p-autoComplete>
 						  </span>
 					</div>
 
 					<div class="col-12 md:col-12 lg:col-12" *ngIf="champsActif ==='adresse'">
 						<label>Ville</label>
-						<p-autoComplete formControlName="ville" [virtualScroll]="true"  field="user.nom" [dropdown]="true">
+						<p-autoComplete formControlName="ville" [virtualScroll]="true"  field="user.nom"
+										[suggestions]="villeForm"  (completeMethod)="villesItems($event)" field="libelle" [dropdown]="true">
 						</p-autoComplete>
 					</div>
 
@@ -428,19 +419,19 @@
 					<div class="col-12 md:col-12 lg:col-12" *ngIf="champsActif ==='adresse'">
 						  <span>
 							<label>Longitude</label>
-							<input type="text" pInputText formControlName="longitude">
+							<input type="number" pInputText formControlName="longitude">
 						  </span>
 					</div>
 
 					<div class="col-12 md:col-12 lg:col-12"  *ngIf="champsActif ==='adresse'">
 						<label>Lattitude</label>
-						<p-autoComplete  [virtualScroll]="true" formControlName="lattitude"  field="user.nom" [dropdown]="true">
-						</p-autoComplete>
+						<input type="number" pInputText formControlName="lattitude">
 					</div>
 
 					<div class="col-12 md:col-12 lg:col-12" *ngIf="champsActif ==='service'">
 						<label>Type de service</label>
-						<p-autoComplete  [virtualScroll]="true"  formControlName="typeMedecin" field="user.nom" [dropdown]="true">
+						<p-autoComplete [baseZIndex]="3000" appendTo="body"  [virtualScroll]="true"  formControlName="typeService"
+										 [suggestions]="serviceForm"  (completeMethod)="servicesItems($event)" field="libelle" [dropdown]="true">
 						</p-autoComplete>
 					</div>
 

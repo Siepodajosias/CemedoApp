@@ -23,4 +23,8 @@ export class VilleService {
                     headers:new HttpHeaders({'Content-Type':'application/json'})
                 });
     }
+
+    supprimerVille(idVille:number):Observable<any>{
+        return this.http.get(this.configUrl+"/active/"+idVille)
+    }
 }

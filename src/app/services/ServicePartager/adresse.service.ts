@@ -24,4 +24,8 @@ export class AdresseService {
               headers:new HttpHeaders({'Content-Type':'application/json'})
             });
   }
+
+    supprimerAdresse(idAdresse:number):Observable<any>{
+        return this.http.get(this.configUrl+"/active/"+idAdresse)
+    }
 }

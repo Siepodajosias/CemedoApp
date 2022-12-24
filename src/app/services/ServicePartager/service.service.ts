@@ -23,4 +23,9 @@ export class ServiceService {
               headers:new HttpHeaders({'Content-Type':'application/json'})
             });
   }
+
+
+    supprimerService(idService: number): Observable<any> {
+        return this.http.get(this.configUrl + '/active/' + idService);
+    }
 }

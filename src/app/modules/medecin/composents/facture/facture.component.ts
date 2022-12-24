@@ -38,9 +38,9 @@ export class FactureComponent implements OnInit {
     }else if(idFormulaire.id === 'examen'){
       this.formulaireDialog=true
       this.titre="Créer une facture pour un examen"
-    }else if(idFormulaire.id === 'hospitalisation'){
+    }else if(idFormulaire.id === 'ordonnance'){
       this.formulaireDialog=true
-      this.titre="Créer une facture pour une hospitalisationà domicile"
+      this.titre="Créer une facture pour une ordonnance"
     }else {
       this.formulaireDialog=true
       this.titre="Créer une facture pour un test laboratoire"
@@ -61,5 +61,8 @@ export class FactureComponent implements OnInit {
 
   enregistrerFacture() {
 
+  }
+  fermerModal():void{
+    this.formulaireDialog=false
   }
 }

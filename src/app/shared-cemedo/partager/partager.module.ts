@@ -10,6 +10,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { EmployeService } from 'src/app/services/ServiceEmploye/employe.service';
 import { AdresseService } from 'src/app/services/ServicePartager/adresse.service';
 import { ServiceService } from 'src/app/services/ServicePartager/service.service';
+import { TypeServiceService } from 'src/app/services/ServicePartager/type-service.service';
 
 
 @NgModule({
@@ -25,6 +26,6 @@ import { ServiceService } from 'src/app/services/ServicePartager/service.service
     ConfirmDialogModule,
     CalendarModule
   ],
-  providers:[VilleService,EmployeService,AdresseService,ServiceService]
+  providers:[VilleService,EmployeService,AdresseService,ServiceService, TypeServiceService]
 })
 export class PartagerModule { }

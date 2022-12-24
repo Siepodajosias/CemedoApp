@@ -302,7 +302,7 @@ export const ROUTES: RouteInfo[] = [
     title: "Ressources humaine",
     moduleName: "ressources",
     iconType: "material-icons-two-tone",
-    icon: "vaccines",
+    icon: "diversity_3",
     class: "menu-toggle",
     groupTitle: false,
     badge: "",

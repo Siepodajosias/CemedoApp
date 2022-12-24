@@ -97,10 +97,10 @@
                 </div>
             </div>
             <div class="col-12 md:col-6 lg:col-3">
-                <div #d8 id="testLaboratoire" class="surface-card shadow-2 p-3 border-round hover:surface-300" (click)="formulaire(d8)">
+                <div #d8 id="ordonnance" class="surface-card shadow-2 p-3 border-round hover:surface-300" (click)="formulaire(d8)">
                     <div class="flex justify-content-between mb-3">
                         <div>
-                            <span class="block text-500 font-medium mb-3">Tests de laboratoire</span>
+                            <span class="block text-500 font-medium mb-3">Ordonnance</span>
                         </div>
                         <div class="flex align-items-center justify-content-center bg-purple-100 border-round" style="width:2.5rem;height:2.5rem">
                             <i class="pi pi-comment text-purple-500 text-xl"></i>
@@ -234,6 +234,641 @@
                                 <ng-template pTemplate="summary">
                                     <div class="flex align-items-center justify-content-between">
                                         Total:  factures pour les rendez-vous
+                                    </div>
+                                </ng-template>
+                            </p-table>
+                        </p-tabPanel>
+                        <p-tabPanel header="Facture des appels vidéos">
+                            <p-table #dt
+                                     [scrollable]="true"
+                                     scrollHeight="500px"
+                                     [globalFilterFields]="['libelle','email','ville']"
+                                     [filterDelay]="0"
+                                     styleClass="p-datatable-gridlines"
+                                     selectionMode="multiple"
+                                     [resizableColumns]="true">
+                                <ng-template pTemplate="caption">
+                                    <div class="flex align-items-center justify-content-between">
+                                        <h5 class="m-0">Ordonnance</h5>
+                                        <span class="p-input-icon-left">
+                                          <i class="pi pi-search"></i>
+                                          <input pInputText type="text" placeholder="Rechercher..." />
+                                     </span>
+                                    </div>
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th [style]="{textAlign: 'center'}" pSortableColumn="libelle">Date de création<p-sortIcon field="libelle"></p-sortIcon>
+                                        </th>
+                                        <th [style]="{textAlign: 'center'}" pSortableColumn="email" class="text-center">Identifiant de l'ordonnance <p-sortIcon field="email"></p-sortIcon>
+                                        </th>
+                                        <th [style]="{textAlign: 'center'}" pSortableColumn="tel" class="text-center">Patient <p-sortIcon field="tel"></p-sortIcon>
+                                        </th>
+                                        <th [style]="{textAlign: 'center'}" pSortableColumn="ville" class="text-center">Médecin<p-sortIcon field="ville"></p-sortIcon>
+                                        </th>
+                                        <th [style]="{textAlign: 'center'}" pSortableColumn="ville" class="text-center">Montant<p-sortIcon field="ville"></p-sortIcon>
+                                        </th>
+                                        <th [style]="{textAlign: 'center'}" pSortableColumn="ville" class="text-center">Statut<p-sortIcon field="ville"></p-sortIcon>
+                                        </th>
+                                        <th [style]="{textAlign: 'center'}">Actions</th>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <p-columnFilter [showClearButton]="false" type="text" field="libelle" matchMode="contains" pTooltip="Options de filtrage">
+                                                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                                                    <input type="text" #valeur class="p-2 border" maxlength="20"
+                                                           [value]="value"
+                                                           pInputText
+                                                           (input)="filter(valeur.value)"
+                                                    >
+                                                </ng-template>
+                                            </p-columnFilter>
+                                        </th>
+                                        <th>
+                                            <p-columnFilter [showClearButton]="false" type="text" field="email" matchMode="contains" pTooltip="Options de filtrage">
+                                                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                                                    <input type="text" #valeur class="p-2 border" maxlength="20"
+                                                           [value]="value"
+                                                           pInputText
+                                                           (input)="filter(valeur.value)"
+                                                    >
+                                                </ng-template>
+                                            </p-columnFilter>
+                                        </th>
+                                        <th>
+                                            <p-columnFilter [showClearButton]="false" type="text" field="tel" matchMode="contains" pTooltip="Options de filtrage">
+                                                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                                                    <input type="text" #valeur class="p-2 border" maxlength="20"
+                                                           [value]="value"
+                                                           pInputText
+                                                           (input)="filter(valeur.value)"
+                                                    >
+                                                </ng-template>
+                                            </p-columnFilter>
+                                        </th>
+                                        <th>
+                                            <p-columnFilter [showClearButton]="false" type="text" field="ville" matchMode="contains" pTooltip="Options de filtrage">
+                                                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                                                    <input type="text" #valeur class="p-2 border" maxlength="20"
+                                                           [value]="value"
+                                                           pInputText
+                                                           (input)="filter(valeur.value)"
+                                                    >
+                                                </ng-template>
+                                            </p-columnFilter>
+                                        </th>
+                                        <th>
+                                            <p-columnFilter [showClearButton]="false" type="text" field="ville" matchMode="contains" pTooltip="Options de filtrage">
+                                                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                                                    <input type="text" #valeur class="p-2 border" maxlength="20"
+                                                           [value]="value"
+                                                           pInputText
+                                                           (input)="filter(valeur.value)"
+                                                    >
+                                                </ng-template>
+                                            </p-columnFilter>
+                                        </th>
+                                        <th>
+                                            <p-columnFilter [showClearButton]="false" type="text" field="ville" matchMode="contains" pTooltip="Options de filtrage">
+                                                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                                                    <input type="text" #valeur class="p-2 border" maxlength="20"
+                                                           [value]="value"
+                                                           pInputText
+                                                           (input)="filter(valeur.value)"
+                                                    >
+                                                </ng-template>
+                                            </p-columnFilter>
+                                        </th>
+                                        <th></th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-assurance>
+                                    <tr>
+                                        <td [style]="{textAlign: 'center'}">{{assurance.libelle}}</td>
+                                        <td>{{assurance.email}}</td>
+                                        <td class="text-right">{{assurance.tel}}</td>
+                                        <td>{{assurance.ville}}</td>
+                                        <td >
+                                            <button pButton pRipple type="button" pTooltip="Modifier" icon="pi pi-pencil"
+                                                    class="p-button-rounded p-button-text"></button>
+                                            <button pButton pRipple type="button" pTooltip="Detail de l'assurance" icon="pi pi-angle-right"
+                                                    class="p-button-rounded p-button-text p-button-success"></button>
+                                            <button pButton pRipple type="button" pTooltip="Supprimer l'assurance"  icon="pi pi-trash"
+                                                    class="p-button-rounded p-button-text p-button-danger"></button>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="summary">
+                                    <div class="flex align-items-center justify-content-between">
+                                        Total:  factures pour les ordonnances
+                                    </div>
+                                </ng-template>
+                            </p-table>
+                        </p-tabPanel>
+                        <p-tabPanel header="Facture des appels téléphoniques">
+                            <p-table #dt
+                                     [scrollable]="true"
+                                     scrollHeight="500px"
+                                     [globalFilterFields]="['libelle','email','ville']"
+                                     [filterDelay]="0"
+                                     styleClass="p-datatable-gridlines"
+                                     selectionMode="multiple"
+                                     [resizableColumns]="true">
+                                <ng-template pTemplate="caption">
+                                    <div class="flex align-items-center justify-content-between">
+                                        <h5 class="m-0">Ordonnance</h5>
+                                        <span class="p-input-icon-left">
+                                          <i class="pi pi-search"></i>
+                                          <input pInputText type="text" placeholder="Rechercher..." />
+                                     </span>
+                                    </div>
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th [style]="{textAlign: 'center'}" pSortableColumn="libelle">Date de création<p-sortIcon field="libelle"></p-sortIcon>
+                                        </th>
+                                        <th [style]="{textAlign: 'center'}" pSortableColumn="email" class="text-center">Identifiant de l'ordonnance <p-sortIcon field="email"></p-sortIcon>
+                                        </th>
+                                        <th [style]="{textAlign: 'center'}" pSortableColumn="tel" class="text-center">Patient <p-sortIcon field="tel"></p-sortIcon>
+                                        </th>
+                                        <th [style]="{textAlign: 'center'}" pSortableColumn="ville" class="text-center">Médecin<p-sortIcon field="ville"></p-sortIcon>
+                                        </th>
+                                        <th [style]="{textAlign: 'center'}" pSortableColumn="ville" class="text-center">Montant<p-sortIcon field="ville"></p-sortIcon>
+                                        </th>
+                                        <th [style]="{textAlign: 'center'}" pSortableColumn="ville" class="text-center">Statut<p-sortIcon field="ville"></p-sortIcon>
+                                        </th>
+                                        <th [style]="{textAlign: 'center'}">Actions</th>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <p-columnFilter [showClearButton]="false" type="text" field="libelle" matchMode="contains" pTooltip="Options de filtrage">
+                                                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                                                    <input type="text" #valeur class="p-2 border" maxlength="20"
+                                                           [value]="value"
+                                                           pInputText
+                                                           (input)="filter(valeur.value)"
+                                                    >
+                                                </ng-template>
+                                            </p-columnFilter>
+                                        </th>
+                                        <th>
+                                            <p-columnFilter [showClearButton]="false" type="text" field="email" matchMode="contains" pTooltip="Options de filtrage">
+                                                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                                                    <input type="text" #valeur class="p-2 border" maxlength="20"
+                                                           [value]="value"
+                                                           pInputText
+                                                           (input)="filter(valeur.value)"
+                                                    >
+                                                </ng-template>
+                                            </p-columnFilter>
+                                        </th>
+                                        <th>
+                                            <p-columnFilter [showClearButton]="false" type="text" field="tel" matchMode="contains" pTooltip="Options de filtrage">
+                                                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                                                    <input type="text" #valeur class="p-2 border" maxlength="20"
+                                                           [value]="value"
+                                                           pInputText
+                                                           (input)="filter(valeur.value)"
+                                                    >
+                                                </ng-template>
+                                            </p-columnFilter>
+                                        </th>
+                                        <th>
+                                            <p-columnFilter [showClearButton]="false" type="text" field="ville" matchMode="contains" pTooltip="Options de filtrage">
+                                                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                                                    <input type="text" #valeur class="p-2 border" maxlength="20"
+                                                           [value]="value"
+                                                           pInputText
+                                                           (input)="filter(valeur.value)"
+                                                    >
+                                                </ng-template>
+                                            </p-columnFilter>
+                                        </th>
+                                        <th>
+                                            <p-columnFilter [showClearButton]="false" type="text" field="ville" matchMode="contains" pTooltip="Options de filtrage">
+                                                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                                                    <input type="text" #valeur class="p-2 border" maxlength="20"
+                                                           [value]="value"
+                                                           pInputText
+                                                           (input)="filter(valeur.value)"
+                                                    >
+                                                </ng-template>
+                                            </p-columnFilter>
+                                        </th>
+                                        <th>
+                                            <p-columnFilter [showClearButton]="false" type="text" field="ville" matchMode="contains" pTooltip="Options de filtrage">
+                                                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                                                    <input type="text" #valeur class="p-2 border" maxlength="20"
+                                                           [value]="value"
+                                                           pInputText
+                                                           (input)="filter(valeur.value)"
+                                                    >
+                                                </ng-template>
+                                            </p-columnFilter>
+                                        </th>
+                                        <th></th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-assurance>
+                                    <tr>
+                                        <td [style]="{textAlign: 'center'}">{{assurance.libelle}}</td>
+                                        <td>{{assurance.email}}</td>
+                                        <td class="text-right">{{assurance.tel}}</td>
+                                        <td>{{assurance.ville}}</td>
+                                        <td >
+                                            <button pButton pRipple type="button" pTooltip="Modifier" icon="pi pi-pencil"
+                                                    class="p-button-rounded p-button-text"></button>
+                                            <button pButton pRipple type="button" pTooltip="Detail de l'assurance" icon="pi pi-angle-right"
+                                                    class="p-button-rounded p-button-text p-button-success"></button>
+                                            <button pButton pRipple type="button" pTooltip="Supprimer l'assurance"  icon="pi pi-trash"
+                                                    class="p-button-rounded p-button-text p-button-danger"></button>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="summary">
+                                    <div class="flex align-items-center justify-content-between">
+                                        Total:  factures pour les ordonnances
+                                    </div>
+                                </ng-template>
+                            </p-table>
+                        </p-tabPanel>
+                        <p-tabPanel header="Facture des consultations à domicile">
+                            <p-table #dt
+                                     [scrollable]="true"
+                                     scrollHeight="500px"
+                                     [globalFilterFields]="['libelle','email','ville']"
+                                     [filterDelay]="0"
+                                     styleClass="p-datatable-gridlines"
+                                     selectionMode="multiple"
+                                     [resizableColumns]="true">
+                                <ng-template pTemplate="caption">
+                                    <div class="flex align-items-center justify-content-between">
+                                        <h5 class="m-0">Ordonnance</h5>
+                                        <span class="p-input-icon-left">
+                                          <i class="pi pi-search"></i>
+                                          <input pInputText type="text" placeholder="Rechercher..." />
+                                     </span>
+                                    </div>
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th [style]="{textAlign: 'center'}" pSortableColumn="libelle">Date de création<p-sortIcon field="libelle"></p-sortIcon>
+                                        </th>
+                                        <th [style]="{textAlign: 'center'}" pSortableColumn="email" class="text-center">Identifiant de l'ordonnance <p-sortIcon field="email"></p-sortIcon>
+                                        </th>
+                                        <th [style]="{textAlign: 'center'}" pSortableColumn="tel" class="text-center">Patient <p-sortIcon field="tel"></p-sortIcon>
+                                        </th>
+                                        <th [style]="{textAlign: 'center'}" pSortableColumn="ville" class="text-center">Médecin<p-sortIcon field="ville"></p-sortIcon>
+                                        </th>
+                                        <th [style]="{textAlign: 'center'}" pSortableColumn="ville" class="text-center">Montant<p-sortIcon field="ville"></p-sortIcon>
+                                        </th>
+                                        <th [style]="{textAlign: 'center'}" pSortableColumn="ville" class="text-center">Statut<p-sortIcon field="ville"></p-sortIcon>
+                                        </th>
+                                        <th [style]="{textAlign: 'center'}">Actions</th>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <p-columnFilter [showClearButton]="false" type="text" field="libelle" matchMode="contains" pTooltip="Options de filtrage">
+                                                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                                                    <input type="text" #valeur class="p-2 border" maxlength="20"
+                                                           [value]="value"
+                                                           pInputText
+                                                           (input)="filter(valeur.value)"
+                                                    >
+                                                </ng-template>
+                                            </p-columnFilter>
+                                        </th>
+                                        <th>
+                                            <p-columnFilter [showClearButton]="false" type="text" field="email" matchMode="contains" pTooltip="Options de filtrage">
+                                                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                                                    <input type="text" #valeur class="p-2 border" maxlength="20"
+                                                           [value]="value"
+                                                           pInputText
+                                                           (input)="filter(valeur.value)"
+                                                    >
+                                                </ng-template>
+                                            </p-columnFilter>
+                                        </th>
+                                        <th>
+                                            <p-columnFilter [showClearButton]="false" type="text" field="tel" matchMode="contains" pTooltip="Options de filtrage">
+                                                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                                                    <input type="text" #valeur class="p-2 border" maxlength="20"
+                                                           [value]="value"
+                                                           pInputText
+                                                           (input)="filter(valeur.value)"
+                                                    >
+                                                </ng-template>
+                                            </p-columnFilter>
+                                        </th>
+                                        <th>
+                                            <p-columnFilter [showClearButton]="false" type="text" field="ville" matchMode="contains" pTooltip="Options de filtrage">
+                                                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                                                    <input type="text" #valeur class="p-2 border" maxlength="20"
+                                                           [value]="value"
+                                                           pInputText
+                                                           (input)="filter(valeur.value)"
+                                                    >
+                                                </ng-template>
+                                            </p-columnFilter>
+                                        </th>
+                                        <th>
+                                            <p-columnFilter [showClearButton]="false" type="text" field="ville" matchMode="contains" pTooltip="Options de filtrage">
+                                                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                                                    <input type="text" #valeur class="p-2 border" maxlength="20"
+                                                           [value]="value"
+                                                           pInputText
+                                                           (input)="filter(valeur.value)"
+                                                    >
+                                                </ng-template>
+                                            </p-columnFilter>
+                                        </th>
+                                        <th>
+                                            <p-columnFilter [showClearButton]="false" type="text" field="ville" matchMode="contains" pTooltip="Options de filtrage">
+                                                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                                                    <input type="text" #valeur class="p-2 border" maxlength="20"
+                                                           [value]="value"
+                                                           pInputText
+                                                           (input)="filter(valeur.value)"
+                                                    >
+                                                </ng-template>
+                                            </p-columnFilter>
+                                        </th>
+                                        <th></th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-assurance>
+                                    <tr>
+                                        <td [style]="{textAlign: 'center'}">{{assurance.libelle}}</td>
+                                        <td>{{assurance.email}}</td>
+                                        <td class="text-right">{{assurance.tel}}</td>
+                                        <td>{{assurance.ville}}</td>
+                                        <td >
+                                            <button pButton pRipple type="button" pTooltip="Modifier" icon="pi pi-pencil"
+                                                    class="p-button-rounded p-button-text"></button>
+                                            <button pButton pRipple type="button" pTooltip="Detail de l'assurance" icon="pi pi-angle-right"
+                                                    class="p-button-rounded p-button-text p-button-success"></button>
+                                            <button pButton pRipple type="button" pTooltip="Supprimer l'assurance"  icon="pi pi-trash"
+                                                    class="p-button-rounded p-button-text p-button-danger"></button>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="summary">
+                                    <div class="flex align-items-center justify-content-between">
+                                        Total:  factures pour les ordonnances
+                                    </div>
+                                </ng-template>
+                            </p-table>
+                        </p-tabPanel>
+                        <p-tabPanel header="Facture des chats">
+                            <p-table #dt
+                                     [scrollable]="true"
+                                     scrollHeight="500px"
+                                     [globalFilterFields]="['libelle','email','ville']"
+                                     [filterDelay]="0"
+                                     styleClass="p-datatable-gridlines"
+                                     selectionMode="multiple"
+                                     [resizableColumns]="true">
+                                <ng-template pTemplate="caption">
+                                    <div class="flex align-items-center justify-content-between">
+                                        <h5 class="m-0">Ordonnance</h5>
+                                        <span class="p-input-icon-left">
+                                          <i class="pi pi-search"></i>
+                                          <input pInputText type="text" placeholder="Rechercher..." />
+                                     </span>
+                                    </div>
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th [style]="{textAlign: 'center'}" pSortableColumn="libelle">Date de création<p-sortIcon field="libelle"></p-sortIcon>
+                                        </th>
+                                        <th [style]="{textAlign: 'center'}" pSortableColumn="email" class="text-center">Identifiant de l'ordonnance <p-sortIcon field="email"></p-sortIcon>
+                                        </th>
+                                        <th [style]="{textAlign: 'center'}" pSortableColumn="tel" class="text-center">Patient <p-sortIcon field="tel"></p-sortIcon>
+                                        </th>
+                                        <th [style]="{textAlign: 'center'}" pSortableColumn="ville" class="text-center">Médecin<p-sortIcon field="ville"></p-sortIcon>
+                                        </th>
+                                        <th [style]="{textAlign: 'center'}" pSortableColumn="ville" class="text-center">Montant<p-sortIcon field="ville"></p-sortIcon>
+                                        </th>
+                                        <th [style]="{textAlign: 'center'}" pSortableColumn="ville" class="text-center">Statut<p-sortIcon field="ville"></p-sortIcon>
+                                        </th>
+                                        <th [style]="{textAlign: 'center'}">Actions</th>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <p-columnFilter [showClearButton]="false" type="text" field="libelle" matchMode="contains" pTooltip="Options de filtrage">
+                                                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                                                    <input type="text" #valeur class="p-2 border" maxlength="20"
+                                                           [value]="value"
+                                                           pInputText
+                                                           (input)="filter(valeur.value)"
+                                                    >
+                                                </ng-template>
+                                            </p-columnFilter>
+                                        </th>
+                                        <th>
+                                            <p-columnFilter [showClearButton]="false" type="text" field="email" matchMode="contains" pTooltip="Options de filtrage">
+                                                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                                                    <input type="text" #valeur class="p-2 border" maxlength="20"
+                                                           [value]="value"
+                                                           pInputText
+                                                           (input)="filter(valeur.value)"
+                                                    >
+                                                </ng-template>
+                                            </p-columnFilter>
+                                        </th>
+                                        <th>
+                                            <p-columnFilter [showClearButton]="false" type="text" field="tel" matchMode="contains" pTooltip="Options de filtrage">
+                                                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                                                    <input type="text" #valeur class="p-2 border" maxlength="20"
+                                                           [value]="value"
+                                                           pInputText
+                                                           (input)="filter(valeur.value)"
+                                                    >
+                                                </ng-template>
+                                            </p-columnFilter>
+                                        </th>
+                                        <th>
+                                            <p-columnFilter [showClearButton]="false" type="text" field="ville" matchMode="contains" pTooltip="Options de filtrage">
+                                                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                                                    <input type="text" #valeur class="p-2 border" maxlength="20"
+                                                           [value]="value"
+                                                           pInputText
+                                                           (input)="filter(valeur.value)"
+                                                    >
+                                                </ng-template>
+                                            </p-columnFilter>
+                                        </th>
+                                        <th>
+                                            <p-columnFilter [showClearButton]="false" type="text" field="ville" matchMode="contains" pTooltip="Options de filtrage">
+                                                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                                                    <input type="text" #valeur class="p-2 border" maxlength="20"
+                                                           [value]="value"
+                                                           pInputText
+                                                           (input)="filter(valeur.value)"
+                                                    >
+                                                </ng-template>
+                                            </p-columnFilter>
+                                        </th>
+                                        <th>
+                                            <p-columnFilter [showClearButton]="false" type="text" field="ville" matchMode="contains" pTooltip="Options de filtrage">
+                                                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                                                    <input type="text" #valeur class="p-2 border" maxlength="20"
+                                                           [value]="value"
+                                                           pInputText
+                                                           (input)="filter(valeur.value)"
+                                                    >
+                                                </ng-template>
+                                            </p-columnFilter>
+                                        </th>
+                                        <th></th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-assurance>
+                                    <tr>
+                                        <td [style]="{textAlign: 'center'}">{{assurance.libelle}}</td>
+                                        <td>{{assurance.email}}</td>
+                                        <td class="text-right">{{assurance.tel}}</td>
+                                        <td>{{assurance.ville}}</td>
+                                        <td >
+                                            <button pButton pRipple type="button" pTooltip="Modifier" icon="pi pi-pencil"
+                                                    class="p-button-rounded p-button-text"></button>
+                                            <button pButton pRipple type="button" pTooltip="Detail de l'assurance" icon="pi pi-angle-right"
+                                                    class="p-button-rounded p-button-text p-button-success"></button>
+                                            <button pButton pRipple type="button" pTooltip="Supprimer l'assurance"  icon="pi pi-trash"
+                                                    class="p-button-rounded p-button-text p-button-danger"></button>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="summary">
+                                    <div class="flex align-items-center justify-content-between">
+                                        Total:  factures pour les ordonnances
+                                    </div>
+                                </ng-template>
+                            </p-table>
+                        </p-tabPanel>
+                        <p-tabPanel header="Facture des examens">
+                            <p-table #dt
+                                     [scrollable]="true"
+                                     scrollHeight="500px"
+                                     [globalFilterFields]="['libelle','email','ville']"
+                                     [filterDelay]="0"
+                                     styleClass="p-datatable-gridlines"
+                                     selectionMode="multiple"
+                                     [resizableColumns]="true">
+                                <ng-template pTemplate="caption">
+                                    <div class="flex align-items-center justify-content-between">
+                                        <h5 class="m-0">Ordonnance</h5>
+                                        <span class="p-input-icon-left">
+                                          <i class="pi pi-search"></i>
+                                          <input pInputText type="text" placeholder="Rechercher..." />
+                                     </span>
+                                    </div>
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th [style]="{textAlign: 'center'}" pSortableColumn="libelle">Date de création<p-sortIcon field="libelle"></p-sortIcon>
+                                        </th>
+                                        <th [style]="{textAlign: 'center'}" pSortableColumn="email" class="text-center">Identifiant de l'ordonnance <p-sortIcon field="email"></p-sortIcon>
+                                        </th>
+                                        <th [style]="{textAlign: 'center'}" pSortableColumn="tel" class="text-center">Patient <p-sortIcon field="tel"></p-sortIcon>
+                                        </th>
+                                        <th [style]="{textAlign: 'center'}" pSortableColumn="ville" class="text-center">Médecin<p-sortIcon field="ville"></p-sortIcon>
+                                        </th>
+                                        <th [style]="{textAlign: 'center'}" pSortableColumn="ville" class="text-center">Montant<p-sortIcon field="ville"></p-sortIcon>
+                                        </th>
+                                        <th [style]="{textAlign: 'center'}" pSortableColumn="ville" class="text-center">Statut<p-sortIcon field="ville"></p-sortIcon>
+                                        </th>
+                                        <th [style]="{textAlign: 'center'}">Actions</th>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <p-columnFilter [showClearButton]="false" type="text" field="libelle" matchMode="contains" pTooltip="Options de filtrage">
+                                                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                                                    <input type="text" #valeur class="p-2 border" maxlength="20"
+                                                           [value]="value"
+                                                           pInputText
+                                                           (input)="filter(valeur.value)"
+                                                    >
+                                                </ng-template>
+                                            </p-columnFilter>
+                                        </th>
+                                        <th>
+                                            <p-columnFilter [showClearButton]="false" type="text" field="email" matchMode="contains" pTooltip="Options de filtrage">
+                                                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                                                    <input type="text" #valeur class="p-2 border" maxlength="20"
+                                                           [value]="value"
+                                                           pInputText
+                                                           (input)="filter(valeur.value)"
+                                                    >
+                                                </ng-template>
+                                            </p-columnFilter>
+                                        </th>
+                                        <th>
+                                            <p-columnFilter [showClearButton]="false" type="text" field="tel" matchMode="contains" pTooltip="Options de filtrage">
+                                                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                                                    <input type="text" #valeur class="p-2 border" maxlength="20"
+                                                           [value]="value"
+                                                           pInputText
+                                                           (input)="filter(valeur.value)"
+                                                    >
+                                                </ng-template>
+                                            </p-columnFilter>
+                                        </th>
+                                        <th>
+                                            <p-columnFilter [showClearButton]="false" type="text" field="ville" matchMode="contains" pTooltip="Options de filtrage">
+                                                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                                                    <input type="text" #valeur class="p-2 border" maxlength="20"
+                                                           [value]="value"
+                                                           pInputText
+                                                           (input)="filter(valeur.value)"
+                                                    >
+                                                </ng-template>
+                                            </p-columnFilter>
+                                        </th>
+                                        <th>
+                                            <p-columnFilter [showClearButton]="false" type="text" field="ville" matchMode="contains" pTooltip="Options de filtrage">
+                                                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                                                    <input type="text" #valeur class="p-2 border" maxlength="20"
+                                                           [value]="value"
+                                                           pInputText
+                                                           (input)="filter(valeur.value)"
+                                                    >
+                                                </ng-template>
+                                            </p-columnFilter>
+                                        </th>
+                                        <th>
+                                            <p-columnFilter [showClearButton]="false" type="text" field="ville" matchMode="contains" pTooltip="Options de filtrage">
+                                                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                                                    <input type="text" #valeur class="p-2 border" maxlength="20"
+                                                           [value]="value"
+                                                           pInputText
+                                                           (input)="filter(valeur.value)"
+                                                    >
+                                                </ng-template>
+                                            </p-columnFilter>
+                                        </th>
+                                        <th></th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-assurance>
+                                    <tr>
+                                        <td [style]="{textAlign: 'center'}">{{assurance.libelle}}</td>
+                                        <td>{{assurance.email}}</td>
+                                        <td class="text-right">{{assurance.tel}}</td>
+                                        <td>{{assurance.ville}}</td>
+                                        <td >
+                                            <button pButton pRipple type="button" pTooltip="Modifier" icon="pi pi-pencil"
+                                                    class="p-button-rounded p-button-text"></button>
+                                            <button pButton pRipple type="button" pTooltip="Detail de l'assurance" icon="pi pi-angle-right"
+                                                    class="p-button-rounded p-button-text p-button-success"></button>
+                                            <button pButton pRipple type="button" pTooltip="Supprimer l'assurance"  icon="pi pi-trash"
+                                                    class="p-button-rounded p-button-text p-button-danger"></button>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="summary">
+                                    <div class="flex align-items-center justify-content-between">
+                                        Total:  factures pour les ordonnances
                                     </div>
                                 </ng-template>
                             </p-table>
@@ -446,7 +1081,7 @@
                             <button type="submit" pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-bouton-texte p-bouton-sm
                                   w-10rem h-2rem m-2"></button>
                             <button type="button" pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-danger p-bouton-sm
-                                  w-10rem h-2rem m-2"></button>
+                                  w-10rem h-2rem m-2" (click)="fermerModal()"></button>
                         </div>
                     </div>
                 </div>
