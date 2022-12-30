@@ -1,86 +1,44 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Patient1 } from 'src/app/models/modelPatient/patient1';
-import { Ordonnance } from 'src/app/models/modelPatient/ordonnance';
-import { PageCarnetSante } from 'src/app/models/modelPatient/page-carnet-sante';
+import { Patient } from 'src/app/models/modelPatient/patient';
+
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class PatientService {
-  private config:string="http://38.242.229.12/assures/patient/"
-  private config4:string="http://38.242.229.12/assures/"
-  private config2:string="http://38.242.229.12/ordonnances"
-  private config3:string="http://38.242.229.12/page_carnet_santes"
-  constructor(private httpPat:HttpClient) { }
+	private config1: string = 'http://38.242.229.12/assures/patient/';
+	private config4: string = 'http://38.242.229.12/assures/';
 
- //patients ressource
- recupererPatient():Observable<any>{
-  return this.httpPat.get<any>(this.config+"all",{
-    headers:new HttpHeaders({'Content-Type':'application/json'})
-  })
-}
+	constructor(private http: HttpClient) {}
 
-enregistrerPatient(pat:Patient1):Observable<Patient1>{
-  return this.httpPat.post<Patient1>(this.config+"create",pat,{
-    headers:new HttpHeaders({'Content-Type':'application/json'})
-  })
-}
-recupererPatientById(a:number):Observable<any>{
-  return this.httpPat.get<any>(this.config4+"getOne/"+a,
-  {
-    headers:new HttpHeaders({'Content-Type':'application/json'})
-  }
-  )
-}
-supprimerPatient(e:number):Observable<any>{
- return this.httpPat.delete(this.config+"/"+e)
-}
+	recupererPatient(): Observable<any> {
+		return this.http.get<any>(this.config1 + 'all', {
+			headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+		});
+	}
 
-//Ordonnance ressource
-recupererOrdonnance():Observable<any>{
-  return this.httpPat.get<any>(this.config2,{
-    headers:new HttpHeaders({'Content-Type':'application/json'})
-  })
-}
+	enregistrerPatient(patient: Patient): Observable<Patient> {
+		return this.http.post<Patient>(this.config1 + 'create', patient, {
+			headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+		});
+	}
 
-enregistrerOrdonnance(ord:Ordonnance):Observable<Ordonnance>{
-  return this.httpPat.post<Ordonnance>(this.config2,ord,{
-    headers:new HttpHeaders({'Content-Type':'application/json'})
-  })
-}
-recupererOrdonnanceById(a:number):Observable<any>{
-  return this.httpPat.get<any>(this.config2+"/"+a,
-  {
-    headers:new HttpHeaders({'Content-Type':'application/json'})
-  }
-  )
-}
-supprimerOrdonnance(e:number):void{
-  this.httpPat.delete(this.config2+"/"+e)
-}
+	recupererPatientById(idPatient: number): Observable<any> {
+		return this.http.get<any>(this.config4 + 'getOne/' + idPatient,
+				{
+					headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+				}
+		);
+	}
 
-//carnet de sante ressource
+	modifierPatient(patient: Patient): Observable<Patient> {
+		return this.http.post<Patient>(this.config1 + 'update', patient, {
+			headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+		});
+	}
 
-getCarnetSante():Observable<any>{
-  return this.httpPat.get<any>(this.config3,{
-    headers:new HttpHeaders({'Content-Type':'application/json'})
-  })
-}
-
-sendCarnetSante(cnts:PageCarnetSante):Observable<PageCarnetSante>{
-  return this.httpPat.post<PageCarnetSante>(this.config3,cnts,{
-    headers:new HttpHeaders({'Content-Type':'application/json'})
-  })
-}
-getCanetSanteById(a:number):Observable<any>{
-  return this.httpPat.get<any>(this.config3+"/"+a,
-  {
-    headers:new HttpHeaders({'Content-Type':'application/json'})
-  }
-  )
-}
-deletePageCarnetSante(e:number):void{
-  this.httpPat.delete(this.config3+"/"+e)
-}
+	supprimerPatient(idPatient: number): Observable<any> {
+		return this.http.get(this.config1 + '/active/' + idPatient);
+	}
 }

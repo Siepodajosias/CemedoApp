@@ -3,59 +3,38 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Administrateur } from 'src/app/models/modelAdministrateur/administrateur';
 import { Facture } from 'src/app/models/modelAdministrateur/facture';
+import { ModePaiement } from 'src/app/models/modelPartager/mode-paiement';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
-  private config1:string="http://38.242.229.12/administrateurs"
-  private config2:string="http://38.242.229.12/factures"
-  constructor(private httpadmin:HttpClient) { }
+  private config1:string="http://38.242.229.12/employe/administrateur"
+
+  constructor(private http:HttpClient) { }
 
   //administrateur ressources
   recupererAdministrateur():Observable<any>{
-    return this.httpadmin.get<any>(this.config1,{
+    return this.http.get<any>(this.config1+'/getAll',{
       headers:new HttpHeaders({'Content-Type':'application/json'})
     })
   }
 
   enregistrerAdministrateur(admin:Administrateur):Observable<Administrateur>{
-    return this.httpadmin.post<Administrateur>(this.config1,admin,{
-      headers:new HttpHeaders({'Content-Type':'application/json'})
-    })
-  }
-  getAdminById(a:number):Observable<any>{
-    return this.httpadmin.get<any>(this.config1+"/"+a,
-    {
-      headers:new HttpHeaders({'Content-Type':'application/json'})
-    }
-    )
-  }
-  deleteAdmin(e:number):void{
-    this.httpadmin.delete(this.config1+"/"+e)
-  }
-
-  //facture ressource
-  recupererRDV():Observable<any>{
-    return this.httpadmin.get<any>(this.config2,{
+    return this.http.post<Administrateur>(this.config1+'/create',admin,{
       headers:new HttpHeaders({'Content-Type':'application/json'})
     })
   }
 
-  sendFacture(fact:Facture):Observable<Facture>{
-    return this.httpadmin.post<Facture>(this.config2,fact,{
-      headers:new HttpHeaders({'Content-Type':'application/json'})
-    })
+  supprimerAdministrateur(idAdministrateur:number): Observable<any> {
+    return this.http.get(this.config1 + '/active/' + idAdministrateur);
   }
-  getFactureById(a:number):Observable<any>{
-    return this.httpadmin.get<any>(this.config2+"/"+a,
-    {
-      headers:new HttpHeaders({'Content-Type':'application/json'})
-    }
-    )
-  }
-  deleteFacture(e:number):void{
-    this.httpadmin.delete(this.config2+"/"+e)
+
+  modifierAdministrateur(admin:Administrateur): Observable<any> {
+    return this.http.post<any>(this.config1 + '/update/' + admin.matricule,admin,
+            {
+              headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+            });
   }
 
 }

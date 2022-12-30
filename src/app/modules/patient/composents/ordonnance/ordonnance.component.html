@@ -104,15 +104,17 @@
 				</ng-template>
 				<ng-template pTemplate="body" let-ordonnance>
 					<tr>
-						<td>{{ordonnance.assure.user.nom}}</td>
-						<td>{{ordonnance.medecin.user.nom}}</td>
+						<td *ngIf="ordonnance.assure">{{ordonnance.assure.user.nom}}</td>
+						<td *ngIf="!ordonnance.assure"></td>
+						<td *ngIf="ordonnance.medecin">{{ordonnance.medecin.user.fullName}}</td>
+						<td *ngIf="!ordonnance.medecin"></td>
 						<td class="text-right">{{ordonnance.dateEmission |date:'dd-MM-yyyy'}}</td>
 						<td>
 							<p-tag *ngIf="ordonnance.livre" severity="success" value="Livrer"></p-tag>
 							<p-tag *ngIf="!ordonnance.livre" severity="danger" value="Non livrer"></p-tag>
 						</td>
 						<td >
-							<button pButton pRipple type="button" pTooltip="Modifier" icon="pi pi-pencil" (click)="updateOrdonnance(ordonnance)" *ngIf="urlActif()"
+							<button pButton pRipple type="button" pTooltip="Modifier" icon="pi pi-pencil" (click)="modifierOdonnance(ordonnance)" *ngIf="urlActif()"
 									class="p-button-rounded p-button-text"></button>
 							<button pButton pRipple type="button" pTooltip="Detail de l'ordonnance" icon="pi pi-angle-right" (click)="ordonnanceDetail(ordonnance)"
 									class="p-button-rounded p-button-text p-button-success"></button>
@@ -133,7 +135,7 @@
 		<p-dialog [(visible)]="ordonnanceDialog" [style]="{width: '460px'}" header="Création d'une ordonnance" [modal]="true"
 				  styleClass="p-fluid">
 
-			<form [formGroup]="ordonnanceForms">
+			<form [formGroup]="ordonnanceForms" (ngSubmit)="enregistrerOrdonnance()">
 				<div class="grid">
 
 					<div class="col-12 md:col-6 lg:col-6">
@@ -146,7 +148,7 @@
 					<div class="col-12 md:col-6 lg:col-6">
             <span>
             <h4>Statut</h4>
-              <input type="email" pInputText formControlName="medecin">
+              <input type="email" pInputText formControlName="livre">
             </span>
 					</div>
 
@@ -175,50 +177,8 @@
 				</div>
 			</form>
 		</p-dialog>
-		<p-dialog [(visible)]="ordonnanceDialogUpdate" [style]="{width: '460px'}" header="Modifier l' ordonnance" [modal]="true"
-				  styleClass="p-fluid">
-			<form [formGroup]="ordonnanceFormsUpdate">
-				<div class="grid">
-					<div class="col-12 md:col-6 lg:col-6">
-            <span>
-            <h4>Date de création</h4>
-              <input type="text" pInputText formControlName="dateEmissionUpdate">
-            </span>
-					</div>
-
-					<div class="col-12 md:col-6 lg:col-6">
-            <span>
-            <h4>Statut</h4>
-              <input type="email" pInputText formControlName="medecinUpdate">
-            </span>
-					</div>
-
-					<div class="col-12">
-            <span>
-            <h4>Patient</h4>
-              <input type="text" pInputText formControlName="assureUpdate">
-            </span>
-					</div>
-					<div class="col-12">
-            <span>
-            <h4>Médecin</h4>
-              <input type="text" pInputText formControlName="livreUpdate">
-            </span>
-					</div>
-					<div class="col-12 md:col-12">
-						<div class="flex justify-content-end">
-							<p-button label="Enregistrer" icon="pi pi-check" type="submit">
-							</p-button>
-							<p-button label="Annuler" (click)="newOrdonnance()" icon="pi pi-times" styleClass="p-button-sm p-button-danger ml-2">
-							</p-button>
-						</div>
-					</div>
-				</div>
-			</form>
-		</p-dialog>
 		<p-toast key="myKey1"></p-toast>
 		<p-toast key="myKey2"></p-toast>
-		<p-toast key="myKey3"></p-toast>
 	</div>
 </section>
 

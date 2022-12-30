@@ -22,16 +22,9 @@ interface jsPDFWithPlugin extends jspdf.jsPDF {
 })
 export class PharmacienViewComponent implements OnInit {
 	posts: any;
-
 	pharmaciens: any[] = [];
-	dragdrop: boolean = true;
 
 	@ViewChild('dt') dt: Table | undefined | any;
-
-	unlockedCustomers: any[] = [];
-
-	lockedCustomers: any[] = [];
-
 	loading: boolean = true;
 
 	exportColumns: any[] = [];
@@ -133,20 +126,6 @@ export class PharmacienViewComponent implements OnInit {
 		return $event.target.value;
 	}
 
-	toggleLock(data: any, frozen: any, index: any) {
-
-		if (frozen) {
-			this.lockedCustomers = this.lockedCustomers.filter((c, i) => i !== index);
-			this.unlockedCustomers.push(data);
-		} else {
-			this.unlockedCustomers = this.unlockedCustomers.filter((c, i) => i !== index);
-			this.lockedCustomers.push(data);
-		}
-		this.unlockedCustomers.sort((val1, val2) => {
-			return val1.id < val2.id ? -1 : 1;
-		});
-	}
-
 	newPharmacien() {
 		this.pharmacienForms.reset();
 		this.pharmacienDialog = !this.pharmacienDialog;
@@ -158,7 +137,7 @@ export class PharmacienViewComponent implements OnInit {
 			head: this.exportColumns,
 			body: this.pharmaciens
 		});
-		doc.save('Pomptables.pdf');
+		doc.save('Pharmacien.pdf');
 	}
 
 	exportExcel() {
@@ -212,7 +191,7 @@ export class PharmacienViewComponent implements OnInit {
 		this.pharmacienService.recupererPharmacien().subscribe({
 			next: (value: any) => {
 				this.posts = value.data;
-				this.pharmaciens = this.posts.data;
+				this.pharmaciens = this.posts;
 				this.loading = false;
 			},
 			error: (e) => {
@@ -251,7 +230,7 @@ export class PharmacienViewComponent implements OnInit {
 		pharmacien.genre = valuerGenre.id;
 		pharmacien.typeEmploye = valuerEmploye.id;
 		pharmacien.fcmToken = '';
-
+        console.log(pharmacien)
 		this.modification(pharmacien);
 	}
 

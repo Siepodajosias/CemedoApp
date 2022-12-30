@@ -40,6 +40,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ParametrageComponent } from 'src/app/modules/administrateur/composents/parametrage/parametrage.component';
 import { PartagerModule } from 'src/app/shared-cemedo/partager/partager.module';
 import { TabViewModule } from 'primeng/tabview';
+import { PasswordModule } from 'primeng/password';
 
 
 @NgModule({
@@ -49,43 +50,44 @@ import { TabViewModule } from 'primeng/tabview';
     DepartementComponent,
     ParametrageComponent
   ],
-  imports: [
-    CommonModule,
-    AdministrateurRoutingModule,
-    chartjsModule,
-    NgxEchartsModule.forRoot({
-      echarts: () => import('echarts'),
-    }),
-    PerfectScrollbarModule,
-    MatIconModule,
-    NgApexchartsModule,
-    MatTabsModule,
-    MatButtonModule,
-    ComponentsModule,
-    HttpClientModule,
+	imports: [
+		CommonModule,
+		AdministrateurRoutingModule,
+		chartjsModule,
+		NgxEchartsModule.forRoot({
+			echarts: () => import('echarts'),
+		}),
+		PerfectScrollbarModule,
+		MatIconModule,
+		NgApexchartsModule,
+		MatTabsModule,
+		MatButtonModule,
+		ComponentsModule,
+		HttpClientModule,
 
 
-    FieldsetModule,
-    CardModule,
-    MultiSelectModule,
-    DropdownModule,
-    AutoCompleteModule,
+		FieldsetModule,
+		CardModule,
+		MultiSelectModule,
+		DropdownModule,
+		AutoCompleteModule,
 
-    ChipsModule,
-    ContextMenuModule,
-    ProgressBarModule,
-    SliderModule,
-    RippleModule,
-    OrderListModule,
-    DividerModule,
-    MenubarModule,
-    ToolbarModule,
-    SpeedDialModule,
-    ReactiveFormsModule,
-    MenuModule,
-    FullCalendarModule,
-    PartagerModule,
-    TabViewModule
-  ], providers: [AdminService,MessageService,ConfirmationService,MedecinSpecialiteService]
+		ChipsModule,
+		ContextMenuModule,
+		ProgressBarModule,
+		SliderModule,
+		RippleModule,
+		OrderListModule,
+		DividerModule,
+		MenubarModule,
+		ToolbarModule,
+		SpeedDialModule,
+		ReactiveFormsModule,
+		MenuModule,
+		FullCalendarModule,
+		PartagerModule,
+		TabViewModule,
+		PasswordModule
+	], providers: [AdminService,MessageService,ConfirmationService,MedecinSpecialiteService]
 })
 export class AdministrateurModule { }

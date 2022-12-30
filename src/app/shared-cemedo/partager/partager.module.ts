@@ -12,6 +12,8 @@ import { AdresseService } from 'src/app/services/ServicePartager/adresse.service
 import { ServiceService } from 'src/app/services/ServicePartager/service.service';
 import { TypeServiceService } from 'src/app/services/ServicePartager/type-service.service';
 import { ModePaiementService } from 'src/app/services/ServicePartager/mode-paiement.service';
+import { AppelVideoService } from 'src/app/services/ServicePartager/appel-video.service';
+import { StatutService } from 'src/app/services/ServicePartager/statut.service';
 
 
 @NgModule({
@@ -27,6 +29,6 @@ import { ModePaiementService } from 'src/app/services/ServicePartager/mode-paiem
     ConfirmDialogModule,
     CalendarModule
   ],
-  providers:[VilleService,EmployeService,AdresseService,ServiceService, TypeServiceService,ModePaiementService]
+  providers:[VilleService,EmployeService,AdresseService,ServiceService, TypeServiceService,ModePaiementService,AppelVideoService,StatutService]
 })
 export class PartagerModule { }

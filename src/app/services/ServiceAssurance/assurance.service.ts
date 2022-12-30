@@ -68,6 +68,13 @@ export class AssuranceService {
 		);
 	}
 
+	modifierResponsable(responsable: any): Observable<any> {
+		return this.http.post<any>(this.config2 + 'update/' + responsable.matricule, responsable,
+				{
+					headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+				});
+	}
+
 	supprimerteResponsable(idesponsable: number): Observable<any> {
 		return this.http.get(this.config2 + 'active/' + idesponsable);
 	}

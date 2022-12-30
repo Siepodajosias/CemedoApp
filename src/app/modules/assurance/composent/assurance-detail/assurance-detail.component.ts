@@ -5,18 +5,12 @@ import { AssuranceService } from 'src/app/services/ServiceAssurance/assurance.se
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Responsable } from 'src/app/models/modelAssurance/responsable';
 import { PrimeNGConfig } from 'primeng/api';
-
-
 import * as saveAs from 'file-saver';
-
 import * as jspdf from 'jspdf';
 import 'jspdf-autotable';
 import { UserOptions } from 'jspdf-autotable';
-
-
 import { Table } from 'primeng/table';
 import { ConfirmationService, MessageService } from 'primeng/api';
-
 
 interface jsPDFWithPlugin extends jspdf.jsPDF {
 	autoTable: (options: UserOptions) => jspdf.jsPDF;
@@ -61,27 +55,17 @@ export type ChartOptions = {
 	styleUrls: ['./assurance-detail.component.scss']
 })
 export class AssuranceDetailComponent implements OnInit {
-
-
 	responsableForms: FormGroup;
 	responsables: any[];
 
-	dragdrop: boolean = true;
-
 	@ViewChild('dt') dt: Table | undefined | any;
-
-	unlockedCustomers: any[] = [];
-
-	lockedCustomers: any[] = [];
-
-	rowGroupMetadata: any;
 
 	loading: boolean = true;
 
 	exportColumns: any[] = [];
 
 	responsableDialog: boolean = false;
-
+	boutonActif:string;
 	posts: any;
 
 	posts2: any;
@@ -98,9 +82,7 @@ export class AssuranceDetailComponent implements OnInit {
 				private messageService: MessageService,
 				private primeNgConfig: PrimeNGConfig,
 				private route: Router,
-				private employeService: EmployeService,
-	) {
-	}
+				private employeService: EmployeService) {}
 
 	public lineChartOptions: Partial<ChartOptions>;
 	//  color: ["#3FA7DC", "#F6A025", "#9BC311"],
@@ -189,21 +171,9 @@ export class AssuranceDetailComponent implements OnInit {
 		return $event.target.value;
 	}
 
-	toggleLock(data: any, frozen: any, index: any) {
-		if (frozen) {
-			this.lockedCustomers = this.lockedCustomers.filter((c, i) => i !== index);
-			this.unlockedCustomers.push(data);
-		} else {
-			this.unlockedCustomers = this.unlockedCustomers.filter((c, i) => i !== index);
-			this.lockedCustomers.push(data);
-		}
-
-		this.unlockedCustomers.sort((val1, val2) => {
-			return val1.id < val2.id ? -1 : 1;
-		});
-	}
 
 	newRespnsable() {
+		this.responsableForms.reset();
 		this.responsableDialog = !this.responsableDialog;
 		this.responsableForms.patchValue({
 			assurance: this.assurance.libelle
@@ -232,35 +202,56 @@ export class AssuranceDetailComponent implements OnInit {
 	}
 
 	enregistrerResponsable() {
+
 		const responsable: Responsable = new Responsable();
-		responsable.matricule = null;
 		responsable.email = this.responsableForms.get('email')?.value;
 		responsable.password = this.responsableForms.get('password')?.value;
 		responsable.nom = this.responsableForms.get('nom')?.value;
 		responsable.prenoms = this.responsableForms.get('prenoms')?.value;
 		responsable.login = this.responsableForms.get('login')?.value;
 		responsable.dateNaissance = this.responsableForms.get('dateNaissance')?.value;
-		responsable.tel = this.responsableForms.get('tel')?.value;
-		responsable.tel2 = this.responsableForms.get('tel2')?.value;
 		const valeurGenre = this.responsableForms.get('genre')?.value;
 		const valeurAssurance = this.responsableForms.get('assurance')?.value;
 		responsable.assurance=valeurAssurance.id
 		responsable.genre =valeurGenre.id
+		responsable.tel = this.responsableForms.get('tel')?.value;
+		responsable.tel2 = this.responsableForms.get('tel2')?.value;
 		responsable.fcmToken = '';
 		responsable.role = null;
-		this.assurService.enregistrerResponsable(responsable).subscribe({
-			next: () => {
-				this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'Le responsable a été enregistré' });
-				this.responsableForms.reset();
-			},
-			error: (e) => {
+		if(this.boutonActif !="modification"){
 
-			},
-			complete: () => {
-				this.recupererResponsable();
-				this.responsableDialog=false;
-			}
-		});
+			responsable.matricule = null;
+			this.assurService.enregistrerResponsable(responsable).subscribe({
+				next: () => {
+					this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'Le responsable a été enregistré' });
+					this.responsableForms.reset();
+				},
+				error: (e) => {
+
+				},
+				complete: () => {
+					this.recupererResponsable();
+					this.responsableDialog=false;
+				}
+			});
+		}
+		//modification
+		else {
+			responsable.matricule = this.responsableForms.get('matricule')?.value;
+			this.assurService.modifierResponsable(responsable).subscribe({
+				next: () => {
+					this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'Le responsable a été modifié' });
+					this.responsableForms.reset();
+				},
+				error: (e) => {
+
+				},
+				complete: () => {
+					this.recupererResponsable();
+					this.responsableDialog=false;
+				}
+			});
+		}
 	}
 
 	urlActif(): boolean {
@@ -298,5 +289,23 @@ export class AssuranceDetailComponent implements OnInit {
 				});
 			}
 		});
+	}
+
+	modifierResponsable(responsable: any) {
+		this.boutonActif="modification";
+		this.responsableDialog=true;
+		this.responsableForms.patchValue({
+			matricule:responsable.id,
+			nom: responsable.user.nom,
+			prenoms: responsable.user.prenoms,
+			login: responsable.user.login,
+			password:responsable.user.password,
+			email: responsable.user.email,
+			tel: responsable.user.tel,
+			tel2: responsable.user.tel2,
+			genre: responsable.user.genre,
+			dateNaissance:responsable.user.dateNaissance,
+			typeEmploye: responsable.typeEmploye
+		})
 	}
 }

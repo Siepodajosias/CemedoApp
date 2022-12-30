@@ -29,17 +29,7 @@ export class MedecinViewComponent implements OnInit {
 	posts: any;
 	post: any;
 
-	dragdrop: boolean = true;
-
 	@ViewChild('dt') dt: Table | undefined | any;
-
-	scrollableCols: any[] = [];
-
-	unlockedCustomers: any[] = [];
-
-	lockedCustomers: any[] = [];
-
-	rowGroupMetadata: any;
 
 	loading: boolean = true;
 

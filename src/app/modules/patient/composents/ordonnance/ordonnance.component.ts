@@ -37,6 +37,7 @@ export class OrdonnanceComponent implements OnInit {
     posts: any;
     patientForm:any
     medecinForm:any
+    boutonActif: string;
   constructor(private route: Router,private ordonnanceForm: FormBuilder,
               private confirmationService: ConfirmationService,
               private messageService: MessageService,
@@ -55,13 +56,6 @@ export class OrdonnanceComponent implements OnInit {
       assure: ['', [Validators.required, Validators.maxLength(30)]],
       livre: ['', [Validators.required, Validators.maxLength(30)]],
 
-    });
-    this.ordonnanceFormsUpdate = this.ordonnanceForm.group({
-      idUpdate: null,
-      dateEmissionUpdate: ['', [Validators.required, Validators.maxLength(30)]],
-      medecinUpdate: ['', [Validators.required, Validators.maxLength(30)]],
-      assureUpdate: ['', [Validators.required, Validators.maxLength(30)]],
-      livreUpdate: ['', [Validators.required, Validators.maxLength(30)]],
     });
 
     this.statut = [
@@ -110,17 +104,6 @@ export class OrdonnanceComponent implements OnInit {
   newOrdonnance() {
     this.ordonnanceForms.reset();
     this.ordonnanceDialog = !this.ordonnanceDialog;
-  }
-
-  updateOrdonnance(ordonnance: any) {
-    this.ordonnanceDialogUpdate = !this.ordonnanceDialogUpdate;
-    this.ordonnanceFormsUpdate.patchValue({
-      idUpdate: ordonnance.id,
-      dateEmissionUpdate: ordonnance.dateEmission,
-      medecinUpdate: ordonnance.medecin.user.nom,
-      assureUpdate: ordonnance.assure.user.nom,
-      livreUpdate: ordonnance.livre
-    });
   }
 
   exportPdf() {
@@ -172,27 +155,52 @@ export class OrdonnanceComponent implements OnInit {
   }
 
   enregistrerOrdonnance(): void {
+
     const ordonnance: Ordonnance= new Ordonnance();
-    ordonnance.id = null;
     ordonnance.dateEmission = this.ordonnanceForms.get('dateEmission')?.value;
-    ordonnance.medecin = this.ordonnanceForms.get('medecin')?.value;
-    ordonnance.assure = this.ordonnanceForms.get('assure')?.value;
-    ordonnance.livre = this.ordonnanceForms.get('livre')?.value;
+    const valeurMedecin= this.ordonnanceForms.get('medecin')?.value;
+    ordonnance.medecin=valeurMedecin.id;
+    const valeurpatient= this.ordonnanceForms.get('assure')?.value;
+    ordonnance.assure=valeurpatient.id;
+    const value= this.ordonnanceForms.get('livre')?.value;
 
-    this.ordonnanceService.enregistrerOrdonnance(ordonnance).subscribe({
-      next: (v) => {
-        this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Service Message', detail: 'L \'ordonnance a été enregistrée' });
-        this.ordonnanceForms.reset();
-      },
-      error: (e) => {
-      },
-      complete: () => {
-        this.recupererOrdonnance();
-        this.ordonnanceDialog = false;
-      }
-    });
+    if(value=='livre'){
+      ordonnance.livre=true
+    }else {
+      ordonnance.livre=false
+    }
+    if(this.boutonActif!='modification'){
+      ordonnance.id = null;
+      this.ordonnanceService.enregistrerOrdonnance(ordonnance).subscribe({
+        next: (v) => {
+          this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Service Message', detail: 'L \'ordonnance a été enregistrée' });
+          this.ordonnanceForms.reset();
+        },
+        error: (e) => {
+        },
+        complete: () => {
+          this.recupererOrdonnance();
+          this.ordonnanceDialog = false;
+        }
+      });
+    }else {
+      ordonnance.id=this.ordonnanceForms.get('id')?.value;
+      this.ordonnanceService.modificationOrdonnance(ordonnance).subscribe({
+        next: (v) => {
+          this.messageService.add({ key: 'myKey1', severity: 'success', summary: 'Service Message', detail: 'L \'ordonnance a été modifiée' });
+          this.ordonnanceForms.reset();
+        },
+        error: (e) => {
+        },
+        complete: () => {
+          this.recupererOrdonnance();
+          this.ordonnanceDialog = false;
+        }
+      });
+    }
+
+
   }
-
   supprimerOrdonnance(ordonnance: any) {
     this.confirmationService.confirm({
       message: 'Supprimer l\'ordonnance du ' + ordonnance.dateEmission + '?',
@@ -211,7 +219,6 @@ export class OrdonnanceComponent implements OnInit {
       }
     });
   }
-
   medecinItems(event: any) {
     let filtered: any[] = [];
     let query = event.query;
@@ -223,7 +230,6 @@ export class OrdonnanceComponent implements OnInit {
     }
     this.medecinForm = filtered;
   }
-
   patientItems(event: any) {
     let filtered: any[] = [];
     let query = event.query;
@@ -247,5 +253,16 @@ export class OrdonnanceComponent implements OnInit {
       reject: 'Non',
       accept: 'Oui'
     });
+  }
+
+  modifierOdonnance(ordonnance: any) {
+    this.boutonActif="modification";
+    this.ordonnanceDialog=true
+    this.ordonnanceForms.patchValue({
+      id: ordonnance.id,
+      medecin: ordonnance.medecin.user.nom ? ordonnance.medecin: '',
+      assure:  ordonnance.assure.user.nom ? ordonnance.assure: '',
+      livre: ordonnance.livre
+    })
   }
 }

@@ -33,13 +33,7 @@ export class ReceptionViewComponent implements OnInit {
 
 	posts: any;
 	receptions: any[] = [];
-	dragdrop: boolean = true;
-
 	@ViewChild('dt') dt: Table | undefined | any;
-
-	unlockedCustomers: any[] = [];
-
-	lockedCustomers: any[] = [];
 
 	loading: boolean = true;
 
@@ -129,19 +123,6 @@ export class ReceptionViewComponent implements OnInit {
 		return $event.target.value;
 	}
 
-	toggleLock(data: any, frozen: any, index: any) {
-		if (frozen) {
-			this.lockedCustomers = this.lockedCustomers.filter((c, i) => i !== index);
-			this.unlockedCustomers.push(data);
-		} else {
-			this.unlockedCustomers = this.unlockedCustomers.filter((c, i) => i !== index);
-			this.lockedCustomers.push(data);
-		}
-		this.unlockedCustomers.sort((val1, val2) => {
-			return val1.id < val2.id ? -1 : 1;
-		});
-	}
-
 	newReception() {
 		this.receptionForms.reset();
 		this.receptionDialog = !this.receptionDialog;
@@ -208,7 +189,7 @@ export class ReceptionViewComponent implements OnInit {
 		this.receptionService.recupererReception().subscribe({
 			next: (value: any) => {
 				this.posts = value.data;
-				this.receptions = this.posts.data;
+				this.receptions = this.posts;
 			},
 			error: () => {
 			},

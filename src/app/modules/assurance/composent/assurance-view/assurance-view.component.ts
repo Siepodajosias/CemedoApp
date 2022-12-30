@@ -26,17 +26,7 @@ export class AssuranceViewComponent implements OnInit {
 	assuranceForms: FormGroup;
 	assuranceFormsUpdate: FormGroup;
 
-	dragdrop: boolean = true;
-
 	@ViewChild('dt') dt: Table | undefined | any;
-
-
-	unlockedCustomers: any[] = [];
-
-	lockedCustomers: any[] = [];
-
-
-	rowGroupMetadata: any;
 
 	loading: boolean = true;
 	submitted: boolean = false;
@@ -45,7 +35,7 @@ export class AssuranceViewComponent implements OnInit {
 	assuranceDialog: boolean;
 	assuranceDialogUpdate: boolean;
 
-	assurances: any[] = [];
+	assurances: any[];
 	posts: any;
 
 	posts2: any;
@@ -55,9 +45,7 @@ export class AssuranceViewComponent implements OnInit {
 				private assuranceForm: FormBuilder,
 				private confirmationService: ConfirmationService,
 				private messageService: MessageService,
-				private primeNgConfig: PrimeNGConfig,
-	) {
-	}
+				private primeNgConfig: PrimeNGConfig) {}
 
 	ngOnInit(): void {
 		this.recupererAssurance();
@@ -131,19 +119,6 @@ export class AssuranceViewComponent implements OnInit {
 
 	getEventValue($event: any): string {
 		return $event.target.value;
-	}
-
-	toggleLock(data: any, frozen: any, index: any) {
-		if (frozen) {
-			this.lockedCustomers = this.lockedCustomers.filter((c, i) => i !== index);
-			this.unlockedCustomers.push(data);
-		} else {
-			this.unlockedCustomers = this.unlockedCustomers.filter((c, i) => i !== index);
-			this.lockedCustomers.push(data);
-		}
-		this.unlockedCustomers.sort((val1, val2) => {
-			return val1.id < val2.id ? -1 : 1;
-		});
 	}
 
 	newAssurance() {
@@ -229,7 +204,6 @@ export class AssuranceViewComponent implements OnInit {
 
 	modifierAssurance(): void {
 		const assurance: Assurance = new Assurance();
-
 		assurance.id = this.assuranceFormsUpdate.get('idUpdate')?.value;
 		assurance.email = this.assuranceFormsUpdate.get('emailUpdate')?.value;
 		assurance.libelle = this.assuranceFormsUpdate.get('libelleUpdate')?.value;

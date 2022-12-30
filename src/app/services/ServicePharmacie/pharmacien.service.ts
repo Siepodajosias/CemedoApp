@@ -19,23 +19,17 @@ export class PharmacienService {
     })
   }
 
-  enregistrerPharmacien(phar:Pharmacien):Observable<Pharmacien>{
-    return this.http.post<Pharmacien>(this.config+"/create",phar,{
+  enregistrerPharmacien(pharmacien:Pharmacien):Observable<Pharmacien>{
+    return this.http.post<Pharmacien>(this.config+"/create",pharmacien,{
       headers:new HttpHeaders({'Content-Type':'application/json'})
     })
   }
-  recupererPharmacienById(a:number):Observable<any>{
-    return this.http.get<any>(this.config+"/"+a,
-    {
-      headers:new HttpHeaders({'Content-Type':'application/json'})
-    }
-    )
-  }
+
   supprimerPharmacien(e:number):Observable<any>{
    return  this.http.get(this.config+"/active/"+e)
   }
 
-  modificationPharmacien(pharmacien: any): Observable<any> {
+  modificationPharmacien(pharmacien: Pharmacien): Observable<any> {
     return this.http.post<any>(this.config + '/update/' + pharmacien.matricule,pharmacien,
             {
               headers: new HttpHeaders({ 'Content-Type': 'application/json' })

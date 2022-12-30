@@ -379,7 +379,7 @@ export const ROUTES: RouteInfo[] = [
 
   {
     path: "/admin/parametrage",
-    title: "Parametrage",
+    title: "Paramétrage",
     moduleName: "parametrage",
     iconType: "material-icons-two-tone",
     icon: "settings",
@@ -1089,6 +1089,19 @@ export const ROUTES: RouteInfo[] = [
   role: ["Assurance"],
   submenu: [],
 },
+  {
+    path: "/assurance/statistique",
+    title: "Statistique",
+    moduleName: "efffff",
+    iconType: "material-icons-two-tone",
+    icon: "query_stats",
+    class: "",
+    groupTitle: false,
+    badge: "",
+    badgeClass: "",
+    role: ["Assurance"],
+    submenu: [],
+  },
   // Modules infirmerie
   {
     path: "/infirmerie/dashboard",
@@ -1228,7 +1241,7 @@ export const ROUTES: RouteInfo[] = [
     title: "Ordonnaces",
     moduleName: "",
     iconType: "material-icons-two-tone",
-    icon: "route",
+    icon: "save_as",
     class: "",
     groupTitle: false,
     badge: "",

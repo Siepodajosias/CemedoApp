@@ -24,16 +24,9 @@ interface jsPDFWithPlugin extends jspdf.jsPDF {
 export class ComptableViewComponent implements OnInit {
 
 	posts: any;
-
 	comptables: any[] = [];
 
-	dragdrop: boolean = true;
-
 	@ViewChild('dt') dt: Table | undefined | any;
-
-	unlockedCustomers: any[] = [];
-
-	lockedCustomers: any[] = [];
 
 	loading: boolean = true;
 
@@ -53,8 +46,7 @@ export class ComptableViewComponent implements OnInit {
 				private comptableForm: FormBuilder,
 				private primeNgConfig: PrimeNGConfig,
 				private employeService: EmployeService,
-				private confirmationService: ConfirmationService) {
-	}
+				private confirmationService: ConfirmationService) {}
 
 	ngOnInit(): void {
 
@@ -132,21 +124,6 @@ export class ComptableViewComponent implements OnInit {
 		return $event.target.value;
 	}
 
-	toggleLock(data: any, frozen: any, index: any) {
-
-		if (frozen) {
-			this.lockedCustomers = this.lockedCustomers.filter((c, i) => i !== index);
-			this.unlockedCustomers.push(data);
-		} else {
-			this.unlockedCustomers = this.unlockedCustomers.filter((c, i) => i !== index);
-			this.lockedCustomers.push(data);
-		}
-
-		this.unlockedCustomers.sort((val1, val2) => {
-			return val1.id < val2.id ? -1 : 1;
-		});
-	}
-
 	newComptable() {
 		this.comptableForms.reset();
 		this.comptableDialog = !this.comptableDialog;
@@ -187,7 +164,7 @@ export class ComptableViewComponent implements OnInit {
 		comptable.genre = valeurGenre.id;
 		comptable.typeEmploye = valeurEmploye.id;
 		comptable.tel = this.comptableForms.get('tel')?.value;
-		comptable.tel2 = this.comptableForms.get('tel')?.value;
+		comptable.tel2 = this.comptableForms.get('tel2')?.value;
 		comptable.fcmToken = '';
 		comptable.role = null;
 
@@ -307,7 +284,7 @@ export class ComptableViewComponent implements OnInit {
 		return this.route.url.includes('admin/comptable/liste');
 	}
 
-	updateComptable(comptable:any) {
+	modifierComptables(comptable:any) {
 		this.comptableDialogUpdate = !this.comptableDialogUpdate;
 		this.comptableFormsUpdate.patchValue({
 			matriculeUpdate:comptable.id,

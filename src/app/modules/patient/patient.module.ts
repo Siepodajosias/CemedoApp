@@ -30,18 +30,13 @@ import { PatientRoutingModule } from "src/app/modules/patient/patient-routing.mo
 import { ComponentsModule } from "src/app/shared/components/components.module";
 import { PatientViewComponent } from 'src/app/modules/patient/composents/patient-view/patient-view.component';
 import { PatientDetailComponent } from 'src/app/modules/patient/composents/patient-detail/patient-detail.component';
-import { PatientFormsComponent } from 'src/app/modules/patient/composents/patient-view2/patient-forms.component';
 import { PatientDossierComponent } from 'src/app/modules/patient/composents/patient-dossier/patient-dossier.component';
 import { PatientService } from "src/app/services/ServicePatient/patient.service";
 import { OrdonnanceComponent } from 'src/app/modules/patient/composents/ordonnance/ordonnance.component';
 
 //primeng
 import { CardModule} from 'primeng/card'
-import { ToastModule} from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-import { TableModule} from 'primeng/table';
-import { ButtonModule} from 'primeng/button';
-import { DialogModule} from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { MultiSelectModule} from 'primeng/multiselect';
@@ -60,15 +55,14 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { SharedModule } from "src/app/shared/shared.module";
 import { HttpClientModule } from '@angular/common/http';
 import { TagModule } from 'primeng/tag';
-import { CalendarModule } from 'primeng/calendar';
 import { MedecinService } from 'src/app/services/ServiceMedecin/medecin.service';
 import { PartagerModule } from 'src/app/shared-cemedo/partager/partager.module';
+import { OrdonnanceService } from 'src/app/services/ServicePatient/ordonnance.service';
 
 @NgModule({
   declarations: [ 
     PatientViewComponent, 
     PatientDetailComponent,
-    PatientFormsComponent, 
     PatientDossierComponent, 
     OrdonnanceComponent,
 
@@ -125,6 +119,6 @@ import { PartagerModule } from 'src/app/shared-cemedo/partager/partager.module';
 		TagModule,
 		PartagerModule
 
-	],providers:[PatientService,MedecinService,MessageService,ConfirmationService]
+	],providers:[PatientService,MedecinService,MessageService,ConfirmationService,OrdonnanceService]
 })
 export class PatientModule {}

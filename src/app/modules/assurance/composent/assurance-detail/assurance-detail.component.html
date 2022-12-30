@@ -257,6 +257,8 @@
                 <td >{{responsable.user.tel}}</td>
                 <td >{{responsable.user.tel2}}</td>
                   <td>
+                      <button pButton pRipple type="button" pTooltip="Modifier" icon="pi pi-pencil" (click)="modifierResponsable(responsable)" *ngIf="urlActif()"
+                              class="p-button-rounded p-button-text"></button>
                       <button pButton pRipple type="button" pTooltip="Supprimer le responsable"  icon="pi pi-trash" (click)="supprimerResponsable(responsable)"
                               class="p-button-rounded p-button-text p-button-danger"></button>
                   </td>
@@ -270,7 +272,7 @@
           </p-table>
         </div>
     
-        <p-dialog [(visible)]="responsableDialog" [style]="{width: '650px'}" header="Créer un responsable" [modal]="true"
+        <p-dialog [(visible)]="responsableDialog" [style]="{width: '650px'}" header="Créer ou modifier un responsable" [modal]="true"
                   styleClass="p-fluid">
           <form [formGroup]="responsableForms" (ngSubmit)="enregistrerResponsable()">
             <div class="p-fluid grid">

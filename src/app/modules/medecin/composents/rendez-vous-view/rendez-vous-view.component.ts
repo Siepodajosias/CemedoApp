@@ -13,6 +13,7 @@ import { PatientService } from 'src/app/services/ServicePatient/patient.service'
 import { Rendezvous } from 'src/app/models/modelMedecin/rendezvous';
 import { VilleService } from 'src/app/services/ServicePartager/ville.service';
 import { AdresseService } from 'src/app/services/ServicePartager/adresse.service';
+import { StatutService } from 'src/app/services/ServicePartager/statut.service';
 
 interface jsPDFWithPlugin extends jspdf.jsPDF {
 	autoTable: (options: UserOptions) => jspdf.jsPDF;
@@ -52,6 +53,9 @@ export class RendezVousViewComponent implements OnInit {
 	villeForm: any[];
 	villes: any[];
 
+	statutForm: any[];
+	statuts: any[];
+
 	adresseForm: any[];
 	adresses: any[];
 
@@ -64,7 +68,8 @@ export class RendezVousViewComponent implements OnInit {
 				private confirmationService: ConfirmationService,
 				private messageService: MessageService,
 				private villeService: VilleService,
-				private adresseService: AdresseService) {}
+				private adresseService: AdresseService,
+				private statutRDVService: StatutService) {}
 
 	ngOnInit(): void {
 		this.recupererRendezVous();
@@ -151,10 +156,10 @@ export class RendezVousViewComponent implements OnInit {
 		const rdv: Rendezvous = new Rendezvous();
         rdv.dateHeure=this.rendezVousForms.get('dateRendezVous')?.value;
 		rdv.commentaire= this.rendezVousForms.get('commentaire')?.value;
-		rdv.description= this.rendezVousForms.get('description')?.value;
+		rdv.descriptionLieu= this.rendezVousForms.get('description')?.value;
 		rdv.ville= this.rendezVousForms.get('ville')?.value;
 		rdv.lieu= this.rendezVousForms.get('lieu')?.value;
-		rdv.statut= this.rendezVousForms.get('statut')?.value;
+		rdv.statutRdv= this.rendezVousForms.get('statut')?.value;
 		const valeurPatient = this.rendezVousForms.get('patient')?.value;
 		const valeurMedecin = this.rendezVousForms.get('medecin')?.value;
 		const valeurInfirmier = this.rendezVousForms.get('infirmier')?.value;
@@ -235,6 +240,12 @@ export class RendezVousViewComponent implements OnInit {
 			next:(value)=>{
 				this.postsAdresse = value.data;
 				this.adresses = this.postsAdresse;
+			}
+		})
+		this.statutRDVService.recupererStatutRendezVous().subscribe({
+			next:(value)=>{
+				const post = value.data;
+				this.statuts = post;
 			}
 		})
 	}

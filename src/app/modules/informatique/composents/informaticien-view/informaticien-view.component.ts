@@ -24,17 +24,7 @@ export class InformaticienViewComponent implements OnInit {
   informaticiens:any[]=[]
   posts: any
 
-  dragdrop:boolean=true
-
   @ViewChild('dt') dt: Table | undefined | any;
-
-  scrollableCols: any[]=[];
-
-  unlockedCustomers: any[]=[];
-
-  lockedCustomers: any[]=[];
-
-  rowGroupMetadata: any;
 
   loading: boolean = true;
 
@@ -136,7 +126,7 @@ export class InformaticienViewComponent implements OnInit {
   }
 
   enregistrerInformaticien(){
-    this.informaticien.id=null
+    this.informaticien.matricule=null
     this.informaticien.email=this.InformaticienForms.get('email')?.value
     this.informaticien.password=this.InformaticienForms.get('password')?.value
     this.informaticien.nom=this.InformaticienForms.get('nom')?.value

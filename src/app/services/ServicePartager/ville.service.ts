@@ -27,4 +27,11 @@ export class VilleService {
     supprimerVille(idVille:number):Observable<any>{
         return this.http.get(this.configUrl+"/active/"+idVille)
     }
+
+    modifierVille(ville: Ville): Observable<any> {
+        return this.http.post<any>(this.configUrl + '/update/' + ville.id,ville,
+                {
+                    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+                });
+    }
 }

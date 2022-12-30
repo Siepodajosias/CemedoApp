@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Service } from 'src/app/models/modelPartager/service';
 import { ModePaiement } from 'src/app/models/modelPartager/mode-paiement';
 
 @Injectable({
@@ -29,4 +28,12 @@ export class ModePaiementService {
   supprimerModePaiement(idModePaiement: number): Observable<any> {
     return this.http.get(this.configUrl + '/active/' + idModePaiement);
   }
+
+    modifierModePaiement(modePaiement: ModePaiement): Observable<any> {
+        return this.http.post<any>(this.configUrl + '/update/' + modePaiement.id,modePaiement,
+                {
+                    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+                });
+    }
+
 }

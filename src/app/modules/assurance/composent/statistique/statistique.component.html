@@ -1,0 +1,100 @@
+<section class="content">
+	<div class="content-block">
+		<div class="block-header">
+			<!-- breadcrumb -->
+			<app-breadcrumb [title]="'Rapport'" [items]="[]" [active_item]="'service cemedo'"></app-breadcrumb>
+		</div>
+
+		<div class="surface-ground px-4 py-5 md:px-6 lg:px-8">
+			<div class="grid">
+				<div class="col-12 md:col-6 lg:col-4">
+					<div class="surface-card shadow-2 p-3 border-round">
+
+						<div class="float-start">
+							<h3 class="text-muted">Appels vidéo</h3>
+							<h6>72 bmp <span class="text-muted font-12">()</span></h6>
+						</div>
+						<div class="mb-5">
+							<apx-chart [series]="restRateChartOptions.series" [chart]="restRateChartOptions.chart"
+									   [xaxis]="restRateChartOptions.xaxis" [stroke]="restRateChartOptions.stroke"
+									   [colors]="restRateChartOptions.colors" [dataLabels]="restRateChartOptions.dataLabels"
+									   [legend]="restRateChartOptions.legend" [markers]="restRateChartOptions.markers"
+									   [grid]="restRateChartOptions.grid" [yaxis]="restRateChartOptions.yaxis"
+									   [tooltip]="restRateChartOptions.tooltip" [title]="restRateChartOptions.title"></apx-chart>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 md:col-6 lg:col-4">
+					<div class="surface-card shadow-2 p-3 border-round">
+
+						<div class="float-start">
+							<h3 class="text-muted">Appels téléhonique</h3>
+							<h6>72 bmp <span class="text-muted font-12">()</span></h6>
+						</div>
+						<div class="mb-5">
+							<apx-chart [series]="restRateChartOptions2.series" [chart]="restRateChartOptions2.chart"
+									   [xaxis]="restRateChartOptions2.xaxis" [stroke]="restRateChartOptions2.stroke"
+									   [colors]="restRateChartOptions2.colors" [dataLabels]="restRateChartOptions2.dataLabels"
+									   [legend]="restRateChartOptions2.legend" [markers]="restRateChartOptions2.markers"
+									   [grid]="restRateChartOptions2.grid" [yaxis]="restRateChartOptions2.yaxis"
+									   [tooltip]="restRateChartOptions2.tooltip" [title]="restRateChartOptions2.title"></apx-chart>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 md:col-6 lg:col-4">
+					<div class="surface-card shadow-2 p-3 border-round">
+
+						<div class="float-start">
+							<h3 class="text-muted">Consultations à domicile</h3>
+							<h6>72 bmp <span class="text-muted font-12">()</span></h6>
+						</div>
+						<div class="mb-5">
+							<apx-chart [series]="restRateChartOptions2.series" [chart]="restRateChartOptions2.chart"
+									   [xaxis]="restRateChartOptions2.xaxis" [stroke]="restRateChartOptions2.stroke"
+									   [colors]="restRateChartOptions2.colors" [dataLabels]="restRateChartOptions2.dataLabels"
+									   [legend]="restRateChartOptions2.legend" [markers]="restRateChartOptions2.markers"
+									   [grid]="restRateChartOptions2.grid" [yaxis]="restRateChartOptions2.yaxis"
+									   [tooltip]="restRateChartOptions2.tooltip" [title]="restRateChartOptions2.title"></apx-chart>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="surface-ground px-4 py-5 md:px-6 lg:px-8">
+			<div class="grid">
+				<div class="col-12 md:col-6 lg:col-4">
+					<div class="surface-card shadow-2 p-3 border-round">
+						<div class="float-start">
+							<h3 class="text-muted">Hospitlistion à domicile</h3>
+							<h5>129 bmp <span class="text-muted font-12">()</span></h5>
+						</div>
+						<div class="mb-5">
+							<apx-chart [series]="performanceRateChartOptions.series" [chart]="performanceRateChartOptions.chart"
+									   [xaxis]="performanceRateChartOptions.xaxis" [stroke]="performanceRateChartOptions.stroke"
+									   [colors]="performanceRateChartOptions.colors" [dataLabels]="performanceRateChartOptions.dataLabels"
+									   [legend]="performanceRateChartOptions.legend" [markers]="performanceRateChartOptions.markers"
+									   [grid]="performanceRateChartOptions.grid" [yaxis]="performanceRateChartOptions.yaxis"
+									   [tooltip]="performanceRateChartOptions.tooltip" [title]="performanceRateChartOptions.title"></apx-chart>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 md:col-6 lg:col-4">
+					<div class="surface-card shadow-2 p-3 border-round">
+						<div class="float-start">
+							<h3 class="text-muted">information supplementaire</h3>
+							<h5>129 bmp <span class="text-muted font-12">()</span></h5>
+						</div>
+						<div class="mb-5">
+							<apx-chart [series]="performanceRateChartOptions.series" [chart]="performanceRateChartOptions.chart"
+									   [xaxis]="performanceRateChartOptions.xaxis" [stroke]="performanceRateChartOptions.stroke"
+									   [colors]="performanceRateChartOptions.colors" [dataLabels]="performanceRateChartOptions.dataLabels"
+									   [legend]="performanceRateChartOptions.legend" [markers]="performanceRateChartOptions.markers"
+									   [grid]="performanceRateChartOptions.grid" [yaxis]="performanceRateChartOptions.yaxis"
+									   [tooltip]="performanceRateChartOptions.tooltip" [title]="performanceRateChartOptions.title"></apx-chart>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

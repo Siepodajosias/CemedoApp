@@ -43,12 +43,14 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { CalendarModule} from 'primeng/calendar';
 import { HttpClientModule } from '@angular/common/http';
 import { PartagerModule } from 'src/app/shared-cemedo/partager/partager.module';
+import { StatistiqueComponent } from 'src/app/modules/assurance/composent/statistique/statistique.component';
 
 @NgModule({
   declarations: [
     DashboardAssuranceComponent,
     AssuranceViewComponent,
     AssuranceDetailComponent,
+    StatistiqueComponent
   ],
   imports: [
     CommonModule,

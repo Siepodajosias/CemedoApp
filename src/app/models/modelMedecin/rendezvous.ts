@@ -7,10 +7,11 @@ export class Rendezvous {
     adresse: number
     commentaire?: string
     ville: number
-    statut:	boolean
+    statutRdv:	boolean
     lieu: string
     infirmier?:	number
-    description?:	string
+    descriptionLieu?: string
     dateHeure:	string
-
+    secondContact:string
+    services: number[]
 }

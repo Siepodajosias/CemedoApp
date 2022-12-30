@@ -28,4 +28,11 @@ export class AdresseService {
     supprimerAdresse(idAdresse:number):Observable<any>{
         return this.http.get(this.configUrl+"/active/"+idAdresse)
     }
+
+    modifierAdresse(adresse: Adresse): Observable<any> {
+        return this.http.post<any>(this.configUrl + '/update',adresse,
+                {
+                    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+                });
+    }
 }
