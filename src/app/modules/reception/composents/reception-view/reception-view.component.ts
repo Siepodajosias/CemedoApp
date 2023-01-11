@@ -50,38 +50,7 @@ export class ReceptionViewComponent implements OnInit {
 	ngOnInit(): void {
 		this.recupererReception();
 		this.recupererConfig();
-		this.receptionForms = this.receptionForm.group({
-			matricule: null,
-			nom: ['', [Validators.required, Validators.minLength(3)]],
-			prenoms: ['', [Validators.required, Validators.maxLength(20)]],
-			login: ['', [Validators.required, Validators.maxLength(20)]],
-			email: ['', [Validators.required, Validators.maxLength(30), Validators.email]],
-			password: ['', [Validators.required, Validators.maxLength(8)]],
-			tel: ['', [Validators.required, Validators.maxLength(20)]],
-			tel2: ['', [Validators.required, Validators.maxLength(20)]],
-			genre: ['', [Validators.required, Validators.maxLength(20)]],
-			dateNaissance: ['', [Validators.required, Validators.maxLength(30)]],
-			fcmToken: '',
-			typeEmploye: null
-
-
-			/*
-			   salt: ['', [Validators.required, Validators.maxLength(30)]],
-
-			   salaireInfirmier: ['', [Validators.required, Validators.maxLength(30)]],
-			   username: ['', [Validators.required, Validators.maxLength(30)]],
-			   userIdentifier: ['', [Validators.required, Validators.maxLength(15)]],
-			   active: [null, [Validators.required, Validators.maxLength(10)]],
-			   createdAt: [null, [Validators.required, Validators.maxLength(10)]],
-			   updatedAt: ['', [Validators.required, Validators.maxLength(10)]],
-			   version: [null, [Validators.required, Validators.maxLength(20)]],
-
-			   file:['', [Validators.required, Validators.maxLength(30)]],
-			   photo:['', [Validators.required, Validators.maxLength(20)]],
-			   residence:['', [Validators.required, Validators.maxLength(30)]],
-			   numeroCni:['', [Validators.required, Validators.maxLength(20)]]
-			   */
-		});
+        this.initFormulaire();
 		this.receptionFormsUpdate = this.receptionForm.group({
 			matriculeUpdate: null,
 			nomUpdate: ['', [Validators.required, Validators.minLength(3)]],
@@ -98,8 +67,7 @@ export class ReceptionViewComponent implements OnInit {
 		});
 	}
 
-	recupererDetail(a: any) {
-	}
+	recupererDetail(reception: any) {}
 
 	saveAsExcelFile(buffer: any, fileName: string): void {
 
@@ -328,6 +296,31 @@ export class ReceptionViewComponent implements OnInit {
 			noFilter: 'Pas de filtre',
 			reject: 'Non',
 			accept: 'Oui'
+		});
+	}
+
+	initFormulaire(): void{
+		this.receptionForms = this.receptionForm.group({
+			matricule: null,
+			nom: ['', [Validators.required, Validators.minLength(3)]],
+			prenoms: ['', [Validators.required, Validators.maxLength(20)]],
+			login: ['', [Validators.required, Validators.maxLength(20)]],
+			email: ['', [Validators.required, Validators.maxLength(30), Validators.email]],
+			password: ['', [Validators.required, Validators.maxLength(8)]],
+			tel: ['', [Validators.required, Validators.maxLength(20)]],
+			tel2: ['', [Validators.required, Validators.maxLength(20)]],
+			genre: ['', [Validators.required, Validators.maxLength(20)]],
+			dateNaissance: ['', [Validators.required, Validators.maxLength(30)]],
+			fcmToken: '',
+			typeEmploye: null
+
+			/*
+			   salaireInfirmier: ['', [Validators.required, Validators.maxLength(30)]],
+			   file:['', [Validators.required, Validators.maxLength(30)]],
+			   photo:['', [Validators.required, Validators.maxLength(20)]],
+			   residence:['', [Validators.required, Validators.maxLength(30)]],
+			   numeroCni:['', [Validators.required, Validators.maxLength(20)]]
+			   */
 		});
 	}
 }

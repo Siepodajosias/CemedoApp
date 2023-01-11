@@ -66,37 +66,7 @@ export class MedecinViewComponent implements OnInit {
 	ngOnInit(): void {
 		this.recupererListeMedecin();
 		this.recupererCinfig();
-		this.medecinForms = this.medecinForm.group({
-			matricule: null,
-			email: ['', [Validators.required, Validators.maxLength(30), Validators.email]],
-			password: ['', [Validators.required, Validators.maxLength(8)]],
-			nom: ['', [Validators.required, Validators.minLength(3)]],
-			prenoms: ['', [Validators.required, Validators.maxLength(20)]],
-			tel: ['', [Validators.required, Validators.maxLength(10)]],
-			tel2: ['', [Validators.required, Validators.maxLength(10)]],
-			genre: ['', [Validators.required, Validators.maxLength(10)]],
-			dateNaissance: ['', [Validators.required, Validators.maxLength(10)]],
-			login: ['', [Validators.required, Validators.maxLength(20)]],
-			fcmToken: 'string',
-			sepecialiteMedecin: null,
-			typeEmploye: null,
-			typeMedecin: null,
-
-
-			//createdAt:['', [Validators.required, Validators.maxLength(10)]],
-			//updatedAt:['', [Validators.required, Validators.maxLength(10)]],
-			//version: [null, [Validators.required, Validators.maxLength(8)]],
-			//active: [true, [Validators.required, Validators.maxLength(8)]],
-
-			//residence: ['', [Validators.required, Validators.maxLength(20)]],
-			//salaireMedecin:[null, [Validators.required, Validators.maxLength(10)]],
-			//primeMedecin:[null,[Validators.required, Validators.maxLength(10)]],
-			//heureDebut:['',[Validators.required, Validators.maxLength(10)]],
-			//heureFin:['',[Validators.required, Validators.maxLength(10)]],
-			//photo:['',[Validators.required, Validators.maxLength(30)]],
-			//numeroCni:['',[Validators.required, Validators.maxLength(10)]]
-
-		});
+        this.initFormulaire();
 		this.medecinFormsUpdate = this.medecinForm.group({
 			matriculeUpdate: null,
 			emailUpdate: ['', [Validators.required, Validators.maxLength(30), Validators.email]],
@@ -411,6 +381,33 @@ export class MedecinViewComponent implements OnInit {
 			noFilter: 'Pas de filtre',
 			reject: 'Non',
 			accept: 'Oui'
+		});
+	}
+
+	initFormulaire(): void{
+		this.medecinForms = this.medecinForm.group({
+			matricule: null,
+			email: ['', [Validators.required, Validators.maxLength(30), Validators.email]],
+			password: ['', [Validators.required, Validators.maxLength(8)]],
+			nom: ['', [Validators.required, Validators.minLength(3)]],
+			prenoms: ['', [Validators.required, Validators.maxLength(20)]],
+			tel: ['', [Validators.required, Validators.maxLength(10)]],
+			tel2: ['', [Validators.required, Validators.maxLength(10)]],
+			genre: ['', [Validators.required, Validators.maxLength(10)]],
+			dateNaissance: ['', [Validators.required, Validators.maxLength(10)]],
+			login: ['', [Validators.required, Validators.maxLength(20)]],
+			fcmToken: 'string',
+			sepecialiteMedecin: null,
+			typeEmploye: null,
+			typeMedecin: null,
+
+			//residence: ['', [Validators.required, Validators.maxLength(20)]],
+			//salaireMedecin:[null, [Validators.required, Validators.maxLength(10)]],
+			//primeMedecin:[null,[Validators.required, Validators.maxLength(10)]],
+			//heureDebut:['',[Validators.required, Validators.maxLength(10)]],
+			//heureFin:['',[Validators.required, Validators.maxLength(10)]],
+			//photo:['',[Validators.required, Validators.maxLength(30)]],
+			//numeroCni:['',[Validators.required, Validators.maxLength(10)]]
 		});
 	}
 }

@@ -11,7 +11,8 @@ export class AppelVideoService {
   constructor(private http: HttpClient) { }
 
   recupererListeAppelVideo():Observable<any> {
-    return this.http.get<any>(this.configUrl,{ headers:new HttpHeaders({'Content-Type':'application/json'})})
+    return this.http.get<any>(this.configUrl,{ headers:new HttpHeaders({'Content-Type':'application/json','Authorization':'' +
+                '007eJxTYCh976R67amZ+cSY6YreMv2TpLatsq954TzxGP+n/t/3T3xXYDA2MkhJSzOxMEk0MTQxMjSztEhMNUtNSko0tjROTDZOPWC+J7khkJGhZPY2BkYoBPHZGJJTc1NT8hkYAPKKIiE='})})
   }
 
   enregistrerAppelVideo(data: any): Observable<any> {

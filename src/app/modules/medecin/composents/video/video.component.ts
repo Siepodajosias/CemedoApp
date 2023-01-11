@@ -84,7 +84,7 @@ export class VideoComponent implements OnInit {
 
   rejoindreAppelVideo():void{
 
-    this.client = this.ngxAgoraService.createClient({ mode: 'rtc', codec: 'h264' });
+    this.client = this.ngxAgoraService.createClient({mode: 'rtc', codec: 'h264'});
     this.assignClientHandlers();
     this.localStream = this.ngxAgoraService.createStream({ streamID: this.uid, audio: true, video: true, screen: false });
     this.assignLocalStreamHandlers();
@@ -104,7 +104,7 @@ export class VideoComponent implements OnInit {
   }
 
   join(onSuccess?: (uid: number | string) => void, onFailure?: (error: Error) => void): void {
-    this.client.join(null, 'foo-bar', this.uid, onSuccess, onFailure);
+    this.client.join('007eJxTYCh976R67amZ+cSY6YreMv2TpLatsq954TzxGP+n/t/3T3xXYDA2MkhJSzOxMEk0MTQxMjSztEhMNUtNSko0tjROTDZOPWC+J7khkJGhZPY2BkYoBPHZGJJTc1NT8hkYAPKKIiE=', 'cemedo', this.uid, onSuccess, onFailure);
   }
 
   publish(): void {

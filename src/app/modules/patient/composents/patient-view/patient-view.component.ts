@@ -57,7 +57,7 @@ export class PatientViewComponent implements OnInit {
 	ngOnInit(): void {
 		this.recupererConfig();
 		this.recupererPatient();
-		this.recupererFormulaire();
+		this.initFormulaire();
 	}
 
 	patientDetail(a: any) {
@@ -241,7 +241,7 @@ export class PatientViewComponent implements OnInit {
 		});
 	}
 
-	recupererFormulaire(): void {
+	initFormulaire(): void {
 		this.patientForms = this.patientForm.group({
 			active: [true, [Validators.required, Validators.maxLength(10)]],
 			assurance: ['', [Validators.required, Validators.maxLength(10)]],

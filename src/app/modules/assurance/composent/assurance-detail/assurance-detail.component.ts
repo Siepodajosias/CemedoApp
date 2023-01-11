@@ -65,7 +65,7 @@ export class AssuranceDetailComponent implements OnInit {
 	exportColumns: any[] = [];
 
 	responsableDialog: boolean = false;
-	boutonActif:string;
+	boutonActif: string;
 	posts: any;
 
 	posts2: any;
@@ -82,7 +82,8 @@ export class AssuranceDetailComponent implements OnInit {
 				private messageService: MessageService,
 				private primeNgConfig: PrimeNGConfig,
 				private route: Router,
-				private employeService: EmployeService) {}
+				private employeService: EmployeService) {
+	}
 
 	public lineChartOptions: Partial<ChartOptions>;
 	//  color: ["#3FA7DC", "#F6A025", "#9BC311"],
@@ -103,49 +104,17 @@ export class AssuranceDetailComponent implements OnInit {
 
 
 	ngOnInit(): void {
-
-		const z = this.routeParams.snapshot.params['id'];
-		this.assurService.recupererAssuranceById(z).subscribe({
+		const idAssurance = this.routeParams.snapshot.params['id'];
+		this.assurService.recupererAssuranceById(idAssurance).subscribe({
 			next: (value: any) => {
 				this.assurance = value.data;
-				this.assurances=[value.data];
+				this.assurances = [value.data];
 			}
 		});
+
+		this.recupererConfigPrimeNG();
 		this.recupererResponsable();
-		this.responsableForms = this.responsableForm.group({
-			matricule: null,
-			nom: ['', [Validators.required, Validators.minLength(3)]],
-			prenoms: ['', [Validators.required, Validators.maxLength(20)]],
-			login: ['', [Validators.required, Validators.maxLength(20)]],
-			genre: ['', [Validators.required, Validators.maxLength(10)]],
-			dateNaissance: ['', [Validators.required, Validators.maxLength(10)]],
-			email: ['', [Validators.required, Validators.maxLength(30), Validators.email]],
-			tel: ['', [Validators.required, Validators.maxLength(15)]],
-			tel2: ['', [Validators.required, Validators.maxLength(15)]],
-			password: ['', [Validators.required, Validators.maxLength(8)]],
-			assurance: ['', [Validators.required]],
-			fcmToken: '',
-			role: null,
-
-			/*
-			residence: ['', [Validators.required, Validators.maxLength(20)]],
-			numeroCni:['',[Validators.required, Validators.maxLength(15)]],
-			userIdentifier:[''],
-			username:['']*/
-
-		});
-		this.primeNgConfig.setTranslation({
-			startsWith: 'Commence par',
-			contains: 'Contient',
-			notContains: 'Ne contient pas',
-			endsWith: 'Fini par',
-			equals: 'Egale à',
-			notEquals: 'différent de',
-			noFilter: 'Pas de filtre',
-			reject: 'Non',
-			accept: 'Oui'
-		});
-
+		this.initFormulaire();
 	}
 
 
@@ -171,13 +140,12 @@ export class AssuranceDetailComponent implements OnInit {
 		return $event.target.value;
 	}
 
-
 	newRespnsable() {
 		this.responsableForms.reset();
 		this.responsableDialog = !this.responsableDialog;
 		this.responsableForms.patchValue({
 			assurance: this.assurance.libelle
-		})
+		});
 	}
 
 	exportPdf() {
@@ -212,13 +180,13 @@ export class AssuranceDetailComponent implements OnInit {
 		responsable.dateNaissance = this.responsableForms.get('dateNaissance')?.value;
 		const valeurGenre = this.responsableForms.get('genre')?.value;
 		const valeurAssurance = this.responsableForms.get('assurance')?.value;
-		responsable.assurance=valeurAssurance.id
-		responsable.genre =valeurGenre.id
+		responsable.assurance = valeurAssurance.id;
+		responsable.genre = valeurGenre.id;
 		responsable.tel = this.responsableForms.get('tel')?.value;
 		responsable.tel2 = this.responsableForms.get('tel2')?.value;
 		responsable.fcmToken = '';
 		responsable.role = null;
-		if(this.boutonActif !="modification"){
+		if (this.boutonActif != 'modification') {
 
 			responsable.matricule = null;
 			this.assurService.enregistrerResponsable(responsable).subscribe({
@@ -231,7 +199,7 @@ export class AssuranceDetailComponent implements OnInit {
 				},
 				complete: () => {
 					this.recupererResponsable();
-					this.responsableDialog=false;
+					this.responsableDialog = false;
 				}
 			});
 		}
@@ -248,7 +216,7 @@ export class AssuranceDetailComponent implements OnInit {
 				},
 				complete: () => {
 					this.recupererResponsable();
-					this.responsableDialog=false;
+					this.responsableDialog = false;
 				}
 			});
 		}
@@ -257,9 +225,10 @@ export class AssuranceDetailComponent implements OnInit {
 	urlActif(): boolean {
 		return this.route.url.includes('/admin/assurance/detail');
 	}
+
 	recupererResponsable(): void {
 		this.assurService.recupererResponsable().subscribe({
-			next:(value)=>{
+			next: (value) => {
 				this.posts = value.data ? value : [];
 				this.responsables = this.posts.data;
 				this.loading = false;
@@ -272,19 +241,20 @@ export class AssuranceDetailComponent implements OnInit {
 			}
 		});
 	}
+
 	supprimerResponsable(responsable: any) {
 		this.confirmationService.confirm({
-			message: 'Supprimer le responsable ' + responsable.user.nom+ ' ' + responsable.user.prenoms + '?',
+			message: 'Supprimer le responsable ' + responsable.user.nom + ' ' + responsable.user.prenoms + '?',
 			header: 'Confirmer',
 			icon: 'pi pi-exclamation-triangle',
 			accept: () => {
 				this.assurService.supprimerteResponsable(responsable.id).subscribe({
 					next: (v: string) => {
-						this.messageService.add({severity: 'info', summary: 'Suppression', detail: 'Le responsable a été supprimé', icon: 'pi-file' });
+						this.messageService.add({ severity: 'info', summary: 'Suppression', detail: 'Le responsable a été supprimé', icon: 'pi-file' });
 						this.responsables = this.responsables.filter(val => val.user.id !== responsable.user.id);
 					},
 					error: () => {
-						this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Le responsable ne peut pas être supprimer', icon: 'pi-file' });
+						this.messageService.add({ severity: 'error', summary: 'Erreur', detail: 'Le responsable ne peut pas être supprimer', icon: 'pi-file' });
 					}
 				});
 			}
@@ -292,20 +262,53 @@ export class AssuranceDetailComponent implements OnInit {
 	}
 
 	modifierResponsable(responsable: any) {
-		this.boutonActif="modification";
-		this.responsableDialog=true;
+		this.boutonActif = 'modification';
+		this.responsableDialog = true;
 		this.responsableForms.patchValue({
-			matricule:responsable.id,
+			matricule: responsable.id,
 			nom: responsable.user.nom,
 			prenoms: responsable.user.prenoms,
 			login: responsable.user.login,
-			password:responsable.user.password,
+			password: responsable.user.password,
 			email: responsable.user.email,
 			tel: responsable.user.tel,
 			tel2: responsable.user.tel2,
 			genre: responsable.user.genre,
-			dateNaissance:responsable.user.dateNaissance,
+			dateNaissance: responsable.user.dateNaissance,
 			typeEmploye: responsable.typeEmploye
-		})
+		});
+	}
+
+	recupererConfigPrimeNG(): void {
+		this.primeNgConfig.setTranslation({
+			startsWith: 'Commence par',
+			contains: 'Contient',
+			notContains: 'Ne contient pas',
+			endsWith: 'Fini par',
+			equals: 'Egale à',
+			notEquals: 'différent de',
+			noFilter: 'Pas de filtre',
+			reject: 'Non',
+			accept: 'Oui'
+		});
+	}
+
+	initFormulaire(): void {
+		this.responsableForms = this.responsableForm.group({
+			matricule: null,
+			nom: ['', [Validators.required, Validators.minLength(3)]],
+			prenoms: ['', [Validators.required, Validators.maxLength(20)]],
+			login: ['', [Validators.required, Validators.maxLength(20)]],
+			genre: ['', [Validators.required, Validators.maxLength(10)]],
+			dateNaissance: ['', [Validators.required, Validators.maxLength(10)]],
+			email: ['', [Validators.required, Validators.maxLength(30), Validators.email]],
+			tel: ['', [Validators.required, Validators.maxLength(15)]],
+			tel2: ['', [Validators.required, Validators.maxLength(15)]],
+			password: ['', [Validators.required, Validators.maxLength(8)]],
+			assurance: ['', [Validators.required]],
+			fcmToken: '',
+			role: null,
+			//numeroCni:['',[Validators.required, Validators.maxLength(15)]],
+		});
 	}
 }
