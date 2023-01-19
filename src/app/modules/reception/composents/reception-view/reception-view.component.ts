@@ -313,14 +313,6 @@ export class ReceptionViewComponent implements OnInit {
 			dateNaissance: ['', [Validators.required, Validators.maxLength(30)]],
 			fcmToken: '',
 			typeEmploye: null
-
-			/*
-			   salaireInfirmier: ['', [Validators.required, Validators.maxLength(30)]],
-			   file:['', [Validators.required, Validators.maxLength(30)]],
-			   photo:['', [Validators.required, Validators.maxLength(20)]],
-			   residence:['', [Validators.required, Validators.maxLength(30)]],
-			   numeroCni:['', [Validators.required, Validators.maxLength(20)]]
-			   */
 		});
 	}
 }
