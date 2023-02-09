@@ -6,13 +6,15 @@ jobs:
     run-on: ubuntu-latest
     steps:
       -name: Checkout
-       uses: actions/checkout@v2
+      -uses: actions/checkout@v2
       -name: Cypress run
+      -run: npm run build
        uses: cypress-io/github-action@v2
        with:
          build: npm run build
          start: npm start
          record: true
+         projectId: 4ybk56
          env:
            CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
