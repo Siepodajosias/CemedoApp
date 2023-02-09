@@ -5,6 +5,7 @@ jobs:
   build_and_preview:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
       - uses: actions/checkout@v2
       - run: npm run build
       - name: Cypress run
@@ -13,4 +14,3 @@ jobs:
           record: true
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           CYPRESS_RECORD_KEY: '${{ secrets.CYPRESS_RECORD_KEY }}'
-          projectId: 4ybk56
