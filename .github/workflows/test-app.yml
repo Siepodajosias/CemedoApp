@@ -5,7 +5,7 @@ name: Cypress Test
       - 'y'
 jobs:
   build_and_preview:
-    run-on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - run: npm run build
