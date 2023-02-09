@@ -2,14 +2,16 @@ name: Cypress Test
 on: [push]
 
 jobs:
-  build_and_preview:
+  cypress-run:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
       - uses: actions/checkout@v2
-      - run: npm run build
       - name: Cypress run
       - uses: cypress-io/github-action@v2
         with:
+          build: npm run build
+          start: npm start
           record: true
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           CYPRESS_RECORD_KEY: '${{ secrets.CYPRESS_RECORD_KEY }}'
