@@ -10,12 +10,14 @@
             <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success mr-2"  pTooltip="XLS" tooltipPosition="bottom"></button>
             <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
         </ng-template>
-        <ng-template pTemplate="right" *ngIf="getActif()">
-            <button pButton pRipple label="Créer un nouveau patient" icon="pi pi-plus" class="p-button-help"
-            ></button>
-        </ng-template>
+
+          <ng-template pTemplate="right">
+              <button pButton pRipple label="Créer un patient" icon="pi pi-plus" class="p-button-help" (click)="newPatient()"
+                      *ngIf="urlActif()"></button>
+          </ng-template>
+
     </p-toolbar>
-      <p-table #dt  [value]="patients"  [scrollable]="true" scrollHeight="400px"
+      <p-table #dt  [value]="patients"  [scrollable]="true" scrollHeight="600px"
       [globalFilterFields]="['user.nom','user.prenoms','lieuHabitation','profession']"
       [loading]="loading"
       [filterDelay]="0"
@@ -31,35 +33,123 @@
                       (input)="dt.filterGlobal(getEventValue($event), 'contains')"
                        placeholder="Rechercher..." 
                       />
-  
                   </span>
               </div>
           </ng-template>
-          <ng-template pTemplate="header" let-patient>
+          <ng-template pTemplate="header">
               <tr>
-                  <th pSortableColumn="nom">Nom<p-sortIcon field="nom"></p-sortIcon></th>
-                  <th pSortableColumn="prenoms">Prenom <p-sortIcon field="prenoms"></p-sortIcon></th>
-                  <th pSortableColumn="genre">Genre <p-sortIcon field="genre"></p-sortIcon></th>
-                  <th pSortableColumn="profession">Profession<p-sortIcon field="profession"></p-sortIcon></th>
-                  <th pSortableColumn="lieuHabitation">Ville<p-sortIcon field="lieuHabitation"></p-sortIcon></th>
-                  <th pSortableColumn="tel">Téléphone 1<p-sortIcon field="tel"></p-sortIcon></th>
-                  <th pSortableColumn="tel2">Téléphone 2<p-sortIcon field="tel2"></p-sortIcon></th>
-                  <th></th>
+                  <th pSortableColumn="user.nom" [style]="{fontSize:'14px',color:'#2E5C2F',background:'rgb(46 92 47 / 10%)'}">Nom<p-sortIcon field="user.nom"></p-sortIcon></th>
+                  <th pSortableColumn="user.prenoms" [style]="{fontSize:'14px',color:'#2E5C2F',background:'rgb(46 92 47 / 10%)'}">Prenom <p-sortIcon field="user.prenoms"></p-sortIcon></th>
+                  <th pSortableColumn="user.genre" [style]="{fontSize:'14px',color:'#ff0000c4',background:'rgb(239 7 67 / 10%)'}">Genre <p-sortIcon field="user.genre"></p-sortIcon></th>
+                  <th pSortableColumn="user.profession" [style]="{fontSize:'14px',color:'#f1749e',background:'rgb(241 116 158 / 10%)'}">Profession<p-sortIcon field="profession"></p-sortIcon></th>
+                  <th pSortableColumn="user.lieuHabitation" [style]="{fontSize:'14px',color:'#f1749e',background:'rgb(241 116 158 / 10%)'}">Ville<p-sortIcon field="lieuHabitation"></p-sortIcon></th>
+                  <th pSortableColumn="user.tel" [style]="{fontSize:'14px',color:'#2196F3',background:'rgb(33 150 243 / 10%)'}">Téléphone 1<p-sortIcon field="user.tel"></p-sortIcon></th>
+                  <th pSortableColumn="user.tel2" [style]="{fontSize:'14px',color:'#2196F3',background:'rgb(33 150 243 / 10%)'}">Téléphone 2<p-sortIcon field="user.tel2"></p-sortIcon></th>
+                  <th  *ngIf="urlActifAdmin()">Actions</th>
+              </tr>
+              <tr>
+                  <th>
+                      <p-columnFilter [showClearButton]="false" type="text" field="user.nom" matchMode="contains" pTooltip="Options de filtrage">
+                          <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                              <input type="text" #valeur class="p-2 border" maxlength="20"
+                                     [value]="value"
+                                     pInputText
+                                     (input)="filter(valeur.value)"
+                              >
+                          </ng-template>
+                      </p-columnFilter>
+                  </th>
+                  <th>
+                      <p-columnFilter [showClearButton]="false" type="text" field="user.prenoms" matchMode="contains" pTooltip="Options de filtrage">
+                          <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                              <input type="text" #valeur class="p-2 border" maxlength="20"
+                                     [value]="value"
+                                     pInputText
+                                     (input)="filter(valeur.value)"
+                              >
+                          </ng-template>
+                      </p-columnFilter>
+                  </th>
+                  <th>
+                      <p-columnFilter [showClearButton]="false" type="text" field="uer.genre" matchMode="contains" pTooltip="Options de filtrage">
+                          <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                              <input type="text" #valeur class="p-2 border" maxlength="20"
+                                     [value]="value"
+                                     pInputText
+                                     (input)="filter(valeur.value)"
+                              >
+                          </ng-template>
+                      </p-columnFilter>
+                  </th>
+                  <th>
+                      <p-columnFilter [showClearButton]="false" type="text" field="profession" matchMode="contains" pTooltip="Options de filtrage">
+                          <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                              <input type="text" #valeur class="p-2 border" maxlength="20"
+                                     [value]="value"
+                                     pInputText
+                                     (input)="filter(valeur.value)"
+                              >
+                          </ng-template>
+                      </p-columnFilter>
+                  </th>
+                  <th>
+                      <p-columnFilter [showClearButton]="false" type="text" field="lieuHabitation" matchMode="contains" pTooltip="Options de filtrage">
+                          <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                              <input type="text" #valeur class="p-2 border" maxlength="20"
+                                     [value]="value"
+                                     pInputText
+                                     (input)="filter(valeur.value)"
+                              >
+                          </ng-template>
+                      </p-columnFilter>
+                  </th>
+                  <th>
+                      <p-columnFilter [showClearButton]="false" type="text" field="user.tel" matchMode="contains" pTooltip="Options de filtrage">
+                          <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                              <input type="text" #valeur class="p-2 border" maxlength="20"
+                                     [value]="value"
+                                     pInputText
+                                     (input)="filter(valeur.value)"
+                              >
+                          </ng-template>
+                      </p-columnFilter>
+                  </th>
+                  <th>
+                      <p-columnFilter [showClearButton]="false" type="text" field="tel2" matchMode="contains" pTooltip="Options de filtrage">
+                          <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                              <input type="text" #valeur class="p-2 border" maxlength="20"
+                                     [value]="value"
+                                     pInputText
+                                     (input)="filter(valeur.value)"
+                              >
+                          </ng-template>
+                      </p-columnFilter>
+                  </th>
+                  <th  *ngIf="urlActifAdmin()"></th>
               </tr>
           </ng-template>
-          <ng-template pTemplate="body" let-patient let-index="rowIndex">
+          <ng-template pTemplate="body" let-patient>
               <tr>
-                  <td style="min-width:200px">{{patient.user.nom}}</td>
-                  <td style="min-width:200px">{{patient.user.prenoms}}</td>
-                  <td style="min-width:200px">{{patient.user.genre}}</td>
-                  <td style="min-width:200px">{{patient.profession}}</td>
-                  <td style="min-width:200px">{{patient.lieuHabitation}}</td>
-                  <td style="min-width:200px">{{patient.user.tel}}</td>
-                  <td style="min-width:200px">{{patient.user.tel2}}</td>
-                  <td style="flex: 0 0 4rem">
-                      <button pButton pRipple type="button"  icon="pi pi-angle-right"  (click)="detail(patient.id)" 
+                  <td style="min-width:200px" [style]="{color:'#2E5C2F'}">{{patient.user.nom}}</td>
+                  <td style="min-width:200px" [style]="{color:'#2E5C2F'}">{{patient.user.prenoms}}</td>
+                  <td style="min-width:200px" [style]="{color:'red'}">{{patient.user.genre.libelle}}</td>
+                  <td style="min-width:200px" [style]="{color:'#f1749e'}">{{patient.profession}}</td>
+                  <td style="min-width:200px" [style]="{color:'#f1749e'}">{{patient.lieuHabitation}}</td>
+                  <td style="min-width:200px" [style]="{color:'#2196F3'}">{{patient.user.tel}}</td>
+                  <td style="min-width:200px" [style]="{color:'#2196F3'}">{{patient.user.tel2}}</td>
+                  <td  *ngIf="urlActifAdmin()" style="min-width:200px">
+
+                      <button pButton pRipple type="button" pTooltip="Modifier"
+                              (click)="modifierPatient(patient)"
+                              icon="pi pi-pencil" *ngIf="urlActifAdmin()"
+                              class="p-button-rounded p-button-text"></button>
+                      <button pButton pRipple type="button"  pTooltip="Détail du patient"  *ngIf="urlActifAdmin()"
+                              icon="pi pi-angle-right"  (click)="patientDetail(patient.id)"
                       class="p-button-rounded p-button-text"
                       ></button>
+                      <button pButton pRipple type="button" pTooltip="Supprimer le patient" *ngIf="urlActifAdmin()"
+                              icon="pi pi-trash" (click)="supprimerPatient(patient)"
+                              class="p-button-rounded p-button-text p-button-danger"></button>
                   </td>
               </tr>
           </ng-template>
@@ -67,8 +157,143 @@
               <div class="flex align-items-center justify-content-between">
                Total: {{patients ? patients.length : 0 }} patients
               </div>
-          </ng-template>
+              </ng-template>
       </p-table>
   </div>
+      <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+      <p-toast></p-toast>
+
+      <p-dialog [(visible)]="patientDialog" [style]="{width: '650px'}" header="Créer ou modifier un patient"
+                [modal]="true" styleClass="p-fluid">
+          <form [formGroup]="patientForms" (submit)="enregistrerPatient()">
+              <div class="row mt-5">
+                  <div class="col-md-4 col-lg-4 col-sm-12">
+                      <div class="mb-3">
+                          <input type="text" class="form-control"
+                                 formControlName="nom" placeholder="Nom">
+                      </div>
+                  </div>
+                  <div class="col-md-4 col-lg-4 col-sm-12">
+                      <div class="mb-3">
+                          <input type="text" class="form-control"
+                                 formControlName="prenoms" placeholder="Prénom"
+                          >
+                      </div>
+                  </div>
+                  <div class="col-md-4 col-lg-4 col-sm-12">
+                      <div class="mb-3">
+                          <input type="text" class="form-control"
+                                 formControlName="login" placeholder="Nom dutilisateur"
+                          >
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-4 col-lg-4 col-sm-12">
+                      <div class="mb-3">
+                          <input type="text" class="form-control"
+                                 formControlName="genre" placeholder="Genre">
+                      </div>
+                  </div>
+                  <div class="col-md-4 col-lg-4 col-sm-12">
+                      <div class="mb-3">
+                          <input type="date" class="form-control"
+                                 formControlName="dateNaissance" placeholder="Date de naissance"
+                          >
+                      </div>
+                  </div>
+                  <div class="col-md-4 col-lg-4 col-sm-12">
+                      <div class="mb-3">
+                          <input type="text" class="form-control"
+                                 formControlName="lieuHabitation" placeholder="Ville"
+                          >
+                      </div>
+                  </div>
+              </div>
+
+              <div class="row">
+                  <div class="col-md-4 col-lg-4 col-sm-12">
+                      <div class="mb-3">
+                          <input type="text" class="form-control"
+                                 formControlName="profession" placeholder="Profession"
+                          >
+                      </div>
+                  </div>
+                  <div class="col-md-4 col-lg-4 col-sm-12">
+                      <div class="mb-3">
+					  <span>
+                          <p-dropdown [options]="assurances" placeholder="assurance" optionLabel="libelle" [showClear]="true" formControlName="assurance">
+						</p-dropdown>
+					  </span>
+                      </div>
+                  </div>
+                  <div class="col-md-4 col-lg-4 col-sm-12">
+                      <div class="mb-3">
+                          <input type="number" class="form-control"
+                                 formControlName="tauxCouverture" placeholder="Taux de couverture">
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-12 col-lg-12 col-sm-12">
+                      <div class="mb-3">
+                          <input type="text" class="form-control" formControlName="tel"
+                                 placeholder="Téléphone 1"
+                          >
+                      </div>
+                  </div>
+              </div>
+
+              <div class="row">
+                  <div class="col-md-12 col-lg-12 col-sm-12">
+                      <div class="mb-3">
+                          <input type="text" class="form-control" formControlName="tel2"
+                                 placeholder="Téléphone 2">
+                      </div>
+                  </div>
+              </div>
+
+              <div class="row">
+                  <div class="col-md-12 col-lg-12 col-sm-12">
+                      <div class="mb-3">
+                          <input type="email" class="form-control" formControlName="email"
+                                 placeholder="E-mail">
+                      </div>
+                  </div>
+              </div>
+
+              <div class="row">
+                  <div class="col-md-4 col-lg-4 col-sm-12">
+                      <div class="mb-3">
+                          <input type="text" class="form-control"
+                                 formControlName="numeroAssure" placeholder="Numero d'assurance">
+                      </div>
+                  </div>
+                  <div class="col-md-4 col-lg-4 col-sm-12">
+                      <div class="mb-3">
+                          <input type="text" class="form-control"
+                                 formControlName="role" placeholder="Role"
+                          >
+                      </div>
+                  </div>
+                  <div class="col-md-4 col-lg-4 col-sm-12">
+                      <div class="mb-3">
+                          <input type="password" class="form-control"
+                                 formControlName="password" placeholder="Mot de passe"
+                          >
+                      </div>
+                  </div>
+              </div>
+
+              <div class="row">
+                  <div class="col-md-2 col-lg-2 col-sm-12">
+                      <button mat-raised-button color="primary" type="submit"
+                              [disabled]="!patientForms.valid">Enregistrer
+                          <mat-icon>done</mat-icon>
+                      </button>
+                  </div>
+              </div>
+          </form>
+      </p-dialog>
   </div>
 </section>

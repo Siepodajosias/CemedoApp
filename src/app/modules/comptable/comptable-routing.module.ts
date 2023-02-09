@@ -17,7 +17,7 @@ const routes: Routes = [
   {
     path:'medecin',
     loadChildren: () =>
-    import('src/app/modules/medecin/doctor.module').then((m) =>m.DoctorModule),
+    import('src/app/modules/medecin/medecin.module').then((m) =>m.MedecinModule),
   },
   {
     path: 'assurance',
@@ -26,6 +26,26 @@ const routes: Routes = [
   {
     path:'pharmacie',
     loadChildren:()=> import('src/app/modules/pharmacie/pharmacie.module').then((e)=> e.PharmacieModule)
+  },
+  {
+    path:'reception',
+    loadChildren:()=> import('src/app/modules/reception/reception.module').then((r)=>r.ReceptionModule)
+  },
+  {
+    path:'logistique',
+    loadChildren:()=>import('src/app/modules/logistique/logistique.module').then((l)=>l.LogistiqueModule)
+  },
+  {
+    path:'informatique',
+    loadChildren:()=>import('src/app/modules/informatique/informatique.module').then((i)=>i.InformatiqueModule)
+  },
+  {
+    path:'infirmerie',
+    loadChildren:()=>import('src/app/modules/infirmerie/infirmerie.module').then((i)=>i.InfirmerieModule)
+  },
+  {
+    path:'admin',
+    loadChildren:()=>import('src/app/modules/administrateur/administrateur.module').then((a)=>a.AdministrateurModule)
   },
   {path:'liste',component:ComptableViewComponent},
   {path:'detail',component:ComptableDetailComponent},

@@ -1,5 +1,5 @@
 import { Component, OnInit,ViewChild} from '@angular/core';
-import { PharmacienService } from 'src/app/services/servicePharmacie/pharmacien.service';
+import { PharmacienService } from 'src/app/services/ServicePharmacie/pharmacien.service';
 import { Router } from '@angular/router';
 
 
@@ -49,7 +49,7 @@ export class VenteViewComponent implements OnInit {
 
     this.pharService.recupererMedicament().subscribe({
       next: (value: any) => {
-        this.posts = value ? value : []
+        this.posts = value;
 
       },
       error: (e) => { console.log("erreur :" + e) },

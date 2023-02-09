@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComponentsModule } from "src/app/shared/components/components.module";
-import { HttpClientModule } from "@angular/common/http";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTabsModule } from "@angular/material/tabs";
 import { NgApexchartsModule } from "ng-apexcharts";
 
 import { ReactiveFormsModule, FormsModule} from '@angular/forms'
-import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { ToastrModule} from 'ngx-toastr';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatDatepickerModule } from "@angular/material/datepicker";
@@ -19,13 +18,12 @@ import { MedicamentViewComponent } from 'src/app/modules/pharmacie/composents/me
 import { PharmacienViewComponent } from 'src/app/modules/pharmacie/composents/pharmacien-view/pharmacien-view.component';
 import { PharmacienDetailComponent } from 'src/app/modules/pharmacie/composents/pharmacien-detail/pharmacien-detail.component';
 import { MedicamentDetailComponent } from 'src/app/modules/pharmacie/composents/medicament-detail/medicament-detail.component';
-import { MedicamentFormsComponent } from 'src/app/modules/pharmacie/composents/medicament-view/medicament-forms.component';
 import { DashboardPharmacieComponent } from 'src/app/modules/pharmacie/dashboard-pharmacie/dashboard-pharmacie.component';
-import { PharmacienService } from 'src/app/services/servicePharmacie/pharmacien.service';
+import { PharmacienService } from 'src/app/services/ServicePharmacie/pharmacien.service';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { PharmacienView2Component } from 'src/app/modules/pharmacie/composents/pharmacien-view2/pharmacien-view2.component';
+
 
 //primeng
 import { CardModule} from 'primeng/card'
@@ -55,6 +53,9 @@ import { MenuModule } from 'primeng/menu';
 import { VenteViewComponent } from 'src/app/modules/pharmacie/composents/vente-view/vente-view.component';
 import { DepenseViewComponent } from 'src/app/modules/pharmacie/composents/depense-view/depense-view.component';
 import { CategorieMedicamentViewComponent } from 'src/app/modules/pharmacie/composents/categorie-medicament-view/categorie-medicament-view.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MedicamentService } from 'src/app/services/ServicePharmacie/medicament.service';
+import { PartagerModule } from 'src/app/shared-cemedo/partager/partager.module';
 
 
 @NgModule({
@@ -63,16 +64,13 @@ import { CategorieMedicamentViewComponent } from 'src/app/modules/pharmacie/comp
     PharmacienViewComponent,
     PharmacienDetailComponent,
     MedicamentDetailComponent,
-    MedicamentFormsComponent,
     DashboardPharmacieComponent,
-    PharmacienView2Component,
     VenteViewComponent,
     DepenseViewComponent,
     CategorieMedicamentViewComponent
   ],
   imports: [
     CommonModule,
-    HttpClientModule,
     PharmacieRoutingModule,
     ComponentsModule,
     MatIconModule,
@@ -89,13 +87,9 @@ import { CategorieMedicamentViewComponent } from 'src/app/modules/pharmacie/comp
     MatButtonModule,
     ReactiveFormsModule, 
     FormsModule,
+    HttpClientModule,
 
     CardModule,
-    TableModule,
-    ButtonModule,
-    ToastModule,
-    DialogModule,
-    ConfirmDialogModule,
     MultiSelectModule,
     DropdownModule,
     AutoCompleteModule,
@@ -109,11 +103,11 @@ import { CategorieMedicamentViewComponent } from 'src/app/modules/pharmacie/comp
     DividerModule ,
     MenubarModule, 
     ToolbarModule,
-    CalendarModule,
     SpeedDialModule,
-    MenuModule
+    MenuModule,
+    PartagerModule
 
     
-  ],providers:[PharmacienService,ConfirmationService,MessageService]
+  ],providers:[PharmacienService,ConfirmationService,MessageService,MedicamentService]
 })
 export class PharmacieModule { }

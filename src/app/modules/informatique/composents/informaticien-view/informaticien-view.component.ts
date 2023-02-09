@@ -8,7 +8,7 @@ import 'jspdf-autotable'
 import { UserOptions } from 'jspdf-autotable';
 import { Table } from 'primeng/table'
 
-import { InformaticienService } from 'src/app/services/serviceInformatique/informaticien.service';
+import { InformaticienService } from 'src/app/services/ServiceInformatique/informaticien.service';
 import { Informaticien} from 'src/app/models/modelInformatique/informaticien';
 
 
@@ -24,25 +24,13 @@ export class InformaticienViewComponent implements OnInit {
   informaticiens:any[]=[]
   posts: any
 
-  dragdrop:boolean=true
-
   @ViewChild('dt') dt: Table | undefined | any;
-
-  scrollableCols: any[]=[];
-
-  unlockedCustomers: any[]=[];
-
-  lockedCustomers: any[]=[];
-
-  balanceFrozen: boolean = false;
-
-  rowGroupMetadata: any;
 
   loading: boolean = true;
 
   exportColumns: any[]=[];
 
-  personneDialog: any | boolean;
+  informaticienDialog:boolean=false;
 
   InformaticienForms: FormGroup = new FormGroup({})
   informaticien:Informaticien=new Informaticien()
@@ -91,12 +79,12 @@ export class InformaticienViewComponent implements OnInit {
   detail(a:any){}
 
   getEventValue($event:any) :string {
-    console.log($event.target.value);
     return $event.target.value;
   } 
 
-  openNew() {
-    this.personneDialog = true;
+  newInformaticien() {
+    this.InformaticienForms.reset();
+    this.informaticienDialog =!this.informaticienDialog;
     this.genres=[
       {name:'homme'},
       {name:'femme'}
@@ -125,7 +113,6 @@ export class InformaticienViewComponent implements OnInit {
   });
   }
   saveAsExcelFile(buffer: any, fileName: string): void {
-
     let EXCEL_TYPE =
       "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
     let EXCEL_EXTENSION = ".xlsx";
@@ -136,11 +123,10 @@ export class InformaticienViewComponent implements OnInit {
       data,
       fileName + "_export_" + new Date() + EXCEL_EXTENSION
     );
-
   }
 
-  SaveData(){
-    this.informaticien.id=null
+  enregistrerInformaticien(){
+    this.informaticien.matricule=null
     this.informaticien.email=this.InformaticienForms.get('email')?.value
     this.informaticien.password=this.InformaticienForms.get('password')?.value
     this.informaticien.nom=this.InformaticienForms.get('nom')?.value

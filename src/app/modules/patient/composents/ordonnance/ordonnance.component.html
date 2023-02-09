@@ -1,1 +1,184 @@
-<p>ordonnance works!</p>
+<section class="content">
+	<div class="content-block">
+		<div class="block-header">
+			<!-- breadcrumb -->
+			<app-breadcrumb [title]="'Ordonnances'" [items]="[]" [active_item]="'liste des ordonnances'"></app-breadcrumb>
+		</div>
+
+		<div class="card">
+			<p-toolbar styleClass="mb-4">
+				<ng-template pTemplate="left">
+					<button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
+							class="p-button-success mr-2" pTooltip="Export XLSX" tooltipPosition="bottom"></button>
+					<button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()"
+							class="p-button-warning mr-2" pTooltip="Export PDF" tooltipPosition="bottom"></button>
+				</ng-template>
+
+				<ng-template pTemplate="right">
+
+					<button pButton pRipple label="Créer une nouvelle ordonnance" icon="pi pi-plus" class="p-button-help"
+							(click)="newOrdonnance()" *ngIf="urlActif()"></button>
+				</ng-template>
+			</p-toolbar>
+
+			<p-table #dt [value]="ordonnances"
+					 [scrollable]="true"
+					 scrollHeight="500px"
+					 [globalFilterFields]="['libelle','email','ville']"
+					 [loading]="loading"
+					 [filterDelay]="0"
+					 styleClass="p-datatable-gridlines"
+					 selectionMode="multiple"
+					 [resizableColumns]="true">
+				<ng-template pTemplate="caption">
+					<div class="flex align-items-center justify-content-between">
+						<h5 class="m-0">Ordonnance</h5>
+						<span class="p-input-icon-left">
+              <i class="pi pi-search"></i>
+
+              <input pInputText type="text" (input)="dt.filterGlobal(getEventValue($event), 'contains')"
+					 placeholder="Rechercher..." />
+
+            </span>
+					</div>
+				</ng-template>
+				<ng-template pTemplate="header">
+					<tr>
+						<th [style]="{textAlign: 'center'}" pSortableColumn="assure.user.nom">Patient<p-sortIcon field="assure.user.nom"></p-sortIcon>
+						</th>
+						<th [style]="{textAlign: 'center'}" pSortableColumn="medecin.user.nom" class="text-center">Médecin <p-sortIcon field="medecin.user.nom"></p-sortIcon>
+						</th>
+						<th [style]="{textAlign: 'center'}" pSortableColumn="dateEmission" class="text-center">Date de céation <p-sortIcon field="dateEmission"></p-sortIcon>
+						</th>
+						<th [style]="{textAlign: 'center'}" class="text-center">Livrer
+						</th>
+						<th [style]="{textAlign: 'center'}">Actions</th>
+					</tr>
+					<tr>
+						<th>
+							<p-columnFilter [showClearButton]="false" type="text" field="assure.user.nom" matchMode="contains" pTooltip="Options de filtrage">
+								<ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+									<input type="text" #valeur class="p-2 border" maxlength="20"
+										   [value]="value"
+										   pInputText
+										   (input)="filter(valeur.value)"
+									>
+								</ng-template>
+							</p-columnFilter>
+						</th>
+						<th>
+							<p-columnFilter [showClearButton]="false" type="text" field="medecin.user.nom" matchMode="contains" pTooltip="Options de filtrage">
+								<ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+									<input type="text" #valeur class="p-2 border" maxlength="20"
+										   [value]="value"
+										   pInputText
+										   (input)="filter(valeur.value)"
+									>
+								</ng-template>
+							</p-columnFilter>
+						</th>
+						<th>
+							<p-columnFilter [showClearButton]="false" type="text" field="dateEmission" matchMode="contains" pTooltip="Options de filtrage">
+								<ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+									<input type="text" #valeur class="p-2 border" maxlength="20"
+										   [value]="value"
+										   pInputText
+										   (input)="filter(valeur.value)"
+									>
+								</ng-template>
+							</p-columnFilter>
+						</th>
+						<th>
+							<p-columnFilter [showClearButton]="false" field="livre" matchMode="contains" [showMenu]="false" [style]="{width:'200px'}">
+								<ng-template pTemplate="filter" let-value let-filter="filterCallback">
+									<p-dropdown appendTo="body" [baseZIndex]="3000" [ngModel]="value" [options]="statut" (onChange)="filter($event.value)" placeholder="Livrer" [showClear]="false">
+										<ng-template let-option pTemplate="item">
+											<span [class]="'customer-badge status-' + option.value">{{option.label}}</span>
+										</ng-template>
+									</p-dropdown>
+								</ng-template>
+							</p-columnFilter>
+						</th>
+						<th></th>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-ordonnance>
+					<tr>
+						<td *ngIf="ordonnance.assure">{{ordonnance.assure.user.nom}}</td>
+						<td *ngIf="!ordonnance.assure"></td>
+						<td *ngIf="ordonnance.medecin">{{ordonnance.medecin.user.fullName}}</td>
+						<td *ngIf="!ordonnance.medecin"></td>
+						<td class="text-right">{{ordonnance.dateEmission |date:'dd-MM-yyyy'}}</td>
+						<td>
+							<p-tag *ngIf="ordonnance.livre" severity="success" value="Livrer"></p-tag>
+							<p-tag *ngIf="!ordonnance.livre" severity="danger" value="Non livrer"></p-tag>
+						</td>
+						<td >
+							<button pButton pRipple type="button" pTooltip="Modifier" icon="pi pi-pencil" (click)="modifierOdonnance(ordonnance)" *ngIf="urlActif()"
+									class="p-button-rounded p-button-text"></button>
+							<button pButton pRipple type="button" pTooltip="Detail de l'ordonnance" icon="pi pi-angle-right" (click)="ordonnanceDetail(ordonnance)"
+									class="p-button-rounded p-button-text p-button-success"></button>
+							<button pButton pRipple type="button" pTooltip="Supprimer l'ordonnance"  icon="pi pi-trash" (click)="supprimerOrdonnance(ordonnance)"
+									class="p-button-rounded p-button-text p-button-danger"></button>
+						</td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="summary">
+					<div class="flex align-items-center justify-content-between">
+						Total: {{ordonnances ? ordonnances.length : 0 }} ordonnances
+					</div>
+				</ng-template>
+			</p-table>
+		</div>
+
+		<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+		<p-dialog [(visible)]="ordonnanceDialog" [style]="{width: '460px'}" header="Création d'une ordonnance" [modal]="true"
+				  styleClass="p-fluid">
+
+			<form [formGroup]="ordonnanceForms" (ngSubmit)="enregistrerOrdonnance()">
+				<div class="grid">
+
+					<div class="col-12 md:col-6 lg:col-6">
+            <span>
+            <h4>Date de création</h4>
+			 <p-calendar [baseZIndex]="3000" appendTo="body" [showIcon]="true" inputId="icon" formControlName="dateEmission"></p-calendar>
+            </span>
+					</div>
+
+					<div class="col-12 md:col-6 lg:col-6">
+            <span>
+            <h4>Statut</h4>
+              <input type="email" pInputText formControlName="livre">
+            </span>
+					</div>
+
+					<div class="col-12">
+            <span>
+            <h4>Patient</h4>
+				<p-autoComplete [baseZIndex]="3000" appendTo="body" [virtualScroll]="true" [suggestions]="patientForm"  formControlName="assure" field="user.nom" [virtualScroll]="true"  (completeMethod)="patientItems($event)"  [dropdown]="true">
+               </p-autoComplete>
+            </span>
+					</div>
+					<div class="col-12">
+            <span>
+            <h4>Médecin</h4>
+			   <p-autoComplete [baseZIndex]="3000" appendTo="body"  [virtualScroll]="true" [suggestions]="medecinForm"  formControlName="medecin" field="user.nom" [virtualScroll]="true"  (completeMethod)="medecinItems($event)"  [dropdown]="true">
+               </p-autoComplete>
+            </span>
+					</div>
+					<div class="col-12 md:col-12">
+						<div class="flex justify-content-end">
+							<p-button label="Enregistrer" icon="pi pi-check" type="submit">
+							</p-button>
+							<p-button label="Annuler" (click)="newOrdonnance()" icon="pi pi-times" styleClass="p-button-sm p-button-danger ml-2">
+							</p-button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</p-dialog>
+		<p-toast key="myKey1"></p-toast>
+		<p-toast key="myKey2"></p-toast>
+	</div>
+</section>
+

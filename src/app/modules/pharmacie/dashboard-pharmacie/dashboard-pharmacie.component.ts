@@ -79,18 +79,17 @@ export class DashboardPharmacieComponent implements OnInit {
   ngOnInit() {
     this.chart1();
     this.chart2();
-    this.chart3();
-    this.chart4();
+
   }
   private chart1() {
     this.areaChartOptions = {
       series: [
         {
-          name: 'New Patients',
+          name: 'Vente',
           data: [31, 40, 28, 51, 42, 85, 77],
         },
         {
-          name: 'Old Patients',
+          name: 'Depense',
           data: [11, 32, 45, 32, 34, 52, 41],
         },
       ],
@@ -138,7 +137,7 @@ export class DashboardPharmacieComponent implements OnInit {
   }
   private chart2() {
     this.radialChartOptions = {
-      series: [44, 55, 67],
+      series: [44, 55],
       chart: {
         height: 265,
         type: 'radialBar',
@@ -162,123 +161,8 @@ export class DashboardPharmacieComponent implements OnInit {
           },
         },
       },
-      colors: ['#ffc107', '#3f51b5', '#8bc34a'],
-
-      labels: ['Face TO Face', 'E-Consult', 'Available'],
+      colors: ['#ffc107', '#3f51b5'],
+      labels: ['Vente', 'Dépense'],
     };
   }
-
-  private chart3() {
-    this.restRateChartOptions = {
-      series: [
-        {
-          name: 'Heart Rate',
-          data: [69, 75, 72, 69, 75, 80, 87],
-        },
-      ],
-      chart: {
-        height: 350,
-        type: 'line',
-        dropShadow: {
-          enabled: true,
-          color: '#000',
-          top: 18,
-          left: 7,
-          blur: 10,
-          opacity: 0.2,
-        },
-        foreColor: '#9aa0ac',
-        toolbar: {
-          show: false,
-        },
-      },
-      colors: ['#FCB939'],
-      dataLabels: {
-        enabled: true,
-      },
-      stroke: {
-        curve: 'smooth',
-      },
-      markers: {
-        size: 1,
-      },
-      xaxis: {
-        categories: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-        title: {
-          text: 'Weekday',
-        },
-      },
-      yaxis: {
-        title: {
-          text: 'Heart Rate',
-        },
-      },
-      tooltip: {
-        theme: 'dark',
-        marker: {
-          show: true,
-        },
-        x: {
-          show: true,
-        },
-      },
-    };
-  }
-  private chart4() {
-    this.performanceRateChartOptions = {
-      series: [
-        {
-          name: 'Heart Rate',
-          data: [113, 120, 130, 120, 125, 119, 126],
-        },
-      ],
-      chart: {
-        height: 350,
-        type: 'line',
-        dropShadow: {
-          enabled: true,
-          color: '#000',
-          top: 18,
-          left: 7,
-          blur: 10,
-          opacity: 0.2,
-        },
-        foreColor: '#9aa0ac',
-        toolbar: {
-          show: false,
-        },
-      },
-      colors: ['#545454'],
-      dataLabels: {
-        enabled: true,
-      },
-      stroke: {
-        curve: 'smooth',
-      },
-      markers: {
-        size: 1,
-      },
-      xaxis: {
-        categories: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-        title: {
-          text: 'Weekday',
-        },
-      },
-      yaxis: {
-        title: {
-          text: 'Heart Rate',
-        },
-      },
-      tooltip: {
-        theme: 'dark',
-        marker: {
-          show: true,
-        },
-        x: {
-          show: true,
-        },
-      },
-    };
-  }
-
 }

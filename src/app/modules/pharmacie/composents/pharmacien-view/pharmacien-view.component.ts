@@ -1,214 +1,332 @@
-import { Component, OnInit,ViewChild} from '@angular/core';
-import { PharmacienService } from 'src/app/services/servicePharmacie/pharmacien.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { PharmacienService } from 'src/app/services/ServicePharmacie/pharmacien.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService, PrimeNGConfig } from 'primeng/api';
 import { Pharmacien } from 'src/app/models/modelPharmacie/pharmacien';
 import * as saveAs from 'file-saver';
-import * as jspdf from 'jspdf'
-import 'jspdf-autotable'
+import * as jspdf from 'jspdf';
+import 'jspdf-autotable';
 import { UserOptions } from 'jspdf-autotable';
-import { Table } from 'primeng/table'
+import { Table } from 'primeng/table';
+import { EmployeService } from 'src/app/services/ServiceEmploye/employe.service';
 
-interface jsPDFWithPlugin extends jspdf.jsPDF{
-    autoTable: (options: UserOptions)=> jspdf.jsPDF;
+interface jsPDFWithPlugin extends jspdf.jsPDF {
+	autoTable: (options: UserOptions) => jspdf.jsPDF;
 }
 
 @Component({
-  selector: 'app-pharmacien-view',
-  templateUrl: './pharmacien-view.component.html',
-  styleUrls: ['./pharmacien-view.component.scss']
+	selector: 'app-pharmacien-view',
+	templateUrl: './pharmacien-view.component.html',
+	styleUrls: ['./pharmacien-view.component.scss']
 })
 export class PharmacienViewComponent implements OnInit {
-  posts: any
+	posts: any;
+	pharmaciens: any[] = [];
 
-  pharmaciens:any[]=[];
-  dragdrop:boolean=true
+	@ViewChild('dt') dt: Table | undefined | any;
+	loading: boolean = true;
 
-  @ViewChild('dt') dt: Table | undefined | any;
+	exportColumns: any[] = [];
 
-  unlockedCustomers: any[]=[];
+	pharmacienDialog: boolean = false;
+	pharmacienDialogUpdate: boolean = false;
+	genres: any;
+	employes: any[];
+	employeForm: any[];
+	pharmacienForms: FormGroup;
+	pharmacienFormsUpdate: FormGroup;
 
-  lockedCustomers: any[]=[];
+	constructor(private pharmacienService: PharmacienService, private route: Router,
+				private messageService: MessageService,
+				private pharmacienForm: FormBuilder,
+				private primeNgConfig: PrimeNGConfig,
+				private employeService: EmployeService,
+				private confirmationService: ConfirmationService
+	) {
+	}
 
-  loading: boolean = true;
+	ngOnInit(): void {
+		this.recupererPharmacien();
+		this.recupererConfig();
+        this.initFormulaire();
+		this.pharmacienFormsUpdate = this.pharmacienForm.group({
+			matriculeUpdate: null,
+			nomUpdate: ['', [Validators.required, Validators.minLength(3)]],
+			prenomsUpdate: ['', [Validators.required, Validators.maxLength(20)]],
+			loginUpdate: ['', [Validators.required, Validators.maxLength(20)]],
+			emailUpdate: ['', [Validators.required, Validators.maxLength(30), Validators.email]],
+			passwordUpdate: ['', [Validators.required, Validators.maxLength(8)]],
+			telUpdate: ['', [Validators.required, Validators.maxLength(20)]],
+			tel2Update: ['', [Validators.required, Validators.maxLength(20)]],
+			genreUpdate: ['', [Validators.required, Validators.maxLength(20)]],
+			dateNaissanceUpdate: ['', [Validators.required, Validators.maxLength(30)]],
+			roleUpdate: null,
+			fcmTokenUpdate: '',
+			typeEmployeUpdate: null
+		});
 
-  exportColumns: any[]=[];
+	}
 
-  personneDialog: any | boolean;
-  genres:any
-  pharmacienForms: FormGroup = new FormGroup({})
-  pharmacien:Pharmacien=new Pharmacien()
+	pharmacienDetail(pharmacien: any) {
+		this.pharmacienService.recupererPharmacien().subscribe({});
+	}
 
-  constructor(private pharService:PharmacienService,private route:Router,
-    private messageService:MessageService,
-    private pharmacienForm: FormBuilder
-) { }
+	saveAsExcelFile(buffer: any, fileName: string): void {
+		let EXCEL_TYPE =
+				'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+		let EXCEL_EXTENSION = '.xlsx';
+		const data: Blob = new Blob([buffer], {
+			type: EXCEL_TYPE
+		});
+		saveAs(
+				data,
+				fileName + '_export_' + new Date() + EXCEL_EXTENSION
+		);
+	}
 
-  ngOnInit(): void {
-    this.pharmacienForms = this.pharmacienForm.group({
+	applyFilterGlobal($event: any, stringVal: any) {
+		this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
+	}
 
-      id:null,
-      nom: ['', [Validators.required, Validators.minLength(3)]],
-      prenoms: ['', [Validators.required, Validators.maxLength(20)]],
-      login:['', [Validators.required, Validators.maxLength(20)]],
-      email: ['', [Validators.required, Validators.maxLength(30), Validators.email]],
-      password: ['', [Validators.required, Validators.maxLength(8)]],
-      tel:['', [Validators.required, Validators.maxLength(20)]],
-      tel2:['', [Validators.required, Validators.maxLength(20)]],
-      genre:['', [Validators.required, Validators.maxLength(20)]],
-      dateNaissance:['', [Validators.required, Validators.maxLength(30)]],
-      fcmToken:"",
-      typeEmploye:null
+	getEventValue($event: any): string {
+		return $event.target.value;
+	}
 
+	newPharmacien() {
+		this.pharmacienForms.reset();
+		this.pharmacienDialog = !this.pharmacienDialog;
+	}
 
-      //salt: ['', [Validators.required, Validators.maxLength(30)]],
+	exportPdf() {
+		const doc = new jspdf.jsPDF('portrait', 'px', 'a4') as jsPDFWithPlugin;
+		doc.autoTable({
+			head: this.exportColumns,
+			body: this.pharmaciens
+		});
+		doc.save('Pharmacien.pdf');
+	}
 
-      /*
-      salaireInfirmier: ['', [Validators.required, Validators.maxLength(30)]],
-      username: ['', [Validators.required, Validators.maxLength(30)]],
-      userIdentifier: ['', [Validators.required, Validators.maxLength(15)]],
-      active: [null, [Validators.required, Validators.maxLength(10)]],
-      password: ['', [Validators.required, Validators.maxLength(8)]],
-      createdAt: [null, [Validators.required, Validators.maxLength(10)]],
-      updatedAt: ['', [Validators.required, Validators.maxLength(10)]],
-      version: [null, [Validators.required, Validators.maxLength(20)]],
+	exportExcel() {
+		import('xlsx').then(xlsx => {
+			const worksheet = xlsx.utils.json_to_sheet(this.pharmaciens);
+			const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
+			const excelBuffer: any = xlsx.write(workbook, {
+				bookType: 'xlsx',
+				type: 'array'
+			});
+			this.saveAsExcelFile(excelBuffer, 'pharmaciens');
+		});
+	}
 
-      file:['', [Validators.required, Validators.maxLength(30)]],
-      photo:['', [Validators.required, Validators.maxLength(20)]],
-      residence:['', [Validators.required, Validators.maxLength(30)]],
-      numeroCni:['', [Validators.required, Validators.maxLength(20)]]
-      */
-    })
-    this.pharService.recupererPharmacien().subscribe({
-      next: (value: any) => {
-        this.posts = value.data ? value : []
-        this.pharmaciens=this.posts.data
-        this.loading=false
-      },
-      error: (e) => {},
-      complete: () => {
-      }
-    })
-  }
-  detail(a:any){
-    //this.route.navigate(['administrateur/detailM',a]);
-    this.pharService.recupererPharmacien().subscribe({
-      next:(e)=>console.log(e)
-    })
-  }
+	enregistrerPharmacien() {
+		const pharmacien: Pharmacien = new Pharmacien();
+		pharmacien.matricule = null;
+		pharmacien.email = this.pharmacienForms.get('email')?.value;
+		pharmacien.password = this.pharmacienForms.get('password')?.value;
+		pharmacien.nom = this.pharmacienForms.get('nom')?.value;
+		pharmacien.prenoms = this.pharmacienForms.get('prenoms')?.value;
+		pharmacien.dateNaissance = this.pharmacienForms.get('dateNaissance')?.value;
+		pharmacien.tel = this.pharmacienForms.get('tel')?.value;
+		pharmacien.tel2 = this.pharmacienForms.get('tel2')?.value;
+		pharmacien.login = this.pharmacienForms.get('login')?.value;
+		let valuerGenre = this.pharmacienForms.get('genre')?.value;
+		let valuerEmploye = this.pharmacienForms.get('typeEmploye')?.value;
+		pharmacien.genre = valuerGenre.id;
+		pharmacien.typeEmploye = valuerEmploye.id;
+		pharmacien.fcmToken = '';
 
-  saveAsExcelFile(buffer: any, fileName: string): void {
+		this.enregistrement(pharmacien);
+	}
 
-    let EXCEL_TYPE =
-      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
-    let EXCEL_EXTENSION = ".xlsx";
-    const data: Blob = new Blob([buffer], {
-      type: EXCEL_TYPE
-    });
-      saveAs(
-      data,
-      fileName + "_export_" + new Date() + EXCEL_EXTENSION
-    );
+	enregistrement(pharmacien: Pharmacien): void {
+		this.pharmacienService.enregistrerPharmacien(pharmacien).subscribe({
+			next: (v) => {
+				this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'Le pharmacien à été enregistré' });
+				this.pharmacienForms.reset();
+			},
+			error: (e) => {
+			},
+			complete: () => {
+				this.recupererPharmacien();
+				this.pharmacienDialog = false;
+			}
+		});
+	}
 
-  }
+	recupererPharmacien() {
+		this.pharmacienService.recupererPharmacien().subscribe({
+			next: (value: any) => {
+				this.posts = value.data;
+				this.pharmaciens = this.posts;
+				this.loading = false;
+			},
+			error: (e) => {
+			},
+			complete: () => {
+			}
+		});
+		this.employeService.recupererTypeEmploye().subscribe({
+			next: (value) => {
+				const data = value.data;
+				this.employes = data;
+			}
+		});
+		this.employeService.recupererGenre().subscribe({
+			next: (value) => {
+				const data = value.data;
+				this.genres = data;
+			}
+		});
+	}
 
-applyFilterGlobal($event:any, stringVal:any) {
-  this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
-}
+	modifierPharmacien(): void {
 
-getEventValue($event:any) :string {
-  console.log($event.target.value);
-  return $event.target.value;
-} 
+		const pharmacien: Pharmacien = new Pharmacien();
+		pharmacien.matricule = this.pharmacienFormsUpdate.get('matriculeUpdate')?.value;
+		pharmacien.email = this.pharmacienFormsUpdate.get('emailUpdate')?.value;
+		pharmacien.password = this.pharmacienFormsUpdate.get('passwordUpdate')?.value;
+		pharmacien.nom = this.pharmacienFormsUpdate.get('nomUpdate')?.value;
+		pharmacien.prenoms = this.pharmacienFormsUpdate.get('prenomsUpdate')?.value;
+		pharmacien.dateNaissance = this.pharmacienFormsUpdate.get('dateNaissanceUpdate')?.value;
+		pharmacien.tel = this.pharmacienFormsUpdate.get('telUpdate')?.value;
+		pharmacien.tel2 = this.pharmacienFormsUpdate.get('tel2Update')?.value;
+		pharmacien.login = this.pharmacienFormsUpdate.get('loginUpdate')?.value;
+		let valuerGenre = this.pharmacienFormsUpdate.get('genreUpdate')?.value;
+		let valuerEmploye = this.pharmacienFormsUpdate.get('typeEmployeUpdate')?.value;
+		pharmacien.genre = valuerGenre.id;
+		pharmacien.typeEmploye = valuerEmploye.id;
+		pharmacien.fcmToken = '';
+		this.modification(pharmacien);
+	}
 
-toggleLock(data:any, frozen:any, index:any) {
+	modification(pharmacien: Pharmacien): void {
+		this.pharmacienService.modificationPharmacien(pharmacien).subscribe({
+			next: () => {
+				this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'Le pharmacien à été modifié' });
+				this.pharmacienFormsUpdate.reset();
+			},
+			error: () => {},
+			complete: () => {
+				this.recupererPharmacien();
+				this.pharmacienDialogUpdate = false;
+			}
+		});
+	}
 
-  console.log(data);
-    if (frozen) {
-        this.lockedCustomers = this.lockedCustomers.filter((c, i) => i !== index);
-        this.unlockedCustomers.push(data);
-    }
-    else {
-        this.unlockedCustomers = this.unlockedCustomers.filter((c, i) => i !== index);
-        this.lockedCustomers.push(data);
-    }
+	supprimerPharmacien(pharmacien: any) {
+		this.confirmationService.confirm({
+			message: 'Supprimer l\'infirmier ' + pharmacien.user.nom + ' ' + pharmacien.user.prenoms + '?',
+			header: 'Confirmer',
+			icon: 'pi pi-exclamation-triangle',
+			accept: () => {
+				this.pharmacienService.supprimerPharmacien(pharmacien.id).subscribe({
+					next: (v: string) => {
+						this.messageService.add({ severity: 'info', summary: 'Suppression', detail: 'L\'infirmier a été supprimé', icon: 'pi-file' });
+						this.pharmaciens = this.pharmaciens.filter(val => val.user.id !== pharmacien.user.id);
+					},
+					error: () => {
+						this.messageService.add({ severity: 'error', summary: 'Erreur', detail: 'L\'infirmier ne peut pas être supprimer', icon: 'pi-file' });
+					}
+				});
+			}
+		});
+	}
 
-    this.unlockedCustomers.sort((val1, val2) => {
-        return val1.id < val2.id ? -1 : 1;
-    });
-}
- openNew() {
-  this.personneDialog = true;
-  this.genres = [
-    {name: 'homme'},
-    {name: 'femme'}
-];
-}
+	employeItems(event: any) {
+		let filtered: any[] = [];
+		let query = event.query;
+		for (let i = 0; i < this.employes.length; i++) {
+			let item = this.employes[i];
+			if (item.libelle.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+				filtered.push(item);
+			}
+		}
+		this.employeForm = filtered;
+	}
 
-exportPdf() {
+	urlActif(): boolean {
+		return this.route.url.includes('/admin/pharmacie/liste');
+	}
 
-  const doc = new jspdf.jsPDF('portrait','px','a4') as jsPDFWithPlugin;
-        doc.autoTable({
-          head:this.exportColumns,
-          body:this.pharmaciens
-        })
-    doc.save("Pomptables.pdf")
-}
+	updatePharmacien(pharmacien: any) {
+		this.pharmacienDialogUpdate = !this.pharmacienDialogUpdate;
+		this.pharmacienFormsUpdate.patchValue({
+			matriculeUpdate: pharmacien.id,
+			nomUpdate: pharmacien.user.nom,
+			prenomsUpdate: pharmacien.user.prenoms,
+			loginUpdate: pharmacien.user.login,
+			passwordUpdate: pharmacien.user.password,
+			emailUpdate: pharmacien.user.email,
+			telUpdate: pharmacien.user.tel,
+			tel2Update: pharmacien.user.tel2,
+			genreUpdate: pharmacien.user.genre,
+			dateNaissanceUpdate: pharmacien.user.dateNaissance,
+			typeEmployeUpdate: pharmacien.typeEmploye
+		});
+	}
 
-exportExcel() {
-import("xlsx").then(xlsx => {
-const worksheet = xlsx.utils.json_to_sheet(this.pharmaciens);
-const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
-const excelBuffer: any = xlsx.write(workbook, {
-  bookType: "xlsx",
-  type: "array"
-});
-this.saveAsExcelFile(excelBuffer, "pharmaciens");
-});
-}
+	helpPharmacien() {
+		this.pharmacienDialogUpdate = false;
+	}
 
-SaveData(){
+	recupererConfig(): void {
+		this.primeNgConfig.setTranslation({
+			monthNames: ['Janvier',
+				'Fevrier',
+				'Mars',
+				'Avril',
+				'Mai',
+				'Juin',
+				'Juillet',
+				'Août',
+				'Septembre',
+				'Octobre',
+				'Novembre',
+				'Decembre'],
+			dayNamesShort: ['Dim.',
+				'Lun.',
+				'Mar.',
+				'Mer.',
+				'Jeu.',
+				'Ven.',
+				'Sam.'],
+			startsWith: 'Commence par',
+			contains: 'Contient',
+			notContains: 'Ne contient pas',
+			endsWith: 'Fini par',
+			equals: 'Egale à',
+			notEquals: 'différent de',
+			noFilter: 'Pas de filtre',
+			reject: 'Non',
+			accept: 'Oui'
+		});
+	}
 
-  this.pharmacien.id=null
-  this.pharmacien.email=this.pharmacienForms.get('email')?.value
-  this.pharmacien.password=this.pharmacienForms.get('password')?.value
-  this.pharmacien.nom=this.pharmacienForms.get('nom')?.value
-  this.pharmacien.prenoms=this.pharmacienForms.get('prenoms')?.value
-  this.pharmacien.dateNaissance=this.pharmacienForms.get('dateNaissance')?.value
-  this.pharmacien.login=this.pharmacienForms.get('login')?.value
-  let val=this.pharmacienForms.get('genre')?.value
-  this.pharmacien.genre=val.name
-  this.pharmacien.tel=this.pharmacienForms.get('tel')?.value
-  this.pharmacien.tel2=this.pharmacienForms.get('tel2')?.value
+	initFormulaire():void{
+		this.pharmacienForms = this.pharmacienForm.group({
+			matricule: null,
+			nom: ['', [Validators.required, Validators.minLength(3)]],
+			prenoms: ['', [Validators.required, Validators.maxLength(20)]],
+			login: ['', [Validators.required, Validators.maxLength(20)]],
+			email: ['', [Validators.required, Validators.maxLength(30), Validators.email]],
+			password: ['', [Validators.required, Validators.maxLength(8)]],
+			tel: ['', [Validators.required, Validators.maxLength(20)]],
+			tel2: ['', [Validators.required, Validators.maxLength(20)]],
+			genre: ['', [Validators.required, Validators.maxLength(20)]],
+			dateNaissance: ['', [Validators.required, Validators.maxLength(30)]],
+			fcmToken: '',
+			typeEmploye: null
 
-  this.pharmacien.fcmToken=""
-  this.pharmacien.typeEmploye=null
+			/*
+			salaireInfirmier: ['', [Validators.required, Validators.maxLength(30)]],
+			password: ['', [Validators.required, Validators.maxLength(8)]],
 
-     this.pharService.enregistrerPharmacien(this.pharmacien).subscribe({
-
-      next:(v)=>{
-        this.messageService.add({severity: 'success', summary: 'Service Message', detail: 'Pharmacien enregistré' });
-      },
-      error:(e)=>{
-
-      },
-      complete:()=>{
-        this.pharmacienForms.setValue({
-          id:null,
-          email:"",
-          password:"",
-          nom:"",
-          prenoms:"",
-          tel:"",
-          tel2:"",
-          genre:"",
-          dateNaissance:"",
-          login:"",
-          fcmToken:'string',
-          typeEmploye:null,
-        })
-       }
-     })
- }
+			file:['', [Validators.required, Validators.maxLength(30)]],
+			photo:['', [Validators.required, Validators.maxLength(20)]],
+			residence:['', [Validators.required, Validators.maxLength(30)]],
+			numeroCni:['', [Validators.required, Validators.maxLength(20)]]
+			*/
+		});
+	}
 }

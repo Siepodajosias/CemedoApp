@@ -4,24 +4,18 @@ import { InfirmierCalendrierComponent } from 'src/app/modules/infirmerie/compose
 import { InfirmierDetailComponent } from 'src/app/modules/infirmerie/composents/infirmier-detail/infirmier-detail.component';
 import { InfirmierViewComponent } from 'src/app/modules/infirmerie/composents/infirmier-view/infirmier-view.component';
 import { DashboardInfirmerieComponent } from 'src/app/modules/infirmerie/dashboard-infirmerie/dashboard-infirmerie.component';
+import { ExamenViewComponent } from 'src/app/modules/infirmerie/composents/examen-view/examen-view.component';
 
 const routes: Routes = [
   {path: 'dashboard',component:DashboardInfirmerieComponent},
   {path:'liste',component:InfirmierViewComponent},
   {path:'detail',component:InfirmierDetailComponent},
   {path:'calendrier',component:InfirmierCalendrierComponent},
+  {path:'examen',component: ExamenViewComponent},
   {
     path:'patient',
     loadChildren: () =>
     import('src/app/modules/patient/patient.module').then((m) =>m.PatientModule),
-  },{
-    path:'medecin',
-    loadChildren: () =>
-    import('src/app/modules/medecin/doctor.module').then((m) =>m.DoctorModule),
-  },
-  {
-    path: 'assurance',
-    loadChildren: () => import('src/app/modules/assurance/assurance.module').then((r) => r.AssuranceModule)
   }
 ];
 

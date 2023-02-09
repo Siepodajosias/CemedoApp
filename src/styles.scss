@@ -1,13 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-@import "~ng-zorro-antd/ng-zorro-antd.min.css";
-@import "~ng-zorro-antd/ng-zorro-antd.variable.min.css";
-@import '~primeflex/primeflex.scss';
+@import '~primeng/resources/primeng.css';
+@import '~primeng/resources/primeng.min.css';
 @import '~primeflex/primeflex.css';
 @import '~primeicons/primeicons.css';
-@import '~primeng/resources/primeng.min.css';
-@import '~primeng/resources/primeng.css';
 @import '~primeng/resources/themes/saga-blue/theme.css';
+@import '~primeflex/primeflex.scss';
+@import '~primeflex/primeflex.scss';
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

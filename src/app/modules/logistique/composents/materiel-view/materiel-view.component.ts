@@ -19,15 +19,10 @@ export class MaterielViewComponent implements OnInit {
   materiels:any[]=[]
   posts: any
 
-  dragdrop:boolean=true
 
   @ViewChild('dt') dt: Table | undefined | any;
 
   scrollableCols: any[]=[];
-
-  unlockedCustomers: any[]=[];
-
-  lockedCustomers: any[]=[];
 
   balanceFrozen: boolean = false;
 
@@ -49,7 +44,6 @@ export class MaterielViewComponent implements OnInit {
   }
 
   getEventValue($event:any) :string {
-    console.log($event.target.value);
     return $event.target.value;
   } 
 
@@ -88,6 +82,5 @@ export class MaterielViewComponent implements OnInit {
     );
 
   }
-
 
 }

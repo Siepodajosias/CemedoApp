@@ -1,7 +1,7 @@
 {
     "MENUITEMS": {
       "MAIN": {
-        "TEXT": "Main"
+        "TEXT": "Menu"
       },
       "DASHBOARD": {
         "TEXT": "Dashboard",
@@ -21,12 +21,12 @@
         }
       },
       "DOCTORS": {
-        "TEXT": "Doctors",
+        "TEXT": "medecins",
         "LIST": {
-          "ALL-DOCTOR": "All Doctors",
-          "ADD-DOCTOR": "Add Doctor",
-          "EDIT-DOCTOR": "Edit Doctor",
-          "PROFILE": "Doctor Profile"
+          "ALL-DOCTOR": "Tous les medecins",
+          "ADD-DOCTOR": "Ajouter un medecin",
+          "EDIT-DOCTOR": "modifier un medecin",
+          "PROFILE": "Profile medecin"
         }
       },
       "STAFF": {
@@ -41,10 +41,10 @@
       "PATIENTS": {
         "TEXT": "Patients",
         "LIST": {
-          "ALL-PATIENT": "All Patients",
-          "ADD-PATIENT": "Add Patient",
-          "EDIT-PATIENT": "Edit Patient",
-          "PROFILE": "Patient Profile"
+          "ALL-PATIENT": "Tous les patients",
+          "ADD-PATIENT": "Ajouter un patient",
+          "EDIT-PATIENT": "Modifier un patient",
+          "PROFILE": "Profile patient"
         }
       },
       "ROOMS": {
@@ -64,16 +64,16 @@
         }
       },
       "DOCTOR": {    
-          "DASHBOARD": "Dashboard",
+          "DASHBOARD": "Tableau de bord",
           "APPOINTMENTS": "Appointments",
-          "DOCTORS": "Doctors",
+          "DOCTORS": "medecin",
           "PATIENTS": "Patients",
-          "SETTINGS": "Settings",
+          "SETTINGS": "Paramètre",
           "CHAT": "Chat"
       },
         "PATIENT": {    
         "TEXT": "Patient",
-        "DASHBOARD": "Dashboard",
+        "DASHBOARD": "Tableau de bord",
         "APPOINTMENTS": {
           "TEXT": "Appointments",
           "LIST": {
@@ -86,13 +86,13 @@
         "MEDICAL-RECORD": "Medical Record",
         "BILLING": "Billing",
         "CHAT": "Chat",
-        "SETTINGS": "Settings"
+        "SETTINGS": "Paramètre"
       },
       "APPS": {
         "TEXT": "-- Apps"
       },
       "CALENDAR": {
-        "TEXT": "Calendar"
+        "TEXT": "Calendrier"
       },
       "TASK": {
         "TEXT": "Task"

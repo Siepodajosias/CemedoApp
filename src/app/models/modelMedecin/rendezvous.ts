@@ -1,13 +1,17 @@
 export class Rendezvous {
     id: number
-    gerant: string
-    emetteur: string
-    concerne: string
-    medecin: string
-    service: string
-    adresse: string
-    createdAt: string
-    updatedAt: string
-    version: number
-    active: boolean
+    gerant?: string
+    assure: number
+    medecin?: number
+    service: number[]
+    adresse: number
+    commentaire?: string
+    ville: number
+    statutRdv:	boolean
+    lieu: string
+    infirmier?:	number
+    descriptionLieu?: string
+    dateHeure:	string
+    secondContact:string
+    services: number[]
 }

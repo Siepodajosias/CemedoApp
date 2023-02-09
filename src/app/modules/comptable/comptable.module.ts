@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComponentsModule } from "src/app/shared/components/components.module";
-import { HttpClientModule } from "@angular/common/http";
 import { ComptableRoutingModule } from 'src/app/modules/comptable/comptable-routing.module';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
@@ -9,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { ComptableViewComponent } from 'src/app/modules/comptable/composents/comptable-view/comptable-view.component';
 import { ComptableDetailComponent } from 'src/app/modules/comptable/composents/comptable-detail/comptable-detail.component';
-import { ComptableService } from 'src/app/services/serviceComptable/comptable.service';
+import { ComptableService } from 'src/app/services/ServiceComptable/comptable.service';
 import { MatTableModule } from "@angular/material/table";
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatPaginatorModule } from "@angular/material/paginator";
@@ -42,6 +41,8 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { CalendarModule } from 'primeng/calendar';
 import { SpeedDialModule } from 'primeng/speeddial';
 import { MenuModule } from 'primeng/menu';
+import { HttpClientModule } from '@angular/common/http';
+import { PartagerModule } from 'src/app/shared-cemedo/partager/partager.module';
 
 
 @NgModule({
@@ -51,7 +52,6 @@ import { MenuModule } from 'primeng/menu';
   ],
   imports: [
     CommonModule,
-    HttpClientModule,
     MatCardModule,
     MatTableModule ,
     MatDialogModule,
@@ -68,11 +68,6 @@ import { MenuModule } from 'primeng/menu';
     ComponentsModule,
 
     CardModule,
-    TableModule,
-    ButtonModule,
-    ToastModule,
-    DialogModule,
-    ConfirmDialogModule,
     MultiSelectModule,
     DropdownModule,
     AutoCompleteModule,
@@ -86,11 +81,10 @@ import { MenuModule } from 'primeng/menu';
     DividerModule ,
     MenubarModule, 
     ToolbarModule,
-    CalendarModule,
     SpeedDialModule,
-    MenuModule
-    
-
+    MenuModule,
+    HttpClientModule,
+    PartagerModule
   ], providers: [ComptableService,MessageService,ConfirmationService]
 })
 export class ComptableModule { }

@@ -4,7 +4,7 @@ export class Users {
     dateNaissance:string
     email:string
     fcmToken:string
-    genre:string
+    genre:any
     id:number
     lastConnection:string
     login:string

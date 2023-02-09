@@ -31,7 +31,7 @@
               </span>
             </div>
           </ng-template>
-          <ng-template pTemplate="header" let-materiel>
+          <ng-template pTemplate="header">
             <tr>
               <th pSortableColumn="id">Identifiant<p-sortIcon field="id"></p-sortIcon>
               </th>
@@ -44,7 +44,52 @@
               <th pSortableColumn="quantite">Quantité<p-sortIcon field="quantite"></p-sortIcon>
               </th>
               <th></th>
-  
+            </tr>
+            <tr>
+              <th>
+                <p-columnFilter [showClearButton]="false" type="text" field="id" matchMode="contains" pTooltip="Options de filtrage">
+                  <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                    <input type="text" #valeur class="p-2 border" maxlength="20"
+                           [value]="value"
+                           pInputText
+                           (input)="filter(valeur.value)"
+                    >
+                  </ng-template>
+                </p-columnFilter>
+              </th>
+              <th>
+                <p-columnFilter [showClearButton]="false" type="text" field="désignation" matchMode="contains" pTooltip="Options de filtrage">
+                  <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                    <input type="text" #valeur class="p-2 border" maxlength="20"
+                           [value]="value"
+                           pInputText
+                           (input)="filter(valeur.value)"
+                    >
+                  </ng-template>
+                </p-columnFilter>
+              </th>
+              <th>
+                <p-columnFilter [showClearButton]="false" type="text" field="dateAchat" matchMode="contains" pTooltip="Options de filtrage">
+                  <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                    <input type="text" #valeur class="p-2 border" maxlength="20"
+                           [value]="value"
+                           pInputText
+                           (input)="filter(valeur.value)"
+                    >
+                  </ng-template>
+                </p-columnFilter>
+              </th>
+              <th>
+                <p-columnFilter [showClearButton]="false" type="text" field="quantite" matchMode="contains" pTooltip="Options de filtrage">
+                  <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                    <input type="text" #valeur class="p-2 border" maxlength="20"
+                           [value]="value"
+                           pInputText
+                           (input)="filter(valeur.value)"
+                    >
+                  </ng-template>
+                </p-columnFilter>
+              </th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-materiel let-index="rowIndex">
@@ -67,6 +112,5 @@
           </ng-template>
         </p-table>
       </div>
-  
     </div>
   </section>

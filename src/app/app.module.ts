@@ -1,8 +1,6 @@
 import { NgModule } from "@angular/core";
-
 import { CoreModule } from "./core/core.module";
 import { SharedModule } from "./shared/shared.module";
-
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AppRoutingModule } from "./app-routing.module";
@@ -36,7 +34,11 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
-import interactionPlugin from "@fullcalendar/interaction"; 
+import interactionPlugin from "@fullcalendar/interaction";
+import { ApiUrlInterceptor } from 'src/app/services/ServiceInterceptor/api-url-interceptor.service';
+import { NgxAgoraModule } from 'ngx-agora';
+import { agora } from 'src/app/models/modelMedecin/agora';
+
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
   interactionPlugin,
@@ -80,6 +82,7 @@ export function createTranslateLoader(http: HttpClient): any {
         // core & shared
         CoreModule,
         SharedModule,
+        NgxAgoraModule.forRoot({AppID: agora.agora.appId}),
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
@@ -87,8 +90,9 @@ export function createTranslateLoader(http: HttpClient): any {
             provide: PERFECT_SCROLLBAR_CONFIG,
             useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
         },
-        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+        //{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        //{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+        //{ provide: HTTP_INTERCEPTORS, useClass: ApiUrlInterceptor, multi: true },
         fakeBackendProvider,
     ],
     bootstrap: [AppComponent]

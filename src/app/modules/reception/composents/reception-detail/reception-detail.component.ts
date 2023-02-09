@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ReceptionService } from 'src/app/services/serviceReception/reception.service';
+import { ReceptionService } from 'src/app/services/ServiceReception/reception.service';
 
 @Component({
   selector: 'app-reception-detail',

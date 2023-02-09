@@ -2,7 +2,6 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { PerfectScrollbarModule } from "ngx-perfect-scrollbar";
 import { ChartsModule as chartjsModule } from "ng2-charts";
-import { HttpClientModule } from "@angular/common/http";
 import { NgxEchartsModule } from "ngx-echarts";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
@@ -31,18 +30,13 @@ import { PatientRoutingModule } from "src/app/modules/patient/patient-routing.mo
 import { ComponentsModule } from "src/app/shared/components/components.module";
 import { PatientViewComponent } from 'src/app/modules/patient/composents/patient-view/patient-view.component';
 import { PatientDetailComponent } from 'src/app/modules/patient/composents/patient-detail/patient-detail.component';
-import { PatientFormsComponent } from 'src/app/modules/patient/composents/patient-view2/patient-forms.component';
 import { PatientDossierComponent } from 'src/app/modules/patient/composents/patient-dossier/patient-dossier.component';
-import { PatientService } from "src/app/services/servicePatient/patient.service";
+import { PatientService } from "src/app/services/ServicePatient/patient.service";
 import { OrdonnanceComponent } from 'src/app/modules/patient/composents/ordonnance/ordonnance.component';
 
 //primeng
 import { CardModule} from 'primeng/card'
-import { ToastModule} from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-import { TableModule} from 'primeng/table';
-import { ButtonModule} from 'primeng/button';
-import { DialogModule} from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { MultiSelectModule} from 'primeng/multiselect';
@@ -59,70 +53,72 @@ import { MenubarModule } from 'primeng/menubar';
 import { ToolbarModule } from 'primeng/toolbar';
 
 import { SharedModule } from "src/app/shared/shared.module";
+import { HttpClientModule } from '@angular/common/http';
+import { TagModule } from 'primeng/tag';
+import { MedecinService } from 'src/app/services/ServiceMedecin/medecin.service';
+import { PartagerModule } from 'src/app/shared-cemedo/partager/partager.module';
+import { OrdonnanceService } from 'src/app/services/ServicePatient/ordonnance.service';
 
 @NgModule({
   declarations: [ 
     PatientViewComponent, 
     PatientDetailComponent,
-    PatientFormsComponent, 
     PatientDossierComponent, 
     OrdonnanceComponent,
 
   ],
-  imports: [
-    CommonModule,
-    chartjsModule,
-    NgxEchartsModule.forRoot({
-      echarts: () => import("echarts"),
-    }),
-    HttpClientModule,
-    SharedModule,
-    PerfectScrollbarModule,
-    MatIconModule,
-    MatTableModule,
-    MatMenuModule,
-    MatPaginatorModule,
-    MatButtonModule,
-    MatChipsModule,
-    PatientRoutingModule,
-    NgApexchartsModule,
-    MatSnackBarModule,
-    MatFormFieldModule,
-    MatTabsModule,
-    MatDatepickerModule,
-    MatSelectModule,
-    MatCheckboxModule,
-    MatInputModule,
-    MatTooltipModule,
-    MatRadioModule,
-    ComponentsModule,
-    MatDialogModule,
-  
-    ToastrModule.forRoot({}),
-    MatCardModule,
-    ReactiveFormsModule, 
-    FormsModule,
+	imports: [
+		CommonModule,
+		chartjsModule,
+		NgxEchartsModule.forRoot({
+			echarts: () => import('echarts'),
+		}),
+		SharedModule,
+		PerfectScrollbarModule,
+		MatIconModule,
+		MatTableModule,
+		MatMenuModule,
+		MatPaginatorModule,
+		MatButtonModule,
+		MatChipsModule,
+		PatientRoutingModule,
+		NgApexchartsModule,
+		MatSnackBarModule,
+		MatFormFieldModule,
+		MatTabsModule,
+		MatDatepickerModule,
+		MatSelectModule,
+		MatCheckboxModule,
+		MatInputModule,
+		MatTooltipModule,
+		MatRadioModule,
+		ComponentsModule,
+		MatDialogModule,
+		HttpClientModule,
 
-    CardModule,
-    TableModule,
-    ButtonModule,
-    ToastModule,
-    DialogModule,
-    ConfirmDialogModule,
-    MultiSelectModule,
-    DropdownModule,
-    AutoCompleteModule,
+		ToastrModule.forRoot({}),
+		MatCardModule,
+		ReactiveFormsModule,
+		FormsModule,
 
-    ChipsModule,
-    ContextMenuModule,
-    ProgressBarModule,
-    SliderModule,
-    RippleModule,
-    OrderListModule,
-    DividerModule ,
-    MenubarModule, 
-    ToolbarModule
+		CardModule,
+		ConfirmDialogModule,
+		MultiSelectModule,
+		DropdownModule,
+		AutoCompleteModule,
 
-  ],providers:[PatientService,MessageService,ConfirmationService]
+		ChipsModule,
+		ContextMenuModule,
+		ProgressBarModule,
+		SliderModule,
+		RippleModule,
+		OrderListModule,
+		DividerModule,
+		MenubarModule,
+		ToolbarModule,
+		TagModule,
+		PartagerModule
+
+	],providers:[PatientService,MedecinService,MessageService,ConfirmationService,OrdonnanceService]
 })
 export class PatientModule {}

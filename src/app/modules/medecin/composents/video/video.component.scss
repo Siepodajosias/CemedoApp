@@ -1,0 +1,36 @@
+.local {
+	position: fixed;
+	right: 1rem;
+	bottom: 1rem;
+	width: 20vw;
+	height: 20vh;
+	border-radius: 5px;
+	overflow: hidden;
+	z-index: 1;
+	//border:1px solid black;
+}
+
+.remote {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+}
+
+:host {
+	::ng-deep .el {
+		background-color: white !important;
+		width: 40vw !important;
+		box-shadow: 0px 20px 20px #D8DDE680;
+		border: 1px solid rgb(231, 231, 231);
+		//margin-top: -200px !important;
+	}
+}
+
+:host {
+	::ng-deep .p-dialog-header .ng-star-inserted {
+		color: white !important;
+
+	}
+}

@@ -1,0 +1,135 @@
+<section class="content">
+	<div class="content-block">
+		<div class="block-header">
+			<!-- breadcrumb -->
+			<app-breadcrumb [title]="'Département'" [items]="[]" [active_item]="'liste des départements'"></app-breadcrumb>
+		</div>
+		<div class="card">
+			<p-toolbar styleClass="mb-4">
+				<ng-template pTemplate="left">
+					<button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
+							class="p-button-success mr-2" pTooltip="Export XLSX" tooltipPosition="bottom"></button>
+					<button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()"
+							class="p-button-warning mr-2" pTooltip="Export PDF" tooltipPosition="bottom"></button>
+				</ng-template>
+
+				<ng-template pTemplate="right">
+
+					<button pButton pRipple label="Ajouter un département" icon="pi pi-plus" class="p-button-help"
+							(click)="newDepartement()" *ngIf="urlActif()"></button>
+				</ng-template>
+			</p-toolbar>
+
+			<p-table #dt [value]="departements"
+					 [scrollable]="true"
+					 scrollHeight="600px"
+					 [loading]="loading"
+					 [filterDelay]="0"
+					 styleClass="p-datatable-gridlines"
+					 selectionMode="multiple"
+					 [resizableColumns]="true"
+					 [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true">
+				<ng-template pTemplate="caption">
+					<div class="flex align-items-center justify-content-between">
+						<h5 class="m-0">Département</h5>
+					</div>
+				</ng-template>
+				<ng-template pTemplate="header">
+					<tr>
+						<th style="width: 3rem">
+							<p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+						</th>
+						<th pSortableColumn="libelle">Designation<p-sortIcon field="libelle"></p-sortIcon>
+						</th>
+						<th>Actions</th>
+					</tr>
+					<tr>
+						<th style="width: 3rem">
+							<p-tableCheckbox [value]="departements"></p-tableCheckbox>
+						</th>
+						<th>
+							<p-columnFilter [showClearButton]="false" type="text" field="libelle" matchMode="contains" pTooltip="Options de filtrage"
+											[style]="{width:'100%'}">
+								<ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+									<input type="text" #valeur class="p-2 border" maxlength="20"
+										   [value]="value"
+										   pInputText
+										   (input)="filter(valeur.value)"
+									>
+								</ng-template>
+							</p-columnFilter>
+						</th>
+						<th></th>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-departement>
+					<tr>
+						<td style="width: 3rem">
+							<p-tableCheckbox [value]="departement"></p-tableCheckbox>
+						</td>
+						<td style="width: 3rem">{{departement.libelle}}</td>
+						<td >
+							<button pButton pRipple type="button" pTooltip="Modifier" icon="pi pi-pencil" (click)="updateDepartement(departement)" *ngIf="urlActif()"
+									class="p-button-rounded p-button-text"></button>
+							<button pButton pRipple type="button" pTooltip="Detail du departement" icon="pi pi-angle-right" (click)="departementDetail(departement)"
+									class="p-button-rounded p-button-text p-button-success"></button>
+
+							<button pButton pRipple type="button" pTooltip="Supprimer le departement" icon="pi pi-trash" (click)="supprimerDepartement(departement)"
+									class="p-button-rounded p-button-text p-button-danger"></button>
+						</td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="summary">
+					<div class="flex align-items-center justify-content-between">
+						Total: {{departements ? departements.length : 0 }} Département
+					</div>
+				</ng-template>
+			</p-table>
+		</div>
+		<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+		<p-dialog [(visible)]="departementDialog" [style]="{width: '460px'}" header="Créer un département" [modal]="true"
+				  styleClass="p-fluid">
+			<form [formGroup]="departementForms" (ngSubmit)="enregistrerDepartement()">
+				<div class="grid">
+					<div class="col-12 md:col-12 lg:col-12">
+						<span>
+						<h4>Désignation</h4>
+						  <input class="mb-5" type="text" pInputText formControlName="libelle">
+						</span>
+					</div>
+					<div class="col-12 md:col-12">
+						<div class="flex justify-content-end">
+							<p-button label="Enregistrer" icon="pi pi-check" type="submit">
+							</p-button>
+							<p-button label="Annuler" (click)="newDepartement()" icon="pi pi-times" styleClass="p-button-sm p-button-danger ml-2">
+							</p-button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</p-dialog>
+		<p-dialog [(visible)]="departementDialogUpdate" [style]="{width: '460px'}" header="Modifier un département" [modal]="true"
+				  styleClass="p-fluid">
+			<form [formGroup]="departementFormsUpdate" (ngSubmit)="modifierDepartement()">
+				<div class="grid">
+					<div class="col-12 md:col-12 lg:col-12">
+						<span>
+						<h4>Désignation</h4>
+						  <input class="mb-5" type="text" pInputText formControlName="libelleUpdate">
+						</span>
+					</div>
+					<div class="col-12 md:col-12">
+						<div class="flex justify-content-end">
+							<p-button label="Enregistrer" icon="pi pi-check" type="submit">
+							</p-button>
+							<p-button label="Annuler" (click)="helpDepartement()" icon="pi pi-times" styleClass="p-button-sm p-button-danger ml-2">
+							</p-button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</p-dialog>
+		<p-toast></p-toast>
+	</div>
+</section>
+

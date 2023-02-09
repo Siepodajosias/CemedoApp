@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { InfirmierService } from 'src/app/services/serviceInfirmerie/infirmier.service';
+import { InfirmierService } from 'src/app/services/ServiceInfirmerie/infirmier.service';
 
 @Component({
   selector: 'app-infirmier-detail',

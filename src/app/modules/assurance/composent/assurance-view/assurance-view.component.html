@@ -17,13 +17,13 @@
         <ng-template pTemplate="right">
 
           <button pButton pRipple label="Créer une nouvel assurance" icon="pi pi-plus" class="p-button-help"
-            (click)="openNew()"></button>
+            (click)="newAssurance()" *ngIf="urlActif()"></button>
         </ng-template>
       </p-toolbar>
 
       <p-table #dt [value]="assurances" 
       [scrollable]="true" 
-      scrollHeight="500px"
+      scrollHeight="600px"
         [globalFilterFields]="['libelle','email','ville']" 
         [loading]="loading" 
         [filterDelay]="0"
@@ -44,43 +44,77 @@
         </ng-template>
         <ng-template pTemplate="header">
           <tr>
-            <th colspan="1" pSortableColumn="libelle" class="text-center">Nom<p-sortIcon field="libelle"></p-sortIcon>
+            <th [style]="{textAlign: 'center'}" pSortableColumn="libelle">Nom<p-sortIcon field="libelle"></p-sortIcon>
             </th>
-            <th colspan="1" pSortableColumn="email" class="text-center">E-mail <p-sortIcon field="email"></p-sortIcon>
+            <th [style]="{textAlign: 'center'}" pSortableColumn="email" class="text-center">E-mail <p-sortIcon field="email"></p-sortIcon>
             </th>
-            <th colspan="1" pSortableColumn="tel" class="text-center">Contact <p-sortIcon field="tel"></p-sortIcon>
+            <th [style]="{textAlign: 'center'}" pSortableColumn="tel" class="text-center">Contact <p-sortIcon field="tel"></p-sortIcon>
             </th>
-            <th colspan="1" pSortableColumn="ville" class="text-center">Ville<p-sortIcon field="ville"></p-sortIcon>
+            <th [style]="{textAlign: 'center'}" pSortableColumn="ville" class="text-center">Ville<p-sortIcon field="ville"></p-sortIcon>
             </th>
-            <th rowspan="2">Actions</th>
+            <th [style]="{textAlign: 'center'}">Actions</th>
           </tr>
-          <tr>	
+          <tr>
             <th>
-              <p-columnFilter type="text" field="libelle"></p-columnFilter>
+              <p-columnFilter [showClearButton]="false" type="text" field="libelle" matchMode="contains" pTooltip="Options de filtrage">
+                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                  <input type="text" #valeur class="p-2 border" maxlength="20"
+                         [value]="value"
+                         pInputText
+                         (input)="filter(valeur.value)"
+                  >
+                </ng-template>
+              </p-columnFilter>
             </th>
             <th>
-              <p-columnFilter type="text" field="email"></p-columnFilter>
+              <p-columnFilter [showClearButton]="false" type="text" field="email" matchMode="contains" pTooltip="Options de filtrage">
+                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                  <input type="text" #valeur class="p-2 border" maxlength="20"
+                         [value]="value"
+                         pInputText
+                         (input)="filter(valeur.value)"
+                  >
+                </ng-template>
+              </p-columnFilter>
             </th>
             <th>
-              <p-columnFilter type="text" field="tel"></p-columnFilter>
+              <p-columnFilter [showClearButton]="false" type="text" field="tel" matchMode="contains" pTooltip="Options de filtrage">
+                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                  <input type="text" #valeur class="p-2 border" maxlength="20"
+                         [value]="value"
+                         pInputText
+                         (input)="filter(valeur.value)"
+                  >
+                </ng-template>
+              </p-columnFilter>
             </th>
             <th>
-              <p-columnFilter type="text" field="ville"></p-columnFilter>
+              <p-columnFilter [showClearButton]="false" type="text" field="ville" matchMode="contains" pTooltip="Options de filtrage">
+                <ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+                  <input type="text" #valeur class="p-2 border" maxlength="20"
+                         [value]="value"
+                         pInputText
+                         (input)="filter(valeur.value)"
+                  >
+                </ng-template>
+              </p-columnFilter>
             </th>
             <th></th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-assurance>
           <tr>
-            <td>{{assurance.libelle}}</td>
+            <td [style]="{textAlign: 'center'}">{{assurance.libelle}}</td>
             <td>{{assurance.email}}</td>
             <td class="text-right">{{assurance.tel}}</td>
             <td>{{assurance.ville}}</td>
             <td >
-              <button pButton pRipple type="button" pTooltip="Modifier" icon="pi pi-pencil" (click)="detail(assurance)"
-              class="p-button-rounded p-button-text right"></button>
-              <button pButton pRipple type="button" pTooltip="Detail de l'assurance" icon="pi pi-angle-right" (click)="detail(assurance)"
-              class="p-button-rounded p-button-text text-center"></button>
+              <button pButton pRipple type="button" pTooltip="Modifier" icon="pi pi-pencil" (click)="updateAssurance(assurance)" *ngIf="urlActif()"
+              class="p-button-rounded p-button-text"></button>
+              <button pButton pRipple type="button" pTooltip="Detail de l'assurance" icon="pi pi-angle-right" (click)="assuranceDetail(assurance)"
+              class="p-button-rounded p-button-text p-button-success"></button>
+              <button pButton pRipple type="button" pTooltip="Supprimer l'assurance"  icon="pi pi-trash" (click)="supprimerAssurance(assurance)"
+                      class="p-button-rounded p-button-text p-button-danger"></button>
             </td>
           </tr>
         </ng-template>
@@ -93,58 +127,101 @@
     </div>
 
     <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
-
     <p-dialog [(visible)]="assuranceDialog" [style]="{width: '460px'}" header="Création d'une assurance" [modal]="true"
       styleClass="p-fluid">
 
-      <form [formGroup]="assuranceForm" (ngSubmit)="enregistrerAssurance()">
+      <form [formGroup]="assuranceForms" (ngSubmit)="enregistrerAssurance()">
         <div class="grid">
 
           <div class="col-12 md:col-6 lg:col-6">
             <span>
             <h4>Nom assurance</h4>
               <input type="text" pInputText formControlName="libelle"
-              [ngClass]="{'ng-invalid ng-dirty':submitted && assuranceForm.controls['libelle'].errors}">
+              [ngClass]="{'ng-invalid ng-dirty':submitted && assuranceForms.controls['libelle'].errors}">
             </span>
-            <small id="libelle-help" class="p-error" *ngIf="submitted && assuranceForm.controls['libelle'].errors">Nom de l'assurance obligatoire</small>
+            <small id="libelle-help" class="p-error" *ngIf="submitted && assuranceForms.controls['libelle'].errors">Nom de l'assurance obligatoire</small>
           </div>
 
           <div class="col-12 md:col-6 lg:col-6">
             <span>
             <h4>E-mail assurance</h4>
               <input type="email" pInputText formControlName="email"
-              [ngClass]="{'ng-invalid ng-dirty':submitted && assuranceForm.controls['email'].errors}">
+              [ngClass]="{'ng-invalid ng-dirty':submitted && assuranceForms.controls['email'].errors}">
             </span>
-            <small id="email-help" class="p-error" *ngIf="submitted && assuranceForm.controls['email'].errors">E-mail de l'assurance obligatoire</small>
+            <small id="email-help" class="p-error" *ngIf="submitted && assuranceForms.controls['email'].errors">E-mail de l'assurance obligatoire</small>
           </div>
 
           <div class="col-12">
             <span>
             <h4>Contact assurance</h4>
               <input type="text" pInputText formControlName="tel"
-              [ngClass]="{'ng-invalid ng-dirty':submitted && assuranceForm.controls['tel'].errors}">
+              [ngClass]="{'ng-invalid ng-dirty':submitted && assuranceForms.controls['tel'].errors}">
             </span>
-            <small id="contact-help" class="p-error" *ngIf="submitted && assuranceForm.controls['tel'].errors">Contact de l'assurance obligatoire</small>
+            <small id="contact-help" class="p-error" *ngIf="submitted && assuranceForms.controls['tel'].errors">Contact de l'assurance obligatoire</small>
           </div>
           <div class="col-12">
             <span>
             <h4>Ville</h4>
               <input type="text" pInputText formControlName="ville"
-              [ngClass]="{'ng-invalid ng-dirty':submitted && assuranceForm.controls['ville'].errors}">
+              [ngClass]="{'ng-invalid ng-dirty':submitted && assuranceForms.controls['ville'].errors}">
             </span>
-            <small id="ville-help" class="p-error" *ngIf="submitted && assuranceForm.controls['ville'].errors">Ville de l'assurance obligatoire</small>
+            <small id="ville-help" class="p-error" *ngIf="submitted && assuranceForms.controls['ville'].errors">Ville de l'assurance obligatoire</small>
           </div>
             <div class="col-12 md:col-12">
               <div class="flex justify-content-end">
                   <p-button label="Enregistrer" icon="pi pi-check" type="submit">
                   </p-button>
-                  <p-button label="Annuler" (click)="openNew()" icon="pi pi-times" styleClass="p-button-sm p-button-danger ml-2">
+                  <p-button label="Annuler" (click)="newAssurance()" icon="pi pi-times" styleClass="p-button-sm p-button-danger ml-2">
                   </p-button>
               </div>
             </div>
         </div>
       </form>
     </p-dialog>
+    <p-dialog [(visible)]="assuranceDialogUpdate" [style]="{width: '460px'}" header="Modifier l' assurance" [modal]="true"
+              styleClass="p-fluid">
+      <form [formGroup]="assuranceFormsUpdate" (ngSubmit)="modifierAssurance()">
+        <div class="grid">
+
+          <div class="col-12 md:col-6 lg:col-6">
+            <span>
+            <h4>Nom assurance</h4>
+              <input type="text" pInputText formControlName="libelleUpdate">
+            </span>
+          </div>
+
+          <div class="col-12 md:col-6 lg:col-6">
+            <span>
+            <h4>E-mail assurance</h4>
+              <input type="email" pInputText formControlName="emailUpdate">
+            </span>
+          </div>
+
+          <div class="col-12">
+            <span>
+            <h4>Contact assurance</h4>
+              <input type="text" pInputText formControlName="telUpdate">
+            </span>
+          </div>
+          <div class="col-12">
+            <span>
+            <h4>Ville</h4>
+              <input type="text" pInputText formControlName="villeUpdate">
+            </span>
+          </div>
+          <div class="col-12 md:col-12">
+            <div class="flex justify-content-end">
+              <p-button label="Enregistrer" icon="pi pi-check" type="submit">
+              </p-button>
+              <p-button label="Annuler" (click)="helpAssurance()" icon="pi pi-times" styleClass="p-button-sm p-button-danger ml-2">
+              </p-button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </p-dialog>
     <p-toast key="myKey1"></p-toast>
+    <p-toast key="myKey2"></p-toast>
+    <p-toast key="myKey3"></p-toast>
   </div>
 </section>

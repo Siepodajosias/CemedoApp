@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComponentsModule } from "src/app/shared/components/components.module";
-import { HttpClientModule } from "@angular/common/http";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTabsModule } from "@angular/material/tabs";
 import { NgApexchartsModule } from "ng-apexcharts";
 
 import { ReactiveFormsModule, FormsModule} from '@angular/forms'
-import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { ToastrModule} from 'ngx-toastr';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatDatepickerModule } from "@angular/material/datepicker";
@@ -20,7 +19,7 @@ import { ReceptionViewComponent } from 'src/app/modules/reception/composents/rec
 
 import { ReceptionRoutingModule } from 'src/app/modules/reception/reception-routing.module';
 import { DashboardReceptionComponent } from 'src/app/modules/reception/dashboard-reception/dashboard-reception.component';
-import { ReceptionService } from 'src/app/services/serviceReception/reception.service';
+import { ReceptionService } from 'src/app/services/ServiceReception/reception.service';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
@@ -49,6 +48,8 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { CalendarModule } from 'primeng/calendar';
 import { SpeedDialModule } from 'primeng/speeddial';
 import { MenuModule } from 'primeng/menu';
+import { HttpClientModule } from '@angular/common/http';
+import { PartagerModule } from 'src/app/shared-cemedo/partager/partager.module';
 
 
 @NgModule({
@@ -60,7 +61,6 @@ import { MenuModule } from 'primeng/menu';
   ],
   imports: [
     CommonModule,
-    HttpClientModule ,
     ReceptionRoutingModule,
     ComponentsModule,
     MatIconModule,
@@ -77,14 +77,10 @@ import { MenuModule } from 'primeng/menu';
     MatButtonModule,
     ReactiveFormsModule, 
     FormsModule,
+    HttpClientModule,
 
 
     CardModule,
-    TableModule,
-    ButtonModule,
-    ToastModule,
-    DialogModule,
-    ConfirmDialogModule,
     MultiSelectModule,
     DropdownModule,
     AutoCompleteModule,
@@ -98,9 +94,9 @@ import { MenuModule } from 'primeng/menu';
     DividerModule ,
     MenubarModule, 
     ToolbarModule,
-    CalendarModule,
     SpeedDialModule,
-    MenuModule
+    MenuModule,
+    PartagerModule
 
   ],providers:[ReceptionService,ConfirmationService,MessageService]
 })

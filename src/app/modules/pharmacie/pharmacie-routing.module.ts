@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PharmacienView2Component } from 'src/app/modules/pharmacie/composents/pharmacien-view2/pharmacien-view2.component';
 import { MedicamentDetailComponent } from 'src/app/modules/pharmacie/composents/medicament-detail/medicament-detail.component';
 import { MedicamentViewComponent } from 'src/app/modules/pharmacie/composents/medicament-view/medicament-view.component';
 import { PharmacienDetailComponent } from 'src/app/modules/pharmacie/composents/pharmacien-detail/pharmacien-detail.component';
@@ -15,7 +14,6 @@ const routes: Routes = [
   },
   {path:'listeMed',component:MedicamentViewComponent},
   {path:'listePhar',component:PharmacienViewComponent},
-  {path:'liste',component:PharmacienView2Component},
   {path:'detailMed/:id',component:MedicamentDetailComponent},
   {path:'detailPhar',component:PharmacienDetailComponent},
   {path:'listeVente',component:VenteViewComponent},
@@ -29,7 +27,7 @@ const routes: Routes = [
   {
     path:'medecin',
     loadChildren: () =>
-    import('src/app/modules/medecin/doctor.module').then((m) =>m.DoctorModule),
+    import('src/app/modules/medecin/medecin.module').then((m) =>m.MedecinModule),
   },
   {
     path: 'assurance',

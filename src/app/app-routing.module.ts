@@ -20,7 +20,7 @@ const routes: Routes = [
           role: Role.Admin,
         },
         loadChildren: () =>
-          import('./modules/administrateur/admin.module').then((m) => m.AdminModule),
+          import('src/app/modules/administrateur/administrateur.module').then((m) => m.AdministrateurModule),
       },
       {
         path: 'doctor',
@@ -29,7 +29,7 @@ const routes: Routes = [
           role: Role.Doctor,
         },
         loadChildren: () =>
-          import('./modules/medecin/doctor.module').then((m) => m.DoctorModule),
+          import('src/app/modules/medecin/medecin.module').then((m) => m.MedecinModule),
       },
       {
         path: 'reception',

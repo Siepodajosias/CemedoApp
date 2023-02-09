@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComponentsModule } from "src/app/shared/components/components.module";
-import { HttpClientModule } from "@angular/common/http"
 import { MatIconModule } from "@angular/material/icon";
 import { MatTabsModule } from "@angular/material/tabs";
 import { NgApexchartsModule } from "ng-apexcharts";
@@ -11,15 +10,12 @@ import { AssuranceRoutingModule } from 'src/app/modules/assurance/assurance-rout
 import { DashboardAssuranceComponent } from 'src/app/modules/assurance/dashboard-assurance/dashboard-assurance.component';
 import { AssuranceViewComponent } from 'src/app/modules/assurance/composent/assurance-view/assurance-view.component';
 import { AssuranceDetailComponent } from 'src/app/modules/assurance/composent/assurance-detail/assurance-detail.component';
-import { AssuranceService } from 'src/app/services/serviceAssurance/assurance.service';
+import { AssuranceService } from 'src/app/services/ServiceAssurance/assurance.service';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from "@angular/material/table";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { AssuranceView2Component } from 'src/app/modules/assurance/composent/assurance-view2/assurance-view2.component';
-import { ResponsableComponent } from 'src/app/modules/assurance/composent/assurance-view/responsable.component';
-import { ResponsableDetailComponent } from 'src/app/modules/assurance/composent/responsable-detail/responsable-detail.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { ChartsModule as chartjsModule } from "ng2-charts";
 
@@ -44,20 +40,20 @@ import { OrderListModule } from 'primeng/orderlist';
 import { DividerModule } from 'primeng/divider';
 import { MenubarModule } from 'primeng/menubar';
 import { ToolbarModule } from 'primeng/toolbar';
-import {CalendarModule} from 'primeng/calendar';
+import { CalendarModule} from 'primeng/calendar';
+import { HttpClientModule } from '@angular/common/http';
+import { PartagerModule } from 'src/app/shared-cemedo/partager/partager.module';
+import { StatistiqueComponent } from 'src/app/modules/assurance/composent/statistique/statistique.component';
 
 @NgModule({
   declarations: [
     DashboardAssuranceComponent,
     AssuranceViewComponent,
     AssuranceDetailComponent,
-    AssuranceView2Component,
-    ResponsableComponent,
-    ResponsableDetailComponent
+    StatistiqueComponent
   ],
   imports: [
     CommonModule,
-    HttpClientModule,
     AssuranceRoutingModule,
     ComponentsModule,
     MatIconModule,
@@ -77,17 +73,12 @@ import {CalendarModule} from 'primeng/calendar';
     MatTableModule ,
     MatDialogModule,
     MatPaginatorModule,
+    HttpClientModule,
 
     CardModule,
-    TableModule,
-    ButtonModule,
-    ToastModule,
-    DialogModule,
-    ConfirmDialogModule,
     MultiSelectModule,
     DropdownModule,
     AutoCompleteModule,
-
     ChipsModule,
     ContextMenuModule,
     ProgressBarModule,
@@ -97,7 +88,7 @@ import {CalendarModule} from 'primeng/calendar';
     DividerModule ,
     MenubarModule, 
     ToolbarModule,
-    CalendarModule
+    PartagerModule
 
   ],providers:[MessageService,ConfirmationService,AssuranceService]
 })

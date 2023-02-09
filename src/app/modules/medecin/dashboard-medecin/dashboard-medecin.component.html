@@ -2,7 +2,7 @@
   <div class="content-block">
     <div class="block-header">
       <!-- breadcrumb -->
-      <app-breadcrumb [title]="'Tableau de bord medecin'" [items]="[]" [active_item]="'Tableau de bord'"></app-breadcrumb>
+      <app-breadcrumb [title]="'Tableau de bord'" [items]="[]" [active_item]="'medecin'"></app-breadcrumb>
     </div>
 
     <div class="surface-ground px-4 py-5 md:px-6 lg:px-8">
@@ -89,7 +89,7 @@
               <div class="surface-card shadow-4 p-3 border-round">
                   <div class="flex justify-content-between mb-3">
                       <div>
-                          <span class="block text-500 font-medium mb-3">Historique des cas</span>
+                          <span class="block text-500 font-medium mb-3">Nombre de patients traités</span>
                           <div class="text-900 font-medium text-xl">100</div>
                       </div>
                       <div class="flex align-items-center justify-content-center bg-orange-100 border-round" style="width:2.5rem;height:2.5rem">
@@ -141,7 +141,7 @@
                 <div class="header">
                   <h2>
                     Patients Survay</h2>
-      
+
                 </div>
                 <div class="body">
                   <apx-chart [series]="areaChartOptions.series" [chart]="areaChartOptions.chart"
@@ -177,7 +177,7 @@
                     <button mat-stroked-button color="primary">Modify Availability</button>
                   </div>
                 </div>
-   
+
               </div>
             </div>
             </div>
@@ -185,7 +185,7 @@
     </div>
 </div>
 
-<div class="surface-ground px-4 py-5 md:px-6 lg:px-8">
+   <div class="surface-ground px-4 py-5 md:px-6 lg:px-8">
   <div class="grid">
       <div class="col-12 md:col-12 lg:col-12">
           <div class="surface-card shadow-4 p-3 border-round">
@@ -402,12 +402,12 @@
   </div>
 </div>
 
-<div class="surface-ground px-4 py-5 md:px-6 lg:px-8">
+   <div class="surface-ground px-4 py-5 md:px-6 lg:px-8">
   <div class="grid">
       <div class="col-12 md:col-12 lg:col-12">
           <div class="surface-card shadow-4 p-3 border-round">
             <div class="flex justify-content-between mb-3">
-            <div class="col-12 md:col-6 lg:col-4">
+            <div class="col-12 md:col-6 lg:col-6">
 
               <div class="header">
                 <h2>Docteurs</h2>
@@ -506,7 +506,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-12 md:col-6 lg:col-8">
+            <div class="col-12 md:col-6 lg:col-6">
 
               <div class="header">
                 <h2>Patients</h2>
@@ -527,45 +527,5 @@
   </div>
 </div>
 
-    <!--
-      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-        <div class="card">
-          <div class="header">
-            <h2>
-              <strong>Todo</strong> List</h2>
-          </div>
-          <div class="body">
-            <div cdkDropList class="task-list" (cdkDropListDropped)="drop($event)"
-              style="position: relative; max-height: 370px;" [perfectScrollbar]>
-              <div class="task-box" *ngFor="let task of tasks" cdkDrag>
-                <div>
-                  <div class="task-handle m-r-20" cdkDragHandle>
-                    <mat-icon aria-hidden="false">drag_indicator</mat-icon>
-                  </div>
-                </div>
-                <mat-checkbox (change)="toggle(task, sidenav)" [checked]="!!task.done" class="m-r-15" color="primary">
-                </mat-checkbox>
-                <div class="task-custom-placeholder" *cdkDragPlaceholder></div>
-                <div matTooltip="Title" [ngClass]="{done:task.done}">
-                  {{task.title}}</div>
-                <div
-                  [ngClass]="{'task-low': task.priority=='Low', 'task-high': task.priority=='High','task-normal': task.priority=='Normal'}">
-                  <mat-icon matTooltip="Low" aria-hidden="false" class="lbl-low" *ngIf="task?.priority == 'Low'">
-                    arrow_downward
-                  </mat-icon>
-                  <mat-icon matTooltip="High" aria-hidden="false" class="lbl-high" *ngIf="task?.priority == 'High'">
-                    arrow_upward
-                  </mat-icon>
-                  <mat-icon matTooltip="Normal" aria-hidden="false" class="lbl-normal"
-                    *ngIf="task?.priority == 'Normal'">
-                    remove</mat-icon>
-                  {{task.priority}}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    -->
   </div>
 </section>

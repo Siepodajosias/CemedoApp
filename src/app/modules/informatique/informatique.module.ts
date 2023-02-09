@@ -1,14 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComponentsModule } from "src/app/shared/components/components.module";
-import { HttpClientModule } from "@angular/common/http";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTabsModule } from "@angular/material/tabs";
 import { NgApexchartsModule } from "ng-apexcharts";
 //components
 import { InformatiqueRoutingModule } from 'src/app/modules/informatique/informatique-routing.module';
 import { DashboardInformatiqueComponent } from 'src/app/modules/informatique/dashboard-informatique/dashboard-informatique.component';
-import { InformaticienService } from 'src/app/services/serviceInformatique/informaticien.service';
+import { InformaticienService } from 'src/app/services/ServiceInformatique/informaticien.service';
 import { InformaticienViewComponent } from 'src/app/modules/informatique/composents/informaticien-view/informaticien-view.component';
 
 //primeng
@@ -37,6 +36,8 @@ import { SpeedDialModule } from 'primeng/speeddial';
 import { MenuModule } from 'primeng/menu';
 import { FieldsetModule} from 'primeng/fieldset';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { PartagerModule } from 'src/app/shared-cemedo/partager/partager.module';
 
 
 @NgModule({
@@ -46,7 +47,6 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
-    HttpClientModule ,
     InformatiqueRoutingModule,
     ComponentsModule ,
     MatIconModule,
@@ -55,11 +55,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
 
     CardModule,
-    TableModule,
-    ButtonModule,
-    ToastModule,
-    DialogModule,
-    ConfirmDialogModule,
+
     MultiSelectModule,
     DropdownModule,
     AutoCompleteModule,
@@ -72,10 +68,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     DividerModule ,
     MenubarModule, 
     ToolbarModule,
-    CalendarModule,
     SpeedDialModule,
     MenuModule,
-    FieldsetModule
+    FieldsetModule,
+    HttpClientModule,
+    PartagerModule
 
   ],
   providers:[InformaticienService,MessageService,ConfirmationService]

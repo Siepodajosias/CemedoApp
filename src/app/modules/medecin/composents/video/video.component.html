@@ -1,0 +1,101 @@
+<section class="content">
+	<div class="content-block">
+		<div class="block-header">
+			<!-- breadcrumb -->
+			<app-breadcrumb [title]="'Appel vidéo'" [items]="[]" [active_item]="'Liste des appels vidéos'"></app-breadcrumb>
+		</div>
+
+		<div class="surface-ground px-4 py-5 md:px-6 lg:px-8">
+			<p-table #dt
+					 [value]="appelVideos"
+					 [scrollable]="true"
+					 scrollHeight="500px"
+					 [globalFilterFields]="['dateDebut','assure.user.nom','assure.user.dateNaissance']"
+					 [filterDelay]="0"
+					 styleClass="p-datatable-gridlines"
+					 selectionMode="multiple"
+					 [resizableColumns]="true">
+				<ng-template pTemplate="caption">
+					<div class="flex align-items-center justify-content-between">
+						<div class="left">
+							<button type="button" pButton pRipple icon="pi pi-file-excel"  class="p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom"></button>
+							<button type="button" pButton pRipple icon="pi pi-file-pdf" class="p-button-warning mr-4" pTooltip="PDF" tooltipPosition="bottom"></button>
+							<button pButton pRipple label="Appel vidéo" icon="pi pi-plus" class="p-button-help" (click)="rejoindreAppelVideo()"></button>
+						</div>
+						<span class="p-input-icon-left">
+						<i class="pi pi-search"></i>
+						<input pInputText type="text" placeholder="Rechercher..." />
+					   </span>
+					</div>
+				</ng-template>
+				<ng-template pTemplate="header">
+					<tr>
+						<th pSortableColumn="dateDebut">Date de création<p-sortIcon field="dateDebut"></p-sortIcon>
+						<th pSortableColumn="assure.user.nom">Patient<p-sortIcon field="assure.user.nom"></p-sortIcon>
+						<th pSortableColumn="assure.user.dateNaissance">date de naissance<p-sortIcon field="assure.user.dateNaissance"></p-sortIcon>
+						<th >Actions</th>
+					</tr>
+					<tr>
+						<th>
+							<p-columnFilter [showClearButton]="false" type="text" field="dateDebut" matchMode="contains" pTooltip="Options de filtrage">
+								<ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+									<input type="text" #valeur class="p-2 border" maxlength="20"
+										   [value]="value"
+										   pInputText
+										   (input)="filter(valeur.value)"
+									>
+								</ng-template>
+							</p-columnFilter>
+						</th>
+						<th>
+							<p-columnFilter [showClearButton]="false" type="text" field="assure.user.nom" matchMode="contains" pTooltip="Options de filtrage">
+								<ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+									<input type="text" #valeur class="p-2 border" maxlength="20"
+										   [value]="value"
+										   pInputText
+										   (input)="filter(valeur.value)"
+									>
+								</ng-template>
+							</p-columnFilter>
+						</th>
+						<th>
+							<p-columnFilter [showClearButton]="false" type="text" field="assure.user.dateNaissance" matchMode="contains" pTooltip="Options de filtrage">
+								<ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+									<input type="text" #valeur class="p-2 border" maxlength="20"
+										   [value]="value"
+										   pInputText
+										   (input)="filter(valeur.value)"
+									>
+								</ng-template>
+							</p-columnFilter>
+						</th>
+						<th></th>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-appelVideo>
+					<tr>
+						<td >{{appelVideo.dateDebut |date:'dd-MM-yyyy'}}</td>
+						<td *ngIf="appelVideo.assure">{{appelVideo.assure.user.fullName}}</td>
+						<td *ngIf="appelVideo.assure">{{appelVideo.assure.user.dateNaissance}}</td>
+						<td >
+							<button pButton pRipple type="button" pTooltip="Assigner l'appel vidéo à un médecin" icon="pi pi-send" label="Assigner"
+									class="p-button-rounded p-button-text"></button>
+							<button pButton pRipple type="button" pTooltip="Réjoindre l'appel vidéo"  icon="pi pi-arrow-right" label="Réjoindre"
+									class="p-button-rounded p-button-text p-button-success" (click)="rejoindreAppelVideo()"></button>
+						</td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="summary">
+					<div class="flex align-items-center justify-content-between">
+						Total: {{ appelVideos ? appelVideos.length : 0 }} Appels vidéos
+					</div>
+				</ng-template>
+			</p-table>
+		</div>
+		<p-toast></p-toast>
+	</div>
+</section>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+<div [id]="localCallId" class="local"></div>
+<div *ngFor="let callId of remoteCalls" [id]="callId" class="remote"></div>

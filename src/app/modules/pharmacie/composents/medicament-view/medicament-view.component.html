@@ -1,128 +1,205 @@
 <section class="content">
-  <div class="content-block">
-    <div class="block-header">
-      <!-- breadcrumb -->
-      <app-breadcrumb [title]="'Pharmacie'" [items]="[]" [active_item]="'médicament'"></app-breadcrumb>
-    </div>
-    <div class="card">
-      <p-toolbar styleClass="mb-4">
-          <ng-template pTemplate="left">
-              <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success mr-2"  pTooltip="XLS" tooltipPosition="bottom"></button>
-              <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
-          </ng-template>
-  
-          <ng-template pTemplate="right">
-              
-              <button pButton pRipple label="Enregistrer" icon="pi pi-send" class="p-button-help" (click)="openNew()"></button>
-          </ng-template>
-      </p-toolbar>
-  
-      <p-table #dt  [value]="medicaments"  [scrollable]="true" scrollHeight="400px"
-      [globalFilterFields]="['id','libelle','quantite']"
-      [loading]="loading"
-      [filterDelay]="0"
-          >
-          <ng-template pTemplate="caption">
-              <div class="flex align-items-center justify-content-between">
-                  <h5 class="m-0">Medicaments</h5>
-                  <span class="p-input-icon-left">
+	<div class="content-block">
+		<div class="block-header">
+			<!-- breadcrumb -->
+			<app-breadcrumb [title]="'Pharmacie'" [items]="[]" [active_item]="'médicament'"></app-breadcrumb>
+		</div>
+		<div class="card">
+			<p-toolbar styleClass="mb-4">
+				<ng-template pTemplate="left">
+					<button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom"></button>
+					<button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
+				</ng-template>
+
+				<ng-template pTemplate="right">
+
+					<button *ngIf="urlActif()" pButton pRipple label="Ajouer un nouveau medicament" icon="pi pi-plus" class="p-button-help" (click)="newMedicament()"></button>
+				</ng-template>
+			</p-toolbar>
+
+			<p-table #dt [value]="medicaments" [scrollable]="true" scrollHeight="600px"
+					 [globalFilterFields]="['id','libelle','quantite']"
+					 [loading]="loading"
+					 [filterDelay]="0"
+					 styleClass="p-datatable-gridlines"
+					 selectionMode="multiple">
+				<ng-template pTemplate="caption">
+					<div class="flex align-items-center justify-content-between">
+						<h5 class="m-0">Medicaments</h5>
+						<span class="p-input-icon-left">
                       <i class="pi pi-search"></i>
   
                       <input pInputText type="text"
-                      (input)="dt.filterGlobal(getEventValue($event), 'contains')"
-                       placeholder="Rechercher..." 
-                      />
+							 (input)="dt.filterGlobal(getEventValue($event), 'contains')"
+							 placeholder="Rechercher..."
+					  />
   
                   </span>
-              </div>
-          </ng-template>
-          <ng-template pTemplate="header" let-medicament>
-              <tr>
-                  <th pSortableColumn="id">Identifiant<p-sortIcon field="libelle"></p-sortIcon></th>
-                  <th pSortableColumn="libelle">Designation <p-sortIcon field="email"></p-sortIcon></th>
-                  <th pSortableColumn="posologie">Posologie <p-sortIcon field="tel"></p-sortIcon></th>
-                  <th pSortableColumn="quantite">Quantite<p-sortIcon field="ville"></p-sortIcon></th>
-  
-              </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-medicament let-index="rowIndex">
-              <tr>
-                  <td style="min-width:200px">{{medicament.id}}</td>
-                  <td style="min-width:200px">{{medicament.libelle}}</td>
-                  <td style="min-width:200px">{{medicament.posologie}}</td>
-                  <td style="min-width:200px">{{medicament.quantite}}</td>
-                  <td style="flex: 0 0 4rem">
-                      <button pButton pRipple type="button"  icon="pi pi-pencil"  (click)="detail(medicament)" 
-                      class="p-button-rounded p-button-text"
-                      ></button>
-                  </td>
-                  <td style="flex: 0 0 4rem">
-                      <button pButton pRipple type="button"  icon="pi pi-angle-right"  (click)="detail(medicament)" 
-                      class="p-button-rounded p-button-text"
-                      ></button>
-                  </td>
-              </tr>
-          </ng-template>
-          <ng-template pTemplate="summary">
-              <div class="flex align-items-center justify-content-between">
-               Total: {{medicaments ? medicaments.length : 0 }}
-              </div>
-          </ng-template>
-      </p-table>
-  </div>
-  
-  <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
-  
-  <p-dialog [(visible)]="personneDialog" [style]="{width: '560px'}" header="Nouveau medicament" [modal]="true" styleClass="p-fluid">
-  
-    <form >
-  
-      <div class="grid">
-  
-        <div class="col-12">
-          <p-autoComplete  [showEmptyMessage]="true"   field="designation" [minLength]="1"></p-autoComplete>
-        </div>
-        <div class="col-12">
-                      <span class="p-float-label">
-                          <input type="text" id="inputtext1" pInputText>
-                          <label for="inputtext1">Nom</label>
-                      </span>
-        </div>
-  
-               <p-divider layout="vertical"></p-divider>
-  
-        <div class="col-12">
-          <span class="p-float-label">
-            <input type="text" id="inputtext2" pInputText >
-            <label for="inputtext2">Prenom</label>
-          </span>
-        </div>
-              <p-divider align="left" type="dashed">
-                  <b>Left</b>
-                </p-divider>
-        <div class="col-12">
-                      <span class="p-float-label">
-                          <input type="text" id="inputtext3" pInputText>
-                          <label for="inputtext3">Age</label>
-                      </span>
-        </div>
-  
-  
-        <div class="col-12">
-                  <p-divider align="left">
-                      <div class="inline-flex align-items-center">
-                        <i class="pi pi-user mr-2"></i>
-                        <b>Icon</b>
-                      </div>
-                    </p-divider>
-          </div>
-  
-  
-        <button  type="submit" pButton pRipple label="Save" icon="pi pi-check" class="p-button-text p-button-sm"></button>
-  
-      </div>
-  
-    </form>
-  </p-dialog>
-  </div>
+					</div>
+				</ng-template>
+				<ng-template pTemplate="header">
+					<tr>
+						<th pSortableColumn="id">Identifiant
+							<p-sortIcon field="id"></p-sortIcon>
+						</th>
+						<th pSortableColumn="libelle">Designation
+							<p-sortIcon field="libelle"></p-sortIcon>
+						</th>
+						<th pSortableColumn="posologie">Posologie
+							<p-sortIcon field="posologie"></p-sortIcon>
+						</th>
+						<th pSortableColumn="quantite">Quantite
+							<p-sortIcon field="quantite"></p-sortIcon>
+						</th>
+						<th>Actions</th>
+					</tr>
+					<tr>
+						<th>
+							<p-columnFilter [showClearButton]="false" type="text" field="id" matchMode="contains" pTooltip="Options de filtrage">
+								<ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+									<input type="text" #valeur class="p-2 border" maxlength="20"
+										   [value]="value"
+										   pInputText
+										   (input)="filter(valeur.value)"
+									>
+								</ng-template>
+							</p-columnFilter>
+						</th>
+						<th>
+							<p-columnFilter [showClearButton]="false" type="text" field="libelle" matchMode="contains" pTooltip="Options de filtrage">
+								<ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+									<input type="text" #valeur class="p-2 border" maxlength="20"
+										   [value]="value"
+										   pInputText
+										   (input)="filter(valeur.value)"
+									>
+								</ng-template>
+							</p-columnFilter>
+						</th>
+						<th>
+							<p-columnFilter [showClearButton]="false" type="text" field="posologie" matchMode="contains" pTooltip="Options de filtrage">
+								<ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+									<input type="text" #valeur class="p-2 border" maxlength="20"
+										   [value]="value"
+										   pInputText
+										   (input)="filter(valeur.value)"
+									>
+								</ng-template>
+							</p-columnFilter>
+						</th>
+						<th>
+							<p-columnFilter [showClearButton]="false" type="text" field="quantite" matchMode="contains" pTooltip="Options de filtrage">
+								<ng-template pTemplate="filter" let-filter="filterCallback" let-value="$implicit">
+									<input type="text" #valeur class="p-2 border" maxlength="20"
+										   [value]="value"
+										   pInputText
+										   (input)="filter(valeur.value)"
+									>
+								</ng-template>
+							</p-columnFilter>
+						</th>
+						<th></th>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-medicament>
+					<tr>
+						<td style="min-width:200px">{{medicament.id}}</td>
+						<td style="min-width:200px">{{medicament.libelle}}</td>
+						<td style="min-width:200px">{{medicament.posologie}}</td>
+						<td style="min-width:200px">{{medicament.quantite}}</td>
+						<td>
+							<button pButton pRipple type="button" pTooltip="Modifier le medicament" icon="pi pi-pencil" (click)="updateMedicament(medicament)"
+									class="p-button-rounded p-button-text"
+							></button>
+							<button pButton pRipple type="button" pTooltip="Détail du medicament" icon="pi pi-angle-right"
+									class="p-button-rounded p-button-text p-button-success"
+							></button>
+
+							<button pButton pRipple type="button" pTooltip="Supprimer le medicament" icon="pi pi-trash" (click)="supprimerMedicament(medicament)"
+									class="p-button-rounded p-button-text p-button-danger"></button>
+						</td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="summary">
+					<div class="flex align-items-center justify-content-between">
+						Total: {{medicaments ? medicaments.length : 0 }} medicaments
+					</div>
+				</ng-template>
+			</p-table>
+		</div>
+
+		<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+
+		<p-dialog [(visible)]="medicamentDialog" [style]="{width: '560px'}" header="Nouveau medicament" [modal]="true" styleClass="p-fluid">
+
+			<form [formGroup]="medicamentForms" (ngSubmit)="enregistrerMedicament()">
+				<div class="grid">
+
+					<div class="col-12 md:col-6 lg:col-6">
+					<span>
+					   <h4>Désignation</h4>
+					   <input type="text" pInputText formControlName="designation">
+				   </span>
+					</div>
+					<div class="col-12 md:col-6 lg:col-6">
+                   <span>
+                      <h4>Posologie</h4>
+                      <input type="email" pInputText formControlName="posologie">
+                  </span>
+					</div>
+					<div class="col-12">
+					<span>
+					  <h4>Quantité</h4>
+					  <input type="number" pInputText formControlName="quantite">
+					</span>
+					</div>
+
+					<div class="col-12 md:col-12">
+						<div class="flex justify-content-end">
+							<p-button label="Enregistrer" icon="pi pi-check" type="submit">
+							</p-button>
+							<p-button label="Annuler" icon="pi pi-times" styleClass="p-button-sm p-button-danger ml-2" (click)="newMedicament()">
+							</p-button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</p-dialog>
+		<p-dialog [(visible)]="medicamentDialogUpdate" [style]="{width: '560px'}" header="Mise à jour du medicament" [modal]="true" styleClass="p-fluid">
+
+			<form [formGroup]="medicamentFormsUpdate" (ngSubmit)="modifierMedicament()">
+				<div class="grid">
+
+					<div class="col-12 md:col-6 lg:col-6">
+					<span>
+					   <h4>Désignation</h4>
+					   <input type="text" pInputText formControlName="designationUpdate">
+				   </span>
+					</div>
+					<div class="col-12 md:col-6 lg:col-6">
+                   <span>
+                      <h4>Posologie</h4>
+                      <input type="text" pInputText formControlName="posologieUpdate">
+                  </span>
+					</div>
+					<div class="col-12">
+					<span>
+					  <h4>Quantité</h4>
+					  <input type="number" pInputText formControlName="quantiteUpdate">
+					</span>
+					</div>
+
+					<div class="col-12 md:col-12">
+						<div class="flex justify-content-end">
+							<p-button label="Enregistrer" icon="pi pi-check" type="submit">
+							</p-button>
+							<p-button label="Annuler" icon="pi pi-times" styleClass="p-button-sm p-button-danger ml-2" (click)="fermerMedicament()">
+							</p-button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</p-dialog>
+		<p-toast></p-toast>
+	</div>
 </section>

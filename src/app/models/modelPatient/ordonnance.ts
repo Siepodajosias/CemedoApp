@@ -1,9 +1,13 @@
-export class Ordonnance {
-    id: number
-    assure: string
-    medicament: string
-    createdAt: string
-    updatedAt: string
-    version: number
-    active: boolean
+export class Ordonnance{
+    id:number
+    dateEmission:Date
+    livre:boolean
+    user:{
+      id:number
+      fullName:string
+    }
+    medecin:number
+    assure:number
+    active:number
+  
 }
