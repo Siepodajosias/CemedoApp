@@ -1,6 +1,8 @@
 name: Cypress Test
-on: [push]
-
+'on':
+  push:
+    branches:
+      - 'y'
 jobs:
   build_and_preview:
     run-on: ubuntu-latest
