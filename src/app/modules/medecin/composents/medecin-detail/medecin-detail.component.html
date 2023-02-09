@@ -120,7 +120,28 @@
           </div>
       </div>
   </div>
-
+    <div class="surface-ground px-4 py-5 md:px-6 lg:px-8">
+      <div class="grid">
+        <div class="col-12">
+          <div class="surface-card shadow-2 p-3 border-round">
+            <div class="header">
+              <!--dashboard cote medecin-->
+              <h2>Nombre de voix par lieu de vote</h2>
+            </div>
+            <div class="body">
+              <div class="recent-report__chart">
+                <apx-chart [series]="lineChartOptions.series" [chart]="lineChartOptions.chart"
+                           [xaxis]="lineChartOptions.xaxis" [stroke]="lineChartOptions.stroke" [colors]="lineChartOptions.colors"
+                           [dataLabels]="lineChartOptions.dataLabels" [legend]="lineChartOptions.legend"
+                           [tooltip]="lineChartOptions.tooltip" [markers]="lineChartOptions.markers" [grid]="lineChartOptions.grid"
+                           [yaxis]="lineChartOptions.yaxis" [title]="lineChartOptions.title" [fill]="lineChartOptions.fill">
+                </apx-chart>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   <div class="surface-ground px-4 py-5 md:px-6 lg:px-8">
     <div class="grid">
         <div class="col-12 md:col-12 lg:col-12">

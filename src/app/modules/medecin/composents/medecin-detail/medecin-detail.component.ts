@@ -163,4 +163,87 @@ export class MedecinDetailComponent implements OnInit {
     };
   }
 
+  private chart3(): void {
+    this.lineChartOptions = {
+      series: [
+        {
+          name: 'Consultation à domicile',
+          data: [70, 200, 80, 180, 170, 105, 210, 80, 180, 170, 105, 210],
+        },
+        {
+          name: 'Appel Téléphonique',
+          data: [80, 250, 30, 120, 260, 100, 180, 30, 120, 260, 100, 180],
+        },
+        {
+          name: 'Appel Vidéo',
+          data: [85, 130, 85, 225, 80, 190, 120, 30, 120, 260, 100, 180],
+        },
+        {
+          name: 'Chat',
+          data: [85, 130, 87, 235, 80, 190, 120, 30, 120, 260, 140, 100],
+        },
+        {
+          name: 'Hospitalisation',
+          data: [86, 130, 75, 215, 84, 188, 124, 35, 124, 270, 110, 187],
+        }
+      ],
+      chart: {
+        height: 350,
+        type: 'line',
+        foreColor: '#9aa0ac',
+        dropShadow: {
+          enabled: true,
+          color: '#000',
+          top: 18,
+          left: 7,
+          blur: 10,
+          opacity: 0.2,
+        },
+        toolbar: {
+          show: false,
+        },
+      },
+      colors: ['#A5A5A5', '#875692', '#4CB5AC', '#6C63FF', '#475C7A'],
+      stroke: {
+        curve: 'smooth',
+      },
+      grid: {
+        row: {
+          colors: ['transparent', 'transparent'], // takes an array which will be repeated on columns
+          opacity: 0.5,
+        },
+      },
+      markers: {
+        size: 3,
+      },
+      xaxis: {
+        categories: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jui', 'Juil', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc'],
+        title: {
+          text: 'Candidat',
+        },
+      },
+      yaxis: {
+        // opposite: true,
+        title: {
+          text: 'Voix',
+        },
+      },
+      legend: {
+        position: 'top',
+        horizontalAlign: 'right',
+        floating: true,
+        offsetY: -25,
+        offsetX: -5,
+      },
+      tooltip: {
+        theme: 'dark',
+        marker: {
+          show: true,
+        },
+        x: {
+          show: true,
+        },
+      },
+    };
+  }
 }
