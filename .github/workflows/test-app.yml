@@ -11,10 +11,8 @@ jobs:
       -run: npm run build
       -uses: cypress-io/github-action@v2
        with:
-         start: npm start
-         record: true
+         CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
          projectId: 4ybk56
-         env:
-           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
