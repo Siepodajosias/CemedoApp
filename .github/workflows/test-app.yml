@@ -10,6 +10,5 @@ jobs:
       - name: Cypress run
       - uses: cypress-io/github-action@v2
         with:
-          record: true
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           CYPRESS_RECORD_KEY: '${{ secrets.CYPRESS_RECORD_KEY }}'
