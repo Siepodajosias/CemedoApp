@@ -6,11 +6,11 @@ jobs:
     if: '${{ github.event.push.head.repo.full_name == github.repository }}'
     run-on: ubuntu-latest
     steps:
-      -uses: actions/checkout@v2
-      -name: Cypress run
-      -run: npm run build
-      -uses: cypress-io/github-action@v2
-       with:
-         repoToken: '${{ secrets.GITHUB_TOKEN }}'
-         CYPRESS_RECORD_KEY: '${{ secrets.CYPRESS_RECORD_KEY }}'
-         projectId: 4ybk56
+      - uses: actions/checkout@v2
+      - name: Cypress run
+      - run: npm run build
+      - uses: cypress-io/github-action@v2
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          CYPRESS_RECORD_KEY: '${{ secrets.CYPRESS_RECORD_KEY }}'
+          projectId: 4ybk56
