@@ -1,0 +1,16 @@
+name: Cypress Test
+'on':
+  push:
+    branches:
+      - 'y'
+jobs:
+  build_and_preview:
+    run-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm run build
+      - uses: cypress-io/github-action@v2
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          CYPRESS_RECORD_KEY: '${{ secrets.CYPRESS_RECORD_KEY }}'
+          projectId: 4ybk56
